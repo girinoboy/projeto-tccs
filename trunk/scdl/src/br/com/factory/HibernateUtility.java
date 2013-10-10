@@ -80,10 +80,10 @@ public class HibernateUtility {
 			try {  
 				AnnotationConfiguration configuration = new AnnotationConfiguration();
 				//CADASTROS abaixo coloque todas classes que deseja ser modelo para criação do banco de dados
-				/*for(Class<?> clazz : getClasses("br.com.dto")){
+				for(Class<?> clazz : getClasses("br.com.dto")){
 					configuration.addAnnotatedClass(clazz);
-				}*/
-				configuration.addAnnotatedClass(NewView.class);
+				}
+				//configuration.addAnnotatedClass(NewView.class);
 				sessionFactory =
 				((AnnotationConfiguration) configuration //configura as propiedades
 
@@ -113,7 +113,7 @@ public class HibernateUtility {
 				)
 				//.setProperty("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory")
 				//.setProperty("hibernate.default_schema", "dbo")
-                .addAnnotatedClass(UsuarioDTO.class)
+                //.addAnnotatedClass(UsuarioDTO.class)
 				.setProperty("hibernate.connection.autocommit", "true")
 				.setProperty("hibernate.connection.pool_size", "1")
 				.buildSessionFactory();
