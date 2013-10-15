@@ -1,108 +1,105 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-
-</h:head>
-
-<h:body>
-	<h:form id="form1">
-		<p:growl id="messages" />
+<ui:decorate template="layoutComplex.xhtml">  
+	<ui:define name="centro"> 
+		<h:form id="form1">
+			<p:growl id="messages" />
 
 
-	<!-- Aqui começa o FILTRO -->
-	
-    <h3>Informe um dos campos abaixo:</h3>                    
-    <h:panelGrid columns="5" cellpadding="6">  
-   
-        <h:outputLabel for="codigo" value="Código:" style="font-weight:bold"/>  
-        <p:inputText id="codigo" value="#{pprBean.firstname}" />
-        
-        <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>    
-        <p:inputText id="name" value="#{pprBean.firstname}" /> 
-          
-        <p:commandButton value="Consultar" update="display"/>  
+			<!-- Aqui começa o FILTRO -->
+				
+		    <h3>Informe um dos campos abaixo:</h3>                    
+		    <h:panelGrid columns="5" cellpadding="6">  
+		   
+		        <h:outputLabel for="codigo" value="Código:" style="font-weight:bold"/>  
+		        <p:inputText id="codigo" value="#{pprBean.firstname}" />
+		        
+		        <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>    
+		        <p:inputText id="name" value="#{pprBean.firstname}" /> 
+		          
+		        <p:commandButton value="Consultar" />  
+		  
+		        <h:outputText value="#{pprBean.firstname}" id="display" />  
+		    </h:panelGrid>  
+			
+			      
+			
+			<!-- Aqui começa o INCLUIR -->
+				
+			
+				
+			<!-- Aqui começa o ENTRAR CONSULTANDO -->
+				
+			  
+		   	<p:growl id="msgs" showDetail="true" />  
+		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true"/> <br/><br/>
+			  	 
+		    <p:dataTable id="cars" var="car" value="#{tableBean.carsSmall} " style="width:1000px" >  
+		  
+		        <p:column headerText="Código" style="width:50px">  
+		            <h:outputText value="#{escola.codigo}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="Nome" style="width:400px">  
+		            <h:outputText value="#{escola.nome}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="Endereço" style="width:400px">  
+		            <h:outputText value="#{escola.endereco}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="Ações" style="width:210px">  
+		        <!-- consultar -->
+		                <p:commandButton id="selectButton1"  oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">  
+		                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" />  
+		                </p:commandButton> 
+		        <!-- Alterar -->        
+		                <p:commandButton id="selectButton2"  oncomplete="PF('carDialog').show()" icon="ui-icon-pencil" title="alterar">  
+		                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
+		                </p:commandButton> 
+		        <!-- Imprimir -->        
+		                <p:commandButton id="selectButton3"   oncomplete="PF('carDialog').show()" icon="ui-icon-print" title="View">  
+		                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
+		                </p:commandButton> 
+		        <!-- Deletar -->       
+		                <p:commandButton id="selectButton4"   oncomplete="PF('carDialog').show()" icon="ui-icon-trash" title="View">  
+		                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
+		            </p:commandButton>  
+		            
+		        </p:column>  
+		  
+		    </p:dataTable>  
   
-        <h:outputText value="#{pprBean.firstname}" id="display" />  
-    </h:panelGrid>  
-
-      
-
-	<!-- Aqui começa o INCLUIR -->
-	
-
-	
-	<!-- Aqui começa o ENTRAR CONSULTANDO -->
-	
-  
-    <p:growl id="msgs" showDetail="true" />  
-  	 <p:commandButton value="Nova" update="display" action="/incluirEscola.xhtml?faces-redirect=true"/> <br/><br/>
-  	 
-    <p:dataTable id="cars" var="car" value="#{tableBean.carsSmall} " style="width:1000px" >  
-  
-        <p:column headerText="Código" style="width:50px">  
-            <h:outputText value="#{escola.codigo}" />  
-        </p:column>  
-  
-        <p:column headerText="Nome" style="width:400px">  
-            <h:outputText value="#{escola.nome}" />  
-        </p:column>  
-  
-        <p:column headerText="Endereço" style="width:400px">  
-            <h:outputText value="#{escola.endereco}" />  
-        </p:column>  
-  
-        <p:column headerText="Ações" style="width:210px">  
-        <!-- consultar -->
-                <p:commandButton id="selectButton1" update=":form" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">  
-                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" />  
-                </p:commandButton> 
-        <!-- Alterar -->        
-                <p:commandButton id="selectButton2" update=":form" oncomplete="PF('carDialog').show()" icon="ui-icon-pencil" title="alterar">  
-                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
-                </p:commandButton> 
-        <!-- Imprimir -->        
-                <p:commandButton id="selectButton3" update=":form" oncomplete="PF('carDialog').show()" icon="ui-icon-print" title="View">  
-                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
-                </p:commandButton> 
-        <!-- Deletar -->       
-                <p:commandButton id="selectButton4" update=":form" oncomplete="PF('carDialog').show()" icon="ui-icon-trash" title="View">  
-                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
-            </p:commandButton>  
-            
-        </p:column>  
-  
-    </p:dataTable>  
-  
-    <p:dialog header="Car Detail" widgetVar="carDialog" resizable="false" id="carDlg"  
-                showEffect="fade" hideEffect="explode" modal="true">  
-  
-        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
-  
-            <f:facet name="header">  
-                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
-            </f:facet>  
-  
-            <h:outputText value="Model:" />  
-            <h:outputText value="#{tableBean.selectedCar.model}" style="font-weight:bold"/>  
-  
-            <h:outputText value="Year:" />  
-            <h:outputText value="#{tableBean.selectedCar.year}" style="font-weight:bold"/>  
-  
-  
-            <h:outputText value="Manufacturer:" />  
-            <h:outputText value="#{tableBean.selectedCar.manufacturer}" style="font-weight:bold"/>  
-  
-            <h:outputText value="Color:" />  
-            <h:outputText value="#{tableBean.selectedCar.color}" style="font-weight:bold"/>  
-  
-        </h:panelGrid>  
-  
-    </p:dialog>  
- 
-</h:form>  
-	
-</h:body>
+		    <p:dialog header="Car Detail" widgetVar="carDialog" resizable="false" id="carDlg"  
+		                showEffect="fade" hideEffect="explode" modal="true">  
+		  
+		        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+		  
+		            <f:facet name="header">  
+		                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
+		            </f:facet>  
+		  
+		            <h:outputText value="Model:" />  
+		            <h:outputText value="#{tableBean.selectedCar.model}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Year:" />  
+		            <h:outputText value="#{tableBean.selectedCar.year}" style="font-weight:bold"/>  
+		  
+		  
+		            <h:outputText value="Manufacturer:" />  
+		            <h:outputText value="#{tableBean.selectedCar.manufacturer}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Color:" />  
+		            <h:outputText value="#{tableBean.selectedCar.color}" style="font-weight:bold"/>  
+		  
+		        </h:panelGrid>  
+		  
+		    </p:dialog>  
+		</h:form>
+	</ui:define>  
+</ui:decorate>  
 </html>
