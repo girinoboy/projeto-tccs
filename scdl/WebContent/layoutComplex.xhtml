@@ -43,13 +43,13 @@
 							<p:menuitem value="Escola a visitar" url="#" actionListener="#{loginManagedBean.login}" update="messages,:center"  oncomplete="handleLoginRequest(xhr, status, args)"/>
 						</p:submenu>
 						<p:submenu label="Livro" icon="ui-icon-document">
-							<p:menuitem value="Gerenciar livro" url="livro.xhtml" />
+							<p:menuitem value="Gerenciar livro" outcome="livro" update="centro" />
 						</p:submenu>
 						<p:submenu label="Meta" icon="ui-icon-document">
-							<p:menuitem value="Gerenciar Meta" url="meta.xhtml" />
+							<p:menuitem value="Gerenciar Meta" outcome="meta" update="centro" />
 						</p:submenu>
 						<p:submenu label="Solicitação" icon="ui-icon-document">
-							<p:menuitem value="Gerenciar Solicitacao" url="solicitacao.xhtml" />
+							<p:menuitem value="Gerenciar Solicitacao" outcome="solicitacao" update="centro"/>
 						</p:submenu>
 						<p:submenu label="Gráfico" icon="ui-icon-clipboard">
 							<p:menuitem value="Desempenho do divulgador" url="#" />

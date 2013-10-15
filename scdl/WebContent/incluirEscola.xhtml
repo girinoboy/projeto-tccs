@@ -1,19 +1,66 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
+<ui:decorate template="layoutComplex.xhtml">
+	<ui:define name="centro">
+		<center>
+			<p:panelGrid columns="3" style="width:1000px">
+				<f:facet name="header">  
+        Incluir escola 
+    </f:facet>
 
-</h:head>
-
-<h:body>
-
-  
-   
-        <h:outputLabel for="codigo" value="Código:" style="font-weight:bold"/>  
-        <p:inputText id="codigo" value="#{pprBean.firstname}" />
-
-
-</h:body>
+				<h:outputLabel for="nome" value="Nome: *" />
+				<p:inputText id="nome" value="" label="Nome" width="50" />
+				<h:outputLabel for="codigo" value="Codigo:" />
+				<h:outputLabel for="endereco" value="Endereço: *" />
+				<p:inputText id="endereco" value="" required="true" label="Endereco" />
+				<p:selectOneMenu id="city" value="#{pprBean.city}">
+					<f:selectItem itemLabel="Select City *" itemValue="" />
+					<f:selectItems value="#{pprBean.cities}" />
+				</p:selectOneMenu>
+				<h:outputLabel for="telefone" value="Telefone: *" />
+				<p:inputMask value="#{maskController.phone}" mask="(99) 9999-9999" />
+				<p:selectOneMenu id="redEnsino" value="#{pprBean.city}">
+					<f:selectItem itemLabel="Select Rede de Ensino" itemValue="" />
+					<f:selectItems value="#{pprBean.cities}" />
+				</p:selectOneMenu>
+				<h:outputLabel for="fax" value="Fax: " />
+				<p:inputMask value="#{maskController.phone}" mask="(99) 9999-9999" />
+				<p:selectOneMenu id="planLiterario" value="#{pprBean.city}">
+					<f:selectItem itemLabel="Select Planejamento Literário"
+						itemValue="" />
+					<f:selectItems value="#{pprBean.cities}" />
+				</p:selectOneMenu>
+				<h:outputText for="data" value="Data: " />
+				<p:inputMask value="#{maskController.date}" mask="99/99/9999" />
+				<p:selectOneMenu id="serie" value="#{pprBean.city}">
+					<f:selectItem itemLabel="Select Série" itemValue="" />
+					<f:selectItems value="#{pprBean.cities}" />
+				</p:selectOneMenu>
+				<h:outputText for="anotacoes" value="Anotações:" />
+				<p:inputTextarea rows="6" cols="33" />
+				<p:selectOneMenu id="status" value="#{pprBean.city}">
+					<f:selectItem itemLabel="Select Status " itemValue="" />
+					<f:selectItems value="#{pprBean.cities}" />
+				</p:selectOneMenu>
+				<h:outputText for="biblioteca" value="Biblioteca:" />
+				<p:selectOneRadio id="biblioteca" value="#{formBean.number}">
+					<f:selectItem itemLabel="Sim" itemValue="1" />
+					<f:selectItem itemLabel="Não" itemValue="2" />
+				</p:selectOneRadio>
+				<br />
+				<h:outputText for="turno" value="Turno: " />
+				<f:facet name="footer">
+					<div align="right">
+						<p:commandButton type="button" value="Cancelar" icon="ui-icon-closethick" />
+						<p:commandButton type="button" value="Incluir" icon="ui-icon-check" />
+					</div>
+				</f:facet>
+			</p:panelGrid>
+		</center>
+	</ui:define>
+</ui:decorate>
 </html>
