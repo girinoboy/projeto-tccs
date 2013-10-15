@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="layoutComplex.xhtml">
+	<ui:define name="centro">
+		<p:panelGrid columns="2" style="width:1000px">
+			<f:facet name="header">  
+       Consultar Escola 
+    </f:facet>
+
+			<h:outputLabel for="nome" value="Nome: *" />
+			<p:inputText id="nome" value="" label="Nome" />
+
+			<h:outputLabel for="endereco" value="Endereço: *" />
+			<p:inputText id="endereco" value="" required="true" label="Endereco" />
+
+
+			<p:commandButton type="button" value="Save" icon="ui-icon-check" />
+
+		</p:panelGrid>
+
+	</ui:define>
+</ui:decorate>
+</html>

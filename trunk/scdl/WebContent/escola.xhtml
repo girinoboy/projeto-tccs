@@ -13,7 +13,7 @@
 			<!-- Aqui começa o FILTRO -->
 				
 		    <h3>Informe um dos campos abaixo:</h3>                    
-		    <h:panelGrid columns="5" cellpadding="6">  
+		    <h:panelGrid columns="5"  cellpadding="1" style="width:1000px">  
 		   
 		        <h:outputLabel for="codigo" value="Código:" style="font-weight:bold"/>  
 		        <p:inputText id="codigo" value="#{pprBean.firstname}" />
@@ -21,9 +21,10 @@
 		        <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>    
 		        <p:inputText id="name" value="#{pprBean.firstname}" /> 
 		          
-		        <p:commandButton value="Consultar" />  
+		        <p:commandButton value="Consultar" action="/consultarEscola.xhtml?faces-redirect=true"
+		        immediate="true" update=":center"/>  
 		  
-		        <h:outputText value="#{pprBean.firstname}" id="display" />  
+		         
 		    </h:panelGrid>  
 			
 			      
@@ -36,7 +37,9 @@
 				
 			  
 		   	<p:growl id="msgs" showDetail="true" />  
-		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true"/> <br/><br/>
+		   	<br/><br/><br/><br/><br/><br/><br/><br/>
+		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true" immediate="true" update=":center"/> <br/><br/>
+		  	
 			  	 
 		    <p:dataTable id="cars" var="car" value="#{tableBean.carsSmall} " style="width:1000px" >  
 		  

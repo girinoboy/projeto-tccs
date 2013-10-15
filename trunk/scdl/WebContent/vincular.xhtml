@@ -1,84 +1,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
+<ui:decorate template="layoutComplex.xhtml">  
+	<ui:define name="centro"> 
 
-</h:head>
 
-<h:body>
-
-<h:form>
-   <p:growl id="messages"/>  
   
-  
-    <p:menubar>  
-          
-        <p:submenu label="Escola" icon="ui-icon-document">  
-                <p:menuitem value="Gerenciar escola" url="escola.xhtml" />  
-                <p:menuitem value="Justificativa" url="#" />  
-                <p:menuitem value="Escola a visitar" url="#" />     
-        </p:submenu>  
- 
-        <p:submenu label="Livro" icon="ui-icon-document">  
-            <p:menuitem value="Gerenciar livro" url="livro.xhtml" />  
-        </p:submenu>  
-  
-        <p:submenu label="Meta" icon="ui-icon-document">  
-            <p:menuitem value="Gerenciar Meta" url="meta.xhtml" />              
-        </p:submenu>  
- 
-        <p:submenu label="Solicitação" icon="ui-icon-document">             
-                <p:menuitem value="Gerenciar Solicitacao" url="solicitacao.xhtml" />  
-        </p:submenu>  
-        
-        <p:submenu label="Gráfico" icon="ui-icon-clipboard">  
-            
-                <p:menuitem value="Desempenho do divulgador" url="#"  /> 
-                <p:menuitem value="Valor pedido para determinada editora" url="#" />
-                <p:menuitem value="Feedback Escolas" url="#" />
-                <p:menuitem value="Relação de cidades visitadas" url="#" /> 
-                 
-        </p:submenu>  
-      
-         <p:submenu label="Relatório" icon="ui-icon-clipboard">  
-            
-                <p:menuitem value="Escolas do DF" url="#" /> 
-                <p:menuitem value="Escola que não usa nenhum livro em cidade específica" url="#" />
-                <p:menuitem value="Escolas que usam livro específico" url="#" />
-                <p:menuitem value="Escolas que deixaram de usar livro" url="#" />
-                <p:menuitem value="Quantidade de alunos que usará um livro específico" url="#" />
-                <p:menuitem value="Histórico de livros adotados" url="#" />
-                <p:menuitem value="Escola usando o mesmo livro dois anos" url="#" />
-                <p:menuitem value="Escolas que passaram a usar livros pela primeira vez" url="#" /> 
-                 
-        </p:submenu>  
-     
-         <p:submenu label="Vincular" icon="ui-icon-link">  
-            
-                <p:menuitem value="Vincular livro à escola" url="#" />  
-                <p:menuitem value="Vincular divulgador  à escola" url="#" /> 
-                 
-        </p:submenu>  
-    
-         <p:submenu label="Configuração" icon="ui-icon-wrench">  
-            
-                <p:menuitem value="Usuário" url="#" icon="ui-icon-person" /> 
-                <p:menuitem value="Cidade" url="#" icon="ui-icon-home" />
-                <p:menuitem value="Editora" url="#" icon="ui-icon-flag" />
-                <p:menuitem value="Alterar senha" url="#" icon="ui-icon-pencil" /> 
-                 
-        </p:submenu>  
-  
-        <f:facet name="options">    
-            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />  
-        </f:facet>  
-    </p:menubar>  
   
  
   
-</h:form> 
 
-</h:body>
+
+	</ui:define>  
+</ui:decorate>  
 </html>
