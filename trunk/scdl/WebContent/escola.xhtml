@@ -8,7 +8,7 @@
 	<ui:define id="centro" name="centro"> 
 
 			<!-- Aqui começa o FILTRO -->
-				
+			
 		    <h3>Informe um dos campos abaixo:</h3>                    
 		    <h:panelGrid columns="5"  cellpadding="1" style="width:1000px">  
 		   
@@ -52,8 +52,9 @@
 		  
 		        <p:column headerText="Ações" style="width:210px">  
 		        <!-- consultar -->
-		                <p:commandButton id="selectButton1"  oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">  
-		                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" />  
+		                <p:commandButton id="selectButton1" actionListener="#{layoutBean.requestPage}" 
+		                 action="/consultarEscola.xhtml?faces-redirect=true"
+		                 immediate="true" update=":center" icon="ui-icon-search" title="View" >   
 		                </p:commandButton> 
 		        <!-- Alterar -->        
 		                <p:commandButton id="selectButton2"  oncomplete="PF('carDialog').show()" icon="ui-icon-pencil" title="alterar">  
@@ -96,7 +97,8 @@
 		  
 		        </h:panelGrid>  
 		  
-		    </p:dialog>  
+		    </p:dialog> 
+		    
 	</ui:define>  
 </ui:decorate>  
 </html>

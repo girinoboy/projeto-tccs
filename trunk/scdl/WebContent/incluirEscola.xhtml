@@ -52,10 +52,16 @@
 					<f:selectItem itemLabel="Não" itemValue="2" />
 				</p:selectOneRadio>
 				<br />
-				<h:outputText for="turno" value="Turno: " />
+				<h:outputText for="turno" value="Turno: " />  
+        <p:selectManyCheckbox id="turno" value="#{formBean.selectedOptions2}"  
+            layout="turno">  
+            <f:selectItem itemLabel="Matutino" itemValue="1" />  
+            <f:selectItem itemLabel="Vespertino" itemValue="2" />  
+            <f:selectItem itemLabel="Noturno" itemValue="3" />  
+        </p:selectManyCheckbox>  
 				<f:facet name="footer">
 					<div align="right">
-						<p:commandButton type="button" value="Cancelar" icon="ui-icon-closethick" />
+						<p:commandButton value="Cancelar" icon="ui-icon-closethick" action="/escola.xhtml?faces-redirect=true" immediate="true" update=":center" />
 						<p:commandButton type="button" value="Incluir" icon="ui-icon-check" />
 					</div>
 				</f:facet>
