@@ -27,6 +27,7 @@
 
 
         <h:body>
+        <center>
     		<p:growl id="growl" autoUpdate="true" sticky="true"/>  
     		<p:messages id="messages" autoUpdate="true" closable="true" />
             <p:layout fullPage="true" >
@@ -37,8 +38,8 @@
                     <p:menubar>
 						<p:submenu label="Escola" icon="ui-icon-document">
 							<p:menuitem value="Gerenciar escola" outcome="escola" update="centro"/>
-							<p:menuitem value="Justificativa" url="#" actionListener="#{layoutBean.requestPage}" update="messages,:center" onclick="PF('dlg').show();"/>
-							<p:menuitem value="Escola a visitar" url="#" actionListener="#{loginManagedBean.login}" update="messages,:center"  oncomplete="handleLoginRequest(xhr, status, args)"/>
+							<p:menuitem value="Justificativa" outcome="justificativa" update="centro" />
+							<p:menuitem value="Escola a visitar" outcome="escolaVisitar" update="centro"/>
 						</p:submenu>
 						<p:submenu label="Livro" icon="ui-icon-document">
 							<p:menuitem value="Gerenciar livro" outcome="livro" update="centro" />
@@ -66,8 +67,8 @@
 							<p:menuitem	value="Escolas que passaram a usar livros pela primeira vez" url="#" />
 						</p:submenu>
 						<p:submenu label="Vincular" icon="ui-icon-link">
-							<p:menuitem value="Vincular livro à escola" url="#" />
-							<p:menuitem value="Vincular divulgador  à escola" url="#" />
+							<p:menuitem value="Vincular livro à escola" outcome="vincularLivro" update="centro" />
+							<p:menuitem value="Vincular divulgador  à escola" outcome="vincularDivulgador" update="centro" />
 						</p:submenu>
 						<p:submenu label="Configuração" icon="ui-icon-wrench">
 							<p:menuitem value="Usuário" url="#" icon="ui-icon-person" />
@@ -77,7 +78,7 @@
 						</p:submenu>
 				
 						<f:facet name="options">
-							<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+							<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" outcome="login" update="centro"/>
 						</f:facet>
 					</p:menubar>  
 				</h:form>	
@@ -96,7 +97,7 @@
                 </p:layoutUnit>
 
             </p:layout>
-
+</center>
         </h:body>
     </f:view>
 </html>
