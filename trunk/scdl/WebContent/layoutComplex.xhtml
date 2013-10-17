@@ -13,9 +13,6 @@
                 <title>PrimeFaces - ShowCase</title>
             </f:facet>
 
-            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
-            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
-
             <style type="text/css">
                 .ui-layout-north {
                     z-index:20 !important;
@@ -30,7 +27,8 @@
 
 
         <h:body>
-    		<p:growl id="messages"/>  
+    		<p:growl id="growl" autoUpdate="true" sticky="true"/>  
+    		<p:messages id="messages" autoUpdate="true" closable="true" />
             <p:layout fullPage="true" >
 
                 <p:layoutUnit id="top" position="north" size="50">
@@ -90,21 +88,15 @@
                 <p:layoutUnit id="center" position="center">
                     <h:form id="form">
 
-						 <ui:insert name="centro">  
-                            O que estiver aqui será substituido!  
+						<ui:insert id="centro" name="centro">  
+<!--                             O que estiver aqui será substituido!   -->
                         </ui:insert>
-						
 
                     </h:form>
                 </p:layoutUnit>
 
             </p:layout>
 
-            <p:dialog header="Basic Dialog" widgetVar="dlg" modal="true">
-                <h:outputText value="Resistance to PrimeFaces is futile!" />
-            </p:dialog>
-
         </h:body>
-
     </f:view>
 </html>
