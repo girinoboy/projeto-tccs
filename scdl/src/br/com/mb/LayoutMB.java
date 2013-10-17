@@ -71,7 +71,18 @@ public class LayoutMB {
 
 	public void requestPage() {
 		viewedPage = "" + ".xhtml";
+		addMessage("Data saved"); 
+	} 
+	
+	public void requestPage(ActionEvent event) {
+		viewedPage = "" + ".xhtml";
 		 addMessage("Data saved"); 
 	} 
+	
+	public void requestPage(SelectEvent event) {
+		viewedPage = "" + ".xhtml";
+		 addMessage("Data saved"); 
+	} 
+	
 	
 }

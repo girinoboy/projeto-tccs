@@ -5,10 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:decorate template="layoutComplex.xhtml">  
-	<ui:define name="centro"> 
-		<h:form id="form1">
-			<p:growl id="messages" />
-
+	<ui:define id="centro" name="centro"> 
 
 			<!-- Aqui começa o FILTRO -->
 				
@@ -21,10 +18,8 @@
 		        <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>    
 		        <p:inputText id="name" value="#{pprBean.firstname}" /> 
 		          
-		        <p:commandButton value="Consultar" action="/consultarEscola.xhtml?faces-redirect=true"
+		        <p:commandButton value="Consultar" actionListener="#{layoutBean.requestPage}" action="/consultarEscola.xhtml?faces-redirect=true"
 		        immediate="true" update=":center"/>  
-		  
-		         
 		    </h:panelGrid>  
 			
 			      
@@ -102,7 +97,6 @@
 		        </h:panelGrid>  
 		  
 		    </p:dialog>  
-		</h:form>
 	</ui:define>  
 </ui:decorate>  
 </html>
