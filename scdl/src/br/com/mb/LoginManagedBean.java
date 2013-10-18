@@ -21,7 +21,7 @@ import br.com.utility.Constantes;
 @ViewScoped
 public class LoginManagedBean {
 
-	private UsuarioDTO usuario = new UsuarioDTO();
+	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private HttpSession session;
 
@@ -35,12 +35,12 @@ public class LoginManagedBean {
 		String retorno = "ok";
 		
 		try{  
-			usuario = usuarioDAO.verificaLoginSenha(usuario);
-			if(usuario.getTema() != null){
+			usuarioDTO = usuarioDAO.verificaLoginSenha(usuarioDTO);
+			if(usuarioDTO.getTema() != null){
 				loggedIn = true;
-				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", usuario.getLogin());
+				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", usuarioDTO.getUsuario());
 				session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessão caso ñ exista - false retorna nulo caso ñ exista
-				session.setAttribute("usuarioAutenticado", usuario);
+				session.setAttribute("usuarioAutenticado", usuarioDTO);
 
 //				gp.setTheme(usuario.getTema());
 			} else {  
@@ -91,15 +91,15 @@ public class LoginManagedBean {
 	/**
 	 * @return the usuario
 	 */
-	public UsuarioDTO getUsuario() {
-		return usuario;
+	public UsuarioDTO getUsuarioDTO() {
+		return usuarioDTO;
 	}
 
 	/**
 	 * @param usuario the usuario to set
 	 */
-	public void setUsuario(UsuarioDTO usuario) {
-		this.usuario = usuario;
+	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+		this.usuarioDTO = usuarioDTO;
 	}
 
 	/**
