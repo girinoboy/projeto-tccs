@@ -8,12 +8,54 @@
 	<ui:define name="centro"> 
 
 
-  
-  
- 
-  
+  <p:panelGrid columns="3"  cellpadding="1" style="width:1000px">
+			<f:facet name="header">  
+        Selecionar Escola a Visitar
+    </f:facet>
+    </p:panelGrid>
+<br/><br/><br/>
+		<h:panelGrid columns="3"  cellpadding="1" style="width:1000px">
+			<p:selectOneMenu id="city" value="#{pprBean.city}">
+				<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
+				<f:selectItems value="#{pprBean.cities}" />
+			</p:selectOneMenu>
 
+			<p:selectOneMenu id="redEnsino" value="#{pprBean.city}">
+				<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
+				<f:selectItems value="#{pprBean.cities}" />
+			</p:selectOneMenu>
+			
+			<p:commandButton type="button" value="Selecionar" icon="ui-icon-check" />
 
+		</h:panelGrid>
+		
+<br/><br/><br/>		
+
+		<p:dataTable id="cars" var="car" value="#{tableBean.carsSmall} "
+			style="width:1000px">
+
+			<p:column headerText="Cidade" style="width:50px">
+				<h:outputText value="#{escola.codigo}" />
+			</p:column>
+
+			<p:column headerText="Escola" style="width:400px">
+				<h:outputText value="#{escola.nome}" />
+			</p:column>
+	
+		</p:dataTable>
+
+		<p:panelGrid columns="3" style="width:1000px">
+
+			<f:facet name="footer">
+				<div align="center">
+					<p:commandButton value="OK" icon="ui-icon-arrowthick-1-w"
+						action="/index.xhtml?faces-redirect=true" immediate="true"
+						update=":center" />
+					<p:commandButton type="button" value="Excluir" icon="ui-icon-check" />
+				</div>
+			</f:facet>
+		</p:panelGrid>
+  
 	</ui:define>  
 </ui:decorate>  
 </html>
