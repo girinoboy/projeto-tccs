@@ -1,19 +1,91 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<ui:decorate template="layoutComplex.xhtml">  
-	<ui:define name="centro"> 
+<ui:decorate template="layoutComplex.xhtml">
+	<ui:define name="centro">
 
 
-  
-  
- 
-  
+		<p:panelGrid columns="3"  cellpadding="1" style="width:1000px">
+			<f:facet name="header">  
+        Incluir Justificativa
+    </f:facet>
+    </p:panelGrid>
+<br/><br/><br/>
+		<h:panelGrid columns="3"  cellpadding="1" style="width:1000px">
+			<p:selectOneMenu id="city" value="#{pprBean.city}">
+				<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
+				<f:selectItems value="#{pprBean.cities}" />
+			</p:selectOneMenu>
 
+			<p:selectOneMenu id="redEnsino" value="#{pprBean.city}">
+				<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
+				<f:selectItems value="#{pprBean.cities}" />
+			</p:selectOneMenu>
 
-	</ui:define>  
-</ui:decorate>  
+			<p:selectOneMenu id="planLiterario" value="#{pprBean.city}">
+				<f:selectItem itemLabel="Select Planejamento Literário" itemValue="" />
+				<f:selectItem itemLabel="Preço alto" itemValue="1" />
+				<f:selectItem itemLabel="Livro contém erro gramatical" itemValue="2" />
+				<f:selectItem itemLabel="Livro contém informações erradas"
+					itemValue="3" />
+				<f:selectItem itemLabel="Livro do concorrente é melhor"
+					itemValue="4" />
+				<f:selectItem itemLabel="Livro do concorrente é mais barato"
+					itemValue="5" />
+				<f:selectItem itemLabel="Não está adequado a ementa da instituição"
+					itemValue="6" />
+				<f:selectItem itemLabel="O livro não me agradou" itemValue="7" />
+				<f:selectItem itemLabel="Outros" itemValue="8" />
+				<f:selectItems value="#{pprBean.cities}" />
+			</p:selectOneMenu>
+		</h:panelGrid>
+		
+<br/><br/><br/>		
+
+		<p:dataTable id="cars" var="car" value="#{tableBean.carsSmall} "
+			style="width:1000px">
+
+			<p:column headerText="Cidade" style="width:50px">
+				<h:outputText value="#{escola.codigo}" />
+			</p:column>
+
+			<p:column headerText="Escola" style="width:400px">
+				<h:outputText value="#{escola.nome}" />
+			</p:column>
+
+			<p:column headerText="Justificativa" style="width:400px">
+				<h:outputText value="#{escola.endereco}" />
+			</p:column>
+
+			<p:column headerText="Ações" style="width:210px">
+
+				<!-- Deletar -->
+				<p:commandButton id="selectButton4"
+					oncomplete="PF('carDialog').show()" icon="ui-icon-trash"
+					title="View">
+					<f:setPropertyActionListener value="#{escola}"
+						target="#{tableBean.selectedEscola}" />
+				</p:commandButton>
+
+			</p:column>
+
+		</p:dataTable>
+
+		<p:panelGrid columns="3" style="width:1000px">
+
+			<f:facet name="footer">
+				<div align="right">
+					<p:commandButton value="OK" icon="ui-icon-arrowthick-1-w"
+						action="/index.xhtml?faces-redirect=true" immediate="true"
+						update=":center" />
+					<p:commandButton type="button" value="Incluir" icon="ui-icon-check" />
+				</div>
+			</f:facet>
+		</p:panelGrid>
+
+	</ui:define>
+</ui:decorate>
 </html>
