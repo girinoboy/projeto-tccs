@@ -53,11 +53,11 @@
 	      
 	            <h:panelGrid columns="2" cellpadding="5">
 	                <h:outputLabel for="username" value="Username:" />
-	                <p:inputText value="#{loginManagedBean.usuario.login}"
+	                <p:inputText value="#{loginManagedBean.usuarioDTO.usuario}"
 	                        id="username" required="true" label="username" />
 	                  
 	                <h:outputLabel for="password" value="Password:" />
-	                <h:inputSecret value="#{loginManagedBean.usuario.senha}"
+	                <h:inputSecret value="#{loginManagedBean.usuarioDTO.senha}"
 	                        id="password" required="true" label="password" />
 	                  
 	                <f:facet name="footer">

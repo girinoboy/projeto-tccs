@@ -2,7 +2,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"  
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
 
 <ui:decorate template="layoutComplex.xhtml">  
 	<ui:define id="centro" name="centro"> 
@@ -36,10 +37,10 @@
 		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true" immediate="true" update=":center"/> <br/><br/>
 		  	
 			  	 
-		    <p:dataTable id="cars" var="car" value="#{tableBean.carsSmall} " style="width:1000px" >  
+		    <p:dataTable id="escolas" var="escola" value="#{escolaMB.listEscola} " style="width:1000px" >  
 		  
 		        <p:column headerText="Código" style="width:50px">  
-		            <h:outputText value="#{escola.codigo}" />  
+		            <p:outputLabel value="#{escola.id}" />  
 		        </p:column>  
 		  
 		        <p:column headerText="Nome" style="width:400px">  
