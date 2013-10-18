@@ -7,12 +7,79 @@
 <ui:decorate template="layoutComplex.xhtml">  
 	<ui:define name="centro"> 
 
+ <p:panelGrid columns="3"  cellpadding="1" style="width:1500px">
+			<f:facet name="header">  
+        Vincular livro à escola
+    </f:facet>
+    </p:panelGrid>
+<br/><br/><br/>
+		<h:panelGrid columns="3"  cellpadding="1" style="width:1000px">
+			
+			<h:outputLabel for="escola" value="Escola: *" style="font-weight:bold"/> 
+			<h:outputLabel for="livro" value="Livro: *" style="font-weight:bold"/> 
+			<h:outputLabel for="alunos" value="Qnt. alunos: *" style="font-weight:bold"/> 
+			<p:selectOneMenu id="escola" value="#{pprBean.escola}">
+				<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
+				<f:selectItems value="#{pprBean.escolas}" />
+			</p:selectOneMenu>
+				
+			<p:selectOneMenu id="livro" value="#{pprBean.livro}">
+				<f:selectItem itemLabel="Selecione o Livro *" itemValue="" />
+				<f:selectItems value="#{pprBean.livros}" />
+			</p:selectOneMenu>
+			   
+		        <p:inputText id="alunos" value="#{pprBean.alunos}" /> 
 
-  
-  
- 
-  
+			<br/><br/><br/><br/><br/><br/><br/>
+			<center><p:commandButton type="button" value="Vincular" icon="ui-icon-check" /></center>
 
+		</h:panelGrid>
+
+
+		<p:dataTable id="vinculo" var="car" value="#{tableBean.carsSmall} "
+			style="width:1500px">
+
+			<p:column headerText="Código" style="width:50px">
+				<h:outputText value="#{escola.codigo}" />
+			</p:column>
+
+			<p:column headerText="Escola" style="width:400px">
+				<h:outputText value="#{escola.nome}" />
+			</p:column>
+			
+			<p:column headerText="Cód. Livro" style="width:50px">
+				<h:outputText value="#{escola.nome}" />
+			</p:column>
+			
+			<p:column headerText="Livro" style="width:400px">
+				<h:outputText value="#{escola.nome}" />
+			</p:column>
+			
+			<p:column headerText="Editora" style="width:400px">
+				<h:outputText value="#{escola.nome}" />
+			</p:column>
+			
+			<p:column headerText="Quant. Livros" style="width:50px">
+				<h:outputText value="#{escola.nome}" />
+			</p:column>
+			
+			<p:column headerText="Data de Adoção" style="width:50px">
+				<h:outputText value="#{escola.nome}" />
+			</p:column>		
+	
+		</p:dataTable>
+
+		<p:panelGrid columns="3" style="width:1500px">
+
+			<f:facet name="footer">
+				<div align="center">
+					<p:commandButton value="OK" icon="ui-icon-arrowthick-1-w"
+						action="/index.xhtml?faces-redirect=true" immediate="true"
+						update=":center" />
+					<p:commandButton type="button" value="Desvincular" icon="ui-icon-check" />
+				</div>
+			</f:facet>
+		</p:panelGrid>
 
 	</ui:define>  
 </ui:decorate>  
