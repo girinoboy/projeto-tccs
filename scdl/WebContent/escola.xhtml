@@ -37,11 +37,11 @@
 		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true" immediate="true" update=":center"/> <br/><br/>
 		  	
 			  	 
-		    <p:dataTable id="escolas" var="escola" value="#{escolaMB.listEscola} " style="width:1000px" >  
+		    <p:dataTable id="escolaTable" var="escola" value="#{escolaMB.listEscola}" rowKey="#{user.id}" style="width:1000px" emptyMessage="Nemhum item encontrado">  
 		  
 		        <p:column headerText="Código" style="width:50px">  
 		            <p:outputLabel value="#{escola.id}" />  
-		        </p:column>  
+		        </p:column>
 		  
 		        <p:column headerText="Nome" style="width:400px">  
 		            <h:outputText value="#{escola.nome}" />  
