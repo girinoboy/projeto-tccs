@@ -9,12 +9,12 @@
 		<center>
 			<p:panelGrid columns="3" style="width:1000px">
 				<f:facet name="header">  
-        Incluir escola 
-    </f:facet>
+			        Incluir escola 
+			    </f:facet>
 
 				<h:outputLabel for="nome" value="Nome: *" />
-				<p:inputText id="nome" value="#{escolaMB.escolaDTO.nome}" label="Nome" width="50" />
-				<h:outputLabel for="codigo" value="Codigo:" />
+				<p:inputText id="nome" value="#{escolaMB.escolaDTO.nome}" label="Nome" width="50" required="true"/>
+				<h:outputLabel value="Codigo:" />
 				
 				<h:outputLabel for="endereco" value="Endereço: *" />
 				<p:inputText id="endereco" value="#{escolaMB.escolaDTO.endereco}" required="true" label="Endereco" />
@@ -24,7 +24,7 @@
 				</p:selectOneMenu>
 				
 				<h:outputLabel for="telefone" value="Telefone: *" />
-				<p:inputMask value="#{escolaMB.escolaDTO.telefone}" mask="(99) 9999-9999" />
+				<p:inputMask id="telefone" value="#{escolaMB.escolaDTO.telefone}" mask="(99) 9999-9999" />
 				<p:selectOneMenu id="redEnsino" value="#{escolaMB.escolaDTO.redeEnsino}">
 					<f:selectItem itemLabel="Select Rede de Ensino" itemValue="" />
 					<f:selectItem itemLabel="Publica" itemValue="1" />  
@@ -32,7 +32,7 @@
 				</p:selectOneMenu>
 				
 				<h:outputLabel for="fax" value="Fax: " />
-				<p:inputMask value="#{escolaMB.escolaDTO.fax}" mask="(99) 9999-9999" />
+				<p:inputMask id="fax" value="#{escolaMB.escolaDTO.fax}" mask="(99) 9999-9999" />
 				<p:selectOneMenu id="planLiterario" value="#{escolaMB.escolaDTO.planejamentoLiterario}">
 					<f:selectItem itemLabel="Select Planejamento Literário"	itemValue="" />
 					<f:selectItem itemLabel="Mensal" itemValue="1" />  
@@ -40,7 +40,7 @@
 				</p:selectOneMenu>
 				
 				<h:outputText for="data" value="Data: " />
-				<p:inputMask value="#{escolaMB.escolaDTO.data}" mask="99/99/9999" />
+				<p:inputMask id="data" value="#{escolaMB.escolaDTO.data}" mask="99/99/9999" />
 				<p:selectOneMenu id="serie" value="#{escolaMB.escolaDTO.serie}">
 					<f:selectItem itemLabel="Select Série" itemValue="" />
 					<f:selectItem itemLabel="Fundamental" itemValue="1" />
@@ -49,7 +49,7 @@
 				</p:selectOneMenu>
 				
 				<h:outputText for="anotacoes" value="Anotações:" />
-				<p:inputTextarea rows="6" cols="33" />
+				<p:inputTextarea id="anotacoes" rows="6" cols="33" />
 				<p:selectOneMenu id="status" value="#{escolaMB.escolaDTO.status}">
 					<f:selectItem itemLabel="Select Status " itemValue="" />
 					<f:selectItem itemLabel="visitou" itemValue="1" />
@@ -78,7 +78,7 @@
 							action="/escola.xhtml?faces-redirect=true" immediate="true"
 							update=":center" />
 						<p:commandButton type="button" value="Incluir"
-							icon="ui-icon-check" />
+							icon="ui-icon-check" actionListener="#{escolaMB.add}" />
 					</div>
 				</f:facet>
 			</p:panelGrid>
