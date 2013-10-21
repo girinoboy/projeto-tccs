@@ -26,7 +26,6 @@ import javax.persistence.Table;
 @Table(name="escola")
 public class EscolaDTO {
 	
-	
 	@Id 
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
@@ -35,8 +34,6 @@ public class EscolaDTO {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "cidade_id", insertable = true, updatable = true, nullable = true)
 	private CidadeDTO cidadeDTO;
-	@OneToMany(targetEntity=CidadeDTO.class, fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<CidadeDTO> listCidadeDTO;
 	private String telefone;
 	private Integer redeEnsino;
 	private String fax;
@@ -45,14 +42,15 @@ public class EscolaDTO {
 	private Integer serie;
 	private Integer status;
 	private Boolean biblioteca;
-	private Integer turno;
+	@OneToMany(targetEntity=TurnoDTO.class, fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
+	@JoinColumn(name = "escola_id", insertable = true, updatable = true, nullable = true)
+	private List<TurnoDTO> listTurnoDTO;
 
 	/**
 	 * 
 	 */
 	public EscolaDTO() {
-		listCidadeDTO = new ArrayList<CidadeDTO>();
-		listCidadeDTO.add(new CidadeDTO(1,"Brasilia"));
+		
 	}
 
 	public Integer getId() {
@@ -85,14 +83,6 @@ public class EscolaDTO {
 
 	public void setCidadeDTO(CidadeDTO cidadeDTO) {
 		this.cidadeDTO = cidadeDTO;
-	}
-
-	public List<CidadeDTO> getListCidadeDTO() {
-		return listCidadeDTO;
-	}
-
-	public void setListCidadeDTO(List<CidadeDTO> listCidadeDTO) {
-		this.listCidadeDTO = listCidadeDTO;
 	}
 
 	public String getTelefone() {
@@ -159,14 +149,12 @@ public class EscolaDTO {
 		this.biblioteca = biblioteca;
 	}
 
-	public Integer getTurno() {
-		return turno;
+	public List<TurnoDTO> getListTurnoDTO() {
+		return listTurnoDTO;
 	}
 
-	public void setTurno(Integer turno) {
-		this.turno = turno;
+	public void setListTurnoDTO(List<TurnoDTO> listTurnoDTO) {
+		this.listTurnoDTO = listTurnoDTO;
 	}
-
-	
 
 }
