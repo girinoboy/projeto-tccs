@@ -66,39 +66,20 @@
 		                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
 		                </p:commandButton> 
 		        <!-- Deletar -->       
-		                <p:commandButton id="selectButton4"   oncomplete="PF('carDialog').show()" icon="ui-icon-trash" title="View">  
-		                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
-		            </p:commandButton>  
-		            
+		                <p:commandButton id="selectButton4" icon="ui-icon-trash" title="Apagar" update=":growl" onclick="PF('dlg').show();">  
+		            	<f:setPropertyActionListener value="#{escola}" target="#{escolaMB.escolaDTO}" /> 
+		                </p:commandButton> 
 		        </p:column>  
 		  
 		    </p:dataTable>  
-  
-		    <p:dialog header="Car Detail" widgetVar="carDialog" resizable="false" id="carDlg"  
-		                showEffect="fade" hideEffect="explode" modal="true">  
-		  
-		        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
-		  
-		            <f:facet name="header">  
-		                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
-		            </f:facet>  
-		  
-		            <h:outputText value="Model:" />  
-		            <h:outputText value="#{tableBean.selectedCar.model}" style="font-weight:bold"/>  
-		  
-		            <h:outputText value="Year:" />  
-		            <h:outputText value="#{tableBean.selectedCar.year}" style="font-weight:bold"/>  
-		  
-		  
-		            <h:outputText value="Manufacturer:" />  
-		            <h:outputText value="#{tableBean.selectedCar.manufacturer}" style="font-weight:bold"/>  
-		  
-		            <h:outputText value="Color:" />  
-		            <h:outputText value="#{tableBean.selectedCar.color}" style="font-weight:bold"/>  
-		  
-		        </h:panelGrid>  
-		  
-		    </p:dialog> 
+		    
+            <p:dialog header="Apagar?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true">
+                <h:outputText value="Deseja mesmo excluir essa escola?" />
+                <f:facet name="footer">
+	            	<p:commandButton value="Excluir" update=":growl"  icon="ui-icon-close" actionListener="#{escolaMB.del}" immediate="true" />                 
+	            	<p:commandButton value="Cancelar" oncomplete="dlg.hide()" immediate="true" />                 
+	            </f:facet>
+            </p:dialog>
 		    
 	</ui:define>  
 </ui:decorate>  
