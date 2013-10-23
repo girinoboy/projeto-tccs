@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import br.com.dao.EscolaDAO;
@@ -21,6 +22,7 @@ import br.com.utility.TurnoConverter;
  *
  */
 @ManagedBean
+@ViewScoped
 public class EscolaMB extends GenericoMB implements ModeloMB{
 	
 	EscolaDTO escolaDTO = new EscolaDTO();
@@ -58,8 +60,8 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+		//actionEvent.
+		//System.out.println(escolaDTO);
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
