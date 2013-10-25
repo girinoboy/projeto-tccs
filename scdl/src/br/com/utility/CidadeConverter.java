@@ -25,7 +25,16 @@ public class CidadeConverter implements Converter {
 //			cidadeDB = usuarioDAO.list();
 			
 			cidadeDB = new ArrayList<CidadeDTO>();
-			cidadeDB.add(new CidadeDTO(1,"Brasilia"));
+			cidadeDB.add(new CidadeDTO(1,"Águas Claras"));
+			cidadeDB.add(new CidadeDTO(2,"Brasilia"));
+			cidadeDB.add(new CidadeDTO(3,"Gama"));
+			cidadeDB.add(new CidadeDTO(7,"Guará"));
+			cidadeDB.add(new CidadeDTO(4,"Planaltina"));
+			cidadeDB.add(new CidadeDTO(5,"Sobradinho"));
+			cidadeDB.add(new CidadeDTO(6,"Taguatinga"));
+	
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
