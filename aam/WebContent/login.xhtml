@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core">
+	<h:head>
+		<title>Login</title>
+		
+		 <script type="text/javascript">  
+	        function handleLoginRequest(xhr, status, args) {
+	            if(args.validationFailed || !args.loggedIn) {
+	                jQuery('#dialog').effect("shake", { times:3 }, 100);  
+	            } else {
+	                dlg.hide();
+	                jQuery('#loginLink').fadeOut();
+	                if(args.perfil !='visitante')
+	                	jQuery(window.document.location).attr('href','escola.xhtml');
+	                else
+	                	jQuery(window.document.location).attr('href','layoutComplex.xhtml');    
+	            }
+	        }
+	    </script>  
+	</h:head>
+	<h:body>
+		<h:form id="form1">
+	      <p:growl id="growl" showDetail="true" sticky="true" />
+		
+			<div>
+		    	<p:themeSwitcher value="#{themeSwitcherBean.theme}" style="width:155px; top:10px" effect="fade">
+			        <f:selectItem itemLabel="Choose Theme" itemValue="" />
+			        <f:selectItems value="#{themeSwitcherBean.themes}" />
+			        <p:ajax event="change" listener="#{themeSwitcherBean.saveTheme}" update="form1"/>
+			    </p:themeSwitcher>
+		    </div>
+		    <p:separator id="separator"/>
+	            <h:panelGrid columns="2" cellpadding="5">
+	                <h:outputLabel for="username" value="Username:" />
+	                <p:inputText value="#{loginManagedBean.usuarioDTO.usuario}"
+	                        id="username" required="true" label="username" />
+	                  
+	                <h:outputLabel for="password" value="Password:" />
+	                <p:password value="#{loginManagedBean.usuarioDTO.senha}"
+	                        id="password" required="true" label="password"/>
+	                        
+	                <f:facet name="footer">
+	                    <p:commandButton id="loginButton" value="Login" update="growl"
+	                        actionListener="#{loginManagedBean.login}"
+	                        oncomplete="handleLoginRequest(xhr, status, args)"/>
+	                </f:facet>
+	            </h:panelGrid>
+		</h:form>
+	</h:body>
+</html>            
