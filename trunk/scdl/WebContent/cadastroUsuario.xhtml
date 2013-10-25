@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+
+<ui:decorate template="layoutComplex.xhtml">  
+	<ui:define id="centro" name="centro"> 
+ 		<h:form id="form">
+ 		
+ 			<p:panel id="panel" header="Dados Pessoais">
+		    	<h:inputHidden id="idUsuario" value="#{usuarioMB.usuarioDTO.id}" />
+		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		        	<h:outputLabel for="nome" value="Nome: *" />
+		            <p:inputText id="nome" size="80"
+		                value="#{usuarioMB.usuarioDTO.nome}" required="true" label="Nome">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            <p:watermark for="nome" value="Nome completo" />
+		            <p:message for="nome" />
+		            
+		            <f:facet name="footer">
+			          	<p:commandButton value="Salvar" actionListener="#{usuarioMB.add}" id="withIcon"   
+			            update=":growl" icon="ui-icon-disk" />
+			            <p:commandButton value="Reset" type="reset" /> 
+			            <p:commandButton value="Voltar" action="/escola.xhtml?faces-redirect=true" immediate="true"/> 
+		  			</f:facet>
+		        </h:panelGrid>  
+		    </p:panel> 
+ 		</h:form>
+ 	</ui:define>  
+</ui:decorate>  
+</html>

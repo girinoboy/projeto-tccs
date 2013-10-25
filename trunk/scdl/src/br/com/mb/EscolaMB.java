@@ -53,9 +53,13 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 	}
 	
 	public void add(ActionEvent actionEvent) throws Exception {
-		escolaDTO = escolaDAO.save(escolaDTO);
 		
-		addMessage("Escola inserida com sucesso.");
+		if(escolaDAO.existeEnderecoOuNome(escolaDTO)){
+			addMessage("Endereço ou nome duplicado.");
+		}else{
+			escolaDTO = escolaDAO.save(escolaDTO);
+			addMessage("Escola inserida com sucesso.");
+		}
 		//listEscola = escolaDAO.list();
 	}
 
