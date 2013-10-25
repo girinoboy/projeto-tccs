@@ -24,7 +24,7 @@ import br.com.dto.UsuarioDTO;
  */
 @ManagedBean
 @RequestScoped
-public class UsuarioMB {
+public class UsuarioMB extends GenericoMB implements ModeloMB{
 	
 	private List<UsuarioDTO> listUsuario;
 	private List<UsuarioDTO> filteredUsuarios;
@@ -42,7 +42,7 @@ public class UsuarioMB {
 	}
 	
 	
-	public void addUser(ActionEvent actionEvent) throws Exception {
+	public void add(ActionEvent actionEvent) throws Exception {
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.addCallbackParam("salvo", false);
 		usuarioDAO.save(usuarioDTO);
@@ -51,16 +51,15 @@ public class UsuarioMB {
 		usuarioDTO = new UsuarioDTO();
 	}
 	
-	public String editUser(ActionEvent actionEvent) throws Exception {
+	public void edit(ActionEvent actionEvent) throws Exception {
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.addCallbackParam("salvo", false);
 		usuarioDTO = (UsuarioDTO) usuarioDAO.listById(usuarioSelecionado.getId());
 		context.addCallbackParam("salvo", true);
 		
-		return "editar";
 	}
 	
-	public String editUser(SelectEvent event) throws Exception {  
+	public String edit(SelectEvent event) throws Exception {  
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.addCallbackParam("salvo", false);
 		usuarioDTO = usuarioDAO.getById(usuarioSelecionado.getId());
@@ -69,7 +68,7 @@ public class UsuarioMB {
 		return "editar";
 	}
 	
-	public void delUser(ActionEvent actionEvent){
+	public void del(ActionEvent actionEvent){
 		try {
 			if(usuarioSelecionado !=null && usuarioSelecionado.getId() !=null){
 			usuarioDAO.delete(usuarioSelecionado);
