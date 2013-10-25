@@ -44,7 +44,7 @@ public class ChartMB implements Serializable {
 	private Double previsao = 31D;
 
 	public ChartMB(){  
-		createLinearModel();  
+		//createLinearModel();  
 		createCategoryModel(); 
 		createLivePieModel(); 
 		createCombinedModel();  
