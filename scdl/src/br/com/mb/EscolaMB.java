@@ -55,7 +55,7 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 	public void add(ActionEvent actionEvent) throws Exception {
 		escolaDTO = escolaDAO.save(escolaDTO);
 		
-		addMessage("Salvo.");
+		addMessage("Escola inserida com sucesso.");
 		//listEscola = escolaDAO.list();
 	}
 
@@ -69,7 +69,7 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 		escolaDAO.delete(escolaDTO);
 		listEscola = escolaDAO.list();
 		
-		addMessage("Excluido.");
+		addMessage("Escola excluída com sucesso.");
 		
 	}
 	
