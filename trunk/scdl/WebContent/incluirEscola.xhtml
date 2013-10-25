@@ -21,14 +21,14 @@
 				<p:inputText id="endereco" value="#{escolaMB.escolaDTO.endereco}" required="true" label="Endereco" />
 				<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}" required="true" converter="cidade">
 					<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
-					<f:selectItems value="#{escolaMB.listCidadeDTO}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}"/>
+					<f:selectItems value="#{escolaMB.listCidadeDTO}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" style="height:200px"/>
 				</p:selectOneMenu>
 				
 				<h:outputLabel for="telefone" value="Telefone: *" />
 				<p:inputMask id="telefone" value="#{escolaMB.escolaDTO.telefone}" mask="(99) 9999-9999" required="true"/>
 				<p:selectOneMenu id="redEnsino" value="#{escolaMB.escolaDTO.redeEnsino}">
 					<f:selectItem itemLabel="Select Rede de Ensino" itemValue="" />
-					<f:selectItem itemLabel="Publica" itemValue="1" />  
+					<f:selectItem itemLabel="Pública" itemValue="1" />  
             		<f:selectItem itemLabel="Privada" itemValue="2" />
 				</p:selectOneMenu>
 				
@@ -46,13 +46,13 @@
 					<f:selectItem itemLabel="Select Série" itemValue="" />
 					<f:selectItem itemLabel="Fundamental" itemValue="1" />
 					<f:selectItem itemLabel="Medio" itemValue="2" />
-					<f:selectItem itemLabel="Noturno" itemValue="3" />
+					<f:selectItem itemLabel="Pré" itemValue="3" />
 				</p:selectOneMenu>
 				
 				<h:outputText for="anotacoes" value="Anotações:" />
 				<p:inputTextarea id="anotacoes" rows="6" cols="33" />
 				<p:selectOneMenu id="status" value="#{escolaMB.escolaDTO.status}">
-					<f:selectItem itemLabel="Select Status " itemValue="" />
+					<f:selectItem itemLabel="Selecione Status " itemValue="" />
 					<f:selectItem itemLabel="visitou" itemValue="1" />
 					<f:selectItem itemLabel="não visitou" itemValue="2" />
 					<f:selectItem itemLabel="adotou" itemValue="3" />
