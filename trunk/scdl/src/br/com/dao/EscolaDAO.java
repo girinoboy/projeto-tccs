@@ -37,7 +37,7 @@ public class EscolaDAO extends GenericoDAO<EscolaDTO, Serializable>{
 						))
 				.uniqueResult();
 
-		if(escola ==null){
+		if(escola != null){
 			return true;
 		}else{
 			return false;

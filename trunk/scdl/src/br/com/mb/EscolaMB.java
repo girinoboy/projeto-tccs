@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 
 import br.com.dao.EscolaDAO;
@@ -22,7 +22,7 @@ import br.com.utility.TurnoConverter;
  *
  */
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class EscolaMB extends GenericoMB implements ModeloMB{
 	
 	EscolaDTO escolaDTO = new EscolaDTO();
@@ -30,6 +30,7 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 	List<EscolaDTO> listEscola = new ArrayList<EscolaDTO>();
 	private List<CidadeDTO> listCidadeDTO;
 	private List<TurnoDTO> listTurnoDTO;
+	private List<EscolaDTO> filteredEscolas;//para filtro na tabela
 
 	/**
 	 * 
@@ -107,6 +108,14 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 
 	public void setListTurnoDTO(List<TurnoDTO> listTurnoDTO) {
 		this.listTurnoDTO = listTurnoDTO;
+	}
+
+	public List<EscolaDTO> getFilteredEscolas() {
+		return filteredEscolas;
+	}
+
+	public void setFilteredEscolas(List<EscolaDTO> filteredEscolas) {
+		this.filteredEscolas = filteredEscolas;
 	}
 
 }
