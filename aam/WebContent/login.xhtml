@@ -31,22 +31,25 @@
 			        <p:ajax event="change" listener="#{themeSwitcherBean.saveTheme}" update="form1"/>
 			    </p:themeSwitcher>
 		    </div>
+		    <center>
 		    <p:separator id="separator"/>
 	            <h:panelGrid columns="2" cellpadding="5">
-	                <h:outputLabel for="username" value="Username:" />
+	                <h:outputLabel for="username" value="Usuário:" />
 	                <p:inputText value="#{loginManagedBean.usuarioDTO.usuario}"
 	                        id="username" required="true" label="username" />
 	                  
-	                <h:outputLabel for="password" value="Password:" />
+	                <h:outputLabel for="password" value="Senha:" />
 	                <p:password value="#{loginManagedBean.usuarioDTO.senha}"
 	                        id="password" required="true" label="password"/>
 	                        
 	                <f:facet name="footer">
-	                    <p:commandButton id="loginButton" value="Login" update="growl"
+	                    <p:commandButton id="loginButton" value="Entrar" update="growl"
 	                        actionListener="#{loginManagedBean.login}"
 	                        oncomplete="handleLoginRequest(xhr, status, args)"/>
+	                        <p:commandButton value="Cancelar" type="reset" /> 
 	                </f:facet>
 	            </h:panelGrid>
+	        </center>
 		</h:form>
 	</h:body>
 </html>            
