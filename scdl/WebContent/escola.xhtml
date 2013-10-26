@@ -36,13 +36,13 @@
 		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true" immediate="true" update=":center"/> <br/><br/>
 		  	
 			  	 
-		    <p:dataTable id="escolaTable" var="escola" value="#{escolaMB.listEscola}" rowKey="#{user.id}" style="width:1000px" emptyMessage="Nemhum item encontrado">  
+		    <p:dataTable id="escolaTable" var="escola" value="#{escolaMB.listEscola}" rowKey="#{user.id}" style="width:1000px" emptyMessage="Nemhum item encontrado" filteredValue="#{escolaMB.filteredEscolas}">  
 		  
-		        <p:column headerText="Código" style="width:50px">  
+		        <p:column headerText="Código" style="width:50px" filterBy="id">  
 		            <p:outputLabel value="#{escola.id}" />  
 		        </p:column>
 		  
-		        <p:column headerText="Nome" style="width:400px">  
+		        <p:column headerText="Nome" style="width:400px" filterBy="nome" filterMatchMode="contains">  
 		            <h:outputText value="#{escola.nome}" />  
 		        </p:column>  
 		  
@@ -72,28 +72,16 @@
 		        </p:column>  
 		  
 		    </p:dataTable>  
-		    </h:form>
-            <p:dialog header="Apagar?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true">
-                <h:outputText value="Deseja realmente excluir essa escola?" />
-                <f:facet name="footer">
-	            	<p:commandButton value="Excluir" update=":growl,form:escolaTable"  icon="ui-icon-close" actionListener="#{escolaMB.del}" immediate="true" oncomplete="dlg.hide()" />                 
-	            	<p:commandButton value="Cancelar" oncomplete="dlg.hide()" immediate="true" />                 
-	            </f:facet>
-            </p:dialog>
+	    </h:form>
+	    
+		<p:dialog header="Apagar?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:outputText value="Deseja realmente excluir essa escola?" />
+		    <f:facet name="footer">
+			 	<p:commandButton value="Excluir" update=":growl,form:escolaTable"  icon="ui-icon-close" actionListener="#{escolaMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />                 
+			 	<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()" immediate="true" />                 
+			</f:facet>
+		</p:dialog>
 		    
-		    <p:confirmDialog id="confirmaExclusao1" appendToBody="true"  
-            message="Deseja realmente excluir o partido selecionado?"  
-            header="Excluir partido" severity="alert"  
-            widgetVar="confirmaExclusao">  
-  
-            <p:commandButton id="confirm" value="Sim, desejo"  
-                actionListener="#{escolaMB.del}"  
-                oncomplete="confirmaExclusao.hide();"
-                update=":growl,form:escolaTable" />  
-  
-            <p:commandButton id="decline" value="Não, me enganei"  
-                onclick="confirmaExclusao.hide()" type="button" />  
-        </p:confirmDialog>
 	</ui:define>  
 </ui:decorate>  
 </html>

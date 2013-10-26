@@ -18,9 +18,9 @@
 			<h:outputLabel for="escola" value="Escola: *" style="font-weight:bold"/> 
 			<h:outputLabel for="livro" value="Livro: *" style="font-weight:bold"/> 
 			<h:outputLabel for="alunos" value="Qnt. alunos: *" style="font-weight:bold"/> 
-			<p:selectOneMenu id="escola" value="#{pprBean.escola}">
+			<p:selectOneMenu id="escola" value="#{escolaMB.escolaDTO}" converter="escola">
 				<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
-				<f:selectItems value="#{pprBean.escolas}" />
+				<f:selectItems value="#{escolaMB.listEscola}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}"/>
 			</p:selectOneMenu>
 				
 			<p:selectOneMenu id="livro" value="#{pprBean.livro}">
@@ -40,7 +40,7 @@
 			style="width:1500px">
 
 			<p:column headerText="Código" style="width:50px">
-				<h:outputText value="#{escola.codigo}" />
+				<h:outputText value="#{escola.id}" />
 			</p:column>
 
 			<p:column headerText="Escola" style="width:400px">

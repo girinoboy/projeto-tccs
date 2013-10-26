@@ -3,18 +3,15 @@ package br.com.mb;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.HibernateException;
 import org.primefaces.context.RequestContext;
 
 import br.com.dao.UsuarioDAO;
 import br.com.dto.UsuarioDTO;
-import br.com.utility.Constantes;
 
 
 @ManagedBean
