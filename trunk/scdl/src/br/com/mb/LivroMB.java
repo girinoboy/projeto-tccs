@@ -11,6 +11,7 @@ import javax.faces.event.ActionEvent;
 
 import br.com.dao.LivroDAO;
 import br.com.dto.LivroDTO;
+import br.com.dto.UsuarioDTO;
 
 /**
  * @author Marcleônio
@@ -22,6 +23,7 @@ public class LivroMB extends GenericoMB implements ModeloMB{
 	private LivroDTO livroDTO = new LivroDTO();
 	private List<LivroDTO> listLivroDTO = new ArrayList<LivroDTO>();
 	private LivroDAO livroDAO = new LivroDAO();
+	private List<UsuarioDTO> filteredLivros;
 
 	/**
 	 * 
@@ -68,5 +70,15 @@ public class LivroMB extends GenericoMB implements ModeloMB{
 
 	public void setListLivroDTO(List<LivroDTO> listLivroDTO) {
 		this.listLivroDTO = listLivroDTO;
+	}
+
+
+	public List<UsuarioDTO> getFilteredLivros() {
+		return filteredLivros;
+	}
+
+
+	public void setFilteredLivros(List<UsuarioDTO> filteredLivros) {
+		this.filteredLivros = filteredLivros;
 	}
 }
