@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="layoutComplex.xhtml">
+	<ui:define name="centro">
+		<h:form id="form1">
+			<center>
+				<p:panelGrid columns="3" style="width:1000px">
+					<f:facet name="header">  
+        				Incluir Livro
+   			 </f:facet>
+
+					<h:outputLabel for="nome" value="Nome: *" size="10" />
+					<p:inputText id="nome" value="#{livroMB.livroDTO.nome}"
+						label="Nome" width="50" required="true" size="60" />
+					<br />
+					<h:outputLabel for="autor" value="Autor: *" />
+					<p:inputText id="autor" value="#{livroMB.livroDTO.autor}"
+						label="Nome" width="50" required="true" size="60" />
+					<br />
+					<br />
+					<h:outputText for="descricao" value="Descrição: *" />
+					<p:inputTextarea id="descricao" rows="6" cols="33" />
+					<br />
+					<h:outputLabel for="Editora" value="Editora: *" />
+					<p:inputText id="nome" value="#{livroMB.livroDTO.nome}"
+						label="Nome" width="50" required="true" size="30" />
+					<br />
+					<h:outputLabel for="edicao" value="Edição: *" />
+					<p:inputMask value="#{maskController.edicao}" mask="99ª" size="10" />
+					<br />
+					<h:outputLabel for="preco" value="Preço: *" />
+					<p:inputMask value="#{maskController.preco}" mask="R$999,99"
+						size="15" />
+
+					<f:facet name="footer">
+						<div align="right">
+							<p:commandButton value="Cancelar" icon="ui-icon-closethick"
+								action="/escola.xhtml?faces-redirect=true" immediate="true"
+								update=":center" />
+							<p:commandButton value="Incluir" icon="ui-icon-check" />
+						</div>
+					</f:facet>
+				</p:panelGrid>
+			</center>
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>
