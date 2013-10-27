@@ -9,36 +9,34 @@
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
  		
- 			<p:panel id="panel" header="Dados Pessoais">
-		    	<h:inputHidden id="idUsuario" value="#{usuarioMB.usuarioDTO.id}" />
+ 		<p:panel id="panel" header="Graduação">
+		    	<h:inputHidden id="idgraduacao" value="#{graduacaoMB.graduacaoDTO.id}" />
 		        <h:panelGrid id="pg" columns="4" cellpadding="5">
 		        	<h:outputLabel for="nome" value="Nome: *" />
 		            <p:inputText id="nome" size="80"
-		                value="#{usuarioMB.usuarioDTO.nome}" required="true" label="Nome">
+		                value="#{graduacaoMB.graduacaoDTO.nome}" required="true" label="Nome">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            <p:watermark for="nome" value="Nome completo" />
 		            <p:message for="nome" />
 		            
-		            <h:outputLabel for="graduacao" value="Graduacao: *" />
-			        <p:selectOneMenu id="graduacao" value="#{usuarioMB.usuarioDTO.graduacaoDTO}" effect="fade" converter="graduacao" required="true">  
-			            <f:selectItem itemLabel="Selecione" itemValue="" />  
-			            <f:selectItems value="#{usuarioMB.listGraduacaoDTO}" var="graduacao" itemLabel="#{graduacao.nome}" itemValue="#{graduacao}"/>  
-			        </p:selectOneMenu>  
-		            <p:watermark for="graduacao" value=" " />
-		            <p:message for="graduacao" />
-		            
-		            <h:outputText for="status" value="Notas da Avaliação:" />
-					
+		            <h:outputLabel for="conhecimentos" value="Conhecimentos exigidos: " />
+		            <p:inputTextarea id="conhecimentos" rows="5" cols="30" counter="counter" maxlength="200"       
+				    	value="#{graduacaoMB.graduacaoDTO.conhecimentos}" 
+				    	counterTemplate="{0} characters remaining." autoResize="false"/>  
+				  	<p:watermark for="conhecimentos" value=" " />
+				  	<p:message for="conhecimentos" />
+					<h:outputText id="counter" />
 		            
 		            <f:facet name="footer">
-			          	<p:commandButton value="Salvar" actionListener="#{usuarioMB.add}" id="withIcon"   
+			          	<p:commandButton value="Salvar" actionListener="#{graduacaoMB.add}" id="withIcon"   
 			            update=":growl" icon="ui-icon-disk" />
 			            <p:commandButton value="Reset" type="reset" /> 
 			            <p:commandButton value="Voltar" action="/membros.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
 		  			</f:facet>
 		        </h:panelGrid>  
-		    </p:panel> 
+		    </p:panel>
+ 		
  		</h:form>
  	</ui:define>  
 </ui:decorate>  
