@@ -8,16 +8,11 @@
 <ui:decorate template="layout.xhtml">  
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
- 			<p:commandButton value="Incluir Novo" action="/cadastroMembros.xhtml?faces-redirect=true" immediate="true" update=":center"/>
+ 			<p:commandButton value="Incluir Novo" action="/cadastroResultadoAvaliacoes.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 
  			<p:separator id="separator"/>
  			
  			<p:dataTable var="membro" value="#{usuarioMB.listUsuariDTO}">  
-		        <p:column headerText="Foto">  
-		        	<p:graphicImage value="#{usuarioMB.dynamicImage}" style="width:60px;height:60px">
-						<f:param name="image_id" value="#{membro.id}"/>
-					</p:graphicImage>
-		        </p:column>  
 		  
 		        <p:column headerText="Nome">  
 		            <h:outputText value="#{membro.nome}" />  
@@ -27,7 +22,7 @@
 		            <h:outputText value="#{membro.graduacaoDTO.nome}" />  
 		        </p:column>  
 		  
-		        <p:column headerText="Ativo/Inativo">  
+		        <p:column headerText="Data">  
 		        	
 		            <h:outputText value="#{membro.ativoInativo ? 'Ativo' : 'Inativo'}" />  
 		        </p:column>  

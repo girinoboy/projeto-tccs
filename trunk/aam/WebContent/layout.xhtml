@@ -30,7 +30,10 @@
 
 
         <h:body>
-
+			
+			<p:growl id="growl" autoUpdate="true" sticky="true"/>  
+    		<p:messages id="messages" autoUpdate="true" showDetail="true"/>
+			
             <p:layout fullPage="true" >
 
                 <p:layoutUnit id="top" position="north" size="100">
@@ -39,34 +42,33 @@
                     
                 </p:layoutUnit>
 
-                <p:layoutUnit id="left" position="west" size="300" resizable="true" closable="true" collapsible="true" header="Options" minSize="200">
+                <p:layoutUnit id="left" position="west" size="250">
                 	<h:form>
 						 <p:menu>
-		                    <p:menuitem value="Membros" outcome="membros" update="center" />
-		                    <p:menuitem value="Other" url="#" />
-		                    <p:menuitem value="Open" url="#" />
-		                    <p:menuitem value="Quit" url="#" />
+		                    <p:menuitem value="Membros" outcome="membros" update="centro" />
+		                    <p:menuitem value="Graduação" outcome="graduacao" update="centro" />
 	                    </p:menu>
                     </h:form>
                 </p:layoutUnit>
 
-                <p:layoutUnit id="right" position="east" size="250" header="Gallery" resizable="true" closable="true" collapsible="true"
-                              style="text-align:center">
+                <p:layoutUnit id="right" position="east" size="250" style="text-align:center">
 
                      <p:menu>
-	                    <p:menuitem value="Project" url="#" />
-	                    <p:menuitem value="Other" url="#" />
-	                    <p:menuitem value="Open" url="#" />
-	                    <p:menuitem value="Quit" url="#" />
+	                    <p:menuitem value="Resultados de Avaliação" outcome="resultadoAvaliacoes" />
+	                    <p:menuitem value="Grafico de desempenho" url="#" />
+	                    <p:menuitem value="Sair" outcome="login" />
                     </p:menu>
+                    <br/><br/><br/>
+                    <h:graphicImage value="/images/avatar_small.jpg"/>
+                    
 				</p:layoutUnit>
 				
                 <p:layoutUnit id="center" position="center">
-                    <h:form>
 
+						<ui:insert id="centro" name="centro">  
+<!--                             O que estiver aqui será substituido!   -->
+                        </ui:insert>
 
-
-                    </h:form>
                 </p:layoutUnit>
 
             </p:layout>

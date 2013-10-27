@@ -4,13 +4,22 @@
 package br.com.dto;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 /**
  * @author marcleonio.medeiros
@@ -31,6 +40,16 @@ public class UsuarioDTO {
 	private String cpf;
 	private String email;
 	private String tema;
+	private Boolean ativoInativo;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
+	private GraduacaoDTO graduacaoDTO;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	@JoinColumn(name = "anexos_id", insertable = true, updatable = true, nullable = true)
+	private AnexoDTO anexoDTO;
+	@OneToMany(targetEntity=AnexoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY)
+	private List<AnexoDTO> listAnexoDTO;
 	
 	/**
 	 * 
@@ -107,6 +126,39 @@ public class UsuarioDTO {
 	public void setTema(String tema) {
 		this.tema = tema;
 	}
+
+	public Boolean getAtivoInativo() {
+		return ativoInativo;
+	}
+
+	public void setAtivoInativo(Boolean ativoInativo) {
+		this.ativoInativo = ativoInativo;
+	}
+
+	public GraduacaoDTO getGraduacaoDTO() {
+		return graduacaoDTO;
+	}
+
+	public void setGraduacaoDTO(GraduacaoDTO graduacaoDTO) {
+		this.graduacaoDTO = graduacaoDTO;
+	}
+
+	public AnexoDTO getAnexoDTO() {
+		return anexoDTO;
+	}
+
+	public void setAnexoDTO(AnexoDTO anexoDTO) {
+		this.anexoDTO = anexoDTO;
+	}
+
+	public List<AnexoDTO> getListAnexoDTO() {
+		return listAnexoDTO;
+	}
+
+	public void setListAnexoDTO(List<AnexoDTO> listAnexoDTO) {
+		this.listAnexoDTO = listAnexoDTO;
+	}
+
 
 
 }
