@@ -86,12 +86,12 @@ public class HibernateUtility {
 
 //				.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect")//Mudar dialect do banco		
 //				.setProperty("hibernate.connection.datasource", "java:/GSWebDSOracle")//DS da pasta deploy Jboss
-//				.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")// tipo de dialeto do banco
-//				.setProperty("hibernate.connection.driver_class","com.mysql.jdbc.Driver")
-				.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect")// tipo de dialeto do banco
-				.setProperty("hibernate.connection.driver_class","com.hsqldb.jdbc.Driver")
+				.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")// tipo de dialeto do banco
+				.setProperty("hibernate.connection.driver_class","com.mysql.jdbc.Driver")
+//				.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect")// tipo de dialeto do banco
+//				.setProperty("hibernate.connection.driver_class","com.hsqldb.jdbc.Driver")
 				
-				.setProperty("hibernate.connection.datasource", "java:DefaultDS")
+				.setProperty("hibernate.connection.datasource", "java:scdlDS")
 				.setProperty("hibernate.hbm2ddl.auto", "update")
 				.setProperty("hibernate.c3p0.max_size", "10")
 				.setProperty("hibernate.c3p0.min_size", "2")
