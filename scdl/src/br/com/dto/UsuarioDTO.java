@@ -17,7 +17,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="usuario")
+@Table(name="divulgador")
 public class UsuarioDTO {
 
 	@Id 

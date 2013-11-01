@@ -8,13 +8,12 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-       
+
 import br.com.dao.UsuarioDAO;
 import br.com.dto.UsuarioDTO;
 

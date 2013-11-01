@@ -7,21 +7,21 @@ package br.com.mb;
  * @author Marcleônio
  *
  */
-import java.io.Serializable;  
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 
-import org.primefaces.model.chart.CartesianChartModel;  
-import org.primefaces.model.chart.ChartSeries;  
+import org.primefaces.model.chart.CartesianChartModel;
+import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.PieChartModel;
 //import org.primefaces.model.chart.BarChartSeries;
 
+
 import br.com.dao.ChartDAO;
-import br.com.dto.NewView;
+import br.com.dto.EscolaDTO;
 
 
 @ManagedBean(name="chartBean")
@@ -71,7 +71,7 @@ public class ChartMB implements Serializable {
 		String colunaY = "venda";
 		//Double previsao = null;
 
-		List<NewView> a = null;
+		List<EscolaDTO> a = null;
 		try {
 			a = chartDAO.list();
 		} catch (Exception e) {
@@ -81,8 +81,9 @@ public class ChartMB implements Serializable {
 		LineChartSeries series1 = new LineChartSeries();  
 		series1.setLabel("Real");  
 		series1.setMarkerStyle("diamond");
-		for (NewView newView : a) {
-			series1.set(newView.getDia().intValue(), newView.getVenda());
+		for (EscolaDTO newView : a) {
+			System.out.println(newView);
+			//series1.set(newView.getDia().intValue(), newView.getVenda());
 		}
 
 		LineChartSeries series2 = new LineChartSeries();

@@ -4,20 +4,26 @@
 package br.com.dao;
 
 import java.io.Serializable;
+
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 
-import br.com.dto.NewView;
+import br.com.dto.EscolaDTO;
 
 /**
  * @author Marcleônio
  *
  */
-public class ChartDAO extends GenericoDAO<NewView, Serializable>{
+public class ChartDAO extends GenericoDAO<EscolaDTO, Serializable>{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Double minerar(String tabela,String colunaX, String colunaY,Double previsao){
-		Integer dadoMineradoI = 0;
+		//Integer dadoMineradoI = 0;
 		Query query = session.createSQLQuery(
 				"CALL ST_REG_LIN(:tabela,:colunax,:colunay,:previsao)")
 				//.addScalar("VAL_PREVISTO", Hibernate.DOUBLE)

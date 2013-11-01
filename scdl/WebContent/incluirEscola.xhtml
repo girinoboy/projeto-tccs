@@ -8,7 +8,7 @@
 	<ui:define name="centro">
 		<h:form id="form">
 			<center>
-				<p:panelGrid columns="3" style="width:1000px">
+				<p:panelGrid id="panel" columns="3" style="width:1000px">
 					<f:facet name="header">
 			        Incluir escola
 			    </f:facet>
@@ -90,7 +90,7 @@
 								action="/escola.xhtml?faces-redirect=true" immediate="true"
 								update=":center" />
 							<p:commandButton value="Incluir" icon="ui-icon-check"
-								actionListener="#{escolaMB.add}" update=":messages,:growl" />
+								actionListener="#{escolaMB.add}" update=":messages,:growl,panel" />
 						</div>
 					</f:facet>
 				</p:panelGrid>

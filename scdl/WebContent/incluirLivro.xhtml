@@ -8,40 +8,35 @@
 	<ui:define name="centro">
 		<h:form id="form1">
 			<center>
-				<p:panelGrid columns="3" style="width:1000px">
+				<p:panelGrid id="panel" columns="2" style="width:1000px">
 					<f:facet name="header">  
         				Incluir Livro
-   			 </f:facet>
+   					</f:facet>
 
 					<h:outputLabel for="nome" value="Nome: *" size="10" />
-					<p:inputText id="nome" value="#{livroMB.livroDTO.nome}"
-						label="Nome" width="50" required="true" size="60" />
-					<br />
+					<p:inputText id="nome" value="#{livroMB.livroDTO.nome}" label="Nome" width="50" required="true" size="60" />
+					
 					<h:outputLabel for="autor" value="Autor: *" />
-					<p:inputText id="autor" value="#{livroMB.livroDTO.autor}"
-						label="Nome" width="50" required="true" size="60" />
-					<br />
-					<br />
+					<p:inputText id="autor" value="#{livroMB.livroDTO.autor}" label="Autor" width="50" required="true" size="60" />
+					
 					<h:outputText for="descricao" value="Descrição: *" />
-					<p:inputTextarea id="descricao" rows="6" cols="33" />
-					<br />
-					<h:outputLabel for="Editora" value="Editora: *" />
-					<p:inputText id="nome" value="#{livroMB.livroDTO.nome}"
-						label="Nome" width="50" required="true" size="30" />
-					<br />
+					<p:inputTextarea id="descricao" rows="6" cols="33" value="#{livroMB.livroDTO.descricao}"/>
+					
+					<h:outputLabel for="editora" value="Editora: *" />
+					<p:inputText id="editora" value="#{livroMB.livroDTO.nome}" label="Editora" width="50" required="true" size="30" />
+					
 					<h:outputLabel for="edicao" value="Edição: *" />
-					<p:inputMask value="#{maskController.edicao}" mask="99ª" size="10" />
-					<br />
+					<p:inputMask id="edicao" value="#{livroMB.livroDTO.edicao}" mask="99ª" size="10" />
+					
 					<h:outputLabel for="preco" value="Preço: *" />
-					<p:inputMask value="#{maskController.preco}" mask="R$999,99"
-						size="15" />
+					<p:inputMask id="preco" value="#{livroMB.livroDTO.preco}" mask="R$999,99" size="15" />
 
 					<f:facet name="footer">
 						<div align="right">
 							<p:commandButton value="Cancelar" icon="ui-icon-closethick"
-								action="/escola.xhtml?faces-redirect=true" immediate="true"
+								action="/livro.xhtml?faces-redirect=true" immediate="true"
 								update=":center" />
-							<p:commandButton value="Incluir" icon="ui-icon-check" />
+							<p:commandButton value="Incluir" icon="ui-icon-check" actionListener="#{livroMB.add}" update=":messages,:growl,panel" />
 						</div>
 					</f:facet>
 				</p:panelGrid>
