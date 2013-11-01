@@ -31,12 +31,12 @@
 			<!-- Aqui começa o ENTRAR CONSULTANDO -->
 				
 			  
-		   	<p:growl id="msgs" showDetail="true" />  
+		   	  
 		   	<br/><br/><br/><br/><br/><br/><br/><br/>
 		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true" immediate="true" update=":center"/> <br/><br/>
 		  	
 			  	 
-		    <p:dataTable id="escolaTable" var="escola" value="#{escolaMB.listEscola}" rowKey="#{user.id}" style="width:1000px" emptyMessage="Nemhum item encontrado" filteredValue="#{escolaMB.filteredEscolas}">  
+		    <p:dataTable id="escolaTable" var="escola" value="#{escolaMB.listEscola}" rowKey="#{escola.id}" style="width:1000px" emptyMessage="Nemhum item encontrado" filteredValue="#{escolaMB.filteredEscolas}">  
 		  
 		        <p:column headerText="Código" style="width:50px" filterBy="id">  
 		            <p:outputLabel value="#{escola.id}" />  

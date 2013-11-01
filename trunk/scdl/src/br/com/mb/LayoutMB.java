@@ -3,15 +3,12 @@
  */
 package br.com.mb;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.component.layout.LayoutUnit;
-
 import org.primefaces.event.CloseEvent;
 import org.primefaces.event.ResizeEvent;
 import org.primefaces.event.SelectEvent;

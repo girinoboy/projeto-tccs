@@ -45,14 +45,6 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 		}
 	}
 	
-	public void add() throws Exception {
-		escolaDTO = escolaDAO.save(escolaDTO);
-		
-		addMessage("Salvo.");
-		//listEscola = escolaDAO.list();
-		
-	}
-	
 	public void add(ActionEvent actionEvent) throws Exception {
 		
 		if(escolaDAO.existeEnderecoOuNome(escolaDTO)){
@@ -61,6 +53,7 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 			escolaDTO = escolaDAO.save(escolaDTO);
 			addMessage("Escola inserida com sucesso.");
 		}
+		escolaDTO = new EscolaDTO();
 		//listEscola = escolaDAO.list();
 	}
 
