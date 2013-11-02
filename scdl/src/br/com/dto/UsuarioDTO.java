@@ -39,6 +39,22 @@ public class UsuarioDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	@Override  
+    public boolean equals(Object obj) {  
+        if (obj == null) {  
+            return false;  
+        }  
+        if (getClass() != obj.getClass()) {  
+            return false;  
+        }  
+        final UsuarioDTO other = (UsuarioDTO) obj;
+        if (id != null && !this.id.equals(other.id)) {  
+            return false;
+        }  
+        return true;  
+    }
+	
 	public UsuarioDTO(String nome, int i) {
 		this.id = i;
 		this.nome = nome;

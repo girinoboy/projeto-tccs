@@ -21,11 +21,35 @@ public class EscolaDivulgadorDTO {
 	@JoinColumn(name = "escola_id", insertable = true, updatable = true, nullable = true)
 	private EscolaDTO escolaDTO;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
+	@JoinColumn(name = "divulgador_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO divulgadorDTO;
 
 	public EscolaDivulgadorDTO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public EscolaDTO getEscolaDTO() {
+		return escolaDTO;
+	}
+
+	public void setEscolaDTO(EscolaDTO escolaDTO) {
+		this.escolaDTO = escolaDTO;
+	}
+
+	public UsuarioDTO getDivulgadorDTO() {
+		return divulgadorDTO;
+	}
+
+	public void setDivulgadorDTO(UsuarioDTO divulgadorDTO) {
+		this.divulgadorDTO = divulgadorDTO;
 	}
 
 }

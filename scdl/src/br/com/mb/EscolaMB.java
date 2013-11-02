@@ -25,9 +25,9 @@ import br.com.utility.TurnoConverter;
 @RequestScoped
 public class EscolaMB extends GenericoMB implements ModeloMB{
 	
-	EscolaDTO escolaDTO = new EscolaDTO();
-	EscolaDAO escolaDAO = new EscolaDAO();
-	List<EscolaDTO> listEscola = new ArrayList<EscolaDTO>();
+	private EscolaDTO escolaDTO = new EscolaDTO();
+	private EscolaDAO escolaDAO = new EscolaDAO();
+	private List<EscolaDTO> listEscola = new ArrayList<EscolaDTO>();
 	private List<CidadeDTO> listCidadeDTO;
 	private List<TurnoDTO> listTurnoDTO;
 	private List<EscolaDTO> filteredEscolas;//para filtro na tabela

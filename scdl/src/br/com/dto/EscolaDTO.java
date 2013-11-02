@@ -51,7 +51,22 @@ public class EscolaDTO {
 	public EscolaDTO() {
 		
 	}
-
+	
+	@Override  
+    public boolean equals(Object obj) {  
+        if (obj == null) {  
+            return false;  
+        }  
+        if (getClass() != obj.getClass()) {  
+            return false;  
+        }  
+        final EscolaDTO other = (EscolaDTO) obj;
+        if (id != null && !this.id.equals(other.id)) {  
+            return false;
+        }  
+        return true;  
+    }
+	
 	public Integer getId() {
 		return id;
 	}

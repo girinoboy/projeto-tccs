@@ -20,6 +20,22 @@
 		            <p:watermark for="nome" value="Nome completo" />
 		            <p:message for="nome" />
 		            
+		            <h:outputLabel for="usuario" value="Usuário: *" />
+		            <p:inputText id="usuario" size="80"
+		                value="#{usuarioMB.usuarioDTO.usuario}" required="true" label="Usuario">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            <p:watermark for="usuario" value="Login" />
+		            <p:message for="usuario" />
+		            
+		            <h:outputLabel for="senha" value="Senha: *" />
+		            <p:password inputText id="senha" size="80"
+		                value="#{usuarioMB.usuarioDTO.senha}" required="true" label="Senha">
+		                <f:validateLength minimum="2" />
+		            </p:password>
+		            <p:watermark for="senha" value="Secret" />
+		            <p:message for="senha" />
+		            
 		            <f:facet name="footer">
 			          	<p:commandButton value="Salvar" actionListener="#{usuarioMB.add}" id="withIcon"   
 			            update=":growl" icon="ui-icon-disk" />

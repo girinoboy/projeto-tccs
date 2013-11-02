@@ -22,6 +22,21 @@ public class LivroDTO {
 	public LivroDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override  
+    public boolean equals(Object obj) {  
+        if (obj == null) {  
+            return false;  
+        }  
+        if (getClass() != obj.getClass()) {  
+            return false;  
+        }  
+        final LivroDTO other = (LivroDTO) obj;
+        if (id != null && !this.id.equals(other.id)) {  
+            return false;
+        }  
+        return true;  
+    }
 
 	public Integer getId() {
 		return id;
