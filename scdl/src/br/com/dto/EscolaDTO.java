@@ -39,6 +39,7 @@ public class EscolaDTO {
 	private Integer planejamentoLiterario;
 	private Date data;
 	private Integer serie;
+	private String anotacoes;
 	private Integer status;
 	private Boolean biblioteca;
 	@OneToMany(targetEntity=TurnoDTO.class, fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
@@ -169,6 +170,14 @@ public class EscolaDTO {
 
 	public void setListTurnoDTO(List<TurnoDTO> listTurnoDTO) {
 		this.listTurnoDTO = listTurnoDTO;
+	}
+
+	public String getAnotacoes() {
+		return anotacoes;
+	}
+
+	public void setAnotacoes(String anotacoes) {
+		this.anotacoes = anotacoes;
 	}
 
 }

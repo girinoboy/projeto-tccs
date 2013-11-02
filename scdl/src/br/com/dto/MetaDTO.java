@@ -25,7 +25,7 @@ public class MetaDTO {
 	private Date dataInicio;
 	@Column(name="data_fim")
 	private Date dataFim;
-	private String valor;
+	private Double valor;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "cidade_id", insertable = true, updatable = true, nullable = true)
 	private CidadeDTO cidadeDTO;
@@ -66,11 +66,11 @@ public class MetaDTO {
 		this.dataFim = dataFim;
 	}
 
-	public String getValor() {
+	public Double getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 

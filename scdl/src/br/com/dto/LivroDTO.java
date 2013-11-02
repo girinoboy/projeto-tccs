@@ -17,7 +17,7 @@ public class LivroDTO {
 	private String descricao;
 	private String editora;
 	private String edicao;
-	private String preco;
+	private Double preco;
 
 	public LivroDTO() {
 		// TODO Auto-generated constructor stub
@@ -86,11 +86,11 @@ public class LivroDTO {
 		this.edicao = edicao;
 	}
 
-	public String getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(String preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 

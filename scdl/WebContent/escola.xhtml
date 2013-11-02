@@ -36,7 +36,13 @@
 		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true" immediate="true" update=":center"/> <br/><br/>
 		  	
 			  	 
-		    <p:dataTable id="escolaTable" var="escola" value="#{escolaMB.listEscola}" rowKey="#{escola.id}" style="width:1000px" emptyMessage="Nemhum item encontrado" filteredValue="#{escolaMB.filteredEscolas}">  
+		    <p:dataTable id="escolaTable" var="escola" value="#{escolaMB.listEscola}" rowKey="#{escola.id}" style="width:1000px" emptyMessage="Nemhum item encontrado" filteredValue="#{escolaMB.filteredEscolas}" filterEvent="enter" widgetVar="escolasTable">
+		    	<f:facet name="header">  
+		           <p:outputPanel>  
+		               <h:outputText value="Search all fields:" />  
+		               <p:inputText id="globalFilter" onkeyup="escolasTable.filter()" style="width:150px" />  
+		           </p:outputPanel>  
+		       </f:facet>   
 		  
 		        <p:column headerText="Código" style="width:50px" filterBy="id">  
 		            <p:outputLabel value="#{escola.id}" />  

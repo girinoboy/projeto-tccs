@@ -63,7 +63,7 @@
 					</p:selectOneMenu>
 
 					<h:outputText for="anotacoes" value="Anotações:" />
-					<p:inputTextarea id="anotacoes" rows="6" cols="33" />
+					<p:inputTextarea id="anotacoes" rows="6" cols="33" value="#{escolaMB.escolaDTO.anotacoes}"/>
 					<p:selectOneMenu id="status" value="#{escolaMB.escolaDTO.status}">
 						<f:selectItem itemLabel="Selecione Status " itemValue="" />
 						<f:selectItem itemLabel="visitou" itemValue="1" />
