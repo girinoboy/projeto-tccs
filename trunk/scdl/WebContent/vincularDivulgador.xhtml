@@ -16,21 +16,20 @@
 			<br />
 			<br />
 			<br />
-			<h:panelGrid columns="3" cellpadding="1" style="width:500px">
+			<h:panelGrid id="panel" columns="3" cellpadding="1" style="width:500px">
 
-				<h:outputLabel for="escola" value="Escola: *"
-					style="font-weight:bold" />
+				<h:outputLabel for="escola" value="Escola: *" style="font-weight:bold" />
 				<br />
-				<h:outputLabel for="divulgador" value="Divulgador: *"
-					style="font-weight:bold" />
+				<h:outputLabel for="divulgador" value="Divulgador: *" style="font-weight:bold" />
+				
 				<p:selectOneMenu id="escola" value="#{escolaLivroMB.escolaLivroDTO.escolaDTO}" converter="escola">
 					<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
-					<f:selectItems value="#{escolaMB.listEscola}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}" />
+					<f:selectItems value="#{escolaDivulgadorMB.listEscola}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>
 				<br />
-				<p:selectOneMenu id="divulgador" value="#{pprBean.livro}">
+				<p:selectOneMenu id="divulgador" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.divulgadorDTO}" converter="usuario">
 					<f:selectItem itemLabel="selecione o Divulgador *" itemValue="" />
-					<f:selectItems value="#{pprBean.livros}" />
+					<f:selectItems value="#{escolaDivulgadorMB.listDivulgador}" var="divulgador" itemLabel="#{divulgador.nome}" itemValue="#{divulgador}" />
 				</p:selectOneMenu>
 
 				<br />
@@ -41,26 +40,27 @@
 				<br />
 				<br />
 				<center>
-					<p:commandButton type="button" value="Vincular"
-						icon="ui-icon-check" />
+					<p:commandButton value="Vincular"
+						icon="ui-icon-check" actionListener="#{escolaDivulgadorMB.add}"
+						update=":messages,:growl,panel,vinculo" />
 				</center>
 
 			</h:panelGrid>
 
 
-			<p:dataTable id="vinculo" var="car" value="#{tableBean.carsSmall} "
+			<p:dataTable id="vinculo" var="ed" value="#{escolaDivulgadorMB.listEscolaDivulgador}"
 				style="width:1000px">
 
 				<p:column headerText="Código" style="width:50px">
-					<h:outputText value="#{escola.codigo}" />
+					<h:outputText value="#{ed.id}" />
 				</p:column>
 
 				<p:column headerText="Escola" style="width:400px">
-					<h:outputText value="#{escola.nome}" />
+					<h:outputText value="#{ed.escolaDTO.nome}" />
 				</p:column>
 
 				<p:column headerText="Divulgador" style="width:50px">
-					<h:outputText value="#{escola.nome}" />
+					<h:outputText value="#{ed.divulgadorDTO.nome}" />
 				</p:column>
 
 			</p:dataTable>

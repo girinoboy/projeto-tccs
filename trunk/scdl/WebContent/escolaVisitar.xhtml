@@ -1,37 +1,47 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<ui:decorate template="layoutComplex.xhtml">  
-	<ui:define name="centro"> 
+<ui:decorate template="layoutComplex.xhtml">
+	<ui:define name="centro">
 
 
-  <p:panelGrid columns="3"  cellpadding="1" style="width:1000px">
+		<p:panelGrid columns="3" cellpadding="1" style="width:1000px">
 			<f:facet name="header">  
         Selecionar Escola a Visitar
     </f:facet>
-    </p:panelGrid>
-<br/><br/><br/>
-		<h:panelGrid columns="3"  cellpadding="1" style="width:1000px">
-			<p:selectOneMenu id="city" value="#{pprBean.city}">
+		</p:panelGrid>
+		<br />
+		<br />
+		<br />
+		<h:panelGrid columns="3" cellpadding="1" style="width:1000px">
+			<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}"
+				required="true" converter="cidade">
 				<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
-				<f:selectItems value="#{pprBean.cities}" />
+				<f:selectItems value="#{escolaMB.listCidadeDTO}" var="cidade"
+					itemLabel="#{cidade.nome}" itemValue="#{cidade}"
+					style="height:200px" />
 			</p:selectOneMenu>
 
-			<p:selectOneMenu id="redEnsino" value="#{pprBean.city}">
+			<p:selectOneMenu id="escola" value="#{escolaMB.escolaDTO}"
+				converter="escola" required="true">
 				<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
-				<f:selectItems value="#{pprBean.cities}" />
+				<f:selectItems value="#{escolaMB.listEscola}" var="escola"
+					itemLabel="#{escola.nome}" itemValue="#{escola}" />
 			</p:selectOneMenu>
-			
-			<p:commandButton type="button" value="Selecionar" icon="ui-icon-check" />
+
+			<p:commandButton type="button" value="Selecionar"
+				icon="ui-icon-check" />
 
 		</h:panelGrid>
-		
-<br/><br/><br/>		
 
-		<p:dataTable id="cars" var="car" value="#{tableBean.carsSmall} "
+		<br />
+		<br />
+		<br />
+
+		<p:dataTable id="cars" var="car" value="#{tableBean.carsSmall}"
 			style="width:1000px">
 
 			<p:column headerText="Cidade" style="width:50px">
@@ -41,7 +51,7 @@
 			<p:column headerText="Escola" style="width:400px">
 				<h:outputText value="#{escola.nome}" />
 			</p:column>
-	
+
 		</p:dataTable>
 
 		<p:panelGrid columns="3" style="width:1000px">
@@ -49,13 +59,13 @@
 			<f:facet name="footer">
 				<div align="center">
 					<p:commandButton value="OK" icon="ui-icon-arrowthick-1-w"
-						action="/index.xhtml?faces-redirect=true" immediate="true"
+						action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"
 						update=":center" />
 					<p:commandButton type="button" value="Excluir" icon="ui-icon-check" />
 				</div>
 			</f:facet>
 		</p:panelGrid>
-  
-	</ui:define>  
-</ui:decorate>  
+
+	</ui:define>
+</ui:decorate>
 </html>

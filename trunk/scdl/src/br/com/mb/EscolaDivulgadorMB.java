@@ -1,19 +1,46 @@
 package br.com.mb;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.event.ActionEvent;
 
+import br.com.dao.EscolaDAO;
+import br.com.dao.EscolaDivulgadorDAO;
+import br.com.dao.UsuarioDAO;
+import br.com.dto.EscolaDTO;
+import br.com.dto.EscolaDivulgadorDTO;
+import br.com.dto.UsuarioDTO;
+
 @ManagedBean
 public class EscolaDivulgadorMB extends GenericoMB implements ModeloMB{
+	
+	private EscolaDivulgadorDTO escolaDivulgadorDTO = new EscolaDivulgadorDTO();
+	private List<EscolaDivulgadorDTO> listEscolaDivulgador;
+	private EscolaDivulgadorDAO escolaDivulgadorDAO = new EscolaDivulgadorDAO();
+	
+	private EscolaDAO escolaDAO = new EscolaDAO();
+	private List<EscolaDTO> listEscola;
+	
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private List<UsuarioDTO> listDivulgador;
 
 	public EscolaDivulgadorMB() {
-		// TODO Auto-generated constructor stub
+		try {
+			listEscolaDivulgador = escolaDivulgadorDAO.list();
+			listDivulgador = usuarioDAO.list();
+			listEscola = escolaDAO.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+		escolaDivulgadorDAO.save(escolaDivulgadorDTO);
+		addMessage("salvo");
+		escolaDivulgadorDTO = new EscolaDivulgadorDTO();
+		listEscolaDivulgador = escolaDivulgadorDAO.list();
 	}
 
 	@Override
@@ -26,6 +53,39 @@ public class EscolaDivulgadorMB extends GenericoMB implements ModeloMB{
 	public void del(ActionEvent actionEvent) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public EscolaDivulgadorDTO getEscolaDivulgadorDTO() {
+		return escolaDivulgadorDTO;
+	}
+
+	public void setEscolaDivulgadorDTO(EscolaDivulgadorDTO escolaDivulgadorDTO) {
+		this.escolaDivulgadorDTO = escolaDivulgadorDTO;
+	}
+
+	public List<EscolaDivulgadorDTO> getListEscolaDivulgador() {
+		return listEscolaDivulgador;
+	}
+
+	public void setListEscolaDivulgador(
+			List<EscolaDivulgadorDTO> listEscolaDivulgador) {
+		this.listEscolaDivulgador = listEscolaDivulgador;
+	}
+
+	public List<EscolaDTO> getListEscola() {
+		return listEscola;
+	}
+
+	public void setListEscola(List<EscolaDTO> listEscola) {
+		this.listEscola = listEscola;
+	}
+
+	public List<UsuarioDTO> getListDivulgador() {
+		return listDivulgador;
+	}
+
+	public void setListDivulgador(List<UsuarioDTO> listDivulgador) {
+		this.listDivulgador = listDivulgador;
 	}
 
 }

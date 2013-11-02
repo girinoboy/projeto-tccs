@@ -8,10 +8,10 @@
 	<ui:define name="centro">
 		<h:form id="form">
 			<center>
-				<p:panelGrid columns="3" style="width:1000px">
+				<p:panelGrid id="panel" columns="3" style="width:1000px">
 					<f:facet name="header">
-			        Incluir escola
-			    </f:facet>
+				        Incluir Meta
+				    </f:facet>
 
 					<h:outputLabel for="descricao" value="Descrição: *" />
 					<p:inputText id="descricao" value="#{metaMB.metaDTO.descricao}"
@@ -29,7 +29,7 @@
 					<p:inputMask id="dataFim" value="#{metaMB.metaDTO.dataFim}"
 						mask="99/99/9999" size="15"/>
 							
-					<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}"
+					<p:selectOneMenu id="city" value="#{metaMB.metaDTO.cidadeDTO}"
 						required="true" converter="cidade">
 						<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
 						<f:selectItems value="#{escolaMB.listCidadeDTO}" var="cidade"
@@ -43,7 +43,7 @@
 								action="/meta.xhtml?faces-redirect=true" immediate="true"
 								update=":center" />
 							<p:commandButton value="Incluir" icon="ui-icon-check"
-								actionListener="#{metaMB.add}" update=":messages,:growl" />
+								actionListener="#{metaMB.add}" update=":messages,:growl,panel" />
 						</div>
 					</f:facet>
 				</p:panelGrid>
