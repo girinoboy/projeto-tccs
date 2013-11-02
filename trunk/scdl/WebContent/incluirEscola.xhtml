@@ -52,7 +52,9 @@
 
 					<h:outputText for="data" value="Data: " />
 					<p:inputMask id="data" value="#{escolaMB.escolaDTO.data}"
-						mask="99/99/9999" />
+						mask="99/99/9999">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:inputMask>
 					<p:selectOneMenu id="serie" value="#{escolaMB.escolaDTO.serie}">
 						<f:selectItem itemLabel="Select Série" itemValue="" />
 						<f:selectItem itemLabel="Fundamental" itemValue="1" />
