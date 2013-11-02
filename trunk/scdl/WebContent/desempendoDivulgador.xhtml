@@ -9,12 +9,31 @@
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
  			Informe os campos para gerar os graficos
+ 			<br/>
+ 			<br/>
+ 			<h:panelGrid id="panel" columns="3" cellpadding="1" style="width:500px">
  			
- 			
- 			
+				<h:outputLabel for="divulgador" value="Divulgador: *" style="font-weight:bold" />
+				<br />
+ 			<h:outputLabel for="meta" value="Meta: *" style="font-weight:bold" />
+				
+				<p:selectOneMenu id="meta" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.escolaDTO}" converter="escola">
+					<f:selectItem itemLabel="Selecione a Meta" itemValue="" />
+					<f:selectItems value="#{escolaDivulgadorMB.listEscola}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}" />
+				</p:selectOneMenu>
+				<br />
+				<p:selectOneMenu id="divulgador" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.divulgadorDTO}" converter="usuario">
+					<f:selectItem itemLabel="selecione o Divulgador *" itemValue="" />
+					<f:selectItems value="#{escolaDivulgadorMB.listDivulgador}" var="divulgador" itemLabel="#{divulgador.nome}" itemValue="#{divulgador}" />
+				</p:selectOneMenu>
+ 			</h:panelGrid>
+ 			<br/>
+ 			<br/>
+ 			<br/>
  			<p:barChart id="basic" value="#{chartBean.categoryModel}" legendPosition="ne"  
             title="Basic Bar Chart" min="0" max="200" style="height:300px"/>  
  			
+ 			<center><h:outputLabel for="divulgador" value="Status " style="font-weight:bold" /></center>
  		</h:form>
  	</ui:define>  
 </ui:decorate>  
