@@ -22,7 +22,7 @@
 				<br />
 				<h:outputLabel for="divulgador" value="Divulgador: *" style="font-weight:bold" />
 				
-				<p:selectOneMenu id="escola" value="#{escolaLivroMB.escolaLivroDTO.escolaDTO}" converter="escola">
+				<p:selectOneMenu id="escola" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.escolaDTO}" converter="escola">
 					<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
 					<f:selectItems value="#{escolaDivulgadorMB.listEscola}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>

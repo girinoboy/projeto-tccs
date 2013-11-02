@@ -2,7 +2,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+ 	xmlns:pe="http://primefaces.org/ui/extensions"> 
 
 <ui:decorate template="layoutComplex.xhtml">
 	<ui:define name="centro">
@@ -70,11 +71,11 @@
 				</p:column>
 
 				<p:column headerText="Quant. Livros" style="width:50px">
-					<h:outputText value="#{el.livroDTO.preco}" />
+					<h:outputText value="#{el.quantidadeAluno}" />
 				</p:column>
 
 				<p:column headerText="Data de Adoção" style="width:50px">
-					<h:outputText value="#{el.livroDTO.preco}" />
+					<h:outputText value="#{el.dataAdocao}" />
 				</p:column>
 
 			</p:dataTable>

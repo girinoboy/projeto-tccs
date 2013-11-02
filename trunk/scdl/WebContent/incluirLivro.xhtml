@@ -2,7 +2,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:decorate template="layoutComplex.xhtml">
 	<ui:define name="centro">
@@ -29,7 +30,7 @@
 					<p:inputMask id="edicao" value="#{livroMB.livroDTO.edicao}" mask="99ª" size="10" />
 					
 					<h:outputLabel for="preco" value="Preço: *" />
-					<p:inputMask id="preco" value="#{livroMB.livroDTO.preco}" mask="R$999,99" size="15" />
+					<pe:inputNumber id="preco" value="#{livroMB.livroDTO.preco}" symbol="R$ " required="true" size="15"/> 
 
 					<f:facet name="footer">
 						<div align="right">
