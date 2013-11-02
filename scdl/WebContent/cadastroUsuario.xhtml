@@ -29,7 +29,7 @@
 		            <p:message for="usuario" />
 		            
 		            <h:outputLabel for="senha" value="Senha: *" />
-		            <p:password inputText id="senha" size="80"
+		            <p:password id="senha" size="80"
 		                value="#{usuarioMB.usuarioDTO.senha}" required="true" label="Senha">
 		                <f:validateLength minimum="2" />
 		            </p:password>
@@ -38,7 +38,7 @@
 		            
 		            <f:facet name="footer">
 			          	<p:commandButton value="Salvar" actionListener="#{usuarioMB.add}" id="withIcon"   
-			            update=":growl" icon="ui-icon-disk" />
+			            update=":growl,panel" icon="ui-icon-disk" />
 			            <p:commandButton value="Reset" type="reset" /> 
 			            <p:commandButton value="Voltar" action="/escola.xhtml?faces-redirect=true" immediate="true"/> 
 		  			</f:facet>

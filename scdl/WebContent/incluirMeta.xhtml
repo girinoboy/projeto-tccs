@@ -2,7 +2,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:decorate template="layoutComplex.xhtml">
 	<ui:define name="centro">
@@ -17,18 +18,22 @@
 					<p:inputText id="descricao" value="#{metaMB.metaDTO.descricao}"
 						label="Descrição" width="50" required="true" />
 					<h:outputLabel for="city" value="Codigo:" />
-				
+
 					<h:outputLabel for="valor" value="Valor da meta: *" />
 					<h:outputText for="dataInicio" value="Data Inicial: " />
 					<h:outputText for="dataFim" value="Data Final: " />
-					
-					<p:inputMask id="valor" value="#{metaMB.metaDTO.valor}"
-						mask="R$9999,99" required="true"  size="15"/>
+
+					<pe:inputNumber id="valor" value="#{metaMB.metaDTO.valor}"
+						symbol="R$ " required="true" size="15" />
 					<p:inputMask id="dataInicio" value="#{metaMB.metaDTO.dataInicio}"
-						mask="99/99/9999" size="15"/>
+						mask="99/99/9999" size="15">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:inputMask>
 					<p:inputMask id="dataFim" value="#{metaMB.metaDTO.dataFim}"
-						mask="99/99/9999" size="15"/>
-							
+						mask="99/99/9999" size="15">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:inputMask>
+
 					<p:selectOneMenu id="city" value="#{metaMB.metaDTO.cidadeDTO}"
 						required="true" converter="cidade">
 						<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
