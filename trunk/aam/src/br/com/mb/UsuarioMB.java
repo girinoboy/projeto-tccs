@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -56,6 +57,17 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		}
 
 		return new DefaultStreamedContent(new ByteArrayInputStream(emptyImage), "image/png");
+	}
+	
+	public void handleSelect(SelectEvent event) {  
+		
+		try {
+			usuarioDTO = (UsuarioDTO)event.getObject();
+			
+			addMessage("Selected:" + usuarioDTO.getId().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {

@@ -30,21 +30,30 @@ public class GraduacaoDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-/*
 	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final GraduacaoDTO other = (GraduacaoDTO) obj;
-		if (this.id != other.id) {
-			return false;
-		}
-		return true;
-	}*/
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GraduacaoDTO other = (GraduacaoDTO) obj;
+        if (this.id == null){
+        	return false;
+        }
+        if (!this.id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
+ 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + this.id;
+        return hash;
+    }
 
 	public Integer getId() {
 		return id;

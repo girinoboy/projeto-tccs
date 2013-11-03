@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:decorate template="layout.xhtml">  
+	<ui:define id="centro" name="centro"> 
+ 		<h:form id="form">
+ 		
+ 			<ui:include id="pag" src="#{layoutMB.viewedPage}" cache="false"/>
+ 			
+ 			<h:panelGrid id="pg" columns="5" cellpadding="5">
+	 			<h:outputLabel for="graduacao" value="Graduacao: *" />
+		        <p:selectOneMenu id="graduacao" value="#{chartBean.usuarioDTO.graduacaoDTO}" effect="fade" converter="graduacao" required="true">  
+		            <f:selectItem itemLabel="Selecione" itemValue="" />  
+		            <f:selectItems value="#{usuarioMB.listGraduacaoDTO}" var="graduacao" itemLabel="#{graduacao.nome}" itemValue="#{graduacao}"/>  
+		        </p:selectOneMenu>  
+	            <p:watermark for="graduacao" value=" " />
+	            <p:message for="graduacao" />
+	            
+	            <p:commandButton value="Emitir" actionListener="#{chartBean.atualizaNotaMediaGraduacao}" id="withIcon" update=":growl,line" icon="ui-icon-disk" />
+ 			</h:panelGrid>
+ 			
+ 			<p:lineChart id="line" value="#{chartBean.cNotaMediaGraduacao}" legendPosition="e" animate="true"
+                         minY="0" style="height:300px;"/>
+ 		</h:form>
+ 	</ui:define>  
+</ui:decorate>  
+</html>
