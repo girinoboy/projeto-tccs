@@ -22,12 +22,12 @@
 				<br />
 				<h:outputLabel for="divulgador" value="Divulgador: *" style="font-weight:bold" />
 				
-				<p:selectOneMenu id="escola" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.escolaDTO}" converter="escola" required="true">
+				<p:selectOneMenu id="escola" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.escolaDTO}" converter="escola" required="true" requiredMessage="Escola não informada">
 					<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
 					<f:selectItems value="#{escolaDivulgadorMB.listEscola}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>
 				<br />
-				<p:selectOneMenu id="divulgador" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.divulgadorDTO}" converter="usuario" required="true">
+				<p:selectOneMenu id="divulgador" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.divulgadorDTO}" converter="usuario" required="true" requiredMessage="Divulgador não informado!">
 					<f:selectItem itemLabel="selecione o Divulgador *" itemValue="" />
 					<f:selectItems value="#{escolaDivulgadorMB.listDivulgador}" var="divulgador" itemLabel="#{divulgador.nome}" itemValue="#{divulgador}" />
 				</p:selectOneMenu>
