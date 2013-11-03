@@ -12,19 +12,19 @@
 
  			<p:separator id="separator"/>
  			
- 			<p:dataTable var="membro" value="#{usuarioMB.listUsuariDTO}">  
+ 			<p:dataTable var="ra" value="#{resuldoAvaliacaoMB.listResuldoAvaliacaoDTO}">  
 		  
 		        <p:column headerText="Nome">  
-		            <h:outputText value="#{membro.nome}" />  
+		            <h:outputText value="#{ra.usuarioDTO.nome}" />  
 		        </p:column>  
 		  
 		        <p:column headerText="Graduação">  
-		            <h:outputText value="#{membro.graduacaoDTO.nome}" />  
+		            <h:outputText value="#{ra.usuarioDTO.graduacaoDTO.nome}" />  
 		        </p:column>  
 		  
 		        <p:column headerText="Data">  
 		        	
-		            <h:outputText value="#{membro.ativoInativo ? 'Ativo' : 'Inativo'}" />  
+		            <h:outputText value="#{ra.data}" />  
 		        </p:column>  
 		    </p:dataTable> 
     

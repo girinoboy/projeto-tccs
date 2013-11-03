@@ -41,6 +41,8 @@ public class UsuarioDTO {
 	private String email;
 	private String tema;
 	private Boolean ativoInativo;
+	private String sexo;
+	private String rg;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
 	private GraduacaoDTO graduacaoDTO;
@@ -57,6 +59,24 @@ public class UsuarioDTO {
 	public UsuarioDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UsuarioDTO other = (UsuarioDTO) obj;
+        if (this.id == null){
+        	return false;
+        }
+        if (!this.id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
 	
 	public UsuarioDTO(String nome, int i) {
 		this.id = i;
@@ -136,6 +156,8 @@ public class UsuarioDTO {
 	}
 
 	public GraduacaoDTO getGraduacaoDTO() {
+		if(graduacaoDTO==null)
+			graduacaoDTO= new GraduacaoDTO();
 		return graduacaoDTO;
 	}
 
@@ -157,6 +179,22 @@ public class UsuarioDTO {
 
 	public void setListAnexoDTO(List<AnexoDTO> listAnexoDTO) {
 		this.listAnexoDTO = listAnexoDTO;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
 	}
 
 

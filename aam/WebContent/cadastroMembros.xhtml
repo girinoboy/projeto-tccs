@@ -3,7 +3,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:decorate template="layout.xhtml">
 	<ui:define id="centro" name="centro">
@@ -20,28 +21,31 @@
 					<p:watermark for="nome" value="Nome completo" />
 					<p:message for="nome" />
 
-
 					<h:outputLabel for="cpf" value="CPF: *" />
-					<p:inputMask value="#{maskController.cpf}" mask="999.999.999-99"
+					<p:inputMask value="#{usuarioMB.usuarioDTO.cpf}" mask="999.999.999-99"
 						id="cpf" size="15" required="true" label="CPF">
 						<f:validateLength minimum="2" />
 					</p:inputMask>
+					<p:watermark for="cpf" value=" " />
 					<p:message for="cpf" />
-					<br />
+
 					<h:outputLabel for="rg" value="RG: *" />
-					<p:inputText id="rg" value="#{validationBean.rg}">
+					<p:inputText id="rg" value="#{usuarioMB.usuarioDTO.rg}">
 						<p:clientValidator event="keyup" size="15" required="true"
-							label="CPF" />
+							label="RG" />
 						<f:validateLength minimum="2" />
 					</p:inputText>
+					<p:watermark for="rg" value=" " />
 					<p:message for="rg" />
-					<br />
-					<h:outputText value="Sexo: " />
-					<p:selectOneRadio id="options" value="#{formBean.number}">
-						<f:selectItem itemLabel="Feminino" itemValue="1" />
-						<f:selectItem itemLabel="Masculino" itemValue="2" />
-					</p:selectOneRadio>
-					<br />
+					
+					<h:outputLabel for="sexo" value="Sexo: *" />
+		            <p:selectOneRadio id="sexo" value="#{usuarioMB.usuarioDTO.sexo}" required="true">  
+			            <f:selectItem itemLabel="Feminino" itemValue="0" />
+			            <f:selectItem itemLabel="Masculino" itemValue="1" />
+			        </p:selectOneRadio>
+		            <p:watermark for="sexo" value=" " />
+		            <p:message for="sexo" />
+					
 					<h:outputLabel for="graduacao" value="Graduacao: *" />
 					<p:selectOneMenu id="graduacao"
 						value="#{usuarioMB.usuarioDTO.graduacaoDTO}" effect="fade"
@@ -51,6 +55,17 @@
 							var="graduacao" itemLabel="#{graduacao.nome}"
 							itemValue="#{graduacao}" />
 					</p:selectOneMenu>
+					<p:watermark for="graduacao" value=" " />
+					<p:message for="graduacao" />
+
+					<h:outputText for="status" value="Status:" />
+					<p:selectOneRadio id="status" value="#{usuarioMB.usuarioDTO.ativoInativo}">
+						<f:selectItem itemLabel="Ativo" itemValue="true" />
+						<f:selectItem itemLabel="Inativo" itemValue="false" />
+					</p:selectOneRadio>
+					<br />
+					<p:message for="status" />
+					
 					<h:form>
 
 						<p:fileUpload
@@ -61,12 +76,7 @@
 						<p:growl id="messages" showDetail="true" />
 
 					</h:form>
-					<p:watermark for="graduacao" value=" " />
-					<p:message for="graduacao" />
-
-					<h:outputText for="status" value="Notas da Avaliação:" />
-
-
+					
 					<f:facet name="footer">
 						<p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
 							id="withIcon" update=":growl" icon="ui-icon-disk" />

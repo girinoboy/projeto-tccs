@@ -3,50 +3,62 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"  
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:decorate template="layout.xhtml">  
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
  		
  			<p:panel id="panel" header="Resultados de avaliação">
-		    	<h:inputHidden id="idresuldoAvaliacao" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.id}" />
+ 			
 		        <h:panelGrid id="pg" columns="4" cellpadding="5">
 		        
-		        	<h:outputLabel value="Nome: " for="basicPojo"/>  
-		            <p:autoComplete value="#{autoCompleteMB.usuarioDTO}" id="basicPojo" completeMethod="#{autoCompleteMB.completarUsuario}"  
+		        	<h:outputLabel value="Nome: " for="nome"/>
+		            <p:autoComplete value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.usuarioDTO}" id="nome" completeMethod="#{resuldoAvaliacaoMB.completarUsuario}"
 	                    var="u" itemLabel="#{u.nome}" itemValue="#{u}" converter="usuario" forceSelection="true" cache="false" >
-	                    <p:ajax event="itemSelect" listener="#{usuarioMB.handleSelect}" update="messages,photos,panel" />  
-		            </p:autoComplete> 
+	                    <p:ajax event="itemSelect" listener="#{resuldoAvaliacaoMB.handleSelect}" update="panel" />
+		            </p:autoComplete>
 		       		<p:watermark for="nome" value="Nome completo" />
 		            <p:message for="nome" />
 
-					<h:outputLabel for="dataPagamento" value="Data do Pagamento: *" required="true"/>
-		            <p:calendar value="#{usuarioMB.usuarioDTO.pagamentoDTO.dataPagamento}" id="dataPagamento" required="true"/>
+					<h:outputLabel for="dataPagamento" value="Data: *" required="true"/>
+		            <p:calendar value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.data}" id="dataPagamento" required="true"/>
 		            <p:watermark for="dataPagamento" value="__/__/____" />
-		            <p:message for="dataPagamento" />		            
+		            <p:message for="dataPagamento" />
 		            
 		            <h:outputLabel for="graduacao" value="Graduacao: *" />
-			        <p:selectOneMenu id="graduacao" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.graduacaoDTO}" effect="fade" converter="graduacao" required="true">  
-			            <f:selectItem itemLabel="Selecione" itemValue="" />  
-			            <f:selectItems value="#{resuldoAvaliacaoMB.listGraduacaoDTO}" var="graduacao" itemLabel="#{graduacao.nome}" itemValue="#{graduacao}"/>  
-			        </p:selectOneMenu>  
+			        <p:selectOneMenu id="graduacao" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.usuarioDTO.graduacaoDTO}" effect="fade" converter="graduacao" required="true"> 
+			            <f:selectItem itemLabel="Selecione" itemValue="" />
+			            <f:selectItems value="#{resuldoAvaliacaoMB.listGraduacaoDTO}" var="graduacao" itemLabel="#{graduacao.nome}" itemValue="#{graduacao}"/>
+			        </p:selectOneMenu>
 		            <p:watermark for="graduacao" value=" " />
 		            <p:message for="graduacao" />
 		            
-		            <h:outputText for="status" value="Status:" />
-					<p:selectOneRadio id="status" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.ativoInativo}">
-						<f:selectItem itemLabel="Ativo" itemValue="true" />
-						<f:selectItem itemLabel="Inativo" itemValue="false" />
-					</p:selectOneRadio>
-					<br />
-					<p:message for="status" />
+		            <h:outputText value="Notas da Avaliação:" />
+		            <p:row>
+		            	<h:outputLabel for="tecnica" value="Tecnica: *" /> <p:spacer width="57" height="10" />
+		            	<pe:inputNumber id="tecnica" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.tecnica}" required="true" label="Tecnica" maxlength="4"/><br/>
+			            <h:outputLabel for="luta" value="Luta: *" /> <p:spacer width="80" height="10" />
+			            <pe:inputNumber id="luta" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.luta}" required="true" label="Luta" maxlength="4"/><br/>
+			            <h:outputLabel for="conhecimentos" value="Conhecimentos: *" />
+			            <pe:inputNumber id="conhecimentos" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.conhecimentos}" required="true" label="Conhecimentos" maxlength="4"/>
+		            </p:row>
+		            <p:message for="tecnica" />
+		            <p:message for="luta" />
+		            
+		            <h:outputLabel for="comentarios" value="Comentarios: " />
+		            <p:inputTextarea id="comentarios" rows="5" cols="30" counter="counter" maxlength="200"
+				    	value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.comentarios}"
+				    	counterTemplate="{0} characters remaining." autoResize="false"/>
+				  	<p:watermark for="comentarios" value=" " />
+				  	<p:message for="comentarios" />
+					<h:outputText id="counter" />
 		            
 		            <f:facet name="footer">
-			          	<p:commandButton value="Salvar" actionListener="#{resuldoAvaliacaoMB.add}" id="withIcon"   
-			            update=":growl" icon="ui-icon-disk" />
-			            <p:commandButton value="Reset" type="reset" /> 
-			            <p:commandButton value="Voltar" action="/membros.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
+			          	<p:commandButton value="Salvar" actionListener="#{resuldoAvaliacaoMB.add}" id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
+			            <p:commandButton value="Reset" type="reset" />
+			            <p:commandButton value="Voltar" action="/resultadoAvaliacoes.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 		  			</f:facet>
 		        </h:panelGrid>  
 		    </p:panel> 
