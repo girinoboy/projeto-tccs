@@ -16,7 +16,7 @@
 			<h:panelGrid id="pg" columns="5" cellpadding="5">
 				
 				<h:outputLabel value="Nome: " for="nome" />
-				<p:autoComplete
+				<p:autoComplete required="true"
 					value="#{chartBean.usuarioDTO}"
 					id="nome" completeMethod="#{autoCompleteMB.completarUsuario}"
 					var="u" itemLabel="#{u.nome}" itemValue="#{u}" converter="usuario"
