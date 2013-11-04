@@ -72,5 +72,20 @@ public class ChartDAO extends GenericoDAO<EscolaDTO, Serializable>{
 
 			return dadoMinerado;
 	}
+	
+	
+	public String a(){
+		
+		select c.nome,sum(l.preco*el.quantidade_aluno) total from escola_divulgador ed
+		inner join escola e on e.id = ed.escola_id
+		inner join divulgador d on d.id = ed.divulgador_id
+		inner join cidade c on c.id = e.cidade_id
+		inner join meta m on m.cidade_id =c.id
+		inner join escola_livro el on el.escola_id = e.id
+		inner join livro l on l.id = el.livro_id
+		group by 1;
+		
+		return null;
+	}
 
 }
