@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:decorate template="layoutComplex.xhtml">
+	<ui:define name="centro">
+		<h:form id="form1">
+			<center>
+				<p:panelGrid id="panel" columns="2" style="width:1000px">
+					<f:facet name="header">  
+        				Incluir Solicitação
+   					</f:facet>
+					<h:outputLabel for="data" value=" " size="10" />
+					<h:outputLabel for="codigo" value=" " size="10" />
+
+					<h:outputLabel for="descricao" value="Descrição: *" size="60" />
+					<p:inputText id="descricao"
+						value="#{solicitacaoMB.solicitacaoDTO.descricao}"
+						label="Descricao" width="50" required="true" size="60" />
+
+					<p:selectOneMenu id="editora"
+						value="#{escolaMB.escolaDTO.cidadeDTO}" required="true"
+						converter="cidade">
+						<f:selectItem itemLabel="Selecione a Editora *" itemValue="" />
+						<f:selectItems value="#{escolaMB.listCidadeDTO}" var="cidade"
+							itemLabel="#{cidade.nome}" itemValue="#{cidade}"
+							style="height:200px" />
+					</p:selectOneMenu>
+
+					<p:selectOneMenu id="livro"
+						value="#{escolaLivroMB.escolaLivroDTO.livroDTO}" converter="livro"
+						required="true">
+						<f:selectItem itemLabel="Selecione o Livro *" itemValue="" />
+						<f:selectItems value="#{escolaLivroMB.listLivroDTO}" var="livro"
+							itemLabel="#{livro.nome}" itemValue="#{livro}" />
+					</p:selectOneMenu>
+
+					<h:outputText for="quantidade" value="Quantidade: *" />
+					<p:inputText id="quantidade"
+						value="#{solicitacaoMB.solicitacaoDTO.quantidade}" />
+
+
+
+					<f:facet name="footer">
+						<div align="right">
+							<p:commandButton value="Cancelar" icon="ui-icon-closethick"
+								action="/livro.xhtml?faces-redirect=true" immediate="true"
+								update=":center" />
+							<p:commandButton value="Incluir" icon="ui-icon-check"
+								actionListener="#{livroMB.add}" update=":messages,:growl,panel" />
+						</div>
+					</f:facet>
+				</p:panelGrid>
+			</center>
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>
