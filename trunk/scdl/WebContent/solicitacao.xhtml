@@ -6,7 +6,64 @@
 
 <ui:decorate template="layoutComplex.xhtml">  
 	<ui:define name="centro"> 
-
+<h:form id="form">
+											  
+		   	  
+		   	<br/><br/><br/><br/><br/><br/><br/><br/>
+		  	<p:commandButton value="Nova"  action="/incluirSolicitacao.xhtml?faces-redirect=true" immediate="true" update=":center"/> <br/><br/>
+		  	
+			  	 
+		    <p:dataTable id="solcitacaoTable" var="solcitacao" value="#{solicitacaoMB.listSolicitacao}" rowKey="#{solicitacao.id}" style="width:1000px" emptyMessage="Nenhum item encontrado." filteredValue="#{solicitacaoMB.filteredsolicitacoes}" filterEvent="enter" widgetVar="solicitacoesTable">
+		    	<f:facet name="header">  
+		           <p:outputPanel>  
+		               <h:outputText value="Search all fields:" />  
+		               <p:inputText id="globalFilter" onkeyup="solcitacoesTable.filter()" style="width:150px" />  
+		           </p:outputPanel>  
+		       </f:facet>   
+		  
+		        <p:column headerText="Código" style="width:50px" filterBy="id">  
+		            <p:outputLabel value="#{solicitacao.id}" />  
+		        </p:column>
+		  
+		        <p:column headerText="Descrição" style="width:400px" filterBy="nome" filterMatchMode="contains">  
+		            <h:outputText value="#{solicitacao.descricao}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="Quantidade" style="width:400px">  
+		            <h:outputText value="#{solicitacao.quantidade}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="Ações" style="width:210px">  
+		        <!-- consultar -->
+		                <p:commandButton id="selectButton1" actionListener="#{layoutBean.requestPage}" 
+		                 action="/consultarSolicitacao.xhtml?faces-redirect=true"
+		                 immediate="true" update=":center" icon="ui-icon-search" title="Consultar" >   
+		                </p:commandButton> 
+		        <!-- Alterar -->        
+		                <p:commandButton id="selectButton2"  oncomplete="PF('carDialog').show()" icon="ui-icon-pencil" title="Alterar">  
+		                <f:setPropertyActionListener value="#{solicitacao}" target="#{tableBean.selectedEscola}" /> 
+		                </p:commandButton> 
+		        <!-- Imprimir -->        
+		                <p:commandButton id="selectButton3"   oncomplete="PF('carDialog').show()" icon="ui-icon-print" title="Imprimir">  
+		                <f:setPropertyActionListener value="#{solicitacao}" target="#{tableBean.selectedSolicitacao}" /> 
+		                </p:commandButton> 
+		        <!-- Deletar -->       
+		                <p:commandButton id="selectButton4" icon="ui-icon-trash" title="Apagar" update=":growl" onclick="PF('dlg').show();" actionListener="#{solicitacaoMB.edit}">  
+		            	<f:setPropertyActionListener value="#{solicitacao}" target="#{solicitacaoMB.solicitacaoDTO}" /> 
+		                </p:commandButton> 
+		                
+		        </p:column>  
+		  
+		    </p:dataTable>  
+	    </h:form>
+	    
+		<p:dialog header="Apagar?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:outputText value="Deseja realmente excluir essa solicitação?" />
+		    <f:facet name="footer">
+			 	<p:commandButton value="Excluir" update=":growl,form:solicitacaoTable"  icon="ui-icon-close" actionListener="#{escolaMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />                 
+			 	<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()" immediate="true" />                 
+			</f:facet>
+		</p:dialog>
 
   
   
