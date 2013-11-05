@@ -33,7 +33,7 @@
 			  
 		   	  
 		   	<br/><br/><br/><br/><br/><br/><br/><br/>
-		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true" immediate="true" update=":center"/> <br/><br/>
+		  	<p:commandButton value="Nova"  action="/incluirEscola.xhtml?faces-redirect=true" immediate="true" update=":center" title="Incluir uma nova escola"/> <br/><br/>
 		  	
 			  	 
 		    <p:dataTable id="escolaTable" var="escola" value="#{escolaMB.listEscola}" rowKey="#{escola.id}" style="width:1000px" emptyMessage="Nenhum item encontrado" filteredValue="#{escolaMB.filteredEscolas}" filterEvent="enter" widgetVar="escolasTable">
