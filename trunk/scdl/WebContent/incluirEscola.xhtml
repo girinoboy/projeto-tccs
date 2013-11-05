@@ -50,7 +50,7 @@
 						<f:selectItem itemLabel="Anual" itemValue="2" />
 					</p:selectOneMenu>
 
-					<h:outputText for="data" value="Data: " />
+					<h:outputText for="data" value="Data: *" />
 					<p:inputMask id="data" value="#{escolaMB.escolaDTO.data}"
 						mask="99/99/9999" required="true">
 						<f:convertDateTime pattern="dd/MM/yyyy" />

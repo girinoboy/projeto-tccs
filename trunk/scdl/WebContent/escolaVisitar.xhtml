@@ -10,7 +10,7 @@
 
 		<p:panelGrid columns="3" cellpadding="1" style="width:1000px">
 			<f:facet name="header">  
-        Selecionar Escola a Visitar
+        Incluir Escola Visitada
     </f:facet>
 		</p:panelGrid>
 		<br />
@@ -32,7 +32,7 @@
 					itemLabel="#{escola.nome}" itemValue="#{escola}" />
 			</p:selectOneMenu>
 
-			<p:commandButton type="button" value="Selecionar"
+			<p:commandButton type="button" value="Incluir"
 				icon="ui-icon-check" />
 
 		</h:panelGrid>
@@ -58,7 +58,7 @@
 
 			<f:facet name="footer">
 				<div align="center">
-					<p:commandButton value="OK" icon="ui-icon-arrowthick-1-w"
+					<p:commandButton value="Cancelar" icon="ui-icon-arrowthick-1-w"
 						action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"
 						update=":center" />
 					<p:commandButton type="button" value="Excluir" icon="ui-icon-check" />

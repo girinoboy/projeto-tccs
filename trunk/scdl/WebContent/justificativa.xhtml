@@ -17,24 +17,25 @@
 			<br />
 			<br />
 			<h:panelGrid columns="3" cellpadding="1" style="width:1000px">
-				<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}"
-					required="true" converter="cidade">
-					<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
-					<f:selectItems value="#{escolaMB.listCidadeDTO}" var="cidade"
-						itemLabel="#{cidade.nome}" itemValue="#{cidade}"
-						style="height:200px" />
+				
+				<p:selectOneMenu id="livro"
+					value="#{escolaLivroMB.escolaLivroDTO.livroDTO}" converter="livro"
+					required="true">
+					<f:selectItem itemLabel="Selecione o Livro *" itemValue="" />
+					<f:selectItems value="#{escolaLivroMB.listLivroDTO}" var="livro"
+						itemLabel="#{livro.nome}" itemValue="#{livro}" />
 				</p:selectOneMenu>
 
 				<p:selectOneMenu id="escola" value="#{escolaMB.escolaDTO}"
 					converter="escola" required="true">
-					<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
+					<f:selectItem itemLabel="Selecione a Escola *" itemValue="" />
 					<f:selectItems value="#{escolaMB.listEscola}" var="escola"
 						itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>
 
 				<p:selectOneMenu id="planLiterario"
-					value="#{escolaMB.escolaDTO.planejamentoLiterario}">
-					<f:selectItem itemLabel="Selecione a Justificativa" itemValue="" />
+					value="#{escolaMB.escolaDTO.planejamentoLiterario}" required="true">
+					<f:selectItem itemLabel="Selecione a Justificativa *" itemValue="" />
 					<f:selectItem itemLabel="Preço alto" itemValue="1" />
 					<f:selectItem itemLabel="Livro contém erro gramatical"
 						itemValue="2" />
@@ -58,7 +59,7 @@
 			<p:dataTable id="escolaTable" var="escola"
 				value="#{escolaMB.listEscola}" style="width:1000px">
 
-				<p:column headerText="Cidade" style="width:50px">
+				<p:column headerText="Livro" style="width:50px">
 					<h:outputText value="#{escola.id}" />
 				</p:column>
 
@@ -73,9 +74,8 @@
 				<p:column headerText="Ações" style="width:210px">
 
 					<!-- Deletar -->
-					<p:commandButton id="selectButton4"
-						oncomplete="PF('dlg').show()" icon="ui-icon-trash"
-						title="View">
+					<p:commandButton id="selectButton4" oncomplete="PF('dlg').show()"
+						icon="ui-icon-trash" title="View">
 						<f:setPropertyActionListener value="#{escola}"
 							target="#{escolaMB.escolaDTO}" />
 					</p:commandButton>
@@ -88,20 +88,25 @@
 
 				<f:facet name="footer">
 					<div align="right">
-						<p:commandButton value="OK" icon="ui-icon-arrowthick-1-w"
-							action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"
-							update=":center" />
-						<p:commandButton type="button" value="Incluir" icon="ui-icon-check" />
+						<p:commandButton value="Cancelar" icon="ui-icon-arrowthick-1-w"
+							action="/layoutComplex.xhtml?faces-redirect=true"
+							immediate="true" update=":center" />
+						<p:commandButton type="button" value="Incluir"
+							icon="ui-icon-check" />
 					</div>
 				</f:facet>
 			</p:panelGrid>
 		</h:form>
-		
-		<p:dialog header="Apagar?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true">
-		    <h:outputText value="Deseja realmente excluir essa escola?" />
-		    <f:facet name="footer">
-			 	<p:commandButton value="Excluir" update=":growl,form:escolaTable"  icon="ui-icon-close" actionListener="#{escolaMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />                 
-			 	<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()" immediate="true" />                 
+
+		<p:dialog header="Apagar?" widgetVar="dlg" modal="true"
+			appendToBody="true" resizable="false" draggable="true">
+			<h:outputText value="Deseja realmente excluir essa justificativa?" />
+			<f:facet name="footer">
+				<p:commandButton value="Excluir" update=":growl,form:escolaTable"
+					icon="ui-icon-close" actionListener="#{escolaMB.del}"
+					immediate="true" oncomplete="PF('dlg').hide()" />
+				<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()"
+					immediate="true" />
 			</f:facet>
 		</p:dialog>
 	</ui:define>
