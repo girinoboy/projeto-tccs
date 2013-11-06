@@ -7,7 +7,6 @@ import javax.faces.event.ActionEvent;
 
 import br.com.dao.EditoraDAO;
 import br.com.dto.EditoraDTO;
-import br.com.dto.EscolaLivroDTO;
 
 @ManagedBean
 public class EditoraMB extends GenericoMB implements ModeloMB{

@@ -9,7 +9,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.dto.EscolaDTO;
-import br.com.factory.HibernateUtility;
 
 /**
  * @author marcleonio.medeiros
