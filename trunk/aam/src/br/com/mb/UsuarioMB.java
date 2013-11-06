@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -37,6 +38,18 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			e.printStackTrace();
 		}
 	}
+	
+	 public void handleFileUpload(FileUploadEvent event) throws Exception {
+	        
+	        usuarioDTO.getAnexoDTO().setNome(event.getFile().getFileName());
+	        usuarioDTO.getAnexoDTO().setAnexo(event.getFile().getContents());
+	        usuarioDTO.getAnexoDTO().setTamanho(event.getFile().getSize());
+	        usuarioDTO.getAnexoDTO().setContentType(event.getFile().getContentType());
+	        
+	        //usuarioDTO = usuarioDAO.save(usuarioDTO);
+	        usuarioDTO.setAnexoDTO(anexoDAO.save(usuarioDTO.getAnexoDTO()));
+	        addMessage("Imagem add");
+	  }
 	
 	public StreamedContent getDynamicImage() {
 		byte[] emptyImage = new byte[0];
@@ -71,6 +84,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {
+		usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
 		usuarioDAO.save(usuarioDTO);
 		addMessage("Salvo");
 		

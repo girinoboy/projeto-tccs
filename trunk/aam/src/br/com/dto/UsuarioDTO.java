@@ -166,6 +166,9 @@ public class UsuarioDTO {
 	}
 
 	public AnexoDTO getAnexoDTO() {
+		if(anexoDTO == null){
+			anexoDTO = new AnexoDTO();
+		}
 		return anexoDTO;
 	}
 
