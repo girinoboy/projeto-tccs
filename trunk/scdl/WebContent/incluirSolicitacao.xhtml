@@ -30,7 +30,7 @@
 					</p:selectOneMenu>
 					
 					<p:selectOneMenu id="editora"
-						value="#{solicitacaoMB.solicitacaoDTO.livroDTO.editoraDTO}" required="true"
+						value="#{solicitacaoMB.solicitacaoDTO.editoraDTO}" required="true"
 						converter="editora">
 						<f:selectItem itemLabel="Selecione a Editora *" itemValue="" />
 						<f:selectItems value="#{editoraMB.listEditora}" var="editora"

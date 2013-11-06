@@ -22,6 +22,9 @@ public class SolicitacaoDTO {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "livro_id", insertable = true, updatable = true, nullable = true)
 	private LivroDTO livroDTO;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "editora_id", insertable = true, updatable = true, nullable = true)
+	private EditoraDTO editoraDTO;
 	
 	public SolicitacaoDTO() {
 		// TODO Auto-generated constructor stub
@@ -57,6 +60,14 @@ public class SolicitacaoDTO {
 
 	public void setLivroDTO(LivroDTO livroDTO) {
 		this.livroDTO = livroDTO;
+	}
+
+	public EditoraDTO getEditoraDTO() {
+		return editoraDTO;
+	}
+
+	public void setEditoraDTO(EditoraDTO editoraDTO) {
+		this.editoraDTO = editoraDTO;
 	}
 
 }

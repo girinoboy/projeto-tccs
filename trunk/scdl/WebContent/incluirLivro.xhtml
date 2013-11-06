@@ -22,13 +22,14 @@
 					
 					<h:outputText for="descricao" value="Descrição: *" />
 					<p:inputTextarea id="descricao" rows="6" cols="33" value="#{livroMB.livroDTO.descricao}"/>
-					<br/>
+					
+					<h:outputLabel for="editora" value="Editora: *" />
 					<p:selectOneMenu id="editora"
-						value="#{escolaMB.escolaDTO.cidadeDTO}" required="true"
-						converter="cidade">
+						value="#{livroMB.livroDTO.editoraDTO}" required="true"
+						converter="editora">
 						<f:selectItem itemLabel="Selecione a Editora *" itemValue="" />
-						<f:selectItems value="#{escolaMB.listCidadeDTO}" var="cidade"
-							itemLabel="#{cidade.nome}" itemValue="#{cidade}"
+						<f:selectItems value="#{editoraMB.listEditora}" var="editora"
+							itemLabel="#{editora.nome}" itemValue="#{editora}"
 							style="height:200px" />
 					</p:selectOneMenu>
 					
