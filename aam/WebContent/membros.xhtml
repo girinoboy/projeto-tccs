@@ -15,7 +15,7 @@
  			<p:dataTable var="membro" value="#{usuarioMB.listUsuariDTO}">  
 		        <p:column headerText="Foto">  
 		        	<p:graphicImage value="#{usuarioMB.dynamicImage}" style="width:60px;height:60px">
-						<f:param name="image_id" value="#{membro.id}"/>
+						<f:param name="image_id" value="#{membro.anexoDTO.id}"/>
 					</p:graphicImage>
 		        </p:column>  
 		  

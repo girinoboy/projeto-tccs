@@ -12,6 +12,7 @@
 
 			<p:panel id="panel" header="Dados Pessoais">
 				<h:inputHidden id="idUsuario" value="#{usuarioMB.usuarioDTO.id}" />
+				<h:inputHidden id="idAnexo" value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
 				<h:panelGrid id="pg" columns="4" cellpadding="1">
 					<h:outputLabel for="nome" value="Nome: *" />
 					<p:inputText id="nome" size="80"
@@ -66,16 +67,13 @@
 					<br />
 					<p:message for="status" />
 					
-					<h:form>
-
-						<p:fileUpload
-							fileUploadListener="#{fileUploadController.handleFileUpload}"
-							mode="advanced" update="messages" auto="true" sizeLimit="300000"
-							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-
-						<p:growl id="messages" showDetail="true" />
-
-					</h:form>
+					<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}" style="width:60px;height:60px">
+						<f:param id="av" name="image_id" value="#{usuarioMB.usuarioDTO.anexoDTO.id}"/>
+					</p:graphicImage>
+					
+					<p:fileUpload fileUploadListener="#{usuarioMB.handleFileUpload}" mode="advanced" 
+		            	update=":messages,:growl,avatar,av,idUsuario,idAnexo" auto="true" sizeLimit="65535" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+		            	label="Selecione"/>
 					
 					<f:facet name="footer">
 						<p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
