@@ -17,38 +17,40 @@
 			<br />
 			<br />
 			<h:panelGrid columns="3" cellpadding="1" style="width:1000px">
-				
+
 				<p:selectOneMenu id="livro"
-					value="#{escolaLivroMB.escolaLivroDTO.livroDTO}" converter="livro"
-					required="true">
+					value="#{justificativaMB.justificativaDTO.livroDTO}"
+					converter="livro" required="true">
 					<f:selectItem itemLabel="Selecione o Livro *" itemValue="" />
-					<f:selectItems value="#{escolaLivroMB.listLivroDTO}" var="livro"
+					<f:selectItems value="#{livroMB.listLivroDTO}" var="livro"
 						itemLabel="#{livro.nome}" itemValue="#{livro}" />
 				</p:selectOneMenu>
 
-				<p:selectOneMenu id="escola" value="#{escolaMB.escolaDTO}"
+				<p:selectOneMenu id="escola"
+					value="#{justificativaMB.justificativaDTO.escolaDTO}"
 					converter="escola" required="true">
 					<f:selectItem itemLabel="Selecione a Escola *" itemValue="" />
 					<f:selectItems value="#{escolaMB.listEscola}" var="escola"
 						itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>
 
-				<p:selectOneMenu id="planLiterario"
-					value="#{escolaMB.escolaDTO.planejamentoLiterario}" required="true">
+				<p:selectOneMenu id="idJustificativa"
+					value="#{justificativaMB.justificativaDTO.nome}" required="true">
 					<f:selectItem itemLabel="Selecione a Justificativa *" itemValue="" />
-					<f:selectItem itemLabel="Preço alto" itemValue="1" />
+					<f:selectItem itemLabel="Preço alto" itemValue="Preço alto" />
 					<f:selectItem itemLabel="Livro contém erro gramatical"
-						itemValue="2" />
+						itemValue="Livro contém erro gramatical" />
 					<f:selectItem itemLabel="Livro contém informações erradas"
-						itemValue="3" />
+						itemValue="Livro contém informações erradas" />
 					<f:selectItem itemLabel="Livro do concorrente é melhor"
-						itemValue="4" />
+						itemValue="Livro do concorrente é melhor" />
 					<f:selectItem itemLabel="Livro do concorrente é mais barato"
-						itemValue="5" />
+						itemValue="Livro do concorrente é mais barato" />
 					<f:selectItem itemLabel="Não está adequado a ementa da instituição"
-						itemValue="6" />
-					<f:selectItem itemLabel="O livro não me agradou" itemValue="7" />
-					<f:selectItem itemLabel="Outros" itemValue="8" />
+						itemValue="Não está adequado a ementa da instituição" />
+					<f:selectItem itemLabel="O livro não me agradou"
+						itemValue="O livro não me agradou" />
+					<f:selectItem itemLabel="Outros" itemValue="Outros" />
 				</p:selectOneMenu>
 			</h:panelGrid>
 
@@ -56,19 +58,19 @@
 			<br />
 			<br />
 
-			<p:dataTable id="escolaTable" var="escola"
-				value="#{escolaMB.listEscola}" style="width:1000px">
+			<p:dataTable id="justificativaTable" var="justificativa"
+				value="#{justificativaMB.listJustificativa}" style="width:1000px">
 
 				<p:column headerText="Livro" style="width:50px">
-					<h:outputText value="#{escola.id}" />
+					<h:outputText value="#{justificativa.id}" />
 				</p:column>
 
 				<p:column headerText="Escola" style="width:400px">
-					<h:outputText value="#{escola.nome}" />
+					<h:outputText value="#{justificativa.nome}" />
 				</p:column>
 
 				<p:column headerText="Justificativa" style="width:400px">
-					<h:outputText value="#{escola.planejamentoLiterario}" />
+					<h:outputText value="#{justificativa.nome}" />
 				</p:column>
 
 				<p:column headerText="Ações" style="width:210px">
@@ -76,8 +78,8 @@
 					<!-- Deletar -->
 					<p:commandButton id="selectButton4" oncomplete="PF('dlg').show()"
 						icon="ui-icon-trash" title="View">
-						<f:setPropertyActionListener value="#{escola}"
-							target="#{escolaMB.escolaDTO}" />
+						<f:setPropertyActionListener value="#{justificativa}"
+							target="#{justificativaMB.justificativaDTO}" />
 					</p:commandButton>
 
 				</p:column>
@@ -91,8 +93,8 @@
 						<p:commandButton value="Cancelar" icon="ui-icon-arrowthick-1-w"
 							action="/layoutComplex.xhtml?faces-redirect=true"
 							immediate="true" update=":center" />
-						<p:commandButton type="button" value="Incluir"
-							icon="ui-icon-check" />
+						<p:commandButton value="Incluir" icon="ui-icon-check"
+							actionListener="#{justificativaMB.add}" update=":messages,:growl,form"/>
 					</div>
 				</f:facet>
 			</p:panelGrid>
@@ -102,9 +104,10 @@
 			appendToBody="true" resizable="false" draggable="true">
 			<h:outputText value="Deseja realmente excluir essa justificativa?" />
 			<f:facet name="footer">
-				<p:commandButton value="Excluir" update=":growl,form:escolaTable"
-					icon="ui-icon-close" actionListener="#{escolaMB.del}"
-					immediate="true" oncomplete="PF('dlg').hide()" />
+				<p:commandButton value="Excluir"
+					update=":growl,form:justificativaTable" icon="ui-icon-close"
+					actionListener="#{justificativaMB.del}" immediate="true"
+					oncomplete="PF('dlg').hide()" />
 				<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()"
 					immediate="true" />
 			</f:facet>

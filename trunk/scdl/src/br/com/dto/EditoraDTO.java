@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.dto;
 
 import javax.persistence.Entity;
@@ -9,14 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * @author Marcleônio
- *
- */
 @Entity
-@Table(name="cidade")
-public class CidadeDTO {
-	
+@Table(name="editora")
+public class EditoraDTO {
+
 	@Id 
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
@@ -25,9 +18,10 @@ public class CidadeDTO {
 	/**
 	 * 
 	 */
-	public CidadeDTO() {
+	public EditoraDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 	@Override
     public boolean equals(Object obj) {
@@ -37,7 +31,7 @@ public class CidadeDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CidadeDTO other = (CidadeDTO) obj;
+        final EditoraDTO other = (EditoraDTO) obj;
         if (this.id == null){
         	return false;
         }
@@ -51,12 +45,6 @@ public class CidadeDTO {
 		return id;
 	}
 
-	public CidadeDTO(Integer id, String nome) {
-		super();
-		this.id = id;
-		this.nome = nome;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -68,5 +56,4 @@ public class CidadeDTO {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }

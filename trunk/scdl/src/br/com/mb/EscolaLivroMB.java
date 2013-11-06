@@ -41,7 +41,6 @@ public class EscolaLivroMB extends GenericoMB implements ModeloMB{
 		escolaLivroDTO = new EscolaLivroDTO();
 		listEscolaLivroDTO = escolaLivroDAO.list();
 		addMessage("salvo");
-		
 	}
 
 	@Override

@@ -8,10 +8,12 @@ package br.com.mb;
  *
  */
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
@@ -21,7 +23,10 @@ import org.primefaces.model.chart.PieChartModel;
 
 
 import br.com.dao.ChartDAO;
+import br.com.dto.CidadeDTO;
 import br.com.dto.EscolaDTO;
+import br.com.dto.MetaDTO;
+import br.com.dto.UsuarioDTO;
 
 
 @ManagedBean(name="chartBean")
@@ -41,31 +46,78 @@ public class ChartMB implements Serializable {
 
 	private CartesianChartModel combinedModel; 
 	
+	private CartesianChartModel desempenhoDivulgador;
+	
 	private Double previsao = 31D;
+	
+	private ChartDAO chartDAO = new ChartDAO();
+	
+	private UsuarioDTO divulgadorDTO = new UsuarioDTO();
 
 	public ChartMB(){  
-		//createLinearModel();  
-		createCategoryModel(); 
-		createLivePieModel(); 
-		createCombinedModel();  
-	}  
-
-	public CartesianChartModel getLinearModel() {  
-		return linearModel;  
-	}  
-
-	public CartesianChartModel getCategoryModel() {  
-		return categoryModel;  
-	}  
+		//createLinearModel();
+		createCategoryModel();
+		createLivePieModel();
+		createCombinedModel();
+		
+		desempenhoDivulgador(new UsuarioDTO());
+	}
 
 	public void atualizaGrafico() {
 		createLinearModel(); 
+	}
+	
+	public void atualizaDesempenhoDivulgador(){
+		desempenhoDivulgador(divulgadorDTO);
+	}
+	
+	@SuppressWarnings({ "rawtypes" })
+	private void desempenhoDivulgador(UsuarioDTO divulgadorDTO){
+		desempenhoDivulgador = new CartesianChartModel();
+		
+		ChartSeries series1 = new ChartSeries();
+		series1.setLabel("Meta");
+		ChartSeries series2 = new ChartSeries();
+		series2.setLabel("Atingido");
+
+		List<MetaDTO> a = null;
+		try {
+			
+			a = chartDAO.metaByIdDivulgador(divulgadorDTO);
+		} catch (Exception e) {
+ 			e.printStackTrace();
+		}
+		//SimpleDateFormat sdf = new SimpleDateFormat("MMMM/yyyy");
+
+		Iterator it = a.iterator();
+		while(it.hasNext())
+		{
+			Object[] c = (Object[]) it.next();
+			System.out.println(c[0]);//id_cidade
+			System.out.println(c[1]);//nome_cidade
+			System.out.println(c[2]);//Atingido
+
+			//mes-avg(valor)
+			series1.set(c[1],(Double)c[2]);
+			MetaDTO d = chartDAO.metaByIdCidade(new CidadeDTO((Integer)c[0],(String)c[1]));
+			series1.set(d.getCidadeDTO().getNome(), d.getValor());
+		}
+
+		if(series1.getData().size() == 0){
+			series1.set(0, 0);
+		}
+		if(series2.getData().size() == 0){
+			series2.set(0, 0);
+		}
+		
+		desempenhoDivulgador.addSeries(series1);
+		desempenhoDivulgador.addSeries(series2);
 	}
 
 	private void createLinearModel() {  
 
 		linearModel = new CartesianChartModel();  
-		ChartDAO chartDAO = new ChartDAO();
+		
 		String tabela = "new_view";
 		String colunaX = "dia";
 		String colunaY = "venda";
@@ -213,6 +265,30 @@ public class ChartMB implements Serializable {
 	 */
 	public void setPrevisao(Double previsao) {
 		this.previsao = previsao;
-	}  
+	}
+
+	public CartesianChartModel getDesempenhoDivulgador() {
+		return desempenhoDivulgador;
+	}
+
+	public void setDesempenhoDivulgador(CartesianChartModel desempenhoDivulgador) {
+		this.desempenhoDivulgador = desempenhoDivulgador;
+	}
+
+	public UsuarioDTO getDivulgadorDTO() {
+		return divulgadorDTO;
+	}
+
+	public void setDivulgadorDTO(UsuarioDTO divulgadorDTO) {
+		this.divulgadorDTO = divulgadorDTO;
+	}
+	
+	public CartesianChartModel getLinearModel() {
+		return linearModel;
+	}
+
+	public CartesianChartModel getCategoryModel() {
+		return categoryModel;
+	}
 }  
 

@@ -1,9 +1,13 @@
 package br.com.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +19,9 @@ public class LivroDTO {
 	private String nome;
 	private String autor;
 	private String descricao;
-	private String editora;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "editora_id", insertable = true, updatable = true, nullable = true)
+	private EditoraDTO editoraDTO;
 	private String edicao;
 	private Double preco;
 
@@ -70,12 +76,12 @@ public class LivroDTO {
 		this.descricao = descricao;
 	}
 
-	public String getEditora() {
-		return editora;
+	public EditoraDTO getEditoraDTO() {
+		return editoraDTO;
 	}
 
-	public void setEditora(String editora) {
-		this.editora = editora;
+	public void setEditoraDTO(EditoraDTO editoraDTO) {
+		this.editoraDTO = editoraDTO;
 	}
 
 	public String getEdicao() {
