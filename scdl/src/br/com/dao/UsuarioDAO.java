@@ -29,11 +29,11 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 	public UsuarioDAO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+
 	public UsuarioDTO verificaLoginSenha(UsuarioDTO usuario) throws HibernateException, Exception {
 		try{
-			usuario = (UsuarioDTO) HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
+			usuario = (UsuarioDTO) session.createCriteria(UsuarioDTO.class)
 					.add(Restrictions.eq("usuario", usuario.getUsuario()))
 					.add(Restrictions.eq("senha", usuario.getSenha()))
 					.uniqueResult();
@@ -43,24 +43,24 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 		return usuario;
 
 	}
-	
+
 	public void saveTheme(String theme, UsuarioDTO usuario) throws HibernateException, Exception {
 		//Nome da classe e atributo
 		String updateQuery = "UPDATE Usuario obj SET tema = :valor WHERE obj.id = :idUsuario";  
-		HibernateUtility.getSession().createQuery(updateQuery)
+		session.createQuery(updateQuery)
 		.setString("valor", theme)
 		.setLong("idUsuario",usuario.getId())
 		.executeUpdate();
-		
+
 		HibernateUtility.commitTransaction();
-		
+
 	}
 
 
 	public void create(List<UsuarioDTO> listUser) throws HibernateException, Exception {
 
 		for (UsuarioDTO usuario : listUser) { 
-			HibernateUtility.getSession().save(usuario);
+			session.save(usuario);
 		}
 	}
 
