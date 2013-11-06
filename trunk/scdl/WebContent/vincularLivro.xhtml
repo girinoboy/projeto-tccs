@@ -75,7 +75,9 @@
 				</p:column>
 
 				<p:column headerText="Data de Adoção" style="width:50px">
-					<h:outputText value="#{el.dataAdocao}" />
+					<h:outputText value="#{el.dataAdocao}" >
+						<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" /> 
+					</h:outputText>
 				</p:column>
 
 			</p:dataTable>
