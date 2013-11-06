@@ -91,15 +91,15 @@ public class ChartDAO extends GenericoDAO<EscolaDTO, Serializable>{
 		Query query = session.createSQLQuery(
 				"select c.id,c.nome,sum(l.preco*el.quantidade_aluno) total from escola_divulgador ed"+
 						" inner join escola e on e.id = ed.escola_id"+
-						" inner join divulgador d on d.id = ed.divulgador_id"+
+						" inner join usuario d on d.id = ed.usuario_id"+
 						" inner join cidade c on c.id = e.cidade_id"+
 						" inner join meta m on m.cidade_id =c.id"+
 						" inner join escola_livro el on el.escola_id = e.id"+
 						" inner join livro l on l.id = el.livro_id"+
-						" where d.id = :idDivulgador"+
+						" where d.id = :idUsuario"+
 				" group by c.id,c.nome")
 
-		.setParameter("idDivulgador", usuarioDTO.getId());
+		.setParameter("idUsuario", usuarioDTO.getId());
 
 		return query.list();
 	}
