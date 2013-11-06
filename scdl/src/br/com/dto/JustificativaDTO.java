@@ -1,6 +1,9 @@
 package br.com.dto;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,6 +21,8 @@ public class JustificativaDTO {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	@Column(name="data_justificativa")
+	private Date dataJustificativa;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "escola_id", insertable = true, updatable = true, nullable = true)
 	private EscolaDTO escolaDTO;
@@ -29,7 +34,7 @@ public class JustificativaDTO {
 	 * 
 	 */
 	public JustificativaDTO() {
-		// TODO Auto-generated constructor stub
+		dataJustificativa = new Date();
 	}
 	
 	
@@ -85,5 +90,15 @@ public class JustificativaDTO {
 
 	public void setLivroDTO(LivroDTO livroDTO) {
 		this.livroDTO = livroDTO;
+	}
+
+
+	public Date getDataJustificativa() {
+		return dataJustificativa;
+	}
+
+
+	public void setDataJustificativa(Date dataJustificativa) {
+		this.dataJustificativa = dataJustificativa;
 	}
 }

@@ -1,6 +1,9 @@
 package br.com.dto;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +22,8 @@ public class SolicitacaoDTO {
 	private Integer id;
 	private String descricao;
 	private Integer quantidade;
+	@Column(name="data_solicitacao")
+	private Date dataSolicitacao;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "livro_id", insertable = true, updatable = true, nullable = true)
 	private LivroDTO livroDTO;
@@ -27,7 +32,7 @@ public class SolicitacaoDTO {
 	private EditoraDTO editoraDTO;
 	
 	public SolicitacaoDTO() {
-		// TODO Auto-generated constructor stub
+		dataSolicitacao = new Date();
 	}
 
 	public Integer getId() {
@@ -68,6 +73,14 @@ public class SolicitacaoDTO {
 
 	public void setEditoraDTO(EditoraDTO editoraDTO) {
 		this.editoraDTO = editoraDTO;
+	}
+
+	public Date getDataSolicitacao() {
+		return dataSolicitacao;
+	}
+
+	public void setDataSolicitacao(Date dataSolicitacao) {
+		this.dataSolicitacao = dataSolicitacao;
 	}
 
 }
