@@ -14,15 +14,15 @@ import javax.persistence.Table;
 @Table(name = "escola_divulgador")
 public class EscolaDivulgadorDTO {
 	
-	@Id 
+	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "escola_id", insertable = true, updatable = true, nullable = true)
 	private EscolaDTO escolaDTO;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "divulgador_id", insertable = true, updatable = true, nullable = true)
-	private UsuarioDTO divulgadorDTO;
+	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
+	private UsuarioDTO usuarioDTO;
 
 	public EscolaDivulgadorDTO() {
 		// TODO Auto-generated constructor stub
@@ -44,12 +44,12 @@ public class EscolaDivulgadorDTO {
 		this.escolaDTO = escolaDTO;
 	}
 
-	public UsuarioDTO getDivulgadorDTO() {
-		return divulgadorDTO;
+	public UsuarioDTO getUsuarioDTO() {
+		return usuarioDTO;
 	}
 
-	public void setDivulgadorDTO(UsuarioDTO divulgadorDTO) {
-		this.divulgadorDTO = divulgadorDTO;
+	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+		this.usuarioDTO = usuarioDTO;
 	}
 
 }
