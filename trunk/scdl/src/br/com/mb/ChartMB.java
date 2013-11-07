@@ -131,7 +131,7 @@ public class ChartMB implements Serializable {
 			//mes-avg(valor)
 			series1.set(c[1],(Double)c[2]);
 			MetaDTO d = chartDAO.metaByIdCidade(new CidadeDTO((Integer)c[0],(String)c[1]));
-			series1.set(d.getCidadeDTO().getNome(), d.getValor());
+			series2.set(d.getCidadeDTO().getNome(), d.getValor());
 		}
 
 		if(series1.getData().size() == 0){
