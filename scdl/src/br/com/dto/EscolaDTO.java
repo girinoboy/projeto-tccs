@@ -40,7 +40,6 @@ public class EscolaDTO {
 	private Date data;
 	private Integer serie;
 	private String anotacoes;
-	private Integer status;
 	private Boolean biblioteca;
 	@OneToMany(targetEntity=TurnoDTO.class, fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
 	@JoinColumn(name = "escola_id", insertable = true, updatable = true, nullable = true)
@@ -146,14 +145,6 @@ public class EscolaDTO {
 
 	public void setSerie(Integer serie) {
 		this.serie = serie;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
 	}
 
 	public Boolean getBiblioteca() {
