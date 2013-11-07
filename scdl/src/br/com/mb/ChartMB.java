@@ -20,6 +20,7 @@ import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.PieChartModel;
 //import org.primefaces.model.chart.BarChartSeries;
 
+
 import br.com.dao.ChartDAO;
 import br.com.dto.CidadeDTO;
 import br.com.dto.EscolaDTO;
@@ -45,6 +46,7 @@ public class ChartMB implements Serializable {
 	private CartesianChartModel combinedModel; 
 	
 	private CartesianChartModel desempenhoDivulgador;
+	private CartesianChartModel cidadesVisitadas;
 	
 	private Double previsao = 31D;
 	
@@ -59,6 +61,7 @@ public class ChartMB implements Serializable {
 		createCombinedModel();
 		
 		desempenhoDivulgador(new UsuarioDTO());
+		cidadesVisitadas();
 	}
 
 	public void atualizaGrafico() {
@@ -69,6 +72,36 @@ public class ChartMB implements Serializable {
 		desempenhoDivulgador(divulgadorDTO);
 	}
 	
+	public void atualizaCidadesVisitadas(){
+		cidadesVisitadas();
+	}
+	@SuppressWarnings({ "unused", "rawtypes" })
+	private void cidadesVisitadas()   {
+		try{
+		cidadesVisitadas = new CartesianChartModel();
+		
+		ChartSeries series1 = new ChartSeries();
+		series1.setLabel("escolas visitadas que não adotaram o livro");
+		ChartSeries series2 = new ChartSeries();
+		series2.setLabel("escolas visitadas que adotaram o livro");
+		ChartSeries series3 = new ChartSeries();
+		series3.setLabel("escolas não visitadas");
+		Integer ano = 2014;
+		List a;
+		//retorna lista contendo qtd de escolas por cidade filtrada pelo ano
+		a = chartDAO.escolasVisitadasAdotaramLivro(ano);
+		a = chartDAO.escolasVisitadasNaoAdotaramLivro(ano);
+		a = chartDAO.escolasNaoVisitadas(ano);
+		
+		
+		cidadesVisitadas.addSeries(series1);
+		cidadesVisitadas.addSeries(series2);
+		cidadesVisitadas.addSeries(series3);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	@SuppressWarnings({ "rawtypes" })
 	private void desempenhoDivulgador(UsuarioDTO divulgadorDTO){
 		desempenhoDivulgador = new CartesianChartModel();
@@ -112,6 +145,7 @@ public class ChartMB implements Serializable {
 		desempenhoDivulgador.addSeries(series2);
 	}
 
+	@SuppressWarnings("unused")
 	private void createLinearModel() {  
 
 		linearModel = new CartesianChartModel();  
@@ -143,7 +177,7 @@ public class ChartMB implements Serializable {
 //		for (NewView newView : a) {
 //			series2.set(newView.getCusto().intValue(), newView.getQuantidade());
 //		}
-		series2.set(previsao.intValue(), chartDAO.minerar(tabela, colunaX, colunaY, previsao));
+//		series2.set(previsao.intValue(), chartDAO.minerar(tabela, colunaX, colunaY, previsao));
 		
 		linearModel.addSeries(series1);  
 		linearModel.addSeries(series2);  
@@ -287,6 +321,14 @@ public class ChartMB implements Serializable {
 
 	public CartesianChartModel getCategoryModel() {
 		return categoryModel;
+	}
+
+	public CartesianChartModel getCidadesVisitadas() {
+		return cidadesVisitadas;
+	}
+
+	public void setCidadesVisitadas(CartesianChartModel cidadesVisitadas) {
+		this.cidadesVisitadas = cidadesVisitadas;
 	}
 }  
 

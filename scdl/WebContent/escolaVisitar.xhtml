@@ -6,66 +6,67 @@
 
 <ui:decorate template="layoutComplex.xhtml">
 	<ui:define name="centro">
+		<h:form id="form">
 
-
-		<p:panelGrid columns="3" cellpadding="1" style="width:1000px">
-			<f:facet name="header">  
-        Incluir Escola Visitada
-    </f:facet>
-		</p:panelGrid>
-		<br />
-		<br />
-		<br />
-		<h:panelGrid columns="3" cellpadding="1" style="width:1000px">
-			<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}"
-				required="true" converter="cidade">
-				<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
-				<f:selectItems value="#{escolaMB.listCidadeDTO}" var="cidade"
-					itemLabel="#{cidade.nome}" itemValue="#{cidade}"
-					style="height:200px" />
-			</p:selectOneMenu>
-
-			<p:selectOneMenu id="escola" value="#{escolaMB.escolaDTO}"
-				converter="escola" required="true">
-				<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
-				<f:selectItems value="#{escolaMB.listEscola}" var="escola"
-					itemLabel="#{escola.nome}" itemValue="#{escola}" />
-			</p:selectOneMenu>
-
-			<p:commandButton type="button" value="Incluir"
-				icon="ui-icon-check" />
-
-		</h:panelGrid>
-
-		<br />
-		<br />
-		<br />
-
-		<p:dataTable id="cars" var="car" value="#{tableBean.carsSmall}"
-			style="width:1000px">
-
-			<p:column headerText="Cidade" style="width:50px">
-				<h:outputText value="#{escola.codigo}" />
-			</p:column>
-
-			<p:column headerText="Escola" style="width:400px">
-				<h:outputText value="#{escola.nome}" />
-			</p:column>
-
-		</p:dataTable>
-
-		<p:panelGrid columns="3" style="width:1000px">
-
-			<f:facet name="footer">
-				<div align="center">
-					<p:commandButton value="Cancelar" icon="ui-icon-arrowthick-1-w"
-						action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"
-						update=":center" />
-					<p:commandButton type="button" value="Excluir" icon="ui-icon-check" />
-				</div>
-			</f:facet>
-		</p:panelGrid>
-
+			<p:panelGrid columns="3" cellpadding="1" style="width:1000px">
+				<f:facet name="header">  
+			        Incluir Escola Visitada
+			    </f:facet>
+			</p:panelGrid>
+			<br />
+			<br />
+			<br />
+			<h:panelGrid id="panel" columns="3" cellpadding="1" style="width:1000px">
+				<p:selectOneMenu id="city" value="#{escolaVisitadaMB.escolaVisitadaDTO.escolaDTO.cidadeDTO}"
+					required="true" converter="cidade">
+					<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
+					<f:selectItems value="#{cidadeMB.listCidade}" var="cidade"
+						itemLabel="#{cidade.nome}" itemValue="#{cidade}"
+						style="height:200px" />
+					<p:ajax event="change" listener="#{regraMB.populaSistemas}" update="escola " /> 
+				</p:selectOneMenu>
+	
+				<p:selectOneMenu id="escola" value="#{escolaVisitadaMB.escolaVisitadaDTO.escolaDTO}"
+					converter="escola" required="true">
+					<f:selectItem itemLabel="Selecione a Escola" itemValue=""/>
+					<f:selectItems value="#{escolaMB.listEscola}" var="escola"
+						itemLabel="#{escola.nome}" itemValue="#{escola}" />
+				</p:selectOneMenu>
+	
+				<p:commandButton value="Incluir" icon="ui-icon-check" 
+					actionListener="#{escolaVisitadaMB.add}" update=":messages,:growl,panel" />
+	
+			</h:panelGrid>
+	
+			<br />
+			<br />
+			<br />
+	
+			<p:dataTable id="evs" var="ev" value="#{escolaVisitadaMB.listEscolaVisitada}"
+				style="width:1000px">
+	
+				<p:column headerText="Cidade" style="width:50px">
+					<h:outputText value="#{ev.escolaDTO.cidadeDTO.nome}" />
+				</p:column>
+	
+				<p:column headerText="Escola" style="width:400px">
+					<h:outputText value="#{ev.escolaDTO.nome}" />
+				</p:column>
+	
+			</p:dataTable>
+	
+			<p:panelGrid columns="3" style="width:1000px">
+	
+				<f:facet name="footer">
+					<div align="center">
+						<p:commandButton value="Cancelar" icon="ui-icon-arrowthick-1-w"
+							action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"
+							update=":center" />
+						<p:commandButton type="button" value="Excluir" icon="ui-icon-check" />
+					</div>
+				</f:facet>
+			</p:panelGrid>
+		</h:form>
 	</ui:define>
 </ui:decorate>
 </html>

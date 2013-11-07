@@ -27,7 +27,7 @@
 					<f:selectItems value="#{escolaDivulgadorMB.listEscola}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>
 				<br />
-				<p:selectOneMenu id="divulgador" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.divulgadorDTO}" converter="usuario" required="true" requiredMessage="Divulgador não informado!">
+				<p:selectOneMenu id="divulgador" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.usuarioDTO}" converter="usuario" required="true" requiredMessage="Divulgador não informado!">
 					<f:selectItem itemLabel="selecione o Divulgador *" itemValue="" />
 					<f:selectItems value="#{escolaDivulgadorMB.listDivulgador}" var="divulgador" itemLabel="#{divulgador.nome}" itemValue="#{divulgador}" />
 				</p:selectOneMenu>
@@ -60,7 +60,7 @@
 				</p:column>
 
 				<p:column headerText="Divulgador" style="width:50px">
-					<h:outputText value="#{ed.divulgadorDTO.nome}" />
+					<h:outputText value="#{ed.usuarioDTO.nome}" />
 				</p:column>
 
 			</p:dataTable>
