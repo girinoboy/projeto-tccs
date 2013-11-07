@@ -24,7 +24,7 @@
 					<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}"
 						required="true" converter="cidade">
 						<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
-						<f:selectItems value="#{escolaMB.listCidadeDTO}" var="cidade"
+						<f:selectItems value="#{cidadeMB.listCidade}" var="cidade"
 							itemLabel="#{cidade.nome}" itemValue="#{cidade}"
 							style="height:200px" />
 					</p:selectOneMenu>
