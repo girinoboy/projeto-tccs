@@ -3,7 +3,6 @@ package br.com.mb;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
@@ -11,7 +10,6 @@ import br.com.dao.EscolaVisitadaDAO;
 import br.com.dto.EscolaVisitadaDTO;
 
 @ManagedBean
-@RequestScoped
 public class EscolaVisitadaMB extends GenericoMB implements ModeloMB{
 	
 	private List<EscolaVisitadaDTO> listEscolaVisitada;
@@ -28,6 +26,10 @@ public class EscolaVisitadaMB extends GenericoMB implements ModeloMB{
 	
 	public void valueChangeMethod(ValueChangeEvent e){
 		//...
+	}
+	
+	public void populaEscola(){
+		// popula combo de escola
 	}
 	
 

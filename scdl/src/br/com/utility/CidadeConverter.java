@@ -1,8 +1,5 @@
 package br.com.utility;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -10,36 +7,37 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import br.com.dao.CidadeDAO;
 import br.com.dto.CidadeDTO;
   
 @FacesConverter("cidade")
 public class CidadeConverter implements Converter {  
   
-//	private static UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private static CidadeDAO cidadeDAO = new CidadeDAO();
     
-    public static List<CidadeDTO> cidadeDB;  
+//    public static List<CidadeDTO> cidadeDB;  
   
-    static {  
-        cidadeDB = new ArrayList<CidadeDTO>();  
-        try {
-//			cidadeDB = usuarioDAO.list();
+//    static {  
+//        cidadeDB = new ArrayList<CidadeDTO>();  
+//        try {
+//			cidadeDB = cidadeDAO.list();
 			
-			cidadeDB = new ArrayList<CidadeDTO>();
-			cidadeDB.add(new CidadeDTO(1,"Águas Claras"));
-			cidadeDB.add(new CidadeDTO(2,"Brasilia"));
-			cidadeDB.add(new CidadeDTO(3,"Gama"));
-			cidadeDB.add(new CidadeDTO(7,"Guará"));
-			cidadeDB.add(new CidadeDTO(4,"Planaltina"));
-			cidadeDB.add(new CidadeDTO(5,"Sobradinho"));
-			cidadeDB.add(new CidadeDTO(6,"Taguatinga"));
+//			cidadeDB = new ArrayList<CidadeDTO>();
+//			cidadeDB.add(new CidadeDTO(1,"Águas Claras"));
+//			cidadeDB.add(new CidadeDTO(2,"Brasilia"));
+//			cidadeDB.add(new CidadeDTO(3,"Gama"));
+//			cidadeDB.add(new CidadeDTO(7,"Guará"));
+//			cidadeDB.add(new CidadeDTO(4,"Planaltina"));
+//			cidadeDB.add(new CidadeDTO(5,"Sobradinho"));
+//			cidadeDB.add(new CidadeDTO(6,"Taguatinga"));
 	
 			
 			
-		} catch (Exception e) {
+//		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }  
+//			e.printStackTrace();
+//		}
+//    }  
     
   
     public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue) {
@@ -50,13 +48,15 @@ public class CidadeConverter implements Converter {
             try {
                 int number = Integer.parseInt(submittedValue);
                 
-                for (CidadeDTO c : cidadeDB) {
-                    if (c.getId() == number) {
-                        return c;
-                    }
-                }
+//                for (CidadeDTO c : cidadeDB) {
+//                    if (c.getId() == number) {
+//                        return c;
+//                    }
+//                }
+//                
+//                return submittedValue;
                 
-                return submittedValue;
+                return cidadeDAO.getById(number);
   
             } catch(NumberFormatException exception) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid user")); 
