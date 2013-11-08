@@ -109,7 +109,7 @@ public class ChartDAO extends GenericoDAO<EscolaDTO, Serializable>{
 		Query query = session.createSQLQuery(
 				" select c.nome,e.nome, count(*) total from escola e"+
 				" inner join cidade c on c.id = e.cidade_id"+
-		" where id not in(select escola_id from escola_visitada where year(data_visita) = :ano)"+
+		" where e.id not in(select escola_id from escola_visitada where year(data_visita) = :ano)"+
 		" group by c.nome,e.nome")
 		.setParameter("ano",ano);
 		return query.list();
