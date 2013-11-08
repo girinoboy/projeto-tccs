@@ -9,39 +9,43 @@
 		<h:form id="form">
 
 			<p:panelGrid columns="3" cellpadding="1" style="width:1000px">
-				<f:facet name="header">  
+				<f:facet name="header">
 			        Incluir Escola Visitada
 			    </f:facet>
 			</p:panelGrid>
 			<br />
 			<br />
 			<br />
-			<h:panelGrid id="panel" columns="3" cellpadding="1" style="width:1000px">
-				<p:selectOneMenu id="city" value="#{escolaVisitadaMB.escolaVisitadaDTO.escolaDTO.cidadeDTO}"
+			<h:panelGrid id="panel" columns="3" cellpadding="1" style="width:500px">
+
+				<p:selectOneMenu id="city" 
 					required="true" converter="cidade">
 					<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
 					<f:selectItems value="#{cidadeMB.listCidade}" var="cidade"
 						itemLabel="#{cidade.nome}" itemValue="#{cidade}"
 						style="height:200px" />
-					<p:ajax event="change" listener="#{regraMB.populaSistemas}" update="escola " /> 
+					<p:ajax event="change" listener="#{escolaVisitadaMB.populaEscola}" update="escola " /> 
 				</p:selectOneMenu>
-	
+				
 				<p:selectOneMenu id="escola" value="#{escolaVisitadaMB.escolaVisitadaDTO.escolaDTO}"
 					converter="escola" required="true">
 					<f:selectItem itemLabel="Selecione a Escola" itemValue=""/>
 					<f:selectItems value="#{escolaMB.listEscola}" var="escola"
 						itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>
-	
-				<p:commandButton value="Incluir" icon="ui-icon-check" 
-					actionListener="#{escolaVisitadaMB.add}" update=":messages,:growl,panel" />
-	
+
+			
+					<p:commandButton value="Vincular"
+						icon="ui-icon-check" actionListener="#{escolaVisitadaMB.add}"
+						update=":messages,:growl,panel,evs" />
+			
+
 			</h:panelGrid>
-	
+
 			<br />
 			<br />
 			<br />
-	
+
 			<p:dataTable id="evs" var="ev" value="#{escolaVisitadaMB.listEscolaVisitada}"
 				style="width:1000px">
 	
@@ -54,10 +58,11 @@
 				</p:column>
 	
 			</p:dataTable>
-	
+
 			<p:panelGrid columns="3" style="width:1000px">
-	
+
 				<f:facet name="footer">
+					<f:facet name="footer">
 					<div align="center">
 						<p:commandButton value="Cancelar" icon="ui-icon-arrowthick-1-w"
 							action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"
@@ -65,7 +70,10 @@
 						<p:commandButton value="Excluir" icon="ui-icon-check" />
 					</div>
 				</f:facet>
+				</f:facet>
 			</p:panelGrid>
+
+
 		</h:form>
 	</ui:define>
 </ui:decorate>
