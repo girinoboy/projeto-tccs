@@ -1,83 +1,96 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-    <f:view contentType="text/html">
-        <h:head>
-            <f:facet name="first">
-                <meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces - ShowCase</title>
-            </f:facet>
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>PrimeFaces - ShowCase</title>
+		</f:facet>
 
-            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
-            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/css/default.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
 
-            <style type="text/css">
-                .ui-layout-north {
-                    z-index:20 !important;
-                    overflow:visible !important;;
-                }
+		<style type="text/css">
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;;
+}
 
-                .ui-layout-north .ui-layout-unit-content {
-                    overflow:visible !important;
-                }
-            </style>
-        </h:head>
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+</style>
+	</h:head>
 
 
-        <h:body>
-			
-			<p:growl id="growl" autoUpdate="true" sticky="true"/>  
-    		<p:messages id="messages" autoUpdate="true" showDetail="true"/>
-			
-            <p:layout fullPage="true" >
+	<h:body>
 
-                <p:layoutUnit id="top" position="north" size="100">
+		<p:growl id="growl" autoUpdate="true" sticky="true" />
+		<p:messages id="messages" autoUpdate="true" showDetail="true" />
 
-                   
-                    
-                </p:layoutUnit>
+		<p:layout fullPage="true">
 
-                <p:layoutUnit id="left" position="west" size="250">
-                	<h:form>
-						 <p:menu>
-		                    <p:menuitem value="Membros" outcome="membros" update="centro" />
-		                    <p:menuitem value="Graduação" outcome="graduacao" update="centro" />
-	                    </p:menu>
-                    </h:form>
-                </p:layoutUnit>
+			<p:layoutUnit id="top" position="north" size="100">
 
-                <p:layoutUnit id="right" position="east" size="250" style="text-align:center">
 
-                     <p:menu>
-	                    <p:menuitem value="Resultados de Avaliação" outcome="resultadoAvaliacoes" />
-	                    <p:menuitem value="Grafico de desempenho" outcome="graficoDesempenho" />
-	                    <p:menuitem value="Sair" outcome="login" />
-                    </p:menu>
-                    <br/><br/><br/>
-                    <h:graphicImage value="/images/avatar_small.jpg"/>
-                    
-				</p:layoutUnit>
-				
-                <p:layoutUnit id="center" position="center">
 
-						<ui:insert id="centro" name="centro">  
-<!--                             O que estiver aqui será substituido!   -->
-                        </ui:insert>
+			</p:layoutUnit>
 
-                </p:layoutUnit>
+			<p:layoutUnit id="left" position="west">
+				<h:form>
+					<p:menu>
+						<p:menuitem value="História" />
+						<p:menuitem value="Membros" outcome="membros" update="centro" />
+						<p:menuitem value="Técnicas" />
+						<p:menuitem value="Graduação" outcome="graduacao" update="centro" />
+						<p:menuitem value="Técnicas" />
+						<p:menuitem value="Campeonatos" />
+						<p:menuitem value="Notícias" />
+						<p:menuitem value="Financeiro" />
+					</p:menu>
+				</h:form>
+			</p:layoutUnit>
 
-            </p:layout>
+			<p:layoutUnit id="right" position="east" style="text-align:center">
+				<h:form>
+					<p:menu>
+						<p:menuitem value="Resultados de Avaliação"	outcome="resultadoAvaliacoes" />
+						<p:menuitem value="Grafico de desempenho" outcome="graficoDesempenho" />
+						<p:menuitem value="Sair" outcome="login" />
+						<p:menuitem value="Relatório de Participação" />
+						<p:menuitem value="Relatório de Gestão" />
 
-            <p:dialog header="Basic Dialog" widgetVar="dlg" modal="true">
-                <h:outputText value="Resistance to PrimeFaces is futile!" />
-            </p:dialog>
+					</p:menu>
+					<br />
+					<br />
+					<br />
+					<h:graphicImage value="/images/avatar_small.jpg" />
+				</h:form>
+			</p:layoutUnit>
 
-        </h:body>
+			<p:layoutUnit id="center" position="center">
 
-    </f:view>
+				<ui:insert id="centro" name="centro">
+					<!--                             O que estiver aqui será substituido!   -->
+				</ui:insert>
+
+			</p:layoutUnit>
+
+		</p:layout>
+
+		<p:dialog header="Basic Dialog" widgetVar="dlg" modal="true">
+			<h:outputText value="Resistance to PrimeFaces is futile!" />
+		</p:dialog>
+
+	</h:body>
+
+</f:view>
 </html>
