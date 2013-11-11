@@ -85,11 +85,11 @@ public class ChartMB implements Serializable {
 			cidadesVisitadas = new CartesianChartModel();
 
 			ChartSeries series1 = new ChartSeries();
-			series1.setLabel("escolas visitadas que não adotaram o livro");
+			series1.setLabel("escolas visitadas que adotaram o livro");
 			series1 = pupulaSerieComCidade(series1);
 			
 			ChartSeries series2 = new ChartSeries();
-			series2.setLabel("escolas visitadas que adotaram o livro");
+			series2.setLabel("escolas visitadas que não adotaram o livro");
 			series2 = pupulaSerieComCidade(series2);
 			
 			ChartSeries series3 = new ChartSeries();
@@ -104,19 +104,19 @@ public class ChartMB implements Serializable {
 				it = a.iterator();
 				while (it.hasNext()) {
 					Object[] c = (Object[]) it.next();
-					series1.set(c[0], Long.valueOf(c[2].toString()));
+					series1.set(c[0], Long.valueOf(c[1].toString()));
 				}
 				a = chartDAO.escolasVisitadasNaoAdotaramLivro(Integer.valueOf(ano));
 				it = a.iterator();
 				while (it.hasNext()) {
 					Object[] c = (Object[]) it.next();
-					series2.set(c[0], Long.valueOf(c[2].toString()));
+					series2.set(c[0], Long.valueOf(c[1].toString()));
 				}
 				a = chartDAO.escolasNaoVisitadas(Integer.valueOf(ano));
 				it = a.iterator();
 				while (it.hasNext()) {
 					Object[] c = (Object[]) it.next();
-					series3.set(c[0], Long.valueOf(c[2].toString()));
+					series3.set(c[0], Long.valueOf(c[1].toString()));
 				}
 			}
 
@@ -172,9 +172,9 @@ public class ChartMB implements Serializable {
 			System.out.println(c[2]);// Atingido
 
 			// mes-avg(valor)
-			series1.set(c[1], (Double) c[2]);
+			series2.set(c[1], (Double) c[2]);
 			MetaDTO d = chartDAO.metaByIdCidade(new CidadeDTO((Integer) c[0],(String) c[1]));
-			series2.set(d.getCidadeDTO().getNome(), d.getValor());
+			series1.set(d.getCidadeDTO().getNome(), d.getValor());
 		}
 
 		if (series1.getData().size() == 0) {

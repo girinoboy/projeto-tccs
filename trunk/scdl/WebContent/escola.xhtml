@@ -58,9 +58,10 @@
 		  
 		        <p:column headerText="Ações" style="width:210px">  
 		        <!-- consultar -->
-		                <p:commandButton id="selectButton1" actionListener="#{layoutBean.requestPage}" 
+		                <p:commandButton id="selectButton1" actionListener="#{escolaMB.edit}" 
 		                 action="/consultarEscola.xhtml?faces-redirect=true"
-		                 immediate="true" update=":center" icon="ui-icon-search" title="View" >   
+		                 immediate="true" update=":center" icon="ui-icon-search" title="View" >  
+		                 <f:setPropertyActionListener  target="#{escolaMB.escolaDTO}" value="#{escola}"/>  
 		                </p:commandButton> 
 		        <!-- Alterar -->        
 		                <p:commandButton id="selectButton2"  oncomplete="PF('carDialog').show()" icon="ui-icon-pencil" title="alterar">  
@@ -72,7 +73,7 @@
 		                </p:commandButton> 
 		        <!-- Deletar -->       
 		                <p:commandButton id="selectButton4" icon="ui-icon-trash" title="Apagar" update=":growl" onclick="PF('dlg').show();" actionListener="#{escolaMB.edit}">  
-		            	<f:setPropertyActionListener value="#{escola}" target="#{escolaMB.escolaDTO}" /> 
+		            	<f:setPropertyActionListener target="#{escolaMB.escolaDTO}" value="#{escola}"/> 
 		                </p:commandButton> 
 		                
 		        </p:column>  
