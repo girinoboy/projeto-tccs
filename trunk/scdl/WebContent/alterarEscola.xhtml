@@ -20,9 +20,9 @@
 
 					<h:outputLabel for="endereco" value="Endereço: *" />
 					<p:inputText id="endereco" value="#{escolaMB.escolaDTO.endereco}"
-						required="true" label="Endereco" disabled="true" />
+						required="true" label="Endereco" disabled="true"/>
 					<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}"
-						required="true" converter="cidade" disabled="true">
+						required="true" converter="cidade" >
 						<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
 						<f:selectItems value="#{cidadeMB.listCidade}" var="cidade"
 							itemLabel="#{cidade.nome}" itemValue="#{cidade}"
@@ -31,7 +31,7 @@
 
 					<h:outputLabel for="telefone" value="Telefone: *" />
 					<p:inputMask id="telefone" value="#{escolaMB.escolaDTO.telefone}"
-						mask="(99) 9999-9999" required="true" disabled="true" />
+						mask="(99) 9999-9999" required="true" />
 					<p:selectOneMenu id="redEnsino"
 						value="#{escolaMB.escolaDTO.redeEnsino}" disabled="true">
 						<f:selectItem itemLabel="Selecione Rede de Ensino" itemValue=""
@@ -42,10 +42,9 @@
 
 					<h:outputLabel for="fax" value="Fax: " />
 					<p:inputMask id="fax" value="#{escolaMB.escolaDTO.fax}"
-						mask="(99) 9999-9999" disabled="true" />
+						mask="(99) 9999-9999" />
 					<p:selectOneMenu id="planLiterario"
-						value="#{escolaMB.escolaDTO.planejamentoLiterario}"
-						disabled="true">
+						value="#{escolaMB.escolaDTO.planejamentoLiterario}">
 						<f:selectItem itemLabel="Selecione Planejamento Literário"
 							itemValue="" disabled="true" />
 						<f:selectItem itemLabel="Mensal" itemValue="1" />
@@ -67,7 +66,7 @@
 
 					<h:outputText for="anotacoes" value="Anotações:" />
 					<p:inputTextarea id="anotacoes" rows="6" cols="33"
-						value="#{escolaMB.escolaDTO.anotacoes}" disabled="true" />
+						value="#{escolaMB.escolaDTO.anotacoes}" />
 					<br />
 
 					<h:outputText for="biblioteca" value="Biblioteca:" />
@@ -80,24 +79,18 @@
 
 					<h:outputText for="turno" value="Turno: " />
 					<p:selectManyCheckbox id="turno" layout="pageDirection"
-						value="#{escolaMB.escolaDTO.listTurnoDTO}" converter="turno"
-						disabled="true">
+						value="#{escolaMB.escolaDTO.listTurnoDTO}" converter="turno">
 						<f:selectItems value="#{escolaMB.listTurnoDTO}" var="turno"
 							itemLabel="#{turno.nome}" itemValue="#{turno}" />
 					</p:selectManyCheckbox>
 
 					<f:facet name="footer">
 						<div align="right">
-							<h:form>
-								<p:commandButton value="Imprimir" type="button"
-									icon="ui-icon-print">
-									<p:printer target="panel" />
-								</p:commandButton>
-								<p:graphicImage id="panel"  />
-							</h:form>
+
 							<p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-w"
 								action="/escola.xhtml?faces-redirect=true" immediate="true"
 								update=":center" />
+								<p:commandButton value="Alterar" icon="ui-icon-pencil" />
 						</div>
 					</f:facet>
 				</p:panelGrid>
