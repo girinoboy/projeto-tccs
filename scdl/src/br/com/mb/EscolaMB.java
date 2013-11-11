@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import br.com.dao.EscolaDAO;
@@ -20,7 +20,7 @@ import br.com.utility.TurnoConverter;
  *
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class EscolaMB extends GenericoMB implements ModeloMB{
 	
 	private EscolaDTO escolaDTO = new EscolaDTO();
@@ -59,8 +59,7 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
-		//actionEvent.
-		//System.out.println(escolaDTO);
+		System.out.println(escolaDTO);
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {

@@ -70,7 +70,7 @@ public class ChartDAO extends GenericoDAO<EscolaDTO, Serializable>{
 	public List escolasVisitadasAdotaramLivro(Integer ano) throws HibernateException, Exception {
 
 		Query query = session.createSQLQuery(
-				" select c.nome,e.nome, count(*) from escola e"+
+				" select c.nome,count(e.nome) from escola e"+
 				" inner join cidade c on e.cidade_id=c.id"+
 				" where e.id in"+
 				" ("+
@@ -78,7 +78,7 @@ public class ChartDAO extends GenericoDAO<EscolaDTO, Serializable>{
 				" where ev.escola_id in(select el.escola_id from escola_livro el)"+
 				" and year(data_visita) = :ano"+
 				" )"+
-				" group by c.nome,e.nome"
+				" group by c.nome"
 				)
 				.setParameter("ano",ano);
 
@@ -89,7 +89,7 @@ public class ChartDAO extends GenericoDAO<EscolaDTO, Serializable>{
 	
 	public List escolasVisitadasNaoAdotaramLivro(Integer ano) throws HibernateException, Exception {
 		Query query = session.createSQLQuery(
-				" select c.nome,e.nome, count(*) from escola e"+
+				" select c.nome, count(e.nome) from escola e"+
 				" inner join cidade c on e.cidade_id=c.id"+
 				" where e.id in"+
 				" ("+
@@ -97,7 +97,7 @@ public class ChartDAO extends GenericoDAO<EscolaDTO, Serializable>{
 				" where ev.escola_id not in(select el.escola_id from escola_livro el)"+
 				" and year(ev.data_visita) = :ano"+
 				" )"+
-				" group by c.nome,e.nome"
+				" group by c.nome"
 				)
 				.setParameter("ano",ano);
 		return query.list();
@@ -107,10 +107,10 @@ public class ChartDAO extends GenericoDAO<EscolaDTO, Serializable>{
 	public List escolasNaoVisitadas(Integer ano) throws HibernateException, Exception {
 		
 		Query query = session.createSQLQuery(
-				" select c.nome,e.nome, count(*) total from escola e"+
+				" select c.nome, count(e.nome) total from escola e"+
 				" inner join cidade c on c.id = e.cidade_id"+
 		" where e.id not in(select escola_id from escola_visitada where year(data_visita) = :ano)"+
-		" group by c.nome,e.nome")
+		" group by c.nome")
 		.setParameter("ano",ano);
 		return query.list();
 	}
