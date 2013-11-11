@@ -11,11 +11,14 @@
 		<h:form id="form">
 
 			<p:panel id="panel" header="Dados Pessoais">
-				<h:inputHidden id="idUsuario" value="#{usuarioMB.usuarioDTO.id}" />
+				
+			<h:inputHidden id="idUsuario" value="#{usuarioMB.usuarioDTO.id}" />
 				<h:inputHidden id="idAnexo" value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
-				<h:panelGrid id="pg" columns="4" cellpadding="1">
+				<div align="center">
+				<h:panelGrid id="pg" columns="2" cellpadding="1">
+				
 					<h:outputLabel for="nome" value="Nome: *" />
-					<p:inputText id="nome" size="80"
+					<p:inputText id="nome" size="45"
 						value="#{usuarioMB.usuarioDTO.nome}" required="true" label="Nome">
 						<f:validateLength minimum="2" />
 					</p:inputText>
@@ -46,8 +49,40 @@
 			        </p:selectOneRadio>
 		            <p:watermark for="sexo" value=" " />
 		            <p:message for="sexo" />
+		            	
 					
-					<h:outputLabel for="graduacao" value="Graduacao: *" />
+					<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}" style="width:60px;height:60px">
+						<f:param id="av" name="image_id" value="#{usuarioMB.usuarioDTO.anexoDTO.id}"/>
+					</p:graphicImage>				
+					<p:fileUpload size="15" fileUploadListener="#{usuarioMB.handleFileUpload}" mode="advanced" 
+		            	update=":messages,:growl,avatar,av,idUsuario,idAnexo" auto="true" sizeLimit="65535" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+		            	label="Selecione" />  
+		            	         	
+					<!-- E-mail -->
+					<h:outputText for ="email" value ="E-mail: *" />
+					<p:inputText  size="45" required="true" label="email"/>
+					
+					<!-- Telefone -->
+					<h:outputText for ="telefone" value ="Telefone: " />
+					<p:inputMask  mask="(99)9999-9999"
+						 size="15" required="true" label="telefone">
+						<f:validateLength minimum="2" />
+					</p:inputMask>
+					
+					<!-- Endereço -->
+					<h:outputText for ="endereco" value ="Endereço: " />
+					<p:inputText  size= "45" required="true" label="email"/>
+					
+					<!-- Login -->
+					<h:outputText for ="login" value ="Login: *" />
+					<p:inputText  size= "15" required="true" label="login"/>
+					
+					<!-- Senha -->
+					<h:outputText for ="senha" value ="Senha: *" />
+					<p:inputText  size= "15" required="true" label="senha"/>
+					
+					<!-- Graduação -->
+				    <h:outputLabel for="graduacao" value="Graduação: *" />
 					<p:selectOneMenu id="graduacao"
 						value="#{usuarioMB.usuarioDTO.graduacaoDTO}" effect="fade"
 						converter="graduacao" required="true">
@@ -56,24 +91,24 @@
 							var="graduacao" itemLabel="#{graduacao.nome}"
 							itemValue="#{graduacao}" />
 					</p:selectOneMenu>
-					<p:watermark for="graduacao" value=" " />
-					<p:message for="graduacao" />
-
+					
+					<!-- Status -->
 					<h:outputText for="status" value="Status:" />
 					<p:selectOneRadio id="status" value="#{usuarioMB.usuarioDTO.ativoInativo}">
 						<f:selectItem itemLabel="Ativo" itemValue="true" />
 						<f:selectItem itemLabel="Inativo" itemValue="false" />
 					</p:selectOneRadio>
-					<br />
-					<p:message for="status" />
 					
-					<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}" style="width:60px;height:60px">
-						<f:param id="av" name="image_id" value="#{usuarioMB.usuarioDTO.anexoDTO.id}"/>
-					</p:graphicImage>
+					<!-- Desconto -->
+				    <h:outputLabel for="desconto" value="Desconto: *" />
+					<p:selectOneMenu id="desconto" effect="fade" required="true">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+					</p:selectOneMenu>
 					
-					<p:fileUpload fileUploadListener="#{usuarioMB.handleFileUpload}" mode="advanced" 
-		            	update=":messages,:growl,avatar,av,idUsuario,idAnexo" auto="true" sizeLimit="65535" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-		            	label="Selecione"/>
+					<!-- Valor da mensalidade -->
+					<h:outputText for ="valor" value ="Valor da mensalidade: " />
+					<p:inputText  size= "15" required="true" label="valor" disabled="true"/>
+					
 					
 					<f:facet name="footer">
 						<p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
@@ -82,8 +117,9 @@
 						<p:commandButton value="Voltar"
 							action="/membros.xhtml?faces-redirect=true" immediate="true"
 							update=":center" />
-					</f:facet>
+					</f:facet>	
 				</h:panelGrid>
+				</div>
 			</p:panel>
 		</h:form>
 	</ui:define>
