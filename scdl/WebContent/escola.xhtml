@@ -10,7 +10,7 @@
  		<h:form id="form">
 			<!-- Aqui começa o FILTRO -->
 			<h3>Escola</h3>  
-		    Informe um dos campos abaixo:                  
+		    Informe um dos campos abaixo: <br/><br/>                 
 		    <h:panelGrid columns="5"  cellpadding="1" style="width:1000px">  
 		   
 		        <h:outputLabel for="codigo" value="Código:" style="font-weight:bold"/>  
@@ -37,18 +37,13 @@
 		  	
 			  	 
 		    <p:dataTable id="escolaTable" var="escola" value="#{escolaMB.listEscola}" rowKey="#{escola.id}" style="width:1000px" emptyMessage="Nenhum item encontrado" filteredValue="#{escolaMB.filteredEscolas}" filterEvent="enter" widgetVar="escolasTable">
-		    	<f:facet name="header">  
-		           <p:outputPanel>  
-		               <h:outputText value="Search all fields:" />  
-		               <p:inputText id="globalFilter" onkeyup="escolasTable.filter()" style="width:150px" />  
-		           </p:outputPanel>  
-		       </f:facet>   
+		      
 		  
-		        <p:column headerText="Código" style="width:50px" filterBy="id">  
+		        <p:column headerText="Código" style="width:50px" >  
 		            <p:outputLabel value="#{escola.id}" />  
 		        </p:column>
 		  
-		        <p:column headerText="Nome" style="width:400px" filterBy="nome" filterMatchMode="contains">  
+		        <p:column headerText="Nome" style="width:400px" filterMatchMode="contains">  
 		            <h:outputText value="#{escola.nome}" />  
 		        </p:column>  
 		  
@@ -60,16 +55,14 @@
 		        <!-- consultar -->
 		                <p:commandButton id="selectButton1" actionListener="#{escolaMB.edit}" 
 		                 action="/consultarEscola.xhtml?faces-redirect=true"
-		                 immediate="true" update=":center" icon="ui-icon-search" title="View" >  
+		                 immediate="true" update=":center" icon="ui-icon-search" title="Consultar" >  
 		                 <f:setPropertyActionListener  target="#{escolaMB.escolaDTO}" value="#{escola}"/>  
 		                </p:commandButton> 
 		        <!-- Alterar -->        
-		                <p:commandButton id="selectButton2"  oncomplete="PF('carDialog').show()" icon="ui-icon-pencil" title="alterar">  
-		                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
-		                </p:commandButton> 
-		        <!-- Imprimir -->        
-		                <p:commandButton id="selectButton3"   oncomplete="PF('carDialog').show()" icon="ui-icon-print" title="View">  
-		                <f:setPropertyActionListener value="#{escola}" target="#{tableBean.selectedEscola}" /> 
+		                <p:commandButton id="selectButton2" actionListener="#{escolaMB.edit}" 
+		                 action="/alterarEscola.xhtml?faces-redirect=true"
+		                 immediate="true" update=":center" icon="ui-icon-pencil" title="Alterar" >  
+		                 <f:setPropertyActionListener  target="#{escolaMB.escolaDTO}" value="#{escola}"/>  
 		                </p:commandButton> 
 		        <!-- Deletar -->       
 		                <p:commandButton id="selectButton4" icon="ui-icon-trash" title="Apagar" update=":growl" onclick="PF('dlg').show();" actionListener="#{escolaMB.edit}">  
