@@ -16,7 +16,7 @@
 					<h:outputLabel for="nome" value="Nome: *" />
 					<p:inputText id="nome" value="#{escolaMB.escolaDTO.nome}"
 						label="Nome" width="50" required="true" disabled="true" />
-					<h:outputLabel for="city" value="Codigo:" />
+					<h:outputLabel for="city" value="Codigo: #{escolaMB.escolaDTO.id}" />
 
 					<h:outputLabel for="endereco" value="Endereço: *" />
 					<p:inputText id="endereco" value="#{escolaMB.escolaDTO.endereco}"
@@ -96,6 +96,7 @@
 								<p:graphicImage id="panel"  />
 							</h:form>
 							<p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-w"
+								actionListener="#{escolaMB.limpar}"
 								action="/escola.xhtml?faces-redirect=true" immediate="true"
 								update=":center" />
 						</div>
