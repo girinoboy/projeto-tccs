@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -40,9 +42,22 @@ public class EscolaDTO {
 	private Date data;
 	private Integer serie;
 	private String anotacoes;
-	private Boolean biblioteca;
+	private Boolean biblioteca;/*
 	@OneToMany(targetEntity=TurnoDTO.class, fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
-	@JoinColumn(name = "escola_id", insertable = true, updatable = true, nullable = true)
+	@JoinColumn(name = "escola_id", insertable = true, updatable = true, nullable = true)*/
+	/*
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinTable(name = "IDS_SV_CHECK_HAS_TYPE",
+                joinColumns={@JoinColumn(name="check_id")},
+                inverseJoinColumns={@JoinColumn(name="checktype_id")})
+	*/
+	
+	 @ManyToMany  (cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	    @JoinTable(name = "escola_turno", joinColumns = { @JoinColumn(name = "escola_id",   
+	    unique = false, nullable = false, insertable = true) },   
+	    inverseJoinColumns = { @JoinColumn(name = "turno_id",   
+	    unique = false, nullable = false, insertable = true) })  
+	
 	private List<TurnoDTO> listTurnoDTO;
 
 	/**

@@ -76,7 +76,7 @@
 
 					<h:outputText for="turno" value="Turno: " />
 					<p:selectManyCheckbox id="turno" layout="pageDirection"
-						value="#{escolaMB.escolaDTO.listTurnoDTO}" converter="turno">
+						value="#{escolaMB.listAltTurnoDTO}" converter="turno">
 						<f:selectItems value="#{escolaMB.listTurnoDTO}" var="turno"
 							itemLabel="#{turno.nome}" itemValue="#{turno}" />
 					</p:selectManyCheckbox>

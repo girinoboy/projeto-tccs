@@ -10,19 +10,20 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import br.com.dao.TurnoDAO;
 import br.com.dto.TurnoDTO;
   
 @FacesConverter("turno")
 public class TurnoConverter implements Converter {  
   
-//	private static UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private static TurnoDAO turnoDAO = new TurnoDAO();
     
     public static List<TurnoDTO> turnoDB;  
   
     static {  
         turnoDB = new ArrayList<TurnoDTO>();  
         try {
-//			turnoDB = usuarioDAO.list();
+//			turnoDB = turnoDAO.list();
 			
 			turnoDB = new ArrayList<TurnoDTO>();
 			turnoDB.add(new TurnoDTO(1,"Matutino"));
@@ -49,7 +50,7 @@ public class TurnoConverter implements Converter {
                     }
                 }
                 
-                return submittedValue;
+                return turnoDAO.getById(number);
   
             } catch(NumberFormatException exception) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid user")); 
