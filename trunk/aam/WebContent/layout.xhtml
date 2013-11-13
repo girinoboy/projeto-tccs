@@ -39,9 +39,15 @@
 		<p:layout fullPage="true">
 
 			<p:layoutUnit id="top" position="north" size="100">
-
-
-
+				<h:form id="form1">
+					<div>
+						<p:themeSwitcher value="#{themeSwitcherBean.theme}"	style="width:155px; top:10px" effect="fade">
+							<f:selectItem itemLabel="Choose Theme" itemValue="" />
+							<f:selectItems value="#{themeSwitcherBean.themes}" />
+							<p:ajax event="change" listener="#{themeSwitcherBean.saveTheme}"/>
+						</p:themeSwitcher>
+					</div>
+				</h:form>
 			</p:layoutUnit>
 
 			<p:layoutUnit id="left" position="west">
