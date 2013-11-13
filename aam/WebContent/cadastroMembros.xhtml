@@ -11,114 +11,140 @@
 		<h:form id="form">
 
 			<p:panel id="panel" header="Dados Pessoais">
-				
-			<h:inputHidden id="idUsuario" value="#{usuarioMB.usuarioDTO.id}" />
-				<h:inputHidden id="idAnexo" value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
+
+				<h:inputHidden id="idUsuario" value="#{usuarioMB.usuarioDTO.id}" />
+				<h:inputHidden id="idAnexo"
+					value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
 				<div align="center">
-				<h:panelGrid id="pg" columns="2" cellpadding="1">
-				
-					<h:outputLabel for="nome" value="Nome: *" />
-					<p:inputText id="nome" size="45"
-						value="#{usuarioMB.usuarioDTO.nome}" required="true" label="Nome">
-						<f:validateLength minimum="2" />
-					</p:inputText>
-					<p:watermark for="nome" value="Nome completo" />
-					<p:message for="nome" />
+					<h:panelGrid id="pg" columns="2" cellpadding="1">
 
-					<h:outputLabel for="cpf" value="CPF: *" />
-					<p:inputMask value="#{usuarioMB.usuarioDTO.cpf}" mask="999.999.999-99"
-						id="cpf" size="15" required="true" label="CPF">
-						<f:validateLength minimum="2" />
-					</p:inputMask>
-					<p:watermark for="cpf" value=" " />
-					<p:message for="cpf" />
+						<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}"
+							style="width:60px;height:60px">
+							<f:param id="av" name="image_id"
+								value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
+						</p:graphicImage>
+						<p:fileUpload size="15"
+							fileUploadListener="#{usuarioMB.handleFileUpload}"
+							mode="advanced"
+							update=":messages,:growl,avatar,av,idUsuario,idAnexo" auto="true"
+							sizeLimit="65535" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+							label="Selecione" />
 
-					<h:outputLabel for="rg" value="RG: *" />
-					<p:inputText id="rg" value="#{usuarioMB.usuarioDTO.rg}">
-						<p:clientValidator event="keyup" size="15" required="true"
-							label="RG" />
-						<f:validateLength minimum="2" />
-					</p:inputText>
-					<p:watermark for="rg" value=" " />
-					<p:message for="rg" />
-					
-					<h:outputLabel for="sexo" value="Sexo: *" />
-		            <p:selectOneRadio id="sexo" value="#{usuarioMB.usuarioDTO.sexo}" required="true">  
-			            <f:selectItem itemLabel="Feminino" itemValue="0" />
-			            <f:selectItem itemLabel="Masculino" itemValue="1" />
-			        </p:selectOneRadio>
-		            <p:watermark for="sexo" value=" " />
-		            <p:message for="sexo" />
-		            	
-					
-					<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}" style="width:60px;height:60px">
-						<f:param id="av" name="image_id" value="#{usuarioMB.usuarioDTO.anexoDTO.id}"/>
-					</p:graphicImage>				
-					<p:fileUpload size="15" fileUploadListener="#{usuarioMB.handleFileUpload}" mode="advanced" 
-		            	update=":messages,:growl,avatar,av,idUsuario,idAnexo" auto="true" sizeLimit="65535" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-		            	label="Selecione" />  
-		            	         	
-					<!-- E-mail -->
-					<h:outputText for ="email" value ="E-mail: *" />
-					<p:inputText  size="45" required="true" label="email"/>
-					
-					<!-- Telefone -->
-					<h:outputText for ="telefone" value ="Telefone: " />
-					<p:inputMask  mask="(99)9999-9999"
-						 size="15" required="true" label="telefone">
-						<f:validateLength minimum="2" />
-					</p:inputMask>
-					
-					<!-- Endereço -->
-					<h:outputText for ="endereco" value ="Endereço: " />
-					<p:inputText  size= "45" required="true" label="email"/>
-					
-					<!-- Login -->
-					<h:outputText for ="login" value ="Login: *" />
-					<p:inputText  size= "15" required="true" label="login"/>
-					
-					<!-- Senha -->
-					<h:outputText for ="senha" value ="Senha: *" />
-					<p:inputText  size= "15" required="true" label="senha"/>
-					
-					<!-- Graduação -->
-				    <h:outputLabel for="graduacao" value="Graduação: *" />
-					<p:selectOneMenu id="graduacao"
-						value="#{usuarioMB.usuarioDTO.graduacaoDTO}" effect="fade"
-						converter="graduacao" required="true">
-						<f:selectItem itemLabel="Selecione" itemValue="" />
-						<f:selectItems value="#{usuarioMB.listGraduacaoDTO}"
-							var="graduacao" itemLabel="#{graduacao.nome}"
-							itemValue="#{graduacao}" />
-					</p:selectOneMenu>
-					
-					<!-- Status -->
-					<h:outputText for="status" value="Status:" />
-					<p:selectOneRadio id="status" value="#{usuarioMB.usuarioDTO.ativoInativo}">
-						<f:selectItem itemLabel="Ativo" itemValue="true" />
-						<f:selectItem itemLabel="Inativo" itemValue="false" />
-					</p:selectOneRadio>
-					
-					<!-- Desconto -->
-				    <h:outputLabel for="desconto" value="Desconto: *" />
-					<p:selectOneMenu id="desconto" effect="fade" required="true">
-						<f:selectItem itemLabel="Selecione" itemValue="" />
-					</p:selectOneMenu>
-					
-					<!-- Valor da mensalidade -->
-					<h:outputText for ="valor" value ="Valor da mensalidade: " />
-					<p:inputText  size= "15" required="true" label="valor" disabled="true"/>
-					
-					
-					<f:facet name="footer">
-						<p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
-							id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
-						<p:commandButton value="Reset" type="reset" />
-						<p:commandButton value="Voltar"
-							action="/membros.xhtml?faces-redirect=true" immediate="true"
-							update=":center" />
-					</f:facet>	
-				</h:panelGrid>
+						<h:outputLabel for="nome" value="Nome: *" />
+						<p:inputText id="nome" size="45"
+							value="#{usuarioMB.usuarioDTO.nome}" required="true" label="Nome">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:watermark for="nome" value="Nome completo" />
+						<p:message for="nome" />
+
+						<h:outputLabel for="cpf" value="CPF: *" />
+						<p:inputMask value="#{usuarioMB.usuarioDTO.cpf}"
+							mask="999.999.999-99" id="cpf" size="15" required="true"
+							label="CPF">
+							<f:validateLength minimum="2" />
+						</p:inputMask>
+						<p:watermark for="cpf" value=" " />
+						<p:message for="cpf" />
+
+						<h:outputLabel for="rg" value="RG: *" />
+						<p:inputText id="rg" value="#{usuarioMB.usuarioDTO.rg}">
+							<p:clientValidator event="keyup" size="15" required="true"
+								label="RG" />
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:watermark for="rg" value=" " />
+						<p:message for="rg" />
+
+						<h:outputText for="dataNascimento" value="Data de nascimento: *"
+							required="true" />
+						<p:calendar locale="pt" showButtonPanel="true" navigator="true" value="#{calendarBean.date3}" id="popupButtonCal"
+							showOn="button" valueChangeListener="1800"/>
+
+						<h:outputLabel for="sexo" value="Sexo: *" />
+						<p:selectOneRadio id="sexo" value="#{usuarioMB.usuarioDTO.sexo}"
+							required="true">
+							<f:selectItem itemLabel="Feminino" itemValue="0" />
+							<f:selectItem itemLabel="Masculino" itemValue="1" />
+						</p:selectOneRadio>
+						<p:watermark for="sexo" value=" " />
+						<p:message for="sexo" />
+
+
+						<!-- E-mail -->
+						<h:outputText for="email" value="E-mail: *" />
+						<p:inputText size="45" required="true" label="email" />
+
+						<!-- Telefone -->
+						<h:outputText for="telefone" value="Telefone: " />
+						<p:inputMask mask="(99)9999-9999" size="15" required="true"
+							label="telefone">
+							<f:validateLength minimum="2" />
+						</p:inputMask>
+
+						<!-- Endereço -->
+						<h:outputText for="endereco" value="Endereço: " />
+						<p:inputText size="45" required="true" label="email" />
+
+						<!-- Login -->
+						<h:outputText for="login" value="Login: *" />
+						<p:inputText size="15" required="true" label="login" />
+
+						<!-- Senha -->
+						<h:outputText for="senha" value="Senha: *" />
+						<p:password size="15" required="true" label="senha" />
+						
+						<!-- Graduação -->
+						<h:outputLabel for="graduacao" value="Graduação: *" />
+						<p:selectOneMenu id="graduacao"
+							value="#{usuarioMB.usuarioDTO.graduacaoDTO}" effect="fade"
+							converter="graduacao" required="true">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItems value="#{usuarioMB.listGraduacaoDTO}"
+								var="graduacao" itemLabel="#{graduacao.nome}"
+								itemValue="#{graduacao}" />
+						</p:selectOneMenu>
+
+						<!-- Status -->
+						<h:outputText for="status" value="Status:" />
+						<p:selectOneRadio id="status"
+							value="#{usuarioMB.usuarioDTO.ativoInativo}">
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneRadio>
+
+						<!-- Desconto -->
+						<h:outputLabel for="desconto" value="Desconto: *" />
+						<p:selectOneMenu id="desconto" effect="fade" required="true"
+							size="30">
+							<f:selectItem itemLabel="   Selcione" itemValue=""
+								style="height:20px" />
+							<f:selectItem itemLabel="10%" itemValue="1" />
+							<f:selectItem itemLabel="20%" itemValue="2" />
+							<f:selectItem itemLabel="30%" itemValue="3" />
+							<f:selectItem itemLabel="40%" itemValue="4" />
+							<f:selectItem itemLabel="50%" itemValue="5" />
+							<f:selectItem itemLabel="60%" itemValue="6" />
+							<f:selectItem itemLabel="70%" itemValue="7" />
+							<f:selectItem itemLabel="80%" itemValue="8" />
+							<f:selectItem itemLabel="90%" itemValue="9" />
+							<f:selectItem itemLabel="100%" itemValue="10" />
+						</p:selectOneMenu>
+
+						<!-- Valor da mensalidade -->
+						<h:outputText for="valor" value="Valor da mensalidade: " />
+						<p:inputText size="15" required="true" label="valor"
+							disabled="true" />
+
+
+						<f:facet name="footer">
+							<div align="right"><p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
+								id="withIcon" update=":growl" icon="ui-icon-disk" />
+							<p:commandButton value="Voltar"
+								action="/membros.xhtml?faces-redirect=true" immediate="true"
+								update=":center" /></div>
+						</f:facet>
+					</h:panelGrid>
 				</div>
 			</p:panel>
 		</h:form>
