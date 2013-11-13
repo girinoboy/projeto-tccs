@@ -14,12 +14,12 @@
 		    <h:panelGrid columns="5"  cellpadding="1" style="width:1000px">  
 		   
 		        <h:outputLabel for="codigo" value="Código:" style="font-weight:bold"/>  
-		        <p:inputText id="codigo" value="#{escolaMB.idEscola}" />
+		        <p:inputText id="codigo" value="#{escolaMB.idEscola}" converterMessage="Por favor, digite apenas números no campo 'Código'."/>
 		        
 		        <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>    
 		        <p:inputText id="name" value="#{escolaMB.nomeEscola}" /> 
 		          
-		        <p:commandButton value="Filtrar" actionListener="#{escolaMB.filtrar}" update=":messages,:growl,panel"/>  
+		        <p:commandButton value="Pesquisar" actionListener="#{escolaMB.filtrar}" update=":messages,:growl,panel" />  
 		    </h:panelGrid>  
 			
 			      

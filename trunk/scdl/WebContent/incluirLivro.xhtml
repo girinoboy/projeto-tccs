@@ -20,7 +20,7 @@
 					<h:outputLabel for="autor" value="Autor: *" />
 					<p:inputText id="autor" value="#{livroMB.livroDTO.autor}" label="Autor" width="50" required="true" size="60" />
 					
-					<h:outputText for="descricao" value="Descrição: *" />
+					<h:outputText for="descricao" value="Descrição: " />
 					<p:inputTextarea id="descricao" rows="6" cols="33" value="#{livroMB.livroDTO.descricao}"/>
 					
 					<h:outputLabel for="editora" value="Editora: *" />
@@ -35,7 +35,7 @@
 					
 					
 					
-					<h:outputLabel for="edicao" value="Edição: *" />
+					<h:outputLabel for="edicao" value="Edição: " />
 					<p:inputMask id="edicao" value="#{livroMB.livroDTO.edicao}" mask="99ª" size="10" />
 					
 					<h:outputLabel for="preco" value="Preço: *" />
