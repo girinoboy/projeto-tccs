@@ -1,5 +1,6 @@
 package br.com.mb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -14,6 +15,27 @@ public class JustificativaMB extends GenericoMB implements ModeloMB{
 	private List<JustificativaDTO> listJustificativa;
 	private JustificativaDAO justificativaDAO = new JustificativaDAO();
 	private JustificativaDTO justificativaDTO = new JustificativaDTO();
+	
+  public static List<JustificativaDTO> justificativaDB;  
+
+  static {  
+	  justificativaDB = new ArrayList<JustificativaDTO>();
+      try {
+    	  justificativaDB =  new ArrayList<JustificativaDTO>();
+
+    	  justificativaDB.add(new JustificativaDTO(1,"Preço alto"));
+    	  justificativaDB.add(new JustificativaDTO(2,"Livro contém erro gramatical"));
+    	  justificativaDB.add(new JustificativaDTO(3,"Livro contém informações erradas"));
+    	  justificativaDB.add(new JustificativaDTO(4,"Livro do concorrente é melhor"));
+    	  justificativaDB.add(new JustificativaDTO(5,"Livro do concorrente é mais barato"));
+    	  justificativaDB.add(new JustificativaDTO(6,"Não está adequado a ementa da instituição"));
+    	  justificativaDB.add(new JustificativaDTO(7,"O livro não me agradou"));
+    	  justificativaDB.add(new JustificativaDTO(8,"Outros"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+  } 
 
 	public JustificativaMB() {
 		try {
