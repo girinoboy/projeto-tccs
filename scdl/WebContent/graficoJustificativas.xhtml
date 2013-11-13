@@ -41,7 +41,7 @@
 					<p:commandButton value="Emitir" actionListener="#{chartBean.atualizaJustificativas}" id="withIcon" update=":messages,:growl,form,basic" icon="ui-icon-disk" />
 			</h:panelGrid>
 			
-			<p:barChart id="basic" value="#{chartBean.justificativas}" legendPosition="ne"  
+			<p:barChart id="basic" value="#{chartBean.justificativas}" legendPosition="ne" xaxisAngle="60" animate="true" 
 		    	title="Basic Bar Chart" min="0"  style="height:600px"/> 
 			
 		</h:form>  
