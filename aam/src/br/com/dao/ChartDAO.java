@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -60,16 +61,27 @@ public class ChartDAO extends GenericoDAO<ResuldoAvaliacaoDTO, Serializable>{
 
 	public List<ResuldoAvaliacaoDTO> cMediaGeralAcademia(Date dataInicial, Date dataFinal) throws Exception {
 		List<ResuldoAvaliacaoDTO> result;
-		try{
+		try{/*
 			result = HibernateUtility.getSession().createCriteria(ResuldoAvaliacaoDTO.class)
 
 					.add(Restrictions.between("data", dataInicial, dataFinal))
 					.setProjection(Projections.projectionList()
 							.add(Projections.groupProperty("data"))
 							.add(Projections.avg("tecnica"))
+							//.add(Projections.sqlProjection("", new String[] {"pvendi"}, new Type[] {Hibernate.DOUBLE}))
 							)
 					.addOrder(Order.asc("data"))
-					.list();
+					.list();*/
+			
+			result = session.createSQLQuery(
+					"select data,avg(tecnica+luta+conhecimentos)"
+					+ " from resultado_avaliacao"
+					+ " where data BETWEEN :dataInicial AND :dataFinal"
+					+ " group by data"
+					)
+			.setParameter("dataInicial", dataInicial)
+			.setParameter("dataFinal", dataFinal)
+			.list();
 
 		}catch(Exception e){
 			throw e;
