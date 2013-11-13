@@ -23,16 +23,21 @@ import org.primefaces.model.chart.PieChartModel;
 
 
 
+
+
+
 import br.com.dao.ChartDAO;
 import br.com.dao.CidadeDAO;
+import br.com.dao.JustificativaDAO;
 import br.com.dto.CidadeDTO;
 import br.com.dto.EscolaDTO;
+import br.com.dto.JustificativaDTO;
 import br.com.dto.MetaDTO;
 import br.com.dto.UsuarioDTO;
 
 @ManagedBean(name = "chartBean")
 @RequestScoped
-public class ChartMB implements Serializable {
+public class ChartMB extends GenericoMB implements Serializable {
 
 	/**
 	 * 
@@ -49,9 +54,11 @@ public class ChartMB implements Serializable {
 
 	private CartesianChartModel desempenhoDivulgador;
 	private CartesianChartModel cidadesVisitadas;
+	private CartesianChartModel justificativas;
 
 	private Double previsao = 31D;
 	private String ano;
+	private Integer ano1=0,ano2=0;
 
 	private ChartDAO chartDAO = new ChartDAO();
 
@@ -65,6 +72,7 @@ public class ChartMB implements Serializable {
 
 		desempenhoDivulgador(new UsuarioDTO());
 		cidadesVisitadas();
+		justificativas();
 	}
 
 	public void atualizaGrafico() {
@@ -77,6 +85,36 @@ public class ChartMB implements Serializable {
 
 	public void atualizaCidadesVisitadas() {
 		cidadesVisitadas();
+	}
+	
+	public void atualizaJustificativas() {
+		justificativas();
+	}
+
+	@SuppressWarnings("rawtypes")
+	private void justificativas() {
+		try {
+			justificativas = new CartesianChartModel();
+			ChartSeries series1 = new ChartSeries();
+			series1.setLabel("Justificativas");
+			series1 = pupulaSerieComJustificativas(series1);
+			
+			JustificativaDAO justificativaDAO = new JustificativaDAO();
+			
+			if((ano1>0 && ano2==0) || (ano1<=ano2 ) ){ 
+				Iterator it = justificativaDAO.quantidadeJustificativaAgrupada(ano1,ano2).iterator();
+				while (it.hasNext()) {
+					Object[] c = (Object[]) it.next();
+					series1.set(c[0], Long.valueOf(c[1].toString()));
+				}
+			}
+			else if(ano1 != 0)
+				addMessage("ano1 não pode ser menor que ano2");
+			
+			justificativas.addSeries(series1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@SuppressWarnings({ "rawtypes" })
@@ -142,6 +180,14 @@ public class ChartMB implements Serializable {
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		for(CidadeDTO c :cidadeDAO.list()){
 			series.set(c.getNome(), 0);
+		}
+		return series;
+	}
+	
+	private ChartSeries pupulaSerieComJustificativas(ChartSeries series) {
+		
+		for(JustificativaDTO j :JustificativaMB.justificativaDB){
+			series.set(j.getNome(), 0);
 		}
 		return series;
 	}
@@ -386,5 +432,29 @@ public class ChartMB implements Serializable {
 
 	public void setAno(String ano) {
 		this.ano = ano;
+	}
+
+	public CartesianChartModel getJustificativas() {
+		return justificativas;
+	}
+
+	public void setJustificativas(CartesianChartModel justificativas) {
+		this.justificativas = justificativas;
+	}
+
+	public Integer getAno1() {
+		return ano1;
+	}
+
+	public void setAno1(Integer ano1) {
+		this.ano1 = ano1;
+	}
+
+	public Integer getAno2() {
+		return ano2;
+	}
+
+	public void setAno2(Integer ano2) {
+		this.ano2 = ano2;
 	}
 }

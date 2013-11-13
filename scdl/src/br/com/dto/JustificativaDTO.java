@@ -37,6 +37,11 @@ public class JustificativaDTO {
 		dataJustificativa = new Date();
 	}
 	
+	public JustificativaDTO(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
 	
 	@Override
     public boolean equals(Object obj) {
