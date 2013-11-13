@@ -138,7 +138,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMM/yyyy");
 
 		for (ResuldoAvaliacaoDTO ra : a) {
-			series1.set(sdf.format(ra.getData()), ra.getLuta());
+			series1.set(sdf.format(ra.getData()), (ra.getLuta()+ra.getTecnica()+ra.getConhecimentos())/3);
 		}
 		if(series1.getData().size() == 0){
 			series1.set(0, 0);
@@ -172,7 +172,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMM/yyyy");
 
 		for (ResuldoAvaliacaoDTO ra : a) {
-			series1.set(sdf.format(ra.getData()), ra.getLuta());
+			series1.set(sdf.format(ra.getData()), (ra.getLuta()+ra.getTecnica()+ra.getConhecimentos())/3);
 		}
 
 		if(series1.getData().size() == 0){
