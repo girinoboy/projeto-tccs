@@ -22,14 +22,14 @@ import br.com.dto.UsuarioDTO;
 
 @ManagedBean
 public class UsuarioMB extends GenericoMB implements ModeloMB{
-	
+
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private List<UsuarioDTO> listUsuariDTO = new ArrayList<UsuarioDTO>();
 	private GraduacaoDAO graduacaoDAO = new GraduacaoDAO();
 	private List<GraduacaoDTO> listGraduacaoDTO = new ArrayList<GraduacaoDTO>();
 	private AnexoDAO anexoDAO = new AnexoDAO();
-	
+
 	public UsuarioMB(){
 		try {
 			listUsuariDTO = usuarioDAO.list();
@@ -38,19 +38,19 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			e.printStackTrace();
 		}
 	}
-	
-	 public void handleFileUpload(FileUploadEvent event) throws Exception {
-	        
-	        usuarioDTO.getAnexoDTO().setNome(event.getFile().getFileName());
-	        usuarioDTO.getAnexoDTO().setAnexo(event.getFile().getContents());
-	        usuarioDTO.getAnexoDTO().setTamanho(event.getFile().getSize());
-	        usuarioDTO.getAnexoDTO().setContentType(event.getFile().getContentType());
-	        
-	        //usuarioDTO = usuarioDAO.save(usuarioDTO);
-	        usuarioDTO.setAnexoDTO(anexoDAO.save(usuarioDTO.getAnexoDTO()));
-	        addMessage("Imagem add");
-	  }
-	
+
+	public void handleFileUpload(FileUploadEvent event) throws Exception {
+
+		usuarioDTO.getAnexoDTO().setNome(event.getFile().getFileName());
+		usuarioDTO.getAnexoDTO().setAnexo(event.getFile().getContents());
+		usuarioDTO.getAnexoDTO().setTamanho(event.getFile().getSize());
+		usuarioDTO.getAnexoDTO().setContentType(event.getFile().getContentType());
+
+		//usuarioDTO = usuarioDAO.save(usuarioDTO);
+		usuarioDTO.setAnexoDTO(anexoDAO.save(usuarioDTO.getAnexoDTO()));
+		addMessage("Imagem add");
+	}
+
 	public StreamedContent getDynamicImage() {
 		byte[] emptyImage = new byte[0];
 		try{
@@ -71,33 +71,38 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 		return new DefaultStreamedContent(new ByteArrayInputStream(emptyImage), "image/png");
 	}
-	
+
 	public void handleSelect(SelectEvent event) {  
-		
+
 		try {
 			usuarioDTO = (UsuarioDTO)event.getObject();
-			
+
 			addMessage("Selected:" + usuarioDTO.getId().toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void add(ActionEvent actionEvent) throws Exception {
-		usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
-		usuarioDAO.save(usuarioDTO);
-		addMessage("Salvo");
-		
+	public void add(ActionEvent actionEvent) {
+		try{
+			usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
+			usuarioDAO.save(usuarioDTO);
+			addMessage("Salvo");
+			usuarioDTO = new UsuarioDTO();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public UsuarioDTO getUsuarioDTO() {

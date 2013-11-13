@@ -61,6 +61,10 @@ public class ResuldoAvaliacaoMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {
+		
+		ResuldoAvaliacaoDTO a = resuldoAvaliacaoDAO.buscarNotaMesSelecionado(resuldoAvaliacaoDTO);
+		if(a!=null)
+			resuldoAvaliacaoDTO.setId(a.getId());
 		resuldoAvaliacaoDAO.save(resuldoAvaliacaoDTO);
 		addMessage("Salvo");
 		resuldoAvaliacaoDTO = new ResuldoAvaliacaoDTO();
