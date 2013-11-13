@@ -38,19 +38,19 @@
 	        <h:form>
 	      
 	            <h:panelGrid columns="2" cellpadding="5">
-	                <h:outputLabel for="username" value="Username:" />
-	                <p:inputText value="#{loginManagedBean.usuarioDTO.usuario}"
+	                <h:outputLabel for="username" value="Login:" />
+	                <h:inputText value="#{loginManagedBean.usuarioDTO.usuario}"
 	                        id="username" required="true" label="username" />
 	                  
-	                <h:outputLabel for="password" value="Password:" />
+	                <h:outputLabel for="password" value="Senha:" />
 	                <h:inputSecret value="#{loginManagedBean.usuarioDTO.senha}"
 	                        id="password" required="true" label="password" />
-	                  
+	                  			<p:tab/><a href="#">Esqueceu sua senha?</a>
 	                <f:facet name="footer">
-	                    <p:commandButton id="loginButton" value="Login" update=":growl"
+	                    <div align="center"><p:commandButton id="loginButton" value="Login" update=":growl"
 	                        actionListener="#{loginManagedBean.login}"
 	                        oncomplete="handleLoginRequest(xhr, status, args)"/>
-	                </f:facet>
+	              </div>  </f:facet>
 	            </h:panelGrid>
 	              
 	        </h:form>
