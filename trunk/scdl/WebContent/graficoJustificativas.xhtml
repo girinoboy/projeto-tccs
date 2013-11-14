@@ -1,50 +1,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
 
-<ui:decorate template="layoutComplex.xhtml">  
-	<ui:define id="centro" name="centro"> 
- 		<h:form id="form">
- 		
-	 		<h:panelGrid columns="2" cellpadding="1" style="width:500px">
-	 		
-	 			<h:outputLabel value="Ano" for="idAno1"/>
-	 			<p:selectOneMenu id="idAno1"
-						value="#{chartBean.ano1}" required="true">
-						<f:selectItem itemLabel="Selecione o ano *" itemValue="0" />
-						<f:selectItem itemLabel="2010" itemValue="2010" />
-						<f:selectItem itemLabel="2011" itemValue="2011" />
-						<f:selectItem itemLabel="2012" itemValue="2012" />
-						<f:selectItem itemLabel="2013" itemValue="2013" />
-						<f:selectItem itemLabel="2014" itemValue="2014" />
-						<f:selectItem itemLabel="2015" itemValue="2015" />
-						<f:selectItem itemLabel="2016" itemValue="2016" />
-						<f:selectItem itemLabel="2017" itemValue="2017" />
-					</p:selectOneMenu>
-					<h:outputLabel value="Ano" for="idAno2"/>
-					<p:selectOneMenu id="idAno2"
-						value="#{chartBean.ano2}" required="false">
-						<f:selectItem itemLabel="Selecione o ano *" itemValue="0" />
-						<f:selectItem itemLabel="2010" itemValue="2010" />
-						<f:selectItem itemLabel="2011" itemValue="2011" />
-						<f:selectItem itemLabel="2012" itemValue="2012" />
-						<f:selectItem itemLabel="2013" itemValue="2013" />
-						<f:selectItem itemLabel="2014" itemValue="2014" />
-						<f:selectItem itemLabel="2015" itemValue="2015" />
-						<f:selectItem itemLabel="2016" itemValue="2016" />
-						<f:selectItem itemLabel="2017" itemValue="2017" />
-					</p:selectOneMenu>
-					
-					<p:commandButton value="Emitir" actionListener="#{chartBean.atualizaJustificativas}" id="withIcon" update=":messages,:growl,form,basic" icon="ui-icon-disk" />
+<ui:decorate template="layoutComplex.xhtml">
+	<ui:define id="centro" name="centro">
+		<h:form id="form">
+
+			<h:panelGrid columns="2" cellpadding="1" style="width:500px">
+
+
+				<h:outputLabel value="Ano" for="idAno2" />
+				<p:selectOneMenu id="idAno2" value="#{chartBean.ano2}"
+					required="false">
+					<f:selectItem itemLabel="Selecione o ano *" itemValue="0" />
+					<f:selectItem itemLabel="2010" itemValue="2010" />
+					<f:selectItem itemLabel="2011" itemValue="2011" />
+					<f:selectItem itemLabel="2012" itemValue="2012" />
+					<f:selectItem itemLabel="2013" itemValue="2013" />
+					<f:selectItem itemLabel="2014" itemValue="2014" />
+					<f:selectItem itemLabel="2015" itemValue="2015" />
+					<f:selectItem itemLabel="2016" itemValue="2016" />
+					<f:selectItem itemLabel="2017" itemValue="2017" />
+				</p:selectOneMenu>
+
+				<h:outputLabel value="Ano" for="idAno1" />
+				<p:selectOneMenu id="idAno1" value="#{chartBean.ano1}"
+					required="true">
+					<f:selectItem itemLabel="Selecione o ano *" itemValue="0" />
+					<f:selectItem itemLabel="2010" itemValue="2010" />
+					<f:selectItem itemLabel="2011" itemValue="2011" />
+					<f:selectItem itemLabel="2012" itemValue="2012" />
+					<f:selectItem itemLabel="2013" itemValue="2013" />
+					<f:selectItem itemLabel="2014" itemValue="2014" />
+					<f:selectItem itemLabel="2015" itemValue="2015" />
+					<f:selectItem itemLabel="2016" itemValue="2016" />
+					<f:selectItem itemLabel="2017" itemValue="2017" />
+				</p:selectOneMenu>
+
+				<p:commandButton value="Emitir"
+					actionListener="#{chartBean.atualizaJustificativas}" id="withIcon"
+					update=":messages,:growl,form,basic" icon="ui-icon-disk" />
 			</h:panelGrid>
-			
-			<p:barChart id="basic" value="#{chartBean.justificativas}" legendPosition="ne" xaxisAngle="60" animate="true" 
-		    	title="Basic Bar Chart" min="0"  style="height:600px"/> 
-			
-		</h:form>  
-	</ui:define>  
-</ui:decorate>  
+
+			<p:barChart id="basic" value="#{chartBean.justificativas}"
+				legendPosition="ne" xaxisAngle="60" animate="true"
+				title="Basic Bar Chart" min="0" style="height:600px" />
+
+		</h:form>
+	</ui:define>
+</ui:decorate>
 </html>
