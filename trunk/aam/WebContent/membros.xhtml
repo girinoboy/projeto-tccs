@@ -8,11 +8,21 @@
 <ui:decorate template="layout.xhtml">  
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
- 			<p:commandButton value="Incluir Novo" action="/cadastroMembros.xhtml?faces-redirect=true" immediate="true" update=":center"/>
+ 			<p:commandButton value="Incluir Novo" action="/cadastroMembros.xhtml?faces-redirect=true" immediate="true" update=":center" />
+ 			
+ 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update=":center,form" />
 
  			<p:separator id="separator"/>
  			
- 			<p:dataTable var="membro" value="#{usuarioMB.listUsuariDTO}">  
+ 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuariDTO}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 			
+ 				<p:ajax event="rowEdit" listener="#{usuarioMB.onEdit}" update=":messages,:growl" />  
+        		<p:ajax event="rowEditCancel" listener="#{usuarioMB.onCancel}" update=":messages,:growl" /> 
+        		
+        		<p:ajax event="cellEdit" listener="#{usuarioMB.onCellEdit}" update=":messages,:growl" />
+ 			
+ 				<p:column selectionMode="multiple" style="width:2%" />
+ 				 
 		        <p:column headerText="Foto">  
 		        	<p:graphicImage value="#{usuarioMB.dynamicImage}" style="width:60px;height:60px">
 						<f:param name="image_id" value="#{membro.anexoDTO.id}"/>
@@ -20,7 +30,7 @@
 		        </p:column>  
 		  
 		        <p:column headerText="Nome">  
-		            <h:outputText value="#{membro.nome}" />  
+		            <h:outputText value="#{membro.nome}" /> 
 		        </p:column>  
 		  
 		        <p:column headerText="Graduação">  
@@ -28,12 +38,34 @@
 		        </p:column>  
 		  
 		        <p:column headerText="Ativo/Inativo">  
-		        	
-		            <h:outputText value="#{membro.ativoInativo ? 'Ativo' : 'Inativo'}" />  
+		        	<p:cellEditor>  
+	                	<f:facet name="output"><h:outputText value="#{membro.ativoInativo ? 'Ativo' : 'Inativo'}" /></f:facet>  
+	                  	<f:facet name="input">
+	                    	<h:selectOneMenu value="#{membro.ativoInativo}" style="width:100%">  
+		                    	<f:selectItem itemLabel="Ativo" itemValue="true" />
+								<f:selectItem itemLabel="Inativo" itemValue="false" />  
+		                    </h:selectOneMenu> 
+		                </f:facet>
+	              	</p:cellEditor>  
 		        </p:column>  
+		        
+		        <f:facet name="footer">  
+		        	<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}" update="panel" />
+		        	<p:commandButton id="multiViewButton" value="View" icon="ui-icon-search"  
+                             update=":displayMulti" oncomplete="PF('multiCarDialog').show()"/>  
+		        </f:facet>
 		    </p:dataTable> 
     
  		</h:form>
+ 		
+ 		<p:dialog id="multiDialog" header="Car Detail" widgetVar="multiCarDialog"  
+	              height="300" showEffect="fade" hideEffect="explode">  
+	  
+	        <p:dataList id="displayMulti" value="#{usuarioMB.listSelectedUsuariDTO}" var="selectedCar">  
+	            Model: #{selectedCar.nome}, Year: #{selectedCar.graduacaoDTO.nome}  
+	        </p:dataList>  
+	  
+	    </p:dialog> 
  	</ui:define>  
 </ui:decorate>  
 </html>
