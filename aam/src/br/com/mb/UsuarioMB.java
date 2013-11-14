@@ -30,7 +30,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private List<UsuarioDTO> listUsuarioDTO = new ArrayList<UsuarioDTO>();
-	private List<UsuarioDTO> listSelectedUsuariDTO = new ArrayList<UsuarioDTO>();
+	private UsuarioDTO[] listSelectedUsuarioDTO;// = new ArrayList<UsuarioDTO>();
 	private GraduacaoDAO graduacaoDAO = new GraduacaoDAO();
 	private List<GraduacaoDTO> listGraduacaoDTO = new ArrayList<GraduacaoDTO>();
 	private AnexoDAO anexoDAO = new AnexoDAO();
@@ -113,8 +113,16 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
-		System.out.println(listSelectedUsuariDTO);
-
+		//System.out.println(listSelectedUsuarioDTO);
+		for (UsuarioDTO u : listSelectedUsuarioDTO) {
+			usuarioDAO.delete(u);
+		}
+		if(listSelectedUsuarioDTO.length >0){
+			addMessage("Apagado.");
+		}else{
+			addMessage("Nenhum Item Selecionado.");
+		}
+		
 	}
 
 	public void onEdit(RowEditEvent event) {  
@@ -129,14 +137,19 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		FacesContext.getCurrentInstance().addMessage(null, msg);  
 	}  
 	
-	public void onCellEdit(CellEditEvent event) {
+	public void onCellEdit(CellEditEvent event) throws Exception {
         Object oldValue = event.getOldValue();
         Object newValue = event.getNewValue();
-        
+        usuarioDAO.save((UsuarioDTO) membroDataModel.getRowData());
         if(newValue != null && !newValue.equals(oldValue)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+    }
+	
+	public void check(SelectEvent event) {
+        System.out.println("in check");
+        System.out.println(listSelectedUsuarioDTO);
     }
 
 	public UsuarioDTO getUsuarioDTO() {
@@ -163,13 +176,6 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		this.listGraduacaoDTO = listGraduacaoDTO;
 	}
 
-	public List<UsuarioDTO> getListSelectedUsuariDTO() {
-		return listSelectedUsuariDTO;
-	}
-
-	public void setListSelectedUsuariDTO(List<UsuarioDTO> listSelectedUsuariDTO) {
-		this.listSelectedUsuariDTO = listSelectedUsuariDTO;
-	}
 
 	public MembroDataModel getMembroDataModel() {
 		return membroDataModel;
@@ -177,6 +183,14 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void setMembroDataModel(MembroDataModel membroDataModel) {
 		this.membroDataModel = membroDataModel;
+	}
+
+	public UsuarioDTO[] getListSelectedUsuarioDTO() {
+		return listSelectedUsuarioDTO;
+	}
+
+	public void setListSelectedUsuarioDTO(UsuarioDTO[] listSelectedUsuarioDTO) {
+		this.listSelectedUsuarioDTO = listSelectedUsuarioDTO;
 	}
 
 }

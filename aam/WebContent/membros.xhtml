@@ -10,15 +10,15 @@
  		<h:form id="form">
  			<p:commandButton value="Incluir Novo" action="/cadastroMembros.xhtml?faces-redirect=true" immediate="true" update=":center" />
  			
- 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update=":center,form" />
+ 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl" />
 
  			<p:separator id="separator"/>
  			
- 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuariDTO}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuarioDTO}" rowKey="#{membro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
  			
  				<p:ajax event="rowEdit" listener="#{usuarioMB.onEdit}" update=":messages,:growl" />  
         		<p:ajax event="rowEditCancel" listener="#{usuarioMB.onCancel}" update=":messages,:growl" /> 
-        		
+        		<p:ajax event="rowSelectCheckbox" listener="#{usuarioMB.check}"   /> 
         		<p:ajax event="cellEdit" listener="#{usuarioMB.onCellEdit}" update=":messages,:growl" />
  			
  				<p:column selectionMode="multiple" style="width:2%" />
@@ -49,11 +49,6 @@
 	              	</p:cellEditor>  
 		        </p:column>  
 		        
-		        <f:facet name="footer">  
-		        	<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}" update="panel" />
-		        	<p:commandButton id="multiViewButton" value="View" icon="ui-icon-search"  
-                             update=":displayMulti" oncomplete="PF('multiCarDialog').show()"/>  
-		        </f:facet>
 		    </p:dataTable> 
     
  		</h:form>
@@ -61,7 +56,7 @@
  		<p:dialog id="multiDialog" header="Car Detail" widgetVar="multiCarDialog"  
 	              height="300" showEffect="fade" hideEffect="explode">  
 	  
-	        <p:dataList id="displayMulti" value="#{usuarioMB.listSelectedUsuariDTO}" var="selectedCar">  
+	        <p:dataList id="displayMulti" value="#{usuarioMB.listSelectedUsuarioDTO}" var="selectedCar">  
 	            Model: #{selectedCar.nome}, Year: #{selectedCar.graduacaoDTO.nome}  
 	        </p:dataList>  
 	  
