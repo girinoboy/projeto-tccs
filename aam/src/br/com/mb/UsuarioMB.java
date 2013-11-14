@@ -4,11 +4,14 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -19,21 +22,29 @@ import br.com.dao.UsuarioDAO;
 import br.com.dto.AnexoDTO;
 import br.com.dto.GraduacaoDTO;
 import br.com.dto.UsuarioDTO;
+import br.com.utility.MembroDataModel;
 
 @ManagedBean
 public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
-	private List<UsuarioDTO> listUsuariDTO = new ArrayList<UsuarioDTO>();
+	private List<UsuarioDTO> listUsuarioDTO = new ArrayList<UsuarioDTO>();
+	private List<UsuarioDTO> listSelectedUsuariDTO = new ArrayList<UsuarioDTO>();
 	private GraduacaoDAO graduacaoDAO = new GraduacaoDAO();
 	private List<GraduacaoDTO> listGraduacaoDTO = new ArrayList<GraduacaoDTO>();
 	private AnexoDAO anexoDAO = new AnexoDAO();
 
+	private MembroDataModel membroDataModel; 
+
 	public UsuarioMB(){
 		try {
-			listUsuariDTO = usuarioDAO.list();
+			listUsuarioDTO = usuarioDAO.list();
 			listGraduacaoDTO = graduacaoDAO.list();
+
+			membroDataModel = new MembroDataModel(listUsuarioDTO);  
+
+//			listUsuarioDTO = new ArrayList<UsuarioDTO>();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,6 +100,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			usuarioDAO.save(usuarioDTO);
 			addMessage("Salvo");
 			usuarioDTO = new UsuarioDTO();
+			listUsuarioDTO = usuarioDAO.list();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -101,9 +113,31 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		System.out.println(listSelectedUsuariDTO);
 
 	}
+
+	public void onEdit(RowEditEvent event) {  
+		FacesMessage msg = new FacesMessage("Car Edited", ((UsuarioDTO) event.getObject()).getId().toString());  
+
+		FacesContext.getCurrentInstance().addMessage(null, msg);  
+	}  
+
+	public void onCancel(RowEditEvent event) {  
+		FacesMessage msg = new FacesMessage("Car Cancelled", ((UsuarioDTO) event.getObject()).getId().toString());  
+
+		FacesContext.getCurrentInstance().addMessage(null, msg);  
+	}  
+	
+	public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+        
+        if(newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
 
 	public UsuarioDTO getUsuarioDTO() {
 		return usuarioDTO;
@@ -113,12 +147,12 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		this.usuarioDTO = usuarioDTO;
 	}
 
-	public List<UsuarioDTO> getListUsuariDTO() {
-		return listUsuariDTO;
+	public List<UsuarioDTO> getListUsuarioDTO() {
+		return listUsuarioDTO;
 	}
 
-	public void setListUsuariDTO(List<UsuarioDTO> listUsuariDTO) {
-		this.listUsuariDTO = listUsuariDTO;
+	public void setListUsuarioDTO(List<UsuarioDTO> listUsuarioDTO) {
+		this.listUsuarioDTO = listUsuarioDTO;
 	}
 
 	public List<GraduacaoDTO> getListGraduacaoDTO() {
@@ -127,6 +161,22 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void setListGraduacaoDTO(List<GraduacaoDTO> listGraduacaoDTO) {
 		this.listGraduacaoDTO = listGraduacaoDTO;
+	}
+
+	public List<UsuarioDTO> getListSelectedUsuariDTO() {
+		return listSelectedUsuariDTO;
+	}
+
+	public void setListSelectedUsuariDTO(List<UsuarioDTO> listSelectedUsuariDTO) {
+		this.listSelectedUsuariDTO = listSelectedUsuariDTO;
+	}
+
+	public MembroDataModel getMembroDataModel() {
+		return membroDataModel;
+	}
+
+	public void setMembroDataModel(MembroDataModel membroDataModel) {
+		this.membroDataModel = membroDataModel;
 	}
 
 }
