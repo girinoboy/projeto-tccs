@@ -14,41 +14,67 @@
 			    </f:facet>
 
 					<h:outputLabel for="nome" value="Nome: *" />
-					<h:outputLabel for="nomeC" value="#{escolaMB.escolaDTO.nome}" />
-					<h:outputLabel for="codigo" value="Codigo: #{escolaMB.escolaDTO.id}" />
+					<p:inputText id="nomeC" value="#{escolaMB.escolaDTO.nome}" disabled="true"/>
+					<p:inputText id="codigo" value="Codigo: #{escolaMB.escolaDTO.id}" disabled="true"/>
 
 					<h:outputLabel for="endereco" value="Endereço: *" />
-					<h:outputLabel for="enderecoC" value="#{escolaMB.escolaDTO.endereco}" />
-					<h:outputLabel for="city" value="Cidade: #{escolaMB.escolaDTO.cidadeDTO}" />
-					
+					<p:inputText id="endereco" value="#{escolaMB.escolaDTO.endereco}"
+						required="true" label="Endereco" disabled="true" />
+					<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}"
+						required="true" converter="cidade" disabled="true">
+						<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
+						<f:selectItems value="#{cidadeMB.listCidade}" var="cidade"
+							itemLabel="#{cidade.nome}" itemValue="#{cidade}"
+							style="height:200px" />
+					</p:selectOneMenu>
 
 					<h:outputLabel for="telefone" value="Telefone: *" />
-					<h:outputLabel for="telefonec" value="#{escolaMB.escolaDTO.telefone}" />
-					<h:outputLabel for="redEnsino"
-						value=" Rede de ensino: #{escolaMB.escolaDTO.redeEnsino}"  />
-						
+					<p:inputMask id="telefone" value="#{escolaMB.escolaDTO.telefone}"
+						mask="(99) 9999-9999" required="true" disabled="true" />
+					<p:selectOneMenu id="redEnsino"
+						value="#{escolaMB.escolaDTO.redeEnsino}" disabled="true">
+						<f:selectItem itemLabel="Selecione Rede de Ensino" itemValue=""
+							disabled="true" />
+						<f:selectItem itemLabel="Pública" itemValue="1" />
+						<f:selectItem itemLabel="Privada" itemValue="2" />
+					</p:selectOneMenu>
 
 					<h:outputLabel for="fax" value="Fax: " />
-					<h:outputLabel for="faxc" value="#{escolaMB.escolaDTO.fax}" />
-					<h:outputLabel for="planLiterario"
-						value="Planejamento Literário: #{escolaMB.escolaDTO.planejamentoLiterario}" />
-			
+					<p:inputMask id="fax" value="#{escolaMB.escolaDTO.fax}"
+						mask="(99) 9999-9999" disabled="true" />
+					<p:selectOneMenu id="planLiterario"
+						value="#{escolaMB.escolaDTO.planejamentoLiterario}"
+						disabled="true">
+						<f:selectItem itemLabel="Selecione Planejamento Literário"
+							itemValue="" disabled="true" />
+						<f:selectItem itemLabel="Mensal" itemValue="1" />
+						<f:selectItem itemLabel="Anual" itemValue="2" />
+					</p:selectOneMenu>
 
 					<h:outputText for="data" value="Data: *" />
-					<h:outputLabel for="data" value="#{escolaMB.escolaDTO.data}" />
-					
-					<h:outputLabel for="serie" value="#{escolaMB.escolaDTO.serie}" />
-					
+					<p:inputMask id="data" value="#{escolaMB.escolaDTO.data}"
+						mask="99/99/9999" required="true" disabled="true">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:inputMask>
+					<p:selectOneMenu id="serie" value="#{escolaMB.escolaDTO.serie}"
+						disabled="true">
+						<f:selectItem itemLabel="Selecione a Série" itemValue="" />
+						<f:selectItem itemLabel="Fundamental" itemValue="1" />
+						<f:selectItem itemLabel="Medio" itemValue="2" />
+						<f:selectItem itemLabel="Pré" itemValue="3" />
+					</p:selectOneMenu>
 
 					<h:outputText for="anotacoes" value="Anotações:" />
-					<h:outputLabel for="anotacoes" rows="6" cols="33"
-						value="#{escolaMB.escolaDTO.anotacoes}"  />
+					<p:inputTextarea id="anotacoes" rows="6" cols="33"
+						value="#{escolaMB.escolaDTO.anotacoes}" disabled="true" />
 					<br />
 
 					<h:outputText for="biblioteca" value="Biblioteca:" />
-					<h:outputLabel for="biblioteca"
-						value="#{escolaMB.escolaDTO.biblioteca}" />
-					
+					<p:selectOneRadio id="biblioteca"
+						value="#{escolaMB.escolaDTO.biblioteca}" disabled="true">
+						<f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Não" itemValue="false" />
+					</p:selectOneRadio>
 					<br />
 
 					<h:outputText for="turno" value="Turno: " />
