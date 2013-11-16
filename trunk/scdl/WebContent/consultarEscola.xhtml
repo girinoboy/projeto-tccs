@@ -88,17 +88,17 @@
 					<f:facet name="footer">
 						<div align="right">
 							<h:form>
+							<p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-w"
+								actionListener="#{escolaMB.limpar}"
+								action="/escola.xhtml?faces-redirect=true" immediate="true"
+								update=":center" />
 								<p:commandButton value="Imprimir" type="button"
 									icon="ui-icon-print">
 									<p:printer target="panel" />
 								</p:commandButton>
 								<p:graphicImage id="panel"  />
 							</h:form>
-							<p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-w"
-								actionListener="#{escolaMB.limpar}"
-								action="/escola.xhtml?faces-redirect=true" immediate="true"
-								update=":center" />
-						</div>
+							</div>
 					</f:facet>
 				</p:panelGrid>
 			</center>
