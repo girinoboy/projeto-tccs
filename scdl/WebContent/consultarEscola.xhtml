@@ -33,7 +33,7 @@
 						mask="(99) 9999-9999" required="true" disabled="true" />
 					<p:selectOneMenu id="redEnsino"
 						value="#{escolaMB.escolaDTO.redeEnsino}" disabled="true">
-						<f:selectItem itemLabel="Selecione Rede de Ensino" itemValue=""
+						<f:selectItem itemLabel="Rede de Ensino não selecionada" itemValue=""
 							disabled="true" />
 						<f:selectItem itemLabel="Pública" itemValue="1" />
 						<f:selectItem itemLabel="Privada" itemValue="2" />
@@ -45,7 +45,7 @@
 					<p:selectOneMenu id="planLiterario"
 						value="#{escolaMB.escolaDTO.planejamentoLiterario}"
 						disabled="true">
-						<f:selectItem itemLabel="Selecione Planejamento Literário"
+						<f:selectItem itemLabel="Planejamento Literário não selecionado"
 							itemValue="" disabled="true" />
 						<f:selectItem itemLabel="Mensal" itemValue="1" />
 						<f:selectItem itemLabel="Anual" itemValue="2" />
@@ -58,7 +58,7 @@
 					</p:inputMask>
 					<p:selectOneMenu id="serie" value="#{escolaMB.escolaDTO.serie}"
 						disabled="true">
-						<f:selectItem itemLabel="Selecione a Série" itemValue="" />
+						<f:selectItem itemLabel="Série não selecionada" itemValue="" />
 						<f:selectItem itemLabel="Fundamental" itemValue="1" />
 						<f:selectItem itemLabel="Medio" itemValue="2" />
 						<f:selectItem itemLabel="Pré" itemValue="3" />
