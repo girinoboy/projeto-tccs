@@ -52,8 +52,11 @@
 						itemValue="O livro não me agradou" />
 					<f:selectItem itemLabel="Outros" itemValue="Outros" />
 				</p:selectOneMenu>
+				
 			</h:panelGrid>
-
+<br/>
+				<p:commandButton value="Incluir" icon="ui-icon-check"
+							actionListener="#{justificativaMB.add}" update=":messages,:growl,form"/>
 			<br />
 			<br />
 			<br />
@@ -93,8 +96,7 @@
 						<p:commandButton value="Cancelar" icon="ui-icon-arrowthick-1-w"
 							action="/layoutComplex.xhtml?faces-redirect=true"
 							immediate="true" update=":center" />
-						<p:commandButton value="Incluir" icon="ui-icon-check"
-							actionListener="#{justificativaMB.add}" update=":messages,:growl,form"/>
+						
 					</div>
 				</f:facet>
 			</p:panelGrid>
@@ -104,10 +106,6 @@
 			appendToBody="true" resizable="false" draggable="true">
 			<h:outputText value="Deseja realmente excluir essa justificativa?" />
 			<f:facet name="footer">
-				<p:commandButton value="Excluir"
-					update=":growl,form:justificativaTable" icon="ui-icon-close"
-					actionListener="#{justificativaMB.del}" immediate="true"
-					oncomplete="PF('dlg').hide()" />
 				<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()"
 					immediate="true" />
 			</f:facet>
