@@ -34,7 +34,7 @@
 						mask="(99) 9999-9999" required="true" />
 					<p:selectOneMenu id="redEnsino"
 						value="#{escolaMB.escolaDTO.redeEnsino}">
-						<f:selectItem itemLabel="Selecione Rede de Ensino" itemValue="" />
+						<f:selectItem itemLabel="Selecione Rede de Ensino" itemValue="0" />
 						<f:selectItem itemLabel="Particular" itemValue="1" />
 						<f:selectItem itemLabel="Estadual" itemValue="2" />
 						<f:selectItem itemLabel="Municipal" itemValue="3" />
@@ -47,7 +47,7 @@
 					<p:selectOneMenu id="planLiterario"
 						value="#{escolaMB.escolaDTO.planejamentoLiterario}">
 						<f:selectItem itemLabel="Selecione Planejamento Literário"
-							itemValue="" />
+							itemValue="0" />
 						<f:selectItem itemLabel="Mensal" itemValue="1" />
 						<f:selectItem itemLabel="Bimestral" itemValue="2" />
 						<f:selectItem itemLabel="Semestral" itemValue="3" />
@@ -60,7 +60,7 @@
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 					<p:selectOneMenu id="serie" value="#{escolaMB.escolaDTO.serie}">
-						<f:selectItem itemLabel="Selecione a Série" itemValue="" />
+						<f:selectItem itemLabel="Selecione a Série" itemValue="0" />
 						<f:selectItem itemLabel="Maternal" itemValue="1" />
 						<f:selectItem itemLabel="2ª/5ª" itemValue="2" />
 						<f:selectItem itemLabel="6ª/9ª" itemValue="3" />
@@ -89,7 +89,7 @@
 
 					<f:facet name="footer">
 						<div align="right">
-							<p:commandButton value="Cancelar" icon="ui-icon-closethick"
+							<p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-w"
 								action="/escola.xhtml?faces-redirect=true" immediate="true"
 								update=":center" />
 							<p:commandButton value="Incluir" icon="ui-icon-check"
