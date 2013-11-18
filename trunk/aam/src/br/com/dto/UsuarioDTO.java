@@ -43,7 +43,7 @@ public class UsuarioDTO {
 	private Boolean ativoInativo;
 	private String sexo;
 	private String rg;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
 	private GraduacaoDTO graduacaoDTO;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -10,7 +10,7 @@
  		<h:form id="form">
  			<p:commandButton value="Incluir Novo" action="/cadastroMembros.xhtml?faces-redirect=true" immediate="true" update=":center" />
  			
- 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl" />
+ 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl,panel" />
 
  			<p:separator id="separator"/>
  			
