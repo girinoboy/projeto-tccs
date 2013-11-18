@@ -14,12 +14,12 @@
 			    </f:facet>
 
 					<h:outputLabel for="nome" value="Nome: *" />
-					<p:inputText id="nomeC" value="#{escolaMB.escolaDTO.nome}" disabled="true"/>
+					<p:inputText id="nomeC" value="#{escolaMB.escolaDTO.nome}" disabled="true" size="60"/>
 					<p:inputText id="codigo" value="Codigo: #{escolaMB.escolaDTO.id}" disabled="true"/>
 
 					<h:outputLabel for="endereco" value="Endereço: *" />
 					<p:inputText id="endereco" value="#{escolaMB.escolaDTO.endereco}"
-						required="true" label="Endereco" disabled="true" />
+						required="true" label="Endereco" disabled="true" size="60"/>
 					<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}"
 						required="true" converter="cidade" disabled="true">
 						<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
@@ -33,10 +33,12 @@
 						mask="(99) 9999-9999" required="true" disabled="true" />
 					<p:selectOneMenu id="redEnsino"
 						value="#{escolaMB.escolaDTO.redeEnsino}" disabled="true">
-						<f:selectItem itemLabel="Rede de Ensino não selecionada" itemValue=""
+						<f:selectItem itemLabel="Rede de Ensino não selecionada" itemValue="0"
 							disabled="true" />
-						<f:selectItem itemLabel="Pública" itemValue="1" />
-						<f:selectItem itemLabel="Privada" itemValue="2" />
+						<f:selectItem itemLabel="Particular" itemValue="1" />
+						<f:selectItem itemLabel="Estadual" itemValue="2" />
+						<f:selectItem itemLabel="Municipal" itemValue="3" />
+						<f:selectItem itemLabel="Federal" itemValue="4" />	
 					</p:selectOneMenu>
 
 					<h:outputLabel for="fax" value="Fax: " />
@@ -46,9 +48,11 @@
 						value="#{escolaMB.escolaDTO.planejamentoLiterario}"
 						disabled="true">
 						<f:selectItem itemLabel="Planejamento Literário não selecionado"
-							itemValue="" disabled="true" />
+							itemValue="0" disabled="true" />
 						<f:selectItem itemLabel="Mensal" itemValue="1" />
-						<f:selectItem itemLabel="Anual" itemValue="2" />
+						<f:selectItem itemLabel="Bimestral" itemValue="2" />
+						<f:selectItem itemLabel="Semestral" itemValue="3" />
+						<f:selectItem itemLabel="Anual" itemValue="4" />
 					</p:selectOneMenu>
 
 					<h:outputText for="data" value="Data: *" />
@@ -58,10 +62,13 @@
 					</p:inputMask>
 					<p:selectOneMenu id="serie" value="#{escolaMB.escolaDTO.serie}"
 						disabled="true">
-						<f:selectItem itemLabel="Série não selecionada" itemValue="" />
-						<f:selectItem itemLabel="Fundamental" itemValue="1" />
-						<f:selectItem itemLabel="Medio" itemValue="2" />
-						<f:selectItem itemLabel="Pré" itemValue="3" />
+						<f:selectItem itemLabel="Série não selecionada" itemValue="0" />
+						<f:selectItem itemLabel="Selecione a Série" itemValue="" />
+						<f:selectItem itemLabel="Maternal" itemValue="1" />
+						<f:selectItem itemLabel="2ª/5ª" itemValue="2" />
+						<f:selectItem itemLabel="6ª/9ª" itemValue="3" />
+						<f:selectItem itemLabel="Ensino Médio" itemValue="4" />
+						<f:selectItem itemLabel="Outros" itemValue="5" />
 					</p:selectOneMenu>
 
 					<h:outputText for="anotacoes" value="Anotações:" />

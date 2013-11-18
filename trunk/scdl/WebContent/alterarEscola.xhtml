@@ -35,10 +35,12 @@
 						mask="(99) 9999-9999" required="true" />
 					<p:selectOneMenu id="redEnsino"
 						value="#{escolaMB.escolaDTO.redeEnsino}" disabled="true">
-						<f:selectItem itemLabel="Selecione Rede de Ensino" itemValue=""
+						<f:selectItem itemLabel="Rede de Ensino não selecionada" itemValue="0"
 							disabled="true" />
-						<f:selectItem itemLabel="Pública" itemValue="1" />
-						<f:selectItem itemLabel="Privada" itemValue="2" />
+						<f:selectItem itemLabel="Particular" itemValue="1" />
+						<f:selectItem itemLabel="Estadual" itemValue="2" />
+						<f:selectItem itemLabel="Municipal" itemValue="3" />
+						<f:selectItem itemLabel="Federal" itemValue="4" />	
 					</p:selectOneMenu>
 
 					<h:outputLabel for="fax" value="Fax: " />
@@ -47,7 +49,7 @@
 					<p:selectOneMenu id="planLiterario"
 						value="#{escolaMB.escolaDTO.planejamentoLiterario}">
 						<f:selectItem itemLabel="Selecione Planejamento Literário"
-							itemValue="" disabled="true" />
+							itemValue="0" disabled="true" />
 						<f:selectItem itemLabel="Mensal" itemValue="1" />
 						<f:selectItem itemLabel="Bimestral" itemValue="2" />
 						<f:selectItem itemLabel="Semestral" itemValue="3" />
@@ -61,10 +63,12 @@
 					</p:inputMask>
 					<p:selectOneMenu id="serie" value="#{escolaMB.escolaDTO.serie}"
 						disabled="true">
-						<f:selectItem itemLabel="Selecione a Série" itemValue="" />
-						<f:selectItem itemLabel="Fundamental" itemValue="1" />
-						<f:selectItem itemLabel="Medio" itemValue="2" />
-						<f:selectItem itemLabel="Pré" itemValue="3" />
+						<f:selectItem itemLabel="Série não selecionada" itemValue="0" />
+						<f:selectItem itemLabel="Maternal" itemValue="1" />
+						<f:selectItem itemLabel="2ª/5ª" itemValue="2" />
+						<f:selectItem itemLabel="6ª/9ª" itemValue="3" />
+						<f:selectItem itemLabel="Ensino Médio" itemValue="4" />
+						<f:selectItem itemLabel="Outros" itemValue="5" />
 					</p:selectOneMenu>
 
 					<h:outputText for="anotacoes" value="Anotações:" />

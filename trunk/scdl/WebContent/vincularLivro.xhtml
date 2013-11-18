@@ -22,15 +22,15 @@
 				<h:outputLabel for="livro" value="Livro: *" style="font-weight:bold" />
 				<h:outputLabel for="alunos" value="Qnt. alunos: *" style="font-weight:bold" />
 				
-				<p:selectOneMenu id="escola" value="#{escolaLivroMB.escolaLivroDTO.escolaDTO}" converter="escola" required="true">
+				<p:selectOneMenu id="escola" value="#{escolaLivroMB.escolaLivroDTO.escolaDTO}" converter="escola" required="true" requiredMessage="Escola não informada.">
 					<f:selectItem itemLabel="Selecione a Escola" itemValue="" />
 					<f:selectItems value="#{escolaLivroMB.listEscola}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>
-				<p:selectOneMenu id="livro" value="#{escolaLivroMB.escolaLivroDTO.livroDTO}" converter="livro" required="true">
+				<p:selectOneMenu id="livro" value="#{escolaLivroMB.escolaLivroDTO.livroDTO}" converter="livro" required="true" requiredMessage="Livro não informado.">
 					<f:selectItem itemLabel="Selecione o Livro *" itemValue="" />
 					<f:selectItems value="#{escolaLivroMB.listLivroDTO}" var="livro" itemLabel="#{livro.nome}" itemValue="#{livro}" />
 				</p:selectOneMenu>
-				<p:inputText id="alunos" value="#{escolaLivroMB.escolaLivroDTO.quantidadeAluno}" required="true"/>
+				<p:inputText id="alunos" value="#{escolaLivroMB.escolaLivroDTO.quantidadeAluno}" required="true" requiredMessage="Quantidade não informada."/>
 
 				<br />
 				<br />
@@ -66,7 +66,7 @@
 					<h:outputText value="#{el.livroDTO.nome}" />
 				</p:column>
 
-				<p:column headerText="Editora" style="width:400px">
+				<p:column headerText="Editora" style="width:100px">
 					<h:outputText value="#{el.livroDTO.editoraDTO.nome}" />
 				</p:column>
 
@@ -79,18 +79,25 @@
 						<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" /> 
 					</h:outputText>
 				</p:column>
+				
+				 <p:column headerText="Ações" style="width:10px">  
+
+		        <!-- Deletar -->       
+		                <p:commandButton id="excluir" icon="ui-icon-trash" title="Desvincular" update=":growl" onclick="PF('dlg').show();" actionListener="#{escolaMB.edit}">  
+		            	<f:setPropertyActionListener value="#{escola}" target="#{escolaMB.escolaDTO}"/> 
+		                </p:commandButton> 
+		                
+		        </p:column>  
 
 			</p:dataTable>
 
 			<p:panelGrid columns="3" style="width:1500px">
 
 				<f:facet name="footer">
-					<div align="center">
-						<p:commandButton value="OK" icon="ui-icon-arrowthick-1-w"
+					<div align="right">
+						<p:commandButton value="Cancelar" icon="ui-icon-extlink"
 							action="/layoutComplex.xhtml?faces-redirect=true"
 							immediate="true" update=":center" />
-						<p:commandButton type="button" value="Desvincular"
-							icon="ui-icon-check" />
 					</div>
 				</f:facet>
 			</p:panelGrid>

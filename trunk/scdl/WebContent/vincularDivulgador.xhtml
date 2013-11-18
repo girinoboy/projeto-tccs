@@ -27,7 +27,7 @@
 					<f:selectItems value="#{escolaDivulgadorMB.listEscola}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>
 				<br />
-				<p:selectOneMenu id="divulgador" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.usuarioDTO}" converter="usuario" required="true" requiredMessage="Divulgador não informado!">
+				<p:selectOneMenu id="divulgador" value="#{escolaDivulgadorMB.escolaDivulgadorDTO.usuarioDTO}" converter="usuario" required="true" requiredMessage="Divulgador não informado.">
 					<f:selectItem itemLabel="selecione o Divulgador *" itemValue="" />
 					<f:selectItems value="#{escolaDivulgadorMB.listDivulgador}" var="divulgador" itemLabel="#{divulgador.nome}" itemValue="#{divulgador}" />
 				</p:selectOneMenu>
@@ -62,18 +62,25 @@
 				<p:column headerText="Divulgador" style="width:50px">
 					<h:outputText value="#{ed.usuarioDTO.nome}" />
 				</p:column>
+				
+				 <p:column headerText="Ações" style="width:10px">  
+
+		        <!-- Deletar -->       
+		                <p:commandButton id="excluir" icon="ui-icon-trash" title="Desvincular" update=":growl" onclick="PF('dlg').show();" actionListener="#{escolaMB.edit}">  
+		            	<f:setPropertyActionListener value="#{escola}" target="#{escolaMB.escolaDTO}"/> 
+		                </p:commandButton> 
+		                
+		        </p:column>  
 
 			</p:dataTable>
 
 			<p:panelGrid columns="3" style="width:1000px">
 
 				<f:facet name="footer">
-					<div align="center">
-						<p:commandButton value="OK" icon="ui-icon-arrowthick-1-w"
-							action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"
-							update=":center" />
-						<p:commandButton type="button" value="Desvincular"
-							icon="ui-icon-check" />
+					<div align="right">
+						<p:commandButton value="Cancelar" icon="ui-icon-extlink"
+							action="/layoutComplex.xhtml?faces-redirect=true"
+							immediate="true" update=":center" />
 					</div>
 				</f:facet>
 			</p:panelGrid>
