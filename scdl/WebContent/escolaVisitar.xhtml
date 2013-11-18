@@ -19,7 +19,7 @@
 			<h:panelGrid id="panel" columns="3" cellpadding="1" style="width:500px">
 
 				<p:selectOneMenu id="city" 
-					required="true" converter="cidade">
+					required="true" converter="cidade" requiredMessage="Cidade Não informada.">
 					<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
 					<f:selectItems value="#{cidadeMB.listCidade}" var="cidade"
 						itemLabel="#{cidade.nome}" itemValue="#{cidade}"
@@ -28,7 +28,7 @@
 				</p:selectOneMenu>
 				
 				<p:selectOneMenu id="escola" value="#{escolaVisitadaMB.escolaVisitadaDTO.escolaDTO}"
-					converter="escola" required="true">
+					converter="escola" required="true" requiredMessage="Escola não informada.">
 					<f:selectItem itemLabel="Selecione a Escola" itemValue=""/>
 					<f:selectItems value="#{escolaMB.listEscola}" var="escola"
 						itemLabel="#{escola.nome}" itemValue="#{escola}" />
