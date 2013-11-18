@@ -20,7 +20,7 @@
 
 				<p:selectOneMenu id="livro"
 					value="#{justificativaMB.justificativaDTO.livroDTO}"
-					converter="livro" required="true">
+					converter="livro" required="true" requiredMessage="Livro não informado.">
 					<f:selectItem itemLabel="Selecione o Livro *" itemValue="" />
 					<f:selectItems value="#{livroMB.listLivroDTO}" var="livro"
 						itemLabel="#{livro.nome}" itemValue="#{livro}" />
@@ -28,14 +28,14 @@
 
 				<p:selectOneMenu id="escola"
 					value="#{justificativaMB.justificativaDTO.escolaDTO}"
-					converter="escola" required="true">
+					converter="escola" required="true" requiredMessage="Escola não informada.">
 					<f:selectItem itemLabel="Selecione a Escola *" itemValue="" />
 					<f:selectItems value="#{escolaMB.listEscola}" var="escola"
 						itemLabel="#{escola.nome}" itemValue="#{escola}" />
 				</p:selectOneMenu>
 
 				<p:selectOneMenu id="idJustificativa"
-					value="#{justificativaMB.justificativaDTO.nome}" required="true">
+					value="#{justificativaMB.justificativaDTO.nome}" required="true" requiredMessage="Justificativa não informada.">
 					<f:selectItem itemLabel="Selecione a Justificativa *" itemValue="" />
 					<f:selectItem itemLabel="Preço alto" itemValue="Preço alto" />
 					<f:selectItem itemLabel="Livro contém erro gramatical"
