@@ -42,9 +42,9 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			listUsuarioDTO = usuarioDAO.list();
 			listGraduacaoDTO = graduacaoDAO.list();
 
-			membroDataModel = new MembroDataModel(listUsuarioDTO);  
+			membroDataModel = new MembroDataModel(listUsuarioDTO);
 
-//			listUsuarioDTO = new ArrayList<UsuarioDTO>();
+			//			listUsuarioDTO = new ArrayList<UsuarioDTO>();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -112,17 +112,33 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	}
 
-	public void del(ActionEvent actionEvent) throws Exception {
-		//System.out.println(listSelectedUsuarioDTO);
-		for (UsuarioDTO u : listSelectedUsuarioDTO) {
-			usuarioDAO.delete(u);
+	public void del(ActionEvent actionEvent) {
+		try{
+			//System.out.println(listSelectedUsuarioDTO);
+			for (UsuarioDTO u : listSelectedUsuarioDTO) {
+				usuarioDAO.delete(u);
+			}
+			if(listSelectedUsuarioDTO.length >0){
+				addMessage("Apagado.");
+			}else{
+				addMessage("Nenhum Item Selecionado.");
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try {
+				listUsuarioDTO = usuarioDAO.list();
+
+				listGraduacaoDTO = graduacaoDAO.list();
+
+				membroDataModel = new MembroDataModel(listUsuarioDTO);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		if(listSelectedUsuarioDTO.length >0){
-			addMessage("Apagado.");
-		}else{
-			addMessage("Nenhum Item Selecionado.");
-		}
-		
+
 	}
 
 	public void onEdit(RowEditEvent event) {  
@@ -136,21 +152,21 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 		FacesContext.getCurrentInstance().addMessage(null, msg);  
 	}  
-	
+
 	public void onCellEdit(CellEditEvent event) throws Exception {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-        usuarioDAO.save((UsuarioDTO) membroDataModel.getRowData());
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
-	
+		Object oldValue = event.getOldValue();
+		Object newValue = event.getNewValue();
+		usuarioDAO.save((UsuarioDTO) membroDataModel.getRowData());
+		if(newValue != null && !newValue.equals(oldValue)) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+	}
+
 	public void check(SelectEvent event) {
-        System.out.println("in check");
-        System.out.println(listSelectedUsuarioDTO);
-    }
+		System.out.println("in check");
+		System.out.println(listSelectedUsuarioDTO);
+	}
 
 	public UsuarioDTO getUsuarioDTO() {
 		return usuarioDTO;
