@@ -83,19 +83,28 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 		}
 	}
 
-	public void del(ActionEvent actionEvent) throws Exception {
+	public void del(ActionEvent actionEvent) {
 
-		escolaDAO.delete(escolaDTO);
-		listEscola = escolaDAO.list();
+		try {
+			escolaDAO.delete(escolaDTO);
+			listEscola = escolaDAO.list();
+			addMessage("Escola excluída com sucesso.");
+		} catch (Exception e) {
+			if(e.getCause().toString().toUpperCase().contains("ESCOLA_DIVULGADOR")){
+				addMessage("Não excluido. Existe um divuilgador vinculado");
+			}else if(e.getCause().toString().toLowerCase().contains("escola_livro")){
+				addMessage("Não excluido. Existe um livro vinculado");
+			}
+			e.printStackTrace();
+		}
 
-		addMessage("Escola excluída com sucesso.");
 
 	}
 
 	public void filtrar() {
 		try{
-			
-			
+
+
 			if(idEscola==null &&nomeEscola==null)
 				listEscola = escolaDAO.list();
 			else if(idEscola == null && nomeEscola !=null){
@@ -116,7 +125,7 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 			for (TurnoDTO t : escolaDTO.getListTurnoDTO()) {
 				listAltTurnoDTO.add(new TurnoDTO(t.getId(),t.getNome()));
 			}
-		
+
 		escolaDTO = new EscolaDTO();
 		escolaDTO.setListTurnoDTO(listAltTurnoDTO);
 	}
