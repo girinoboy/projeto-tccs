@@ -58,7 +58,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 
 	private Double previsao = 31D;
 	private String ano;
-	private Integer ano1=0,ano2=0;
+	private Integer ano1,ano2;
 
 	private ChartDAO chartDAO = new ChartDAO();
 
@@ -96,22 +96,34 @@ public class ChartMB extends GenericoMB implements Serializable {
 		try {
 			justificativas = new CartesianChartModel();
 			ChartSeries series1 = new ChartSeries();
-			series1.setLabel("Justificativas");
+			series1.setLabel(ano1 == null ? "":ano1.toString());
 			series1 = pupulaSerieComJustificativas(series1);
 			
 			JustificativaDAO justificativaDAO = new JustificativaDAO();
-			
-			if((ano1>0 && ano2==0) || (ano1<=ano2 ) ){ 
-				Iterator it = justificativaDAO.quantidadeJustificativaAgrupada(ano1,ano2).iterator();
+			if(ano1!=null){ 
+				Iterator it = justificativaDAO.quantidadeJustificativaAgrupada(ano1).iterator();
 				while (it.hasNext()) {
 					Object[] c = (Object[]) it.next();
 					series1.set(c[0], Long.valueOf(c[1].toString()));
 				}
 			}
-			else if(ano1 != 0)
-				addMessage("ano1 não pode ser menor que ano2");
+			
+			
+			ChartSeries series2 = new ChartSeries();
+			series2.setLabel(ano2 == null ? "":ano2.toString());
+			series2 = pupulaSerieComJustificativas(series2);
+			
+			
+			if(ano2!=null){ 
+				Iterator it = justificativaDAO.quantidadeJustificativaAgrupada(ano2).iterator();
+				while (it.hasNext()) {
+					Object[] c = (Object[]) it.next();
+					series2.set(c[0], Long.valueOf(c[1].toString()));
+				}
+			}
 			
 			justificativas.addSeries(series1);
+			justificativas.addSeries(series2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
