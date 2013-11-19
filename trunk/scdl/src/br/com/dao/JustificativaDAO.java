@@ -26,23 +26,20 @@ public class JustificativaDAO extends GenericoDAO<JustificativaDTO, Serializable
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List quantidadeJustificativaAgrupada(Integer ano1, Integer ano2) throws HibernateException, Exception {
+	public List quantidadeJustificativaAgrupada(Integer ano) throws HibernateException, Exception {
 
-		Calendar dataMin = new GregorianCalendar(ano1,Calendar.JANUARY,01);
-		Calendar dataMax = new GregorianCalendar(ano2, Calendar.DECEMBER,31);
+		Calendar dataMin = new GregorianCalendar(ano,Calendar.JANUARY,01);
+		Calendar dataMax = new GregorianCalendar(ano,Calendar.DECEMBER,31);
 
 		List result; 
-		Criteria criteria = HibernateUtility.getSession().createCriteria(JustificativaDTO.class);
-		if(ano2==0){
-			criteria.add(Restrictions.ge("dataJustificativa", dataMin.getTime()));
-		}else{
-			criteria.add(Restrictions.between("dataJustificativa", dataMin.getTime(), dataMax.getTime()));
-		}
-		criteria.setProjection(Projections.projectionList()
-				.add(Projections.groupProperty("nome"))
-				.add(Projections.count("nome"),"total")
-				)
-				.addOrder(Order.asc("nome"));
+		Criteria criteria = HibernateUtility.getSession().createCriteria(JustificativaDTO.class)
+				.add(Restrictions.ge("dataJustificativa", dataMin.getTime()))
+				.add(Restrictions.lt("dataJustificativa", dataMax.getTime()))
+				.setProjection(Projections.projectionList()
+						.add(Projections.groupProperty("nome"))
+						.add(Projections.count("nome"),"total")
+						)
+						.addOrder(Order.asc("nome"));
 		result = criteria.list();
 		return result;
 	}
