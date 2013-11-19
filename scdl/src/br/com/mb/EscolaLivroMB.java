@@ -45,14 +45,19 @@ public class EscolaLivroMB extends GenericoMB implements ModeloMB{
 
 	@Override
 	public void edit(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+		System.out.println(escolaLivroDTO);
 	}
 
 	@Override
-	public void del(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void del(ActionEvent actionEvent){
+		try {
+			escolaLivroDAO.delete(escolaLivroDTO);
+			listEscolaLivroDTO = escolaLivroDAO.list();
+			addMessage("registro apagado");
+		} catch (Exception e) {
+			addMessage("erro ao apagar registro");
+			e.printStackTrace();
+		}
 	}
 
 	public EscolaLivroDTO getEscolaLivroDTO() {
