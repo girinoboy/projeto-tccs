@@ -92,7 +92,9 @@
 						<p:commandButton value="Cancelar" icon="ui-icon-arrowthick-1-w"
 							action="/layoutComplex.xhtml?faces-redirect=true"
 							immediate="true" update=":center" />
-						
+						<p:commandButton value="Limpar" icon="ui-icon-arrowthick-1-w"
+							actionListener="#{relatorioMB.limparQtdAlunoLivro}"
+							immediate="true" update="form" />
 					</div>
 				</f:facet>
 			</p:panelGrid>
