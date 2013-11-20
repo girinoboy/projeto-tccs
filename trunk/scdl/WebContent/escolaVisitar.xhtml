@@ -19,7 +19,7 @@
 			<h:panelGrid id="panel" columns="3" cellpadding="1" style="width:500px">
 
 				<p:selectOneMenu id="city" 
-					required="true" converter="cidade" requiredMessage="Cidade Não informada.">
+					required="true" converter="cidade" requiredMessage="Cidade não informada.">
 					<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
 					<f:selectItems value="#{cidadeMB.listCidade}" var="cidade"
 						itemLabel="#{cidade.nome}" itemValue="#{cidade}"
@@ -35,7 +35,7 @@
 				</p:selectOneMenu>
 
 			
-					<p:commandButton value="Vincular"
+					<p:commandButton value="Incluir"
 						icon="ui-icon-check" actionListener="#{escolaVisitadaMB.add}"
 						update=":messages,:growl,panel,evs" />
 			
@@ -56,6 +56,17 @@
 				<p:column headerText="Escola" style="width:400px">
 					<h:outputText value="#{ev.escolaDTO.nome}" />
 				</p:column>
+				
+				<p:column headerText="Ações" style="width:50px">
+
+					<!-- Deletar -->
+					<p:commandButton id="selectButton4" oncomplete="PF('dlg').show()"
+						icon="ui-icon-trash" title="View" immediate="true">
+						<f:setPropertyActionListener value="#{justificativa}"
+							target="#{justificativaMB.justificativaDTO}" />
+					</p:commandButton>
+
+				</p:column>
 	
 			</p:dataTable>
 
@@ -75,6 +86,16 @@
 
 
 		</h:form>
+		
+		<p:dialog header="Apagar?" widgetVar="dlg" modal="true"
+			appendToBody="true" resizable="false" draggable="true">
+			<h:outputText value="Deseja realmente excluir essa justificativa?" />
+			<f:facet name="footer">
+				<p:commandButton value="Excluir" update=":growl,form:panel"  icon="ui-icon-close" actionListener="#{justificativaMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />
+				<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()"
+					immediate="true" />
+			</f:facet>
+		</p:dialog>
 	</ui:define>
 </ui:decorate>
 </html>

@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="layoutComplex.xhtml">
+	<ui:define name="centro">
+		<h:form id="form">
+
+			<p:panelGrid columns="3" cellpadding="1" style="width:1000px">
+				<f:facet name="header">  
+			        Incluir Justificativa
+			    </f:facet>
+			</p:panelGrid>
+			<br />
+			<br />
+			<br />
+			<h:panelGrid columns="4" cellpadding="1" style="width:1000px">
+
+
+				<h:outputLabel for="editora" value="Editora: *" />
+					<p:selectOneMenu id="editora"
+						value="#{livroMB.livroDTO.editoraDTO}" required="true" requiredMessage="Editora não informada."
+						converter="editora">
+						<f:selectItem itemLabel="Selecione a Editora *" itemValue="" />
+						<f:selectItems value="#{editoraMB.listEditora}" var="editora"
+							itemLabel="#{editora.nome}" itemValue="#{editora}"
+							style="height:200px" />
+			   </p:selectOneMenu>
+				
+				<h:outputLabel for="Livro" value="Livro: *" />
+				<p:selectOneMenu id="livro"
+					value="#{justificativaMB.justificativaDTO.livroDTO}"
+					converter="livro" required="true" requiredMessage="Livro não informado.">
+					<f:selectItem itemLabel="Selecione o Livro *" itemValue="" />
+					<f:selectItems value="#{livroMB.listLivroDTO}" var="livro"
+						itemLabel="#{livro.nome}" itemValue="#{livro}" />
+				</p:selectOneMenu>
+
+				
+			</h:panelGrid>
+<br/>
+				<p:commandButton value="Incluir" icon="ui-icon-check" update=":messages,:growl,form,panel"/>
+			<br />
+			<br />
+			<br />
+
+			<p:dataTable id="panel" var="quantidade"
+				value="#" style="width:1000px">
+
+				<p:column headerText="Código do Livro" style="width:50px">
+					<h:outputText value="" />
+				</p:column>
+
+				<p:column headerText="Livro" style="width:400px">
+					<h:outputText value="" />
+				</p:column>
+
+				<p:column headerText="Editora" style="width:400px">
+					<h:outputText value="" />
+				</p:column>
+
+				<p:column headerText="Quantidade" style="width:210px">
+
+					<h:outputText value="" />
+					
+				</p:column>
+
+			</p:dataTable>
+
+			<p:panelGrid columns="3" style="width:1000px">
+
+				<f:facet name="footer">
+					<div align="center">
+					<p:commandButton value="Imprimir" icon="ui-icon-print" />
+						<p:commandButton value="Cancelar" icon="ui-icon-arrowthick-1-w"
+							action="/layoutComplex.xhtml?faces-redirect=true"
+							immediate="true" update=":center" />
+						
+					</div>
+				</f:facet>
+			</p:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:decorate>
+</html>

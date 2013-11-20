@@ -11,7 +11,7 @@
  		
 	 		<p:panel id="panel">
 				<h:outputLabel value="Ano: *" for="ano"/>
-				<p:inputText id="ano" required="true" value="#{chartBean.ano}"/>
+				<p:inputText id="ano" required="true" value="#{chartBean.ano}" requiredMessage="Ano não informado."/>
 				<p:commandButton value="Emitir" actionListener="#{chartBean.atualizaCidadesVisitadas}" id="withIcon" update=":messages,:growl,form,basic" icon="ui-icon-disk" />
 	 		</p:panel>
 	 		
