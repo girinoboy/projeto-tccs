@@ -37,7 +37,7 @@ public class MetaMB extends GenericoMB implements ModeloMB{
 
 	@Override
 	public void edit(ActionEvent actionEvent) throws Exception {
-		System.out.println(metaDTO.getId());
+		System.out.println(metaDTO);
 		//metaDTO = metaDAO.getById(metaDTO.getId());
 
 	}
@@ -46,7 +46,7 @@ public class MetaMB extends GenericoMB implements ModeloMB{
 	public void del(ActionEvent actionEvent)  {
 		try{
 			metaDAO.delete(metaDTO);
-			System.out.println(metaDTO);
+			metaDTO = new MetaDTO();
 			listMeta = metaDAO.list();
 			addMessage("Registro apagado.");
 		} catch (Exception e) {
