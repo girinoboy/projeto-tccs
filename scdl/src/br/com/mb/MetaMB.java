@@ -38,7 +38,7 @@ public class MetaMB extends GenericoMB implements ModeloMB{
 	@Override
 	public void edit(ActionEvent actionEvent) throws Exception {
 		System.out.println(metaDTO.getId());
-		metaDTO = metaDAO.getById(metaDTO.getId());
+		//metaDTO = metaDAO.getById(metaDTO.getId());
 
 	}
 

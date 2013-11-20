@@ -56,16 +56,16 @@
 			</h:panelGrid>
 <br/>
 				<p:commandButton value="Incluir" icon="ui-icon-check"
-							actionListener="#{justificativaMB.add}" update=":messages,:growl,form"/>
+							actionListener="#{justificativaMB.add}" update=":messages,:growl,form,panel"/>
 			<br />
 			<br />
 			<br />
 
-			<p:dataTable id="justificativaTable" var="justificativa"
+			<p:dataTable id="panel" var="justificativa"
 				value="#{justificativaMB.listJustificativa}" style="width:1000px">
 
 				<p:column headerText="Livro" style="width:50px">
-					<h:outputText value="#{justificativa.id}" />
+					<h:outputText value="#{justificativa.livroDTO.nome}" />
 				</p:column>
 
 				<p:column headerText="Escola" style="width:400px">
@@ -80,7 +80,7 @@
 
 					<!-- Deletar -->
 					<p:commandButton id="selectButton4" oncomplete="PF('dlg').show()"
-						icon="ui-icon-trash" title="View">
+						icon="ui-icon-trash" title="View" immediate="true">
 						<f:setPropertyActionListener value="#{justificativa}"
 							target="#{justificativaMB.justificativaDTO}" />
 					</p:commandButton>
@@ -106,6 +106,7 @@
 			appendToBody="true" resizable="false" draggable="true">
 			<h:outputText value="Deseja realmente excluir essa justificativa?" />
 			<f:facet name="footer">
+				<p:commandButton value="Excluir" update=":growl,form:panel"  icon="ui-icon-close" actionListener="#{justificativaMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />
 				<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()"
 					immediate="true" />
 			</f:facet>
