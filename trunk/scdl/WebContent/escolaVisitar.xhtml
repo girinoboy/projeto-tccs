@@ -49,14 +49,14 @@
 			<p:dataTable id="evs" var="ev" value="#{escolaVisitadaMB.listEscolaVisitada}"
 				style="width:1000px">
 	
-				<p:column headerText="Cidade" style="width:50px">
+				<p:column headerText="Cidade" style="width:210px">
 					<h:outputText value="#{ev.escolaDTO.cidadeDTO.nome}" />
 				</p:column>
 	
 				<p:column headerText="Escola" style="width:400px">
 					<h:outputText value="#{ev.escolaDTO.nome}" />
 				</p:column>
-				<p:column headerText="Ações" style="width:210px">  
+				<p:column headerText="Ações" style="width:50px">  
 					<!-- Deletar -->       
 	                <p:commandButton id="selectButton4" icon="ui-icon-trash" title="Apagar" update=":growl" onclick="PF('dlg').show();" actionListener="#{escolaVisitadaMB.edit}" immediate="true">  
 	            		<f:setPropertyActionListener target="#{escolaVisitadaMB.escolaVisitadaDTO}" value="#{ev}" /> 

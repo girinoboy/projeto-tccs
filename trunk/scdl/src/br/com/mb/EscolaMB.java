@@ -89,12 +89,14 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 			listEscola = escolaDAO.list();
 			addMessage("Escola excluída com sucesso.");
 		} catch (Exception e) {
+			e.printStackTrace();
 			if(e.getCause().toString().toUpperCase().contains("ESCOLA_DIVULGADOR")){
 				addMessage("Não excluido. Existe um divuilgador vinculado");
 			}else if(e.getCause().toString().toLowerCase().contains("escola_livro")){
 				addMessage("Não excluido. Existe um livro vinculado");
+			}else{
+				addMessage("Não excluido. "+e.getCause());
 			}
-			e.printStackTrace();
 		}
 
 
