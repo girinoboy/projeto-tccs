@@ -56,6 +56,10 @@ public class RelatorioMB {
 		}
 		
 	}
+	
+	public void limparQtdAlunoLivro(){
+		listQtdAlunoLivro =new ArrayList<>();
+	}
 
 
 	public List<EscolaLivroDTO> getHistoricoLivroAdotado() {
