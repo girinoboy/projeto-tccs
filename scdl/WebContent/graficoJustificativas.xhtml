@@ -14,7 +14,7 @@
 
 				<h:outputLabel value="1º Período" for="idAno1" />
 				<p:selectOneMenu id="idAno1" value="#{chartBean.ano1}"
-					required="true">
+					required="true" requiredMessage="1º período não informado.">
 					<f:selectItem itemLabel="Selecione o ano *" itemValue="" />
 					<f:selectItem itemLabel="2010" itemValue="2010" />
 					<f:selectItem itemLabel="2011" itemValue="2011" />
@@ -29,7 +29,7 @@
 				<h:outputLabel value="2º Período" for="idAno2" />
 				<p:selectOneMenu id="idAno2" value="#{chartBean.ano2}"
 					required="false">
-					<f:selectItem itemLabel="Selecione o ano *" itemValue="" />
+					<f:selectItem itemLabel="Selecione o ano " itemValue="" />
 					<f:selectItem itemLabel="2010" itemValue="2010" />
 					<f:selectItem itemLabel="2011" itemValue="2011" />
 					<f:selectItem itemLabel="2012" itemValue="2012" />
@@ -39,15 +39,15 @@
 					<f:selectItem itemLabel="2016" itemValue="2016" />
 					<f:selectItem itemLabel="2017" itemValue="2017" />
 				</p:selectOneMenu>
-
 				<p:commandButton value="Emitir"
 					actionListener="#{chartBean.atualizaJustificativas}" id="withIcon"
 					update=":messages,:growl,form,basic" icon="ui-icon-disk" />
 			</h:panelGrid>
-
+		
+				 <br/><br/>
 			<p:barChart id="basic" value="#{chartBean.justificativas}"
 				legendPosition="ne" xaxisAngle="60" animate="true"
-				title="Basic Bar Chart" min="0" style="height:600px" />
+				title="FeedBack" min="0" style="height:600px" />
 
 		</h:form>
 	</ui:define>

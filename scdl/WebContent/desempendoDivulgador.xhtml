@@ -15,7 +15,7 @@
  			
 				<h:outputLabel for="divulgador" value="Divulgador: *" style="font-weight:bold" />
 				<br />
-				<p:selectOneMenu id="divulgador" value="#{chartBean.divulgadorDTO}" converter="usuario" required="true">
+				<p:selectOneMenu id="divulgador" value="#{chartBean.divulgadorDTO}" converter="usuario" required="true" requiredMessage="Divulgador não informado.">
 					<f:selectItem itemLabel="Selecione o Divulgador *" itemValue="" />
 					<f:selectItems value="#{usuarioMB.listUsuario}" var="divulgador" itemLabel="#{divulgador.nome}" itemValue="#{divulgador}" />
 				</p:selectOneMenu>

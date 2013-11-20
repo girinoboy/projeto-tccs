@@ -15,14 +15,14 @@
 
 					<h:outputLabel for="nome" value="Nome: *" />
 					<p:inputText id="nome" value="#{escolaMB.escolaDTO.nome}"
-						label="Nome" width="50" required="true" />
+						label="Nome" width="50" required="true" requiredMessage="Nome não informado."/>
 					<h:outputLabel for="city" value="Codigo:" />
 
 					<h:outputLabel for="endereco" value="Endereço: *" />
 					<p:inputText id="endereco" value="#{escolaMB.escolaDTO.endereco}"
-						required="true" label="Endereco" />
+						required="true" label="Endereco" requiredMessage="Endereço não informado."/>
 					<p:selectOneMenu id="city" value="#{escolaMB.escolaDTO.cidadeDTO}"
-						required="true" converter="cidade">
+						required="true" converter="cidade" requiredMessage="Cidade não informada.">
 						<f:selectItem itemLabel="Selecione a Cidade *" itemValue="" />
 						<f:selectItems value="#{cidadeMB.listCidade}" var="cidade"
 							itemLabel="#{cidade.nome}" itemValue="#{cidade}"
@@ -31,7 +31,7 @@
 
 					<h:outputLabel for="telefone" value="Telefone: *" />
 					<p:inputMask id="telefone" value="#{escolaMB.escolaDTO.telefone}"
-						mask="(99) 9999-9999" required="true" />
+						mask="(99) 9999-9999" required="true" requiredMessage="Telefone não informado."/>
 					<p:selectOneMenu id="redEnsino"
 						value="#{escolaMB.escolaDTO.redeEnsino}">
 						<f:selectItem itemLabel="Selecione Rede de Ensino" itemValue="0" />
@@ -56,7 +56,7 @@
 
 					<h:outputText for="data" value="Data: *" />
 					<p:inputMask id="data" value="#{escolaMB.escolaDTO.data}"
-						mask="99/99/9999" required="true">
+						mask="99/99/9999" required="true" requiredMessage="Data não informada.">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 					<p:selectOneMenu id="serie" value="#{escolaMB.escolaDTO.serie}">
