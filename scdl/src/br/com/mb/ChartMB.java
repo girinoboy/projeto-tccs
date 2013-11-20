@@ -96,7 +96,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 		try {
 			justificativas = new CartesianChartModel();
 			ChartSeries series1 = new ChartSeries();
-			series1.setLabel(ano1 == null ? "":ano1.toString());
+			series1.setLabel(ano1 == null ? " ":ano1.toString());
 			series1 = pupulaSerieComJustificativas(series1);
 			
 			JustificativaDAO justificativaDAO = new JustificativaDAO();
@@ -110,7 +110,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 			
 			
 			ChartSeries series2 = new ChartSeries();
-			series2.setLabel(ano2 == null ? "":ano2.toString());
+			series2.setLabel(ano2 == null ? " ":ano2.toString());
 			series2 = pupulaSerieComJustificativas(series2);
 			
 			
