@@ -94,6 +94,8 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 				addMessage("Não excluido. Existe um divuilgador vinculado");
 			}else if(e.getCause().toString().toLowerCase().contains("escola_livro")){
 				addMessage("Não excluido. Existe um livro vinculado");
+			}else if(e.getCause().toString().toUpperCase().contains("ESCOLA_VISITADA")){
+				addMessage("Não excluido. Existe uma escola_visitada vinculada");
 			}else{
 				addMessage("Não excluido. "+e.getCause());
 			}
