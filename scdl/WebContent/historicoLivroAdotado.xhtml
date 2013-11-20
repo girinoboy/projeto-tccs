@@ -1,91 +1,93 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
 
-<ui:decorate template="layoutComplex.xhtml">  
-	<ui:define id="centro" name="centro"> 
+<ui:decorate template="layoutComplex.xhtml">
+	<ui:define id="centro" name="centro">
  		<h:form id="form">
  		
-	 		<p:dataTable id="tbl" var="h" value="#{relatorioMB.historicoLivroAdotado}" paginator="true" rows="10">  
-			    <p:column>  
-			        <f:facet name="header">  
-			            <h:outputText value="Livro" />  
-			        </f:facet>  
-			        <h:outputText value="#{h.livroDTO.nome}" />  
-			    </p:column>  
-			  
-			    <p:column>  
-			        <f:facet name="header">  
-			            <h:outputText value="Data Adoção" />  
-			        </f:facet>  
-			        <h:outputText value="#{h.dataAdocao}"/>  
-			    </p:column>  
-			  
-			    <p:column>  
+	 		<p:dataTable id="tbl" var="h" value="#{relatorioMB.historicoLivroAdotado}" paginator="true" rows="10">
+			    <p:column>
 			        <f:facet name="header">
-			            <h:outputText value="Escola" />  
-			        </f:facet>  
-			        <h:outputText value="#{h.escolaDTO.nome}" />  
-			    </p:column>  
+			            <h:outputText value="Livro"/>
+			        </f:facet>
+			        <h:outputText value="#{h.livroDTO.nome}"/>
+			    </p:column>
 			  
-			    <p:column>  
-			        <f:facet name="header">  
-			            <h:outputText value="Quantidade" />  
-			        </f:facet>  
-			        <h:outputText value="#{h.quantidadeAluno}" />  
-			    </p:column>  
+			    <p:column>
+			        <f:facet name="header">
+			            <h:outputText value="Data Adoção"/>
+			        </f:facet>
+			        <h:outputText value="#{h.dataAdocao}">
+						<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy"/>
+					</h:outputText>
+			    </p:column>
+			  
+			    <p:column>
+			        <f:facet name="header">
+			            <h:outputText value="Escola"/>
+			        </f:facet>
+			        <h:outputText value="#{h.escolaDTO.nome}"/>
+			    </p:column>
+			  
+			    <p:column>
+			        <f:facet name="header">
+			            <h:outputText value="Quantidade"/>
+			        </f:facet>
+			        <h:outputText value="#{h.quantidadeAluno}"/>
+			    </p:column>
 			</p:dataTable>
  		
- 			<h:panelGrid columns="2">  
-			    <p:panel header="Export All Data">  
-			        <h:commandLink>  
-			            <p:graphicImage value="/img/excel.png" />  
-			            <p:dataExporter type="xls" target="tbl" fileName="historico_livro_adotado" />  
-			        </h:commandLink>  
+ 			<h:panelGrid columns="2">
+			    <p:panel header="Export All Data">
+			        <h:commandLink>
+			            <p:graphicImage value="/img/excel.png" />
+			            <p:dataExporter type="xls" target="tbl" fileName="historico_livro_adotado" />
+			        </h:commandLink>
 			  
-			        <h:commandLink>  
-			            <p:graphicImage value="/img/pdf.png" />  
-			            <p:dataExporter type="pdf" target="tbl" fileName="historico_livro_adotado"/>  
-			        </h:commandLink>  
-			          
-			        <h:commandLink>  
-			            <p:graphicImage value="/img/csv.png" />  
-			            <p:dataExporter type="csv" target="tbl" fileName="historico_livro_adotado" />  
-			        </h:commandLink>  
-			          
-			        <h:commandLink>  
-			            <p:graphicImage value="/img/xml.png" />  
-			            <p:dataExporter type="xml" target="tbl" fileName="historico_livro_adotado" />  
-			        </h:commandLink>  
-			    </p:panel>  
-			      
-			    <p:panel header="Export Page Data">  
-			        <h:commandLink>  
-			            <p:graphicImage value="/img/excel.png" />  
-			            <p:dataExporter type="xls" target="tbl" fileName="historico_livro_adotado" pageOnly="true"/>  
-			        </h:commandLink>  
+			        <h:commandLink>
+			            <p:graphicImage value="/img/pdf.png" />
+			            <p:dataExporter type="pdf" target="tbl" fileName="historico_livro_adotado"/>
+			        </h:commandLink>
+			        
+			        <h:commandLink>
+			            <p:graphicImage value="/img/csv.png" />
+			            <p:dataExporter type="csv" target="tbl" fileName="historico_livro_adotado" />
+			        </h:commandLink>
+			        
+			        <h:commandLink>
+			            <p:graphicImage value="/img/xml.png" />
+			            <p:dataExporter type="xml" target="tbl" fileName="historico_livro_adotado" />
+			        </h:commandLink>
+			    </p:panel>
+			    
+			    <p:panel header="Export Page Data">
+			        <h:commandLink>
+			            <p:graphicImage value="/img/excel.png" />
+			            <p:dataExporter type="xls" target="tbl" fileName="historico_livro_adotado" pageOnly="true"/>
+			        </h:commandLink>
 			  
-			        <h:commandLink>  
-			            <p:graphicImage value="/img/pdf.png" />  
-			            <p:dataExporter type="pdf" target="tbl" fileName="historico_livro_adotado" pageOnly="true"/>  
-			        </h:commandLink>  
-			          
-			        <h:commandLink>  
-			            <p:graphicImage value="/img/csv.png" />  
-			            <p:dataExporter type="csv" target="tbl" fileName="historico_livro_adotado" pageOnly="true"/>  
-			        </h:commandLink>  
-			          
-			        <h:commandLink>  
-			            <p:graphicImage value="/img/xml.png" />  
-			            <p:dataExporter type="xml" target="tbl" fileName="historico_livro_adotado" pageOnly="true"/>  
-			        </h:commandLink>  
-			    </p:panel>  
-			</h:panelGrid>  
+			        <h:commandLink>
+			            <p:graphicImage value="/img/pdf.png" />
+			            <p:dataExporter type="pdf" target="tbl" fileName="historico_livro_adotado" pageOnly="true"/>
+			        </h:commandLink>
+			        
+			        <h:commandLink>
+			            <p:graphicImage value="/img/csv.png" />
+			            <p:dataExporter type="csv" target="tbl" fileName="historico_livro_adotado" pageOnly="true"/>
+			        </h:commandLink>
+			        
+			        <h:commandLink>
+			            <p:graphicImage value="/img/xml.png" />
+			            <p:dataExporter type="xml" target="tbl" fileName="historico_livro_adotado" pageOnly="true"/>
+			        </h:commandLink>
+			    </p:panel>
+			</h:panelGrid>
  		
  		</h:form>
- 	</ui:define>  
-</ui:decorate>  
+ 	</ui:define>
+</ui:decorate>
 </html>

@@ -33,22 +33,15 @@
 				<p:inputText id="alunos" value="#{escolaLivroMB.escolaLivroDTO.quantidadeAluno}" required="true" requiredMessage="Quantidade não informada."/>
 
 				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<center>
-					<p:commandButton value="Vincular" icon="ui-icon-check"
-						actionListener="#{escolaLivroMB.add}"
-						update=":messages,:growl,panel,vinculo" />
-				</center>
+				<p:commandButton value="Vincular" icon="ui-icon-check"
+					actionListener="#{escolaLivroMB.add}"
+					update=":messages,:growl,panel,vinculo" />
 
 			</h:panelGrid>
+			
+			<br/>
 
-
-			<p:dataTable id="vinculo" var="el" value="#{escolaLivroMB.listEscolaLivroDTO}" rowKey="#{el.id}" style="width:1500px">
+			<p:dataTable id="vinculo" var="el" value="#{escolaLivroMB.listEscolaLivroDTO}" rowKey="#{el.id}" >
 
 				<p:column headerText="Cód. Escola" style="width:50px">
 					<h:outputText value="#{el.escolaDTO.id}" />
@@ -80,32 +73,30 @@
 					</h:outputText>
 				</p:column>
 				
-				 <p:column headerText="Ações" style="width:10px">  
+				 <p:column headerText="Ações" style="width:10px">
 
-			       <!-- Deletar -->       
-	               <p:commandButton id="excluir" icon="ui-icon-trash" title="Desvincular" update=":display" onclick="PF('dlg').show();" actionListener="#{escolaLivroMB.edit}" immediate="true">  
-	           	   	<f:setPropertyActionListener value="#{el}"  target="#{escolaLivroMB.escolaLivroDTO}"/> 
-	               </p:commandButton> 
-		                
-		        </p:column>  
-
-			</p:dataTable>
-
-			<p:panelGrid columns="3" style="width:1500px">
-
-				<f:facet name="footer">
+			       <!-- Deletar -->
+	               <p:commandButton id="excluir" icon="ui-icon-trash" title="Desvincular" update=":growl" onclick="PF('dlg').show();" actionListener="#{escolaLivroMB.edit}" immediate="true">
+	           	   		<f:setPropertyActionListener value="#{el}" target="#{escolaLivroMB.escolaLivroDTO}"/>
+	               </p:commandButton>
+		           
+		        </p:column>
+		        
+		        <f:facet name="footer">
 					<div align="right">
 						<p:commandButton value="Cancelar" icon="ui-icon-extlink"
 							action="/layoutComplex.xhtml?faces-redirect=true"
 							immediate="true" update=":center" />
 					</div>
 				</f:facet>
-			</p:panelGrid>
+
+			</p:dataTable>
+
 		</h:form>
 		
 		<p:dialog header="Apagar?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true">
 		  <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
-		    <h:outputText value="Deseja realmente excluir  #{escolaLivroMB.escolaLivroDTO.id}?" />
+		    <h:outputText value="Deseja realmente excluir?" />
 		    <f:facet name="footer">
 			 	<p:commandButton value="Excluir" update=":growl,form:panel,form:vinculo"  icon="ui-icon-close" actionListener="#{escolaLivroMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />
 			 	<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()" immediate="true" />                 

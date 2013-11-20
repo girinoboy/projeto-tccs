@@ -3,7 +3,7 @@ package br.com.mb;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import br.com.dao.EscolaDAO;
@@ -14,7 +14,7 @@ import br.com.dto.EscolaLivroDTO;
 import br.com.dto.LivroDTO;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class EscolaLivroMB extends GenericoMB implements ModeloMB{
 
 	private EscolaLivroDTO escolaLivroDTO = new EscolaLivroDTO();
