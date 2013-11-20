@@ -33,11 +33,15 @@
 		                 action="/consultarlivro.xhtml?faces-redirect=true"
 		                 immediate="true" update=":center" icon="ui-icon-search" title="Consultar" >   
 		                </p:commandButton> 
-		        <!-- Alterar -->        
-		                <p:commandButton id="selectButton2"  oncomplete="PF('carDialog').show()" icon="ui-icon-pencil" title="Alterar">  
-		                <f:setPropertyActionListener value="#{livro}" target="#{tableBean.selectedlivro}" /> 
-		                </p:commandButton> 
-		        <!-- Imprimir -->        
+		        <!-- Alterar -->
+					<p:commandButton id="selectButton2"
+						actionListener="#{livroMB.edit}"
+						action="/incluirLivro.xhtml?faces-redirect=true" immediate="true"
+						update=":center" icon="ui-icon-pencil" title="Alterar">
+						<f:setPropertyActionListener value="#{livro}"
+							target="#{livroMB.livroDTO}" />
+					</p:commandButton>
+					<!-- Imprimir -->        
 		                <p:commandButton id="selectButton3"   oncomplete="PF('carDialog').show()" icon="ui-icon-print" title="Imprimir">  
 		                <f:setPropertyActionListener value="#{livro}" target="#{tableBean.selectedlivro}" /> 
 		                </p:commandButton> 

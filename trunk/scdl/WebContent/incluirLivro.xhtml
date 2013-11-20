@@ -8,6 +8,7 @@
 <ui:decorate template="layoutComplex.xhtml">
 	<ui:define name="centro">
 		<h:form id="form1">
+			<h:inputHidden id="idLivro" value="#{livroMB.livroDTO.id}" />
 			<center>
 				<p:panelGrid id="panel" columns="2" style="width:1000px">
 					<f:facet name="header">  
@@ -46,7 +47,7 @@
 							<p:commandButton value="Cancelar" icon="ui-icon-closethick"
 								action="/livro.xhtml?faces-redirect=true" immediate="true"
 								update=":center" />
-							<p:commandButton value="Incluir" icon="ui-icon-check" actionListener="#{livroMB.add}" update=":messages,:growl,panel" />
+							<p:commandButton value="#{livroMB.livroDTO.id ne null ? 'Alterar': 'Incluir'}" icon="ui-icon-check" actionListener="#{livroMB.add}" update=":messages,:growl,panel" />
 						</div>
 					</f:facet>
 				</p:panelGrid>

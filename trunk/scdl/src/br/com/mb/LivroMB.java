@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import br.com.dao.LivroDAO;
@@ -18,6 +20,7 @@ import br.com.dto.UsuarioDTO;
  *
  */
 @ManagedBean
+@SessionScoped
 public class LivroMB extends GenericoMB implements ModeloMB{
 	
 	private LivroDTO livroDTO = new LivroDTO();
@@ -41,16 +44,27 @@ public class LivroMB extends GenericoMB implements ModeloMB{
 		livroDAO.save(livroDTO);
 		addMessage("salvo");
 		livroDTO = new LivroDTO();
- 		
+		listLivroDTO = livroDAO.list();
+		FacesContext.getCurrentInstance().getExternalContext().redirect("livro.xhtml");
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+			System.out.println(livroDTO);
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			livroDAO.delete(livroDTO);
+			listLivroDTO = livroDAO.list();
+			addMessage("Livro excluído com sucesso.");
+		} catch (Exception e) {
+			if(e.getCause().toString().toUpperCase().contains("ESCOLA_DIVULGADOR")){
+				addMessage("Não excluido. Existe um divuilgador vinculado");
+			}else if(e.getCause().toString().toLowerCase().contains("escola_livro")){
+				addMessage("Não excluido. Existe um livro vinculado");
+			}
+			e.printStackTrace();
+		}
 		
 	}
 

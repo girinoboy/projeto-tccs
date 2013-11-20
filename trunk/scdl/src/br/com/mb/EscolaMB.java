@@ -13,7 +13,6 @@ import javax.faces.event.ActionEvent;
 
 import br.com.dao.EscolaDAO;
 import br.com.dto.EscolaDTO;
-import br.com.dto.EscolaTurnoDTO;
 import br.com.dto.TurnoDTO;
 import br.com.utility.TurnoConverter;
 
@@ -62,7 +61,7 @@ public class EscolaMB extends GenericoMB implements ModeloMB{
 			//escolaDTO = new EscolaDTO();
 			listEscola = escolaDAO.list();
 			listTurnoDTO = TurnoConverter.turnoDB;
-			FacesContext.getCurrentInstance().getExternalContext().redirect("escola.xhtml");  
+			FacesContext.getCurrentInstance().getExternalContext().redirect("escola.xhtml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

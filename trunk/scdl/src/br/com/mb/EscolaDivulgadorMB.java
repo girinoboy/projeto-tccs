@@ -3,6 +3,7 @@ package br.com.mb;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import br.com.dao.EscolaDAO;
@@ -13,6 +14,7 @@ import br.com.dto.EscolaDivulgadorDTO;
 import br.com.dto.UsuarioDTO;
 
 @ManagedBean
+@SessionScoped
 public class EscolaDivulgadorMB extends GenericoMB implements ModeloMB{
 	
 	private EscolaDivulgadorDTO escolaDivulgadorDTO = new EscolaDivulgadorDTO();
@@ -50,9 +52,15 @@ public class EscolaDivulgadorMB extends GenericoMB implements ModeloMB{
 	}
 
 	@Override
-	public void del(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void del(ActionEvent actionEvent){
+		try {
+			escolaDivulgadorDAO.delete(escolaDivulgadorDTO);
+			listEscolaDivulgador = escolaDivulgadorDAO.list();
+			addMessage("registro apagado");
+		} catch (Exception e) {
+			addMessage("erro ao apagar registro");
+			e.printStackTrace();
+		}
 	}
 
 	public EscolaDivulgadorDTO getEscolaDivulgadorDTO() {

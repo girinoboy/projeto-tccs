@@ -66,7 +66,7 @@
 		                </p:commandButton> 
 		        <!-- Deletar -->       
 		                <p:commandButton id="selectButton4" icon="ui-icon-trash" title="Apagar" update=":growl" onclick="PF('dlg').show();" actionListener="#{escolaMB.edit}">  
-		            	<f:setPropertyActionListener value="#{escola}" target="#{escolaMB.escolaDTO}"/> 
+		            		<f:setPropertyActionListener target="#{escolaMB.escolaDTO}" value="#{escola}" /> 
 		                </p:commandButton> 
 		                
 		        </p:column>  
