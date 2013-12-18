@@ -1,5 +1,5 @@
 <classloading xmlns="urn:jboss:classloading:1.0"
-    name="rds.war"
+    name="scdl.war"
     parent-first="false"
     domain="DefaultDomain"
     top-level-classloader="true"
