@@ -1,0 +1,121 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="layoutElement.xhtml">
+	<ui:define name="centro">
+		
+<h:head>
+	<title>Marcação de consulta</title>
+	<script type="text/javascript">
+		PrimeFaces.locales['pt_BR'] = {
+		                closeText: 'Fechar',
+		                prevText: 'Anterior',
+		                nextText: 'Próximo',
+		                currentText: 'Começo',
+		                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Des'],
+		                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+		                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+		                dayNamesMin: ['D','S','T','Q','Q','S','S'],
+		                weekHeader: 'Semana',
+		                firstDay: 1,
+		                isRTL: false,
+		                showMonthAfterYear: false,
+		                yearSuffix: '',
+		                timeOnlyTitle: 'Só Horas',
+		                timeText: 'Tempo',
+		                hourText: 'Hora',
+		                minuteText: 'Minuto',
+		                secondText: 'Segundo',
+		                currentText: 'Data Atual',
+		                ampm: false,
+		                month: 'Mês',
+		                week: 'Semana',
+		                day: 'Dia',
+		                allDayText : 'Todo Dia'
+		            };
+		</script>
+</h:head>
+	<h:body>
+		<h:form> 
+	
+			<p:panel id="panel" header="#{msgs.filter}">
+				 <p:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				 
+				 	<p:outputLabel value="#{msgs.user}" for="basicPojo"/>
+				 	<p:autoComplete value="#{marcarConsultaMB.filtroAgendaDTO.usuarioDTO}" id="basicPojo" completeMethod="#{autoCompleteMB.completarUsuario}"  
+		                        var="u" itemLabel="#{u.nome}" itemValue="#{u}" converter="usuario" forceSelection="true" required="false"/>
+				 	
+			        <p:outputLabel for="hd" value="#{msgs.place}" />
+					<p:selectOneMenu value="#{marcarConsultaMB.filtroAgendaDTO.localDTO}" id="hd" effect="fade" converter="local">
+			            <f:selectItem itemLabel="#{msgs.select}" itemValue="" />
+			            <f:selectItems value="#{localMB.listLocal}" var="local" itemLabel="#{local.nome}" itemValue="#{local}"/>
+			        </p:selectOneMenu> 
+			        
+			        <f:facet name="footer">
+			        	<p:commandButton value="#{msgs.reset}" update="panel,:growl" actionListener="#{marcarConsultaMB.limpar}"/>
+			        	<p:commandButton value="#{msgs.filter}" actionListener="#{marcarConsultaMB.filtrar}" id="withIcon"   
+            					update="panel,:growl" icon="ui-icon-disk" oncomplete="PF('myschedule').update();"/>
+            			<p:commandButton value="#{msgs.myTags}" actionListener="#{marcarConsultaMB.mySchedule}" id="withIcon2"   
+            					update="panel,:growl" icon="ui-icon-gear" oncomplete="PF('myschedule').update();"/>
+            					
+			        </f:facet>
+				 </p:panelGrid>
+			</p:panel>
+			<br/>
+		</h:form>
+		
+		<h:form id="formS">
+		<p:schedule id="s1" value="#{marcarConsultaMB.lazyEventModel}" widgetVar="myschedule" locale="#{localeController.currentLocale}"> 
+     
+            <p:ajax event="dateSelect" listener="#{marcarConsultaMB.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show()" /> 
+            <p:ajax event="eventSelect" listener="#{marcarConsultaMB.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show()" /> 
+            <p:ajax event="eventMove" listener="#{marcarConsultaMB.onEventMove}" update=":growl" /> 
+            <p:ajax event="eventResize" listener="#{marcarConsultaMB.onEventResize}" update=":growl" /> 
+     
+        </p:schedule> 
+     
+        <p:dialog widgetVar="eventDialog" header="#{msgs.eventDetails}" showEffect="clip" hideEffect="clip"> 
+            <h:panelGrid id="eventDetails" columns="2"> 
+            	<p:outputLabel value="#{msgs.user}" for="basicPojo"/>
+			 	<p:autoComplete value="#{marcarConsultaMB.agendaDTO.usuarioDTO}" id="basicPojo" completeMethod="#{autoCompleteMB.completarUsuario}"  
+	                        var="u" itemLabel="#{u.nome}" itemValue="#{u}" converter="usuario" forceSelection="true" required="true"/>
+		                        
+            	<p:outputLabel for="hd" value="#{msgs.place}" />
+				<p:selectOneMenu value="#{marcarConsultaMB.agendaDTO.localDTO}" id="hd" effect="fade" converter="local" required="true">
+		            <f:selectItem itemLabel="#{msgs.select}" itemValue="" />
+		            <f:selectItems value="#{localMB.listLocal}" var="local" itemLabel="#{local.nome}" itemValue="#{local}"/>
+		        </p:selectOneMenu>
+            	
+                <h:outputLabel for="from" value="#{msgs.from}:" /> 
+                <p:inputMask id="from" value="#{marcarConsultaMB.agendaDTO.dataHoraI}" mask="99/99/9999 99:99"> 
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" /> 
+                </p:inputMask> 
+     
+                <h:outputLabel for="to" value="#{msgs.to}:" /> 
+                <p:inputMask id="to" value="#{marcarConsultaMB.agendaDTO.dataHoraF}" mask="99/99/9999 99:99"> 
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" /> 
+                </p:inputMask> 
+     
+                <h:outputLabel for="allDay" value="#{msgs.allDay}:" /> 
+                <h:selectBooleanCheckbox id="allDay" value="#{marcarConsultaMB.agendaDTO.allDay}" /> 
+                
+                <h:outputLabel for="observation" value="#{msgs.observation}:" /> 
+                <p:inputTextarea id="observation" value="#{marcarConsultaMB.agendaDTO.obs}" />
+                
+                <f:facet name="footer">
+	                <p:commandButton type="reset" value="#{msgs.reset}" /> 
+	                <p:commandButton value="#{msgs.save}" actionListener="#{marcarConsultaMB.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" rendered="#{marcarConsultaMB.canSave}"/> 
+	                <p:commandButton value="#{msgs.delete}" actionListener="#{marcarConsultaMB.delEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" rendered="#{marcarConsultaMB.canDel}"/>
+                </f:facet>
+            </h:panelGrid> 
+        </p:dialog> 
+     
+    </h:form>
+	</h:body>
+	</ui:define>
+</ui:decorate>
+</html>

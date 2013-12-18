@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:decorate template="layoutElement.xhtml">
+	<ui:define id="centro" name="centro">
+ 		<h:form id="form">
+ 			<h:panelGrid columns="3">
+		        <p:tree id="tree1" value="#{controleAcessoMB.root}" var="node"  selectionMode="single" selection="#{menuMB.selectedNode}"  
+		                draggable="true" droppable="true" dragdropScope="demo">
+		            <p:ajax event="dragdrop" listener="#{menuMB.onDragDrop}" update=":growl" />
+		            <p:treeNode>
+		                <h:outputText value="#{node}" />
+		            </p:treeNode>
+		        </p:tree>
+		  
+		        <p:graphicImage alt="Transfer" url="/img/transfer.png" />
+		  
+		        <p:tree id="tree2" value="#{menuMB.root2}" var="node" selectionMode="single" selection="#{menuMB.selectedNode2}" 
+		                draggable="true" droppable="true" dragdropScope="demo">
+		            <p:ajax event="dragdrop" listener="#{menuMB.onDragDrop}" update=":growl" />
+		            <p:treeNode>
+		                <h:outputText value="#{node}" />
+		            </p:treeNode>
+		        </p:tree>
+		    </h:panelGrid>
+ 		</h:form>
+ 	</ui:define>
+</ui:decorate>
+</html>
