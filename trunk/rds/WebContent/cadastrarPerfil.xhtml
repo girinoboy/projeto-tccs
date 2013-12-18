@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:decorate template="layoutElement.xhtml">  
+	<ui:define id="centro" name="centro"> 
+ 		<h:form id="form">
+ 		
+ 			<p:panel id="panel" header="#{msgs.profileData}">
+		    	<h:inputHidden id="idPerfil" value="#{perfilMB.perfilDTO.id}" />
+		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		        	<h:outputLabel for="nome" value="#{msgs.name}: *" />
+		            <p:inputText id="nome" size="80"
+		                value="#{perfilMB.perfilDTO.nome}" required="true" label="Nome">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            <p:watermark for="nome" value="#{msgs.fullName}" />
+		            <p:message for="nome" />
+		            
+		            <f:facet name="footer">
+			          	<p:commandButton value="#{msgs.save}" actionListener="#{perfilMB.add}" id="withIcon"   
+			            update=":growl,panel,vinculo" icon="ui-icon-disk" />
+			            <p:commandButton value="#{msgs.reset}" type="reset" /> 
+			            <p:commandButton value="#{msgs.back}" action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"/> 
+		  			</f:facet>
+		        </h:panelGrid>  
+		    </p:panel>
+		    
+		    <br/>
+
+			<p:dataTable id="vinculo" var="perfil" value="#{perfilMB.listPerfil}" rowKey="#{perfil.id}" >
+
+				<p:column headerText="Id" style="width:50px">
+					<h:outputText value="#{perfil.id}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.name}" style="width:400px">
+					<h:outputText value="#{perfil.nome}" />
+				</p:column>
+				
+				<p:column headerText="#{msgs.action}" style="width:10px">
+
+			       <!-- Deletar -->
+	               <p:commandButton id="excluir" icon="ui-icon-trash" title="#{msgs.delete}" update=":growl" onclick="PF('dlg').show();" actionListener="#{perfilMB.edit}" immediate="true">
+	           	   		<f:setPropertyActionListener value="#{perfil}" target="#{perfilMB.perfilDTO}"/>
+	               </p:commandButton>
+		           
+		        </p:column>
+		        
+			</p:dataTable>
+			
+ 		</h:form>
+ 		
+ 		<p:dialog header="#{msgs.delete}?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true">
+		  <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+		    <h:outputText value="#{msgs.askDelete}" />
+		    <f:facet name="footer">
+			 	<p:commandButton value="#{msgs.delete}" update=":growl,form:panel,form:vinculo"  icon="ui-icon-close" actionListener="#{perfilMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />
+			 	<p:commandButton value="#{msgs.cancel}" oncomplete="PF('dlg').hide()" immediate="true" />                 
+			</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+ 	</ui:define>  
+</ui:decorate>  
+</html>

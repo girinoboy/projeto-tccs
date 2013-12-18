@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view locale="#{localeController.currentLocale}">
+<h:head>
+	<title>LayoutElement</title>
+</h:head>
+
+<h:body>
+	<p:growl id="growl" autoUpdate="true" sticky="true" showDetail="true"/>		
+    <p:messages id="messages" autoUpdate="true" showDetail="true"/>
+	<p:layout style="min-width:400px;min-height:600px;" id="layout">
+		<p:layoutUnit position="west" resizable="true" size="250" minSize="40" maxSize="500">
+			<h:form>
+	        <h3>#{msgs.programmaticMenu}</h3>
+	   		<p:menu id="menuPrincipal" model="#{menuMB.model}"/>
+	   		</h:form>
+    	</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+        	<ui:insert id="centro" name="centro">
+<!--      		O que estiver aqui será substituido!   -->
+            </ui:insert>
+   		</p:layoutUnit>
+	</p:layout>
+
+</h:body>
+</f:view>
+</html>
