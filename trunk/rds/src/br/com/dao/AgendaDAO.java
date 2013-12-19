@@ -69,11 +69,13 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 					.add(Restrictions.between("dataHoraI",start,end)).list();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			HibernateUtility.closeSession();
 		}
 		return list;
 	}
 
-	public List<AgendaDTO> consultarEntreDatas(Date start, Date end,	UsuarioDTO userSession) {
+	public List<AgendaDTO> consultarEntreDatas(Date start, Date end, UsuarioDTO userSession) {
 		List<AgendaDTO> list =null;
 		try{
 			list = HibernateUtility.getSession().createCriteria(AgendaDTO.class)
@@ -81,8 +83,33 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 					.add(Restrictions.between("dataHoraI",start,end)).list();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			HibernateUtility.closeSession();
 		}
 		return list;
+	}
+
+	public Boolean verificaPeriodoImpeditivo(AgendaDTO agendaDTO) {
+		List<AgendaDTO> list =null;
+		try{
+			list = HibernateUtility.getSession().createCriteria(AgendaDTO.class)
+					.add(Restrictions.eq("localDTO.id",agendaDTO.getLocalDTO().getId()))
+					.add(Restrictions.lt("dataHoraI", agendaDTO.getDataHoraF()))//<
+					.add(Restrictions.gt("dataHoraF",agendaDTO.getDataHoraI()))//>
+					.list();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			HibernateUtility.closeSession();
+		}
+		
+		if(list.isEmpty()){
+			return false;
+		}else{
+			return true;
+		}
+		
+		
 	}
 
 }

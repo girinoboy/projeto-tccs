@@ -28,6 +28,7 @@ import org.primefaces.model.ScheduleModel;
 import br.com.dao.AgendaDAO;
 import br.com.dto.AgendaDTO;
 import br.com.dto.UsuarioDTO;
+import br.com.utility.Constantes;
 
 /**
  * @author marcleonio.medeiros
@@ -43,39 +44,45 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Date date1;
 	//HorarioAtendimentoSubUnidadeDAO horarioAtendimentoSubUnidadeDAO;
-//	private EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
-//	private ConsultaDAO consultaDAO = new ConsultaDAO();
-	private List<UsuarioDTO> listProfissional;
-//	private HorarioAtendimentoSubUnidadeDAO horarioAtendimentoSubUnidadeDAO = new HorarioAtendimentoSubUnidadeDAO();
+	//	private EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
+	//	private ConsultaDAO consultaDAO = new ConsultaDAO();
+	//	private List<UsuarioDTO> listProfissional;
+	//	private HorarioAtendimentoSubUnidadeDAO horarioAtendimentoSubUnidadeDAO = new HorarioAtendimentoSubUnidadeDAO();
 
 	private ScheduleModel eventModel;
 	private ScheduleModel lazyEventModel;
 	private ScheduleEvent event = new DefaultScheduleEvent();
-	
+
 	private AgendaDAO agendaDAO = new AgendaDAO();
 	private AgendaDTO agendaDTO = new AgendaDTO();
 	private AgendaDTO filtroAgendaDTO = new AgendaDTO();
-	
+
 	/**
 	 * 
 	 */
 	@SuppressWarnings("serial")
 	public AgendamentoMB() {
-//		FacesContext fc = FacesContext.getCurrentInstance();
-//		rb = ResourceBundle.getBundle("br.com.messages.messages",fc.getViewRoot().getLocale());
-		
-//		listTipoConsulta = TipoConsultaConverter.listTipoConsulta;//populaTipoConsulta();
-//		HorarioAtendimentoSubUnidadeDTO hasu = new HorarioAtendimentoSubUnidadeDTO();
-//		hasu.getUnidadeSaudeDTO().setId(1);
-//		hasu.setDataTermino(new Date());
+		//		FacesContext fc = FacesContext.getCurrentInstance();
+		//		rb = ResourceBundle.getBundle("br.com.messages.messages",fc.getViewRoot().getLocale());
+
+		//		listTipoConsulta = TipoConsultaConverter.listTipoConsulta;//populaTipoConsulta();
+		//		HorarioAtendimentoSubUnidadeDTO hasu = new HorarioAtendimentoSubUnidadeDTO();
+		//		hasu.getUnidadeSaudeDTO().setId(1);
+		//		hasu.setDataTermino(new Date());
+		carregaAgenda();
+
+		//		listProfissional = new ArrayList<UsuarioDTO>();
+	}
+
+
+	private void carregaAgenda(){
 		try {
-//			listEspecialidade = especialidadeDAO.consultarEspecialidadesUnidadeSaude(hasu);
-//			if(consultaDTO !=null){
-//				listHorarioAtendimento = horarioAtendimentoSubUnidadeDAO.consultarHorariosDisponiveis(consultaDTO);
-//			}else{
-//				consultaDTO = new ConsultaDTO();
-//			}
 			lazyEventModel = new LazyScheduleModel() {
+
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 6760142212935532934L;
 
 				@Override
 				public void loadEvents(Date start, Date end) {
@@ -96,12 +103,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		listProfissional = new ArrayList<UsuarioDTO>();
 	}
-
-
-
 
 	public void handleDateSelect(SelectEvent event) {  
 		FacesContext facesContext = FacesContext.getCurrentInstance();  
@@ -111,9 +113,9 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 
 	public void addEvent(ActionEvent actionEvent)  {
 		try {
-//			agendaDTO.setDataHoraI(event.getStartDate());
-//			agendaDTO.setDataHoraF(event.getEndDate());
-//			consultaDTO.setObs(event.getTitle());
+			//			agendaDTO.setDataHoraI(event.getStartDate());
+			//			agendaDTO.setDataHoraF(event.getEndDate());
+			//			consultaDTO.setObs(event.getTitle());
 			//event = new DefaultScheduleEvent(agendaDTO.getLocalDTO().getNome(),agendaDTO.getDataHoraI(),agendaDTO.getDataHoraF());
 			//event.setId(agendaDTO.getId().toString());
 			if(event.getId() == null){
@@ -124,10 +126,12 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 				lazyEventModel.updateEvent(event);
 				agendaDTO.setId(Integer.valueOf(event.getId()));
 			}
-
-			agendaDTO = agendaDAO.save(agendaDTO);
-//			agendaDTO.setId(agendaDTO.getId());
-			event = new DefaultScheduleEvent();
+			if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
+				agendaDTO = agendaDAO.save(agendaDTO);
+				event = new DefaultScheduleEvent();
+			}else{
+				addMessage(rb.getString("msgPeriodDetracts"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -166,7 +170,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 
 		addMessage(message);
 	}
-	
+
 	public void filtrar(ActionEvent actionEvent){
 		lazyEventModel = new LazyScheduleModel() { 
 			private static final long serialVersionUID = 1L;
@@ -181,20 +185,21 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 					addEvent(event);
 					event.setId(agenda.getId().toString());
 				}
-				
+
 			}
 		};
 		if(actionEvent.getPhaseId().equals(PhaseId.INVOKE_APPLICATION)){
 			System.out.println(lazyEventModel);
-		//	filtroAgendaDTO = new AgendaDTO();
+			//	filtroAgendaDTO = new AgendaDTO();
 		}else{
 			System.out.println(2);
 		}
-		addMessage("filtrar");
+		addMessage(rb.getString("filter"));
 	}
-	
+
 	public void limpar(ActionEvent actionEvent){
 		filtroAgendaDTO = new AgendaDTO();
+		carregaAgenda();
 	}
 	public void mySchedule(ActionEvent actionEvent){
 		lazyEventModel = new LazyScheduleModel() {
@@ -217,30 +222,30 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 		filtroAgendaDTO = new AgendaDTO();
 		addMessage("minha agenda");
 	}
-	
+
 	public void delEvent(ActionEvent actionEvent) throws Exception{
 		agendaDAO.delete(agendaDTO);
 		addMessage("excluirdo");
 	}
-	
+
 	public Boolean getCanDel(){
-		if(agendaDTO.getUsuarioDTO()!=null && agendaDTO.getUsuarioDTO().getPerfilDTO().getNome().equals("administrador")){
+		if(getUserSession()!=null && getUserSession().getPerfilDTO().getId().equals(Constantes.ADMINISTRADOR)){
 			return true;
 		}else if(getUserSession().equals(agendaDTO.getUsuarioDTO())){
 			return true;
 		}else
 			return false;
 	}
-	
+
 	public Boolean getCanSave(){
-		if(agendaDTO.getUsuarioDTO()==null || agendaDTO.getUsuarioDTO().getPerfilDTO().getNome().equals("administrador")){
+		if(agendaDTO.getUsuarioDTO()==null || getUserSession().getPerfilDTO().getId().equals(Constantes.ADMINISTRADOR)){
 			return true;
 		}else if(getUserSession().equals(agendaDTO.getUsuarioDTO())){
 			return true;
 		}else
 			return false;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -256,23 +261,20 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 		this.date1 = date1;  
 	}
 
-
-
-
-	/**
-	 * @return the listProfissional
-	 */
-	public List<UsuarioDTO> getListProfissional() {
-		return listProfissional;
-	}
-
-
-	/**
-	 * @param listProfissional the listProfissional to set
-	 */
-	public void setListProfissional(List<UsuarioDTO> listProfissional) {
-		this.listProfissional = listProfissional;
-	}
+	//	/**
+	//	 * @return the listProfissional
+	//	 */
+	//	public List<UsuarioDTO> getListProfissional() {
+	//		return listProfissional;
+	//	}
+	//
+	//
+	//	/**
+	//	 * @param listProfissional the listProfissional to set
+	//	 */
+	//	public void setListProfissional(List<UsuarioDTO> listProfissional) {
+	//		this.listProfissional = listProfissional;
+	//	}
 
 
 	/**

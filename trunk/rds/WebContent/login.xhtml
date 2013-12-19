@@ -43,11 +43,11 @@
 	            <h:panelGrid columns="2" cellpadding="5">
 	                <h:outputLabel for="username" value="#{msgs.userName}:" />
 	                <h:inputText value="#{loginManagedBean.usuarioDTO.usuario}"
-	                        id="username" required="true" label="username" />
+	                        id="username" required="true" label="#{msgs.userName}" />
 	                
 	                <h:outputLabel for="password" value="#{msgs.password}:" />
 	                <h:inputSecret value="#{loginManagedBean.usuarioDTO.senha}"
-	                        id="password" required="true" label="password" />
+	                        id="password" required="true" label="#{msgs.password}" />
 	                  			<p:tab/><a href="#">#{msgs.askPassword}</a>
 	                <f:facet name="footer">
 	                    <div align="center"><p:commandButton id="loginButton" value="#{msgs.login}" update=":growl"
