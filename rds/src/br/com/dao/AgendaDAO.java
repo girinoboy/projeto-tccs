@@ -96,6 +96,7 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 					.add(Restrictions.eq("localDTO.id",agendaDTO.getLocalDTO().getId()))
 					.add(Restrictions.lt("dataHoraI", agendaDTO.getDataHoraF()))//<
 					.add(Restrictions.gt("dataHoraF",agendaDTO.getDataHoraI()))//>
+					.add(Restrictions.ne("id",agendaDTO.getId()))
 					.list();
 		}catch(Exception e){
 			e.printStackTrace();

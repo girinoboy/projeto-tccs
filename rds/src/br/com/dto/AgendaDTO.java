@@ -18,12 +18,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.envers.Audited;
+
 /**
  * @author marcleonio.medeiros
  *
  */
 @Entity
+@Audited
 @Table(name="agenda")
+@DynamicUpdate(value=true)
 public class AgendaDTO {
 	
 	@Id 

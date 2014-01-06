@@ -5,9 +5,8 @@ package br.com.mb;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -27,7 +26,6 @@ import org.primefaces.model.ScheduleModel;
 
 import br.com.dao.AgendaDAO;
 import br.com.dto.AgendaDTO;
-import br.com.dto.UsuarioDTO;
 import br.com.utility.Constantes;
 
 /**
@@ -60,7 +58,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 	/**
 	 * 
 	 */
-	@SuppressWarnings("serial")
+//	@SuppressWarnings("serial")
 	public AgendamentoMB() {
 		//		FacesContext fc = FacesContext.getCurrentInstance();
 		//		rb = ResourceBundle.getBundle("br.com.messages.messages",fc.getViewRoot().getLocale());
@@ -89,7 +87,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 					clear();
 					//List<AgendaDTO> list =agendaDAO.consultarEntreDatas(start, end);
 					for(AgendaDTO agenda:agendaDAO.consultarEntreDatas(start, end)){
-						event = new DefaultScheduleEvent(agenda.getLocalDTO().getNome(),agenda.getDataHoraI(),agenda.getDataHoraF());
+						event = new DefaultScheduleEvent(agenda.getLocalDTO().getNome(),agenda.getDataHoraI(),agenda.getDataHoraF(),agenda.getAllDay().booleanValue());
 						//event.setAllDay(agenda.getAllDay());
 						event.setId(agenda.getId().toString());
 						addEvent(event);
@@ -119,6 +117,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 			//event = new DefaultScheduleEvent(agendaDTO.getLocalDTO().getNome(),agendaDTO.getDataHoraI(),agendaDTO.getDataHoraF());
 			//event.setId(agendaDTO.getId().toString());
 			if(event.getId() == null){
+				event = new DefaultScheduleEvent(agendaDTO.getLocalDTO().getNome(),agendaDTO.getDataHoraI(),agendaDTO.getDataHoraF(),agendaDTO.getAllDay().booleanValue());
 				//eventModel.addEvent(event);
 				lazyEventModel.addEvent(event);
 			}else{
@@ -126,13 +125,16 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 				lazyEventModel.updateEvent(event);
 				agendaDTO.setId(Integer.valueOf(event.getId()));
 			}
-			if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
+			if(agendaDTO.getDataHoraI().after(agendaDTO.getDataHoraF())){
+				addMessage(rb.getString("msgDataLessEquals"));
+			}else if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
 				agendaDTO = agendaDAO.save(agendaDTO);
 				event = new DefaultScheduleEvent();
 			}else{
 				addMessage(rb.getString("msgPeriodDetracts"));
 			}
 		} catch (Exception e) {
+			addMessage(rb.getString("dateNotFound"));
 			e.printStackTrace();
 		}
 	}
@@ -156,19 +158,48 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
 		agendaDTO = new AgendaDTO();
 		agendaDTO.setDataHoraI(event.getStartDate());
-		agendaDTO.setDataHoraF(event.getEndDate());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(event.getEndDate());
+		calendar.add(Calendar.MINUTE, 30);
+		agendaDTO.setDataHoraF(calendar.getTime());
 	}
 
-	public void onEventMove(ScheduleEntryMoveEvent event) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-
-		addMessage(message);
+	public void onEventMove(ScheduleEntryMoveEvent event) throws Exception {
+		this.event = event.getScheduleEvent();
+		Integer id = Integer.valueOf(this.event.getId());
+		agendaDTO.setId(id);
+		agendaDTO = agendaDAO.getById(id);
+		agendaDTO.setDataHoraI(this.event.getStartDate());
+		agendaDTO.setDataHoraF(this.event.getEndDate());
+		
+		if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
+			agendaDTO = agendaDAO.save(agendaDTO);
+			this.event = new DefaultScheduleEvent();
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+			addMessage(message);
+		}else{
+			addMessage(rb.getString("msgPeriodDetracts"));
+		}
+		//carregaAgenda();
 	}
 
-	public void onEventResize(ScheduleEntryResizeEvent event) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-
-		addMessage(message);
+	public void onEventResize(ScheduleEntryResizeEvent event) throws Exception {
+		this.event = event.getScheduleEvent();
+		Integer id = Integer.valueOf(this.event.getId());
+		agendaDTO = agendaDAO.getById(id);
+		agendaDTO.setId(id);
+		agendaDTO.setDataHoraI(this.event.getStartDate());
+		agendaDTO.setDataHoraF(this.event.getEndDate());
+		
+		if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
+			agendaDTO = agendaDAO.save(agendaDTO);
+			this.event = new DefaultScheduleEvent();
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+			addMessage(message);
+		}else{
+			addMessage(rb.getString("msgPeriodDetracts"));
+		}
+		//carregaAgenda();
 	}
 
 	public void filtrar(ActionEvent actionEvent){

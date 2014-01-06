@@ -60,20 +60,29 @@ public class UsuarioDTO {
 		}
 	}
 	
-	
-	@Override  
-    public boolean equals(Object obj) {  
-        if (obj == null) {  
-            return false;  
-        }  
-        if (getClass() != obj.getClass()) {  
-            return false;  
-        }  
-        final UsuarioDTO other = (UsuarioDTO) obj;
-        if (id != null && !this.id.equals(other.id)) {  
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
-        }  
-        return true;  
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UsuarioDTO other = (UsuarioDTO) obj;
+        if (this.id == null){
+        	return false;
+        }
+        if (!this.id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
+ 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + this.id;
+        return hash;
     }
 	
 	public UsuarioDTO(String nome, int i) {
