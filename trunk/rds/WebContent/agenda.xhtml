@@ -53,25 +53,25 @@
 		<h:form> 
 	
 			<p:panel id="panel" header="#{msgs.filter}">
-				 <p:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-				 
+				 <p:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
 				 	<p:outputLabel value="#{msgs.user}" for="basicPojo"/>
 				 	<p:autoComplete value="#{marcarConsultaMB.filtroAgendaDTO.usuarioDTO}" id="basicPojo" completeMethod="#{autoCompleteMB.completarUsuario}"  
 		                        var="u" itemLabel="#{u.nome}" itemValue="#{u}" converter="usuario" forceSelection="true" required="false"/>
-				 	
+				 	<p:watermark for="basicPojo" value="#{msgs.autoComplete}" />
+
 			        <p:outputLabel for="hd" value="#{msgs.place}" />
 					<p:selectOneMenu value="#{marcarConsultaMB.filtroAgendaDTO.localDTO}" id="hd" effect="fade" converter="local">
 			            <f:selectItem itemLabel="#{msgs.select}" itemValue="" />
 			            <f:selectItems value="#{localMB.listLocal}" var="local" itemLabel="#{local.nome}" itemValue="#{local}"/>
-			        </p:selectOneMenu> 
-			        
+			        </p:selectOneMenu>
+			        <p:watermark for="hd" value=""></p:watermark>
+
 			        <f:facet name="footer">
 			        	<p:commandButton value="#{msgs.reset}" update="panel,:growl" actionListener="#{marcarConsultaMB.limpar}" oncomplete="PF('myschedule').update();"/>
 			        	<p:commandButton value="#{msgs.filter}" actionListener="#{marcarConsultaMB.filtrar}" id="withIcon"   
             					update="panel,:growl" icon="ui-icon-disk" oncomplete="PF('myschedule').update();"/>
             			<p:commandButton value="#{msgs.myTags}" actionListener="#{marcarConsultaMB.mySchedule}" id="withIcon2"   
             					update="panel,:growl" icon="ui-icon-gear" oncomplete="PF('myschedule').update();"/>
-            					
 			        </f:facet>
 				 </p:panelGrid>
 			</p:panel>
@@ -83,8 +83,8 @@
      
             <p:ajax event="dateSelect" listener="#{marcarConsultaMB.onDateSelect}" oncomplete="PF('eventDialog').show()" update="eventDetails,:growl"/> 
             <p:ajax event="eventSelect" listener="#{marcarConsultaMB.onEventSelect}" oncomplete="PF('eventDialog').show()" update="eventDetails,:growl"/> 
-            <p:ajax event="eventMove" listener="#{marcarConsultaMB.onEventMove}" update=":growl" />
-            <p:ajax event="eventResize" listener="#{marcarConsultaMB.onEventResize}" update=":growl" />
+            <p:ajax event="eventMove" listener="#{marcarConsultaMB.onEventMove}" update=":growl" oncomplete="PF('myschedule').update();"/>
+            <p:ajax event="eventResize" listener="#{marcarConsultaMB.onEventResize}" update=":growl" oncomplete="PF('myschedule').update();"/>
      
         </p:schedule> 
      
