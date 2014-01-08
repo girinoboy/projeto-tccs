@@ -18,3 +18,10 @@ INSERT INTO PERFIL_MENU VALUES(7,1,1);
 INSERT INTO PERFIL_MENU VALUES(8,6,1);
 INSERT INTO LOCAL VALUES(1,'Sala 1');
 INSERT INTO LOCAL VALUES(2,'Sala 2');
+
+UPDATE MENU SET nome ='exit' where id =1;
+UPDATE MENU SET nome ='accessControl' where id =2;
+UPDATE MENU SET nome ='schedule' where id =3;
+UPDATE MENU SET nome ='placeRegister' where id =4;
+UPDATE MENU SET nome ='userRegister' where id =5;
+UPDATE MENU SET nome ='profileRegister' where id =6;

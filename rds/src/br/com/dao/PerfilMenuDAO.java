@@ -61,6 +61,7 @@ public class PerfilMenuDAO extends GenericoDAO<PerfilMenuDTO, Integer>{
 			list = HibernateUtility.getSession().createCriteria(PerfilMenuDTO.class)
 					.add(Restrictions.eq("perfilDTO.id", id))
 					.createCriteria("menuDTO").add(Restrictions.eq("ativoInativo",true))
+					.add(Restrictions.isNull("menuDTO.id"))
 					.addOrder(Order.asc("dropIndex"))
 					.list();
 		}catch(Exception e){

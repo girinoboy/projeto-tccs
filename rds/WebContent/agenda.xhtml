@@ -102,12 +102,12 @@
 		        </p:selectOneMenu>
             	
                 <h:outputLabel for="from" value="#{msgs.from}:" /> 
-                <p:inputMask id="from" value="#{marcarConsultaMB.agendaDTO.dataHoraI}" mask="99/99/9999 99:99"> 
+                <p:inputMask id="from" value="#{marcarConsultaMB.agendaDTO.startDate}" mask="99/99/9999 99:99"> 
                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm" /> 
                 </p:inputMask> 
      
                 <h:outputLabel for="to" value="#{msgs.to}:" /> 
-                <p:inputMask id="to" value="#{marcarConsultaMB.agendaDTO.dataHoraF}" mask="99/99/9999 99:99"> 
+                <p:inputMask id="to" value="#{marcarConsultaMB.agendaDTO.endDate}" mask="99/99/9999 99:99"> 
                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm" /> 
                 </p:inputMask> 
      

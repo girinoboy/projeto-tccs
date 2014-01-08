@@ -51,6 +51,8 @@ public class GenericoDAO<T, ID extends Serializable> implements Serializable {
         } catch (HibernateException hibernateException) {
             cancel();
             throw hibernateException;
+        }finally{
+        	HibernateUtility.closeSession();
         }
     }
 

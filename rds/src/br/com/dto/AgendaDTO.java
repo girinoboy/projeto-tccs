@@ -5,6 +5,7 @@ package br.com.dto;
 
 import java.util.Date;
 
+import javax.ejb.Timeout;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,8 +35,11 @@ public class AgendaDTO {
 	@Id 
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
-	private Date dataHoraI;
-	private Date dataHoraF;
+	//@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="start_date")
+	private Date startDate;
+	@Column(name="end_date")
+	private Date endDate;
 	@Column(name="data_agendamento")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAgendamento;
@@ -67,20 +71,20 @@ public class AgendaDTO {
 		this.id = id;
 	}
 
-	public Date getDataHoraI() {
-		return dataHoraI;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setDataHoraI(Date dataHoraI) {
-		this.dataHoraI = dataHoraI;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
-	public Date getDataHoraF() {
-		return dataHoraF;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public void setDataHoraF(Date dataHoraF) {
-		this.dataHoraF = dataHoraF;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	public Date getDataAgendamento() {

@@ -58,8 +58,8 @@
 
 						<h:outputText for="dataNascimento" value="Data de nascimento: *"
 							required="true" />
-						<p:calendar locale="pt" showButtonPanel="true" navigator="true" value="#{calendarBean.date3}" id="popupButtonCal"
-							showOn="button" valueChangeListener="1800"/>
+						<p:calendar locale="pt" showButtonPanel="true" navigator="true" value="#{usuarioMB.usuarioDTO.dataNascimento}" id="popupButtonCal"
+							showOn="button" valueChangeListener="1800" />
 
 						<h:outputLabel for="sexo" value="Sexo: *" />
 						<p:selectOneRadio id="sexo" value="#{usuarioMB.usuarioDTO.sexo}"
@@ -73,26 +73,26 @@
 
 						<!-- E-mail -->
 						<h:outputText for="email" value="E-mail: *" />
-						<p:inputText size="45" required="true" label="email" />
+						<p:inputText size="45" required="true" label="email" value="#{usuarioMB.usuarioDTO.email}"/>
 
 						<!-- Telefone -->
 						<h:outputText for="telefone" value="Telefone: " />
 						<p:inputMask mask="(99)9999-9999" size="15" required="true"
-							label="telefone">
+							label="telefone" value="#{usuarioMB.usuarioDTO.telefone}">
 							<f:validateLength minimum="2" />
 						</p:inputMask>
 
 						<!-- Endereço -->
 						<h:outputText for="endereco" value="Endereço: " />
-						<p:inputText size="45" required="true" label="email" />
+						<p:inputText size="45" required="true" label="email" value="#{usuarioMB.usuarioDTO.endereco}"/>
 
 						<!-- Login -->
 						<h:outputText for="login" value="Login: *" />
-						<p:inputText size="15" required="true" label="login" />
+						<p:inputText size="15" required="true" label="login" value="#{usuarioMB.usuarioDTO.usuario}"/>
 
 						<!-- Senha -->
 						<h:outputText for="senha" value="Senha: *" />
-						<p:password size="15" required="true" label="senha" />
+						<p:password size="15" required="true" label="senha" value="#{usuarioMB.usuarioDTO.senha}"/>
 						
 						<!-- Graduação -->
 						<h:outputLabel for="graduacao" value="Graduação: *" />
@@ -116,32 +116,34 @@
 						<!-- Desconto -->
 						<h:outputLabel for="desconto" value="Desconto: *" />
 						<p:selectOneMenu id="desconto" effect="fade" required="true"
-							size="30">
-							<f:selectItem itemLabel="   Selcione" itemValue=""
-								style="height:20px" />
-							<f:selectItem itemLabel="10%" itemValue="1" />
-							<f:selectItem itemLabel="20%" itemValue="2" />
-							<f:selectItem itemLabel="30%" itemValue="3" />
-							<f:selectItem itemLabel="40%" itemValue="4" />
-							<f:selectItem itemLabel="50%" itemValue="5" />
-							<f:selectItem itemLabel="60%" itemValue="6" />
-							<f:selectItem itemLabel="70%" itemValue="7" />
-							<f:selectItem itemLabel="80%" itemValue="8" />
-							<f:selectItem itemLabel="90%" itemValue="9" />
-							<f:selectItem itemLabel="100%" itemValue="10" />
+							value="#{usuarioMB.usuarioDTO.desconto}" size="30">
+							<p:ajax event="change" listener="#{usuarioMB.calculaDesconto}"
+                                update="valorMensalidade" />
+							<f:selectItem itemLabel="Selcione" itemValue=""	style="height:20px" />
+							<f:selectItem itemLabel="0%" itemValue="0.0" />
+							<f:selectItem itemLabel="10%" itemValue="0.1" />
+							<f:selectItem itemLabel="20%" itemValue="0.2" />
+							<f:selectItem itemLabel="30%" itemValue="0.3" />
+							<f:selectItem itemLabel="40%" itemValue="0.4" />
+							<f:selectItem itemLabel="50%" itemValue="0.5" />
+							<f:selectItem itemLabel="60%" itemValue="0.6" />
+							<f:selectItem itemLabel="70%" itemValue="0.7" />
+							<f:selectItem itemLabel="80%" itemValue="0.8" />
+							<f:selectItem itemLabel="90%" itemValue="0.9" />
+							<f:selectItem itemLabel="100%" itemValue="1.0" />
 						</p:selectOneMenu>
 
 						<!-- Valor da mensalidade -->
 						<h:outputText for="valor" value="Valor da mensalidade: " />
-						<p:inputText size="15" required="true" label="valor"
-							disabled="true" />
+						<p:inputText id="valorMensalidade" size="15" required="true" label="valor" readonly="true"
+							value="#{usuarioMB.usuarioDTO.valorMensalidade}"/>
 
 
 						<f:facet name="footer">
 							<div align="right"><p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
 								id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
-							<p:commandButton value="Voltar"
-								action="/membros.xhtml?faces-redirect=true" immediate="true"
+							<p:commandButton value="Cancelar"
+								action="/listMembros.xhtml?faces-redirect=true" immediate="true"
 								update=":center" /></div>
 						</f:facet>
 					</h:panelGrid>

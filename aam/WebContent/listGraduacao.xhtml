@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+
+<ui:decorate template="layout.xhtml">  
+	<ui:define id="centro" name="centro"> 
+ 		<h:form id="form">
+ 			<p:commandButton value="Incluir Novo" action="/cadastroGraduacao.xhtml?faces-redirect=true" immediate="true" update=":center" />
+ 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl,panel" />
+ 			<p:separator id="separator"/>
+ 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuarioDTO}" rowKey="#{membro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 			
+		    </p:dataTable> 
+ 		</h:form>
+ 	</ui:define>  
+</ui:decorate>  
+</html>

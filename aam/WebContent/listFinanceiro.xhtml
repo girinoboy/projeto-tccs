@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+
+<ui:decorate template="layout.xhtml">
+	<ui:define id="centro" name="centro">
+ 		<h:form id="form">
+ 			<p:panel id="panel1" header="Financeiro">
+ 				<h:outputLabel value="Mensalidade: *" for="mensalidade"/>
+				<p:inputText id="mensalidade" required="true" value="#{financeiroMB.financeiroDTO.mensalidade}" size="5"/>R$
+				<p:spacer height="40"/>
+ 				<p:commandButton value="Salvar Alterações" actionListener="#{financeiroMB.add}"  update="form,:messages,:growl,panel" />
+ 			</p:panel>
+
+ 			<p:separator id="separator"/>
+ 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuarioDTO}" rowKey="#{membro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 			
+ 				  
+		        
+		    </p:dataTable> 
+ 		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>
