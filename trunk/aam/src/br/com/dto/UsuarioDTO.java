@@ -43,6 +43,11 @@ public class UsuarioDTO {
 	private Boolean ativoInativo;
 	private String sexo;
 	private String rg;
+	private String endereco;
+	private String telefone;
+	private Double desconto;
+	@Column(name="valor_mensalidade")
+	private Double valorMensalidade;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
 	private GraduacaoDTO graduacaoDTO;
@@ -198,6 +203,38 @@ public class UsuarioDTO {
 
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+
+	public Double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Double getValorMensalidade() {
+		return valorMensalidade;
+	}
+
+	public void setValorMensalidade(Double valorMensalidade) {
+		this.valorMensalidade = valorMensalidade;
 	}
 
 

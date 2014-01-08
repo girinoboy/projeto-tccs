@@ -221,7 +221,7 @@ public class MenuDAO extends GenericoDAO<MenuDTO, Serializable>{
 		try {
 			list = HibernateUtility.getSession()
 					.createCriteria(MenuDTO.class)
-					.add(Restrictions.eq("ativoInativo",false))
+					.add(Restrictions.or(Restrictions.eq("ativoInativo",false),Restrictions.isNull("ativoInativo")))
 					.list();
 		} catch (HibernateException hibernateException) {
 			cancel();
@@ -230,5 +230,24 @@ public class MenuDAO extends GenericoDAO<MenuDTO, Serializable>{
 			HibernateUtility.closeSession();
 		}
 		return list;
+	}
+
+	public void saveOnDragDrop(MenuDTO menu) throws HibernateException, Exception {
+		//Nome da classe e atributo
+		String updateQuery = "UPDATE MenuDTO obj SET ativoInativo = :valor1, dropIndex= :valor2, menuDTO.id= :valor3 WHERE obj.id = :id";  
+		try {
+			HibernateUtility.getSession().createQuery(updateQuery)
+			.setBoolean("valor1", menu.getAtivoInativo())
+			.setInteger("valor2", menu.getDropIndex())
+			.setParameter("valor3", menu.getMenuDTO() == null ? null : menu.getMenuDTO().getId())			
+			.setInteger("id",menu.getId())
+			.executeUpdate();
+			HibernateUtility.commitTransaction();
+		} catch (HibernateException hibernateException) {
+			cancel();
+			throw hibernateException;
+		}finally{
+			HibernateUtility.closeSession();
+		}
 	}
 }

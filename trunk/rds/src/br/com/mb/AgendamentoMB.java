@@ -87,7 +87,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 					clear();
 					//List<AgendaDTO> list =agendaDAO.consultarEntreDatas(start, end);
 					for(AgendaDTO agenda:agendaDAO.consultarEntreDatas(start, end)){
-						event = new DefaultScheduleEvent(agenda.getLocalDTO().getNome(),agenda.getDataHoraI(),agenda.getDataHoraF(),agenda.getAllDay().booleanValue());
+						event = new DefaultScheduleEvent(agenda.getLocalDTO().getNome(),agenda.getStartDate(),agenda.getEndDate(),agenda.getAllDay().booleanValue());
 						//event.setAllDay(agenda.getAllDay());
 						event.setId(agenda.getId().toString());
 						addEvent(event);
@@ -114,10 +114,10 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 			//			agendaDTO.setDataHoraI(event.getStartDate());
 			//			agendaDTO.setDataHoraF(event.getEndDate());
 			//			consultaDTO.setObs(event.getTitle());
-			//event = new DefaultScheduleEvent(agendaDTO.getLocalDTO().getNome(),agendaDTO.getDataHoraI(),agendaDTO.getDataHoraF());
+			//event = new DefaultScheduleEvent(agendaDTO.getLocalDTO().getNome(),agendaDTO.getStartDate(),agendaDTO.getEndDate());
 			//event.setId(agendaDTO.getId().toString());
 			if(event.getId() == null){
-				event = new DefaultScheduleEvent(agendaDTO.getLocalDTO().getNome(),agendaDTO.getDataHoraI(),agendaDTO.getDataHoraF(),agendaDTO.getAllDay().booleanValue());
+				event = new DefaultScheduleEvent(agendaDTO.getLocalDTO().getNome(),agendaDTO.getStartDate(),agendaDTO.getEndDate(),agendaDTO.getAllDay().booleanValue());
 				//eventModel.addEvent(event);
 				lazyEventModel.addEvent(event);
 			}else{
@@ -125,7 +125,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 				lazyEventModel.updateEvent(event);
 				agendaDTO.setId(Integer.valueOf(event.getId()));
 			}
-			if(agendaDTO.getDataHoraI().after(agendaDTO.getDataHoraF())){
+			if(agendaDTO.getStartDate().after(agendaDTO.getEndDate())){
 				addMessage(rb.getString("msgDataLessEquals"));
 			}else if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
 				agendaDTO = agendaDAO.save(agendaDTO);
@@ -157,11 +157,11 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 	public void onDateSelect(SelectEvent  selectEvent) {
 		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
 		agendaDTO = new AgendaDTO();
-		agendaDTO.setDataHoraI(event.getStartDate());
+		agendaDTO.setStartDate(event.getStartDate());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(event.getEndDate());
 		calendar.add(Calendar.MINUTE, 30);
-		agendaDTO.setDataHoraF(calendar.getTime());
+		agendaDTO.setEndDate(calendar.getTime());
 	}
 
 	public void onEventMove(ScheduleEntryMoveEvent event) throws Exception {
@@ -169,8 +169,9 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 		Integer id = Integer.valueOf(this.event.getId());
 		agendaDTO.setId(id);
 		agendaDTO = agendaDAO.getById(id);
-		agendaDTO.setDataHoraI(this.event.getStartDate());
-		agendaDTO.setDataHoraF(this.event.getEndDate());
+		agendaDTO.setAllDay(event.getScheduleEvent().isAllDay());
+		agendaDTO.setStartDate(this.event.getStartDate());
+		agendaDTO.setEndDate(this.event.getEndDate());
 		
 		if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
 			agendaDTO = agendaDAO.save(agendaDTO);
@@ -188,8 +189,8 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 		Integer id = Integer.valueOf(this.event.getId());
 		agendaDTO = agendaDAO.getById(id);
 		agendaDTO.setId(id);
-		agendaDTO.setDataHoraI(this.event.getStartDate());
-		agendaDTO.setDataHoraF(this.event.getEndDate());
+		agendaDTO.setStartDate(this.event.getStartDate());
+		agendaDTO.setEndDate(this.event.getEndDate());
 		
 		if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
 			agendaDTO = agendaDAO.save(agendaDTO);
@@ -210,7 +211,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 				clear();
 				//List<AgendaDTO> list =agendaDAO.consultarEntreDatas(start, end);
 				for(AgendaDTO agenda:agendaDAO.consultarEntreDatas(start, end,filtroAgendaDTO)){
-					event = new DefaultScheduleEvent(agenda.getLocalDTO().getNome(),agenda.getDataHoraI(),agenda.getDataHoraF());
+					event = new DefaultScheduleEvent(agenda.getLocalDTO().getNome(),agenda.getStartDate(),agenda.getEndDate(),agenda.getAllDay().booleanValue());
 					//event.setAllDay(agenda.getAllDay());
 					event.setId(agenda.getId().toString());
 					addEvent(event);
@@ -242,7 +243,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 				clear();
 				//List<AgendaDTO> list =agendaDAO.consultarEntreDatas(start, end);
 				for(AgendaDTO agenda:agendaDAO.consultarEntreDatas(start, end,getUserSession())){
-					event = new DefaultScheduleEvent(agenda.getLocalDTO().getNome(),agenda.getDataHoraI(),agenda.getDataHoraF());
+					event = new DefaultScheduleEvent(agenda.getLocalDTO().getNome(),agenda.getStartDate(),agenda.getEndDate(),agenda.getAllDay().booleanValue());
 					//event.setAllDay(agenda.getAllDay());
 					event.setId(agenda.getId().toString());
 					addEvent(event);

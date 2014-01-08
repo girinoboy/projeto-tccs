@@ -44,7 +44,7 @@ public class ControleAcessoMB extends GenericoMB{
 	private List<PerfilDTO> listaPerfil = new ArrayList<PerfilDTO>();
 	private PerfilDAO perfilDAO = new PerfilDAO();
 	private PerfilDTO perfil = new PerfilDTO();
-	
+
 	private TreeNode rootInactive;
 	private TreeNode[] nosSelecionadosI;
 
@@ -100,10 +100,16 @@ public class ControleAcessoMB extends GenericoMB{
 		TreeNode tr;
 		for(MenuDTO m:listaMenuDTO){
 			if(StringUtils.isBlank(m.getUrl()) && StringUtils.isBlank(m.getOutcome()) ){
+				if(rb.containsKey(m.getNome())){
+					m.setNome(rb.getString(m.getNome()));
+				}
 				tr = new DefaultTreeNode(m, treeNode);
 				carregarFilhos(m, tr);
 
 			}else{
+				if(rb.containsKey(m.getNome())){
+					m.setNome(rb.getString(m.getNome()));
+				}
 				tr = new DefaultTreeNode(m, treeNode);
 				//verifica se é permitidos apenas par ao ultimo node
 				if (isPermitido(m)) {
@@ -157,7 +163,7 @@ public class ControleAcessoMB extends GenericoMB{
 					TreeNode treeNode = new DefaultTreeNode(menu, rootInactive);
 					carregarFilhos(menu, treeNode);
 				}if(listMenuInativo.isEmpty()){
-//					new DefaultTreeNode(new MenuDTO() , rootInactive);
+					//					new DefaultTreeNode(new MenuDTO() , rootInactive);
 					//rootInactive.getChildren();
 					rootInactive.isExpanded();
 					MenuDTO menu = new MenuDTO();
@@ -189,9 +195,11 @@ public class ControleAcessoMB extends GenericoMB{
 					}
 				}
 				carregaPermissoesUsuarioDTO();
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Permissões Salvas", "Permissões Salvas"));
+				addMessage("Permissões Salvas");
+//				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Permissões Salvas", "Permissões Salvas"));
 			} catch (Exception ex) {
 				Logger.getLogger(ControleAcessoMB.class.getName()).log(Level.SEVERE, null, ex);
+				addMessage(ex.getMessage());
 			}
 		}
 	}
@@ -211,28 +219,58 @@ public class ControleAcessoMB extends GenericoMB{
 				salvaPai(tr);
 			} catch (SQLException ex) {
 				Logger.getLogger(ControleAcessoMB.class.getName()).log(Level.SEVERE, null, ex);
+				throw ex;
+			}catch (Exception e) {
+				throw e;
+				//addMessage(e.getMessage());
 			}
 		}
 	}
 
-	public void onDragDrop(TreeDragDropEvent event) throws Exception {
-//		TreeNode dragNode = event.getDragNode();
-//		TreeNode dropNode = event.getDropNode();
-		Tree tree = (Tree) event.getSource();
-		for (TreeNode tn : tree.getValue().getChildren()) {
-			MenuDTO menu = (MenuDTO) tn.getData();
-			menu.setDropIndex(Integer.valueOf(tn.getRowKey()));
-			if(tn.getParent().getData().equals("root")){
-				menu.setAtivoInativo(true);
+	public void onDragDrop(TreeDragDropEvent event) {
+		try{
+			TreeNode dragNode = event.getDragNode();
+			TreeNode dropNode = event.getDropNode();
+			int dropIndex = event.getDropIndex();
+			MenuDTO m = (MenuDTO) dragNode.getData();
+			 m = menuDAO.getById(m.getId());
+			 
+			if(dropNode.getData().equals("root")){
+				m.setMenuDTO(null);
 			}else{
-				menu.setAtivoInativo(false);
+				m.setDropIndex(dropIndex);
+				m.setMenuDTO(((MenuDTO)dropNode.getData()));
 			}
-			menu.setNome(null);//para update dinamico
-			menuDAO.save(menu);
+			menuDAO.save(m);
+
+			Tree tree = (Tree) event.getSource();//percorre toda a lista para organizar a orderm de exibição do menu
+			for (TreeNode tn : tree.getValue().getChildren()) {
+				MenuDTO menu = (MenuDTO) tn.getData();
+
+				menu.setDropIndex(Integer.valueOf(tn.getRowKey().length() > 1 ? tn.getRowKey().substring(0,1):tn.getRowKey()));
+				if(tn.getParent().getData().equals("root")){
+					menu.setAtivoInativo(true);
+				}else{
+					menu.setAtivoInativo(false);
+				}
+//				if(dropNode.getData().equals("root")){
+//					menu.setMenuDTO(null);
+//				}else{
+//					m.setMenuDTO(((MenuDTO)dropNode.getData()));
+//					menuDAO.saveOnDragDrop(m);
+//					menu.setMenuDTO(((MenuDTO)dropNode.getData()));
+//				}
+				//menu.setNome(null);//para update dinamico
+				menuDAO.saveOnDragDrop(menu);
+			}
+			addMessage(rb.getString("positionChangedMenu"));
+			//FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dragged " + dragNode.getData(), "Dropped on " + dropNode.getData() + " at " + dropIndex); 
+			System.out.println("Dragged " + dragNode.getData()+ "Dropped on " + dropNode.getData() + " at " + dropIndex);
+			//FacesContext.getCurrentInstance().addMessage(null, message);
+		}catch(Exception e){
+			e.printStackTrace();
+			addMessage(e.getMessage());
 		}
-		addMessage(rb.getString("positionChangedMenu"));
-		//FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dragged " + dragNode.getData(), "Dropped on " + dropNode.getData() + " at " + dropIndex);  
-		//FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	public TreeNode getRoot() {

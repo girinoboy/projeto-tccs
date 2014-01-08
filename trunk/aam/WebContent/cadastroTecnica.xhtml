@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:decorate template="layout.xhtml">
+	<ui:define id="centro" name="centro">
+		<h:form id="form">
+
+			<p:panel id="panel" header="Adicionar Grupo de Tecnicas">
+
+				<h:inputHidden id="idUsuario" value="#{usuarioMB.usuarioDTO.id}" />
+				<h:inputHidden id="idAnexo"
+					value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
+				<div align="center">
+					<h:panelGrid id="pg" columns="2" cellpadding="1">
+
+						<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}"
+							style="width:60px;height:60px">
+							<f:param id="av" name="image_id"
+								value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
+						</p:graphicImage>
+						<p:fileUpload size="15"
+							fileUploadListener="#{usuarioMB.handleFileUpload}"
+							mode="advanced"
+							update=":messages,:growl,avatar,av,idUsuario,idAnexo" auto="true"
+							sizeLimit="65535" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+							label="Selecione" />
+
+						<h:outputLabel for="nome" value="Nome: *" />
+						<p:inputText id="nome" size="45"
+							value="#{usuarioMB.usuarioDTO.nome}" required="true" label="Nome">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:watermark for="nome" value="Nome completo" />
+						<p:message for="nome" />
+						
+						<f:facet name="footer">
+							<div align="right"><p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
+								id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
+							<p:commandButton value="Cancelar"
+								action="/listTecnica.xhtml?faces-redirect=true" immediate="true"
+								update=":center" /></div>
+						</f:facet>
+					</h:panelGrid>
+				</div>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>

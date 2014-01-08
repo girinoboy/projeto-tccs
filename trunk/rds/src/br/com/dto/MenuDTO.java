@@ -1,5 +1,6 @@
 package br.com.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,8 +29,12 @@ import org.hibernate.envers.Audited;
 @Audited
 @Table(name = "menu")
 @DynamicUpdate(value=true)
-public class MenuDTO {
+public class MenuDTO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id 
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;

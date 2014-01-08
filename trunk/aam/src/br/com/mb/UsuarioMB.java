@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.hibernate.HibernateException;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
@@ -18,9 +19,11 @@ import org.primefaces.model.StreamedContent;
 
 import br.com.dao.AnexoDAO;
 import br.com.dao.GraduacaoDAO;
+import br.com.dao.ParametroDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.AnexoDTO;
 import br.com.dto.GraduacaoDTO;
+import br.com.dto.ParametroDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.utility.MembroDataModel;
 
@@ -108,7 +111,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		addMessage("Salvo");
 
 	}
 
@@ -166,6 +169,15 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	public void check(SelectEvent event) {
 		System.out.println("in check");
 		System.out.println(listSelectedUsuarioDTO);
+	}
+	
+	public void calculaDesconto() throws HibernateException, Exception{
+		ParametroDAO parametroDAO = new ParametroDAO();
+		ParametroDTO p = parametroDAO.recuperaParametro("mensalidade");
+		if(p != null && p.getValor() != null)
+			usuarioDTO.setValorMensalidade(Double.valueOf(p.getValor()) - Double.valueOf(p.getValor()) * usuarioDTO.getDesconto());
+		else
+			usuarioDTO.setValorMensalidade(0d);
 	}
 
 	public UsuarioDTO getUsuarioDTO() {

@@ -175,8 +175,8 @@ public class ControleAcessoDAO extends GenericoDAO<PerfilMenuDTO, Serializable>{
 		PermissaoMenuDTO permissao;
 		try {
 			permissao = (PermissaoMenuDTO) HibernateUtility.getSession().createCriteria(PermissaoMenuDTO.class)
-					.add(Restrictions.eq("perfil.id", perfil))
-					.add(Restrictions.eq("menu.id", menu))
+					.add(Restrictions.eq("perfilDTO.id", perfil))
+					.add(Restrictions.eq("menuDTO.id", menu))
 					.uniqueResult();
 
 		} catch (HibernateException hibernateException) {

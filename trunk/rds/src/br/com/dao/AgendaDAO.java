@@ -38,7 +38,7 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 		List list =null;
 		try{
 			list = HibernateUtility.getSession().createCriteria(AgendaDTO.class).
-					add(Restrictions.between("dataHoraI",start,end)).list();
+					add(Restrictions.between("startDate",start,end)).list();
 		}catch(Exception e){
 			throw e;
 		}
@@ -49,7 +49,7 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 		List<AgendaDTO> list =null;
 		try{
 			list = HibernateUtility.getSession().createCriteria(AgendaDTO.class).
-					add(Restrictions.between("dataHoraI",start,end)).list();
+					add(Restrictions.between("startDate",start,end)).list();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -66,7 +66,7 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 							Restrictions.eq("usuarioDTO.id",filtroAgendaDTO.getUsuarioDTO() != null ? filtroAgendaDTO.getUsuarioDTO().getId():0),
 							Restrictions.eq("localDTO.id",filtroAgendaDTO.getLocalDTO()!=null ? filtroAgendaDTO.getLocalDTO().getId():0)
 							))
-					.add(Restrictions.between("dataHoraI",start,end)).list();
+					.add(Restrictions.between("startDate",start,end)).list();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -80,7 +80,7 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 		try{
 			list = HibernateUtility.getSession().createCriteria(AgendaDTO.class)
 					.add(Restrictions.eq("usuarioDTO.id", userSession.getId()))
-					.add(Restrictions.between("dataHoraI",start,end)).list();
+					.add(Restrictions.between("startDate",start,end)).list();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -93,10 +93,15 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 		List<AgendaDTO> list =null;
 		try{
 			list = HibernateUtility.getSession().createCriteria(AgendaDTO.class)
-					.add(Restrictions.eq("localDTO.id",agendaDTO.getLocalDTO().getId()))
-					.add(Restrictions.lt("dataHoraI", agendaDTO.getDataHoraF()))//<
-					.add(Restrictions.gt("dataHoraF",agendaDTO.getDataHoraI()))//>
-					.add(Restrictions.ne("id",agendaDTO.getId()))
+					.add(Restrictions.or(
+						Restrictions.and(
+							Restrictions.eq("localDTO.id",agendaDTO.getLocalDTO().getId()),
+							Restrictions.lt("startDate", agendaDTO.getEndDate()),//<
+							Restrictions.gt("endDate",agendaDTO.getStartDate()),//>
+							Restrictions.ne("id",agendaDTO.getId())),
+						//Restrictions.isNotNull("allDay"),
+						Restrictions.eq("allDay",true))
+					)
 					.list();
 		}catch(Exception e){
 			e.printStackTrace();
