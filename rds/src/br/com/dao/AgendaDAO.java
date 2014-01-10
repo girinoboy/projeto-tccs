@@ -4,7 +4,9 @@
 package br.com.dao;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -14,6 +16,7 @@ import org.primefaces.model.DefaultScheduleEvent;
 import br.com.dto.AgendaDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.factory.HibernateUtility;
+import br.com.utility.DataUtils;
 
 /**
  * @author marcleonio.medeiros
@@ -91,18 +94,39 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 
 	public Boolean verificaPeriodoImpeditivo(AgendaDTO agendaDTO) {
 		List<AgendaDTO> list =null;
+		Calendar dataMax = new GregorianCalendar();
+		dataMax.setTime(agendaDTO.getStartDate());
+		Calendar dataMin = new GregorianCalendar();
+		dataMin.setTime(agendaDTO.getStartDate());
+		//int primeiro_dia_mes = dataMax.getActualMinimum(Calendar.DAY_OF_MONTH);  
+		//dataMin.set(Calendar.DAY_OF_MONTH, primeiro_dia_mes);
+
+		//int ultimo_dia_mes = dataMax.getActualMaximum(Calendar.DAY_OF_MONTH);  
+		//dataMax.set(Calendar.DAY_OF_MONTH, ultimo_dia_mes);  
+		
+		dataMin.set(dataMax.get(Calendar.YEAR), dataMax.get(Calendar.MONTH), dataMax.get(Calendar.DATE), 0, 0);
+		dataMax.set(dataMax.get(Calendar.YEAR), dataMax.get(Calendar.MONTH), dataMax.get(Calendar.DATE), 23, 59);
 		try{
 			list = HibernateUtility.getSession().createCriteria(AgendaDTO.class)
 					.add(Restrictions.or(
-						Restrictions.and(
-							Restrictions.eq("localDTO.id",agendaDTO.getLocalDTO().getId()),
-							Restrictions.lt("startDate", agendaDTO.getEndDate()),//<
-							Restrictions.gt("endDate",agendaDTO.getStartDate()),//>
-							Restrictions.ne("id",agendaDTO.getId())),
-						//Restrictions.isNotNull("allDay"),
-						Restrictions.eq("allDay",true))
-					)
-					.list();
+							Restrictions.and(
+									Restrictions.eq("localDTO.id",agendaDTO.getLocalDTO().getId()),
+									Restrictions.lt("startDate", agendaDTO.getEndDate()),//<
+									Restrictions.gt("endDate",agendaDTO.getStartDate()),//>
+									Restrictions.ne("id",agendaDTO.getId() == null ? 0:agendaDTO.getId())
+									),
+							Restrictions.and(
+									Restrictions.eq("localDTO.id",agendaDTO.getLocalDTO().getId()),
+									Restrictions.eq("allDayDate", DataUtils.getSQLDate(agendaDTO.getStartDate())),//2014-01-04
+									Restrictions.ne("id",agendaDTO.getId() == null ? 0:agendaDTO.getId()),
+									Restrictions.eq("allDay",true)
+									),
+							Restrictions.and(
+									Restrictions.eq("allDayDate", DataUtils.getSQLDate(agendaDTO.getStartDate())),
+									Restrictions.eq("true", agendaDTO.getAllDay() == null ? false:agendaDTO.getAllDay())
+									)
+							)
+							).list();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

@@ -5,7 +5,6 @@ package br.com.dto;
 
 import java.util.Date;
 
-import javax.ejb.Timeout;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,11 +39,14 @@ public class AgendaDTO {
 	private Date startDate;
 	@Column(name="end_date")
 	private Date endDate;
+	@Temporal(TemporalType.DATE)
 	@Column(name="data_agendamento")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAgendamento;
 	@Column(name="all_day")
 	private Boolean allDay;
+	@Temporal(TemporalType.DATE)
+	@Column(name="all_day_date")
+	private Date allDayDate;
 	private String obs;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "unidade_id", insertable = true, updatable = true, nullable = true)
@@ -61,6 +63,8 @@ public class AgendaDTO {
 	 */
 	public AgendaDTO() {
 		dataAgendamento = new Date();
+		setDataAgendamento(new Date());
+		setAllDayDate(getStartDate());
 	}
 
 	public Integer getId() {
@@ -88,6 +92,8 @@ public class AgendaDTO {
 	}
 
 	public Date getDataAgendamento() {
+		if(dataAgendamento==null)
+			dataAgendamento = new Date();
 		return dataAgendamento;
 	}
 
@@ -133,6 +139,17 @@ public class AgendaDTO {
 
 	public void setLocalDTO(LocalDTO localDTO) {
 		this.localDTO = localDTO;
+	}
+
+	public Date getAllDayDate() {
+		if(startDate !=null){
+			allDayDate = startDate;
+		}
+		return allDayDate;
+	}
+
+	public void setAllDayDate(Date allDayDate) {
+		this.allDayDate = allDayDate;
 	}
 
 }
