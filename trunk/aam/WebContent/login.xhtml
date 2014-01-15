@@ -19,8 +19,17 @@
 	            }
 	        }
 	    </script>  
+	    
+	    <style>
+	    #ll {  
+                margin: 10px !important;   
+                padding: 0px !important;   
+                background-color: #ece9d8;  
+                background-image : url(img/login.png);  
+            }
+            </style>
 	</h:head>
-	<h:body>
+	<h:body id="ll">
 		<h:form id="form1">
 	      <p:growl id="growl" showDetail="true" sticky="true" />
 		
@@ -31,8 +40,8 @@
 			        <p:ajax event="change" listener="#{themeSwitcherBean.saveTheme}" update="form1"/>
 			    </p:themeSwitcher>
 		    </div>
-		    <center>
 		    <p:separator id="separator"/>
+		    <center style="margin-top: 55px ">
 	            <h:panelGrid columns="2" cellpadding="5">
 	                <h:outputLabel for="username" value="Usuário:" />
 	                <p:inputText value="#{loginManagedBean.usuarioDTO.usuario}"

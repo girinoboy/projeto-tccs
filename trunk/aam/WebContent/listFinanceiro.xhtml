@@ -10,16 +10,26 @@
  		<h:form id="form">
  			<p:panel id="panel1" header="Financeiro">
  				<h:outputLabel value="Mensalidade: *" for="mensalidade"/>
-				<p:inputText id="mensalidade" required="true" value="#{financeiroMB.financeiroDTO.mensalidade}" size="5"/>R$
+				<p:inputText id="mensalidade" required="true" value="#{financeiroMB.financeiroDTO.valorMensalidade}" size="5"/>R$
 				<p:spacer height="40"/>
  				<p:commandButton value="Salvar Alterações" actionListener="#{financeiroMB.add}"  update="form,:messages,:growl,panel" />
  			</p:panel>
 
  			<p:separator id="separator"/>
- 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuarioDTO}" rowKey="#{membro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
- 			
- 				  
-		        
+ 			Consulta de Pagamentos
+ 			<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.financeiroDTO}" rowKey="#{financeiro.id}" editable="false" editMode="fale" paginator="true" rows="10">  
+ 				 <p:column headerText="Nome">  
+		            <h:outputText value="#{financeiro.usuarioDTO.nome}" /> 
+		        </p:column> 
+		        <p:column headerText="Nome">  
+		            <h:outputText value="#{financeiro.usuarioDTO.financeiroDTO.situacao}" /> 
+		        </p:column>
+ 				  <p:column headerText="Nome">  
+		            <h:outputText value="#{financeiro.usuarioDTO.desconto}" /> 
+		        </p:column>
+		        <p:column headerText="Nome">  
+		            <h:outputText value="#{financeiro.usuarioDTO.financeiroDTO.valorComDesconto}" /> 
+		        </p:column>
 		    </p:dataTable> 
  		</h:form>
 	</ui:define>
