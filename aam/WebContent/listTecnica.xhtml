@@ -10,14 +10,25 @@
  		<h:form id="form">
  			<p:commandButton value="Incluir Novo" action="/cadastroTecnnica.xhtml?faces-redirect=true" immediate="true" update=":center" />
 
- 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl,panel" />
+ 			<p:commandButton value="Excluir" actionListener="#{tecnicaMB.del}"  update="form,:messages,:growl,panel" />
 
  			<p:separator id="separator"/>
  			
- 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuarioDTO}" rowKey="#{membro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 			<p:dataTable id="panel" var="tecnica" value="#{tecnicaMB.tecnicaDataModel}" selection="#{tecnicaMB.listSelectedTecnicaDTO}" rowKey="#{tecnica.id}" editable="true" editMode="cell" paginator="true" rows="10">  
  			
+ 				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
+				
+				<p:column selectionMode="multiple" style="width:2%" />
  				  
+		        <p:column headerText="Nome">
+		            <h:outputText value="#{tecnica.nome}"/>
+		        </p:column>
 		        
+		        <p:column headerText="">
+			        <p:commandLink id="ajax" update="panel" actionListener="#{tecnicaMB.edit}" action="/cadastroTecnica.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">  
+				        <h:outputText value="Alterar" />
+				    </p:commandLink>
+		        </p:column>
 		    </p:dataTable> 
  		
  		</h:form>

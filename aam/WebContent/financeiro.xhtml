@@ -13,6 +13,8 @@
  				<h:outputLabel value="Mensalidade: *" for="mensalidade"/>
 				<p:inputText id="mensalidade" required="true" value="#{financeiroMB.financeiroDTO.mensalidade}"/>
 				<p:commandButton value="Emitir" actionListener="#{financeiroMB.add}" id="withIcon" update=":messages,:growl,form" icon="ui-icon-disk" />
+				
+				<p:calendar pattern="EEE, dd MMM, yyyy" showButtonPanel="true" navigator="true" id="customCal"/>
  			</p:panel>
  			
  		</h:form>

@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="form">
+		<p:panel header="Notícias">
+			<p:commandButton value="Incluir Novo"
+				action="/cadastroNoticia.xhtml?faces-redirect=true" immediate="true"
+				update=":center" />
+
+			<p:commandButton value="Excluir" actionListener="#{noticiaMB.del}"
+				update="form,:messages,:growl,panel" />
+
+			<p:separator id="separator" />
+
+			<p:dataTable id="panel" var="noticia"
+				value="#{noticiaMB.noticiaDataModel}"
+				selection="#{noticiaMB.listSelectedNoticiaDTO}"
+				rowKey="#{noticia.id}" editable="false" editMode="cell"
+				paginator="true" rows="10">
+				
+				<p:ajax event="rowSelectCheckbox" listener="#{noticiaMB.check}"   />
+				
+				<p:column selectionMode="multiple" style="width:2%" />
+
+				<p:column headerText="Data de criação">
+					<h:outputText value="#{noticia.dataCriacao}">
+						<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy"/>
+					</h:outputText>
+		        </p:column>
+		        <p:column headerText="Título">
+		            <h:outputText value="#{noticia.titulo}"/>
+		        </p:column>
+		        <p:column headerText="Marcado Para">
+		        	<h:outputText value="#{noticia.marcadoPara}">
+						<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy"/>
+					</h:outputText>
+		        </p:column>
+		        <p:column headerText="">
+			        <p:commandLink id="ajax" update="panel" actionListener="#{noticiaMB.edit}" action="/cadastroNoticia.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">  
+				        <h:outputText value="Alterar" />  
+				    </p:commandLink>
+		        </p:column>
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</ui:composition>
