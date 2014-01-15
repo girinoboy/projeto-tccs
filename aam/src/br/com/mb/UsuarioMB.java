@@ -175,9 +175,9 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		ParametroDAO parametroDAO = new ParametroDAO();
 		ParametroDTO p = parametroDAO.recuperaParametro("mensalidade");
 		if(p != null && p.getValor() != null)
-			usuarioDTO.setValorMensalidade(Double.valueOf(p.getValor()) - Double.valueOf(p.getValor()) * usuarioDTO.getDesconto());
+			usuarioDTO.getFinanceiroDTO().setValorMensalidade(Double.valueOf(p.getValor()) - Double.valueOf(p.getValor()) * usuarioDTO.getDesconto());
 		else
-			usuarioDTO.setValorMensalidade(0d);
+			usuarioDTO.getFinanceiroDTO().setValorMensalidade(0d);
 	}
 
 	public UsuarioDTO getUsuarioDTO() {

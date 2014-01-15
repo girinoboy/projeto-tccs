@@ -59,7 +59,7 @@
 						<h:outputText for="dataNascimento" value="Data de nascimento: *"
 							required="true" />
 						<p:calendar locale="pt" showButtonPanel="true" navigator="true" value="#{usuarioMB.usuarioDTO.dataNascimento}" id="popupButtonCal"
-							showOn="button" valueChangeListener="1800" />
+							showOn="button" valueChangeListener="1800" readonly="true"/>
 
 						<h:outputLabel for="sexo" value="Sexo: *" />
 						<p:selectOneRadio id="sexo" value="#{usuarioMB.usuarioDTO.sexo}"
@@ -136,7 +136,7 @@
 						<!-- Valor da mensalidade -->
 						<h:outputText for="valor" value="Valor da mensalidade: " />
 						<p:inputText id="valorMensalidade" size="15" required="true" label="valor" readonly="true"
-							value="#{usuarioMB.usuarioDTO.valorMensalidade}"/>
+							value="#{usuarioMB.usuarioDTO.financeiroDTO.valorMensalidade}"/>
 
 
 						<f:facet name="footer">

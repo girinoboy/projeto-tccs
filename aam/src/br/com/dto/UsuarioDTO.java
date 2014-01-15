@@ -46,8 +46,6 @@ public class UsuarioDTO {
 	private String endereco;
 	private String telefone;
 	private Double desconto;
-	@Column(name="valor_mensalidade")
-	private Double valorMensalidade;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
 	private GraduacaoDTO graduacaoDTO;
@@ -57,6 +55,15 @@ public class UsuarioDTO {
 	private AnexoDTO anexoDTO;
 	@OneToMany(targetEntity=AnexoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY)
 	private List<AnexoDTO> listAnexoDTO;
+	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)//uma pessoa so tem um pagamento por mes
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	@JoinColumn(name="financeiro_id", referencedColumnName = "id", insertable = true, updatable = true, nullable = true)
+	private FinanceiroDTO financeiroDTO;
+	@OneToMany(targetEntity=FinanceiroDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL,CascadeType.PERSIST, CascadeType.MERGE})
+	private List<FinanceiroDTO> listFinanceiroDTO;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "perfil_id", insertable = true, updatable = true, nullable = true)
+	private PerfilDTO perfilDTO;
 	
 	/**
 	 * 
@@ -229,12 +236,31 @@ public class UsuarioDTO {
 		this.telefone = telefone;
 	}
 
-	public Double getValorMensalidade() {
-		return valorMensalidade;
+	public FinanceiroDTO getFinanceiroDTO() {
+		if(financeiroDTO==null){
+			financeiroDTO = new FinanceiroDTO();
+		}
+		return financeiroDTO;
 	}
 
-	public void setValorMensalidade(Double valorMensalidade) {
-		this.valorMensalidade = valorMensalidade;
+	public void setFinanceiroDTO(FinanceiroDTO financeiroDTO) {
+		this.financeiroDTO = financeiroDTO;
+	}
+
+	public List<FinanceiroDTO> getListFinanceiroDTO() {
+		return listFinanceiroDTO;
+	}
+
+	public void setListFinanceiroDTO(List<FinanceiroDTO> listFinanceiroDTO) {
+		this.listFinanceiroDTO = listFinanceiroDTO;
+	}
+
+	public PerfilDTO getPerfilDTO() {
+		return perfilDTO;
+	}
+
+	public void setPerfilDTO(PerfilDTO perfilDTO) {
+		this.perfilDTO = perfilDTO;
 	}
 
 
