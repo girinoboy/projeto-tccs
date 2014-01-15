@@ -7,20 +7,7 @@
 
 <ui:decorate template="layout.xhtml">  
 	<ui:define id="centro" name="centro"> 
- 		<h:form id="form">
- 			<p:commandButton value="Incluir Novo" action="/cadastroNoticia.xhtml?faces-redirect=true" immediate="true" update=":center" />
-
- 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl,panel" />
-
- 			<p:separator id="separator"/>
- 			
- 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuarioDTO}" rowKey="#{membro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
- 			
- 				  
-		        
-		    </p:dataTable> 
- 		
- 		</h:form>
+ 		<ui:include src="noticiasFragment.xhtml"/>
  	</ui:define>  
 </ui:decorate>  
 </html>

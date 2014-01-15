@@ -19,15 +19,31 @@
 			href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
 
 		<style type="text/css">
-.ui-layout-north {
-	z-index: 20 !important;
-	overflow: visible !important;;
-}
-
-.ui-layout-north .ui-layout-unit-content {
-	overflow: visible !important;
-}
-</style>
+			.ui-layout-north {
+				z-index: 20 !important;
+				overflow: visible !important;;
+			}
+			
+			.ui-layout-north .ui-layout-unit-content {
+				overflow: visible !important;
+			}
+			
+			.topoGeralInterna {
+			    background-image: url("../imagens/bg_topo.png");
+			    height: 65px;
+			    margin: 0 auto;
+			    position: relative;
+			    width: 100%;
+			}
+			.topo_right {
+			    background-image: url("../imagens/bg_usuario.png");
+			    float: right;
+			    height: 46px;
+			    margin-right: -387px;
+			    margin-top: 19px;
+			    width: 363px;
+			}
+		</style>
 	</h:head>
 
 
@@ -40,12 +56,14 @@
 
 			<p:layoutUnit id="top" position="north" size="100">
 				<h:form id="form1">
-					<div>
+					<div class="topoGeralInterna">
 						<p:themeSwitcher value="#{themeSwitcherBean.theme}"	style="width:155px; top:10px" effect="fade">
 							<f:selectItem itemLabel="Choose Theme" itemValue="" />
 							<f:selectItems value="#{themeSwitcherBean.themes}" />
 							<p:ajax event="change" listener="#{themeSwitcherBean.saveTheme}"/>
 						</p:themeSwitcher>
+						
+						<div class="topo_right"/>
 					</div>
 				</h:form>
 			</p:layoutUnit>
@@ -86,6 +104,7 @@
 			<p:layoutUnit id="center" position="center">
 
 				<ui:insert id="centro" name="centro">
+					<ui:include src="noticiasFragment.xhtml"/>
 					<!--                             O que estiver aqui será substituido!   -->
 				</ui:insert>
 

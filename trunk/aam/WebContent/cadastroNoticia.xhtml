@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+
+<ui:decorate template="layout.xhtml">  
+	<ui:define id="centro" name="centro"> 
+ 		<h:form id="form">
+ 		
+ 			<p:panel id="panel" header="Notícias">
+		    	<h:inputHidden id="idnoticia" value="#{noticiaMB.noticiaDTO.id}" />
+		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		        
+		        	<h:outputLabel for="titulo" value="Título: *" />
+		            <p:inputText id="titulo" size="80"
+		                value="#{noticiaMB.noticiaDTO.titulo}" required="true" label="Título">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            <p:message for="titulo" />
+		            
+		            <p:selectOneRadio id="customRadio" value="#{noticiaMB.noticiaDTO.semData}" layout="custom" required="true" label="Marcado Para">  
+				       <f:selectItem itemLabel="Option 1" itemValue="true" />  
+				       <f:selectItem itemLabel="Option 2" itemValue="false" />  
+				    </p:selectOneRadio>
+				    <h:outputText for="opt1" value="Marcado Para: *" />
+		            <h:panelGrid columns="2">
+			            <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>
+						<p:calendar locale="pt" showButtonPanel="true" navigator="true"
+							value="#{noticiaMB.noticiaDTO.marcadoPara}" id="popupButtonCal"
+							showOn="button" valueChangeListener="1800" readonly="true"/>
+			            <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>
+				        <h:outputLabel for="opt2" value="Sem Data" />
+		            </h:panelGrid>
+		            <p:message for="customRadio" />
+		            <br/>
+		             
+		            <h:outputLabel for="descricao" value="Descrição: " />
+		            <p:inputTextarea id="descricao" rows="5" cols="30" counter="counter" maxlength="200"       
+				    	value="#{noticiaMB.noticiaDTO.descricao}" 
+				    	counterTemplate="{0} characters remaining." autoResize="false"/>  
+				  	<p:watermark for="descricao" value=" " />
+				  	<br/>
+				  	<p:message for="descricao" />
+					<h:outputText id="counter" />
+		            
+		            <f:facet name="footer">
+			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon"   
+			            update=":growl,panel,customRadio" icon="ui-icon-disk" />
+			            <p:commandButton value="Reset" type="reset" /> 
+			            <p:commandButton value="Voltar" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
+		  			</f:facet>
+		        </h:panelGrid>  
+		    </p:panel>
+ 		
+ 		</h:form>
+ 	</ui:define>  
+</ui:decorate>  
+</html>
