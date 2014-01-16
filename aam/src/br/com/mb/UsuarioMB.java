@@ -2,7 +2,11 @@ package br.com.mb;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,10 +22,12 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import br.com.dao.AnexoDAO;
+import br.com.dao.FinanceiroDAO;
 import br.com.dao.GraduacaoDAO;
 import br.com.dao.ParametroDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.AnexoDTO;
+import br.com.dto.FinanceiroDTO;
 import br.com.dto.GraduacaoDTO;
 import br.com.dto.ParametroDTO;
 import br.com.dto.UsuarioDTO;
@@ -37,6 +43,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	private GraduacaoDAO graduacaoDAO = new GraduacaoDAO();
 	private List<GraduacaoDTO> listGraduacaoDTO = new ArrayList<GraduacaoDTO>();
 	private AnexoDAO anexoDAO = new AnexoDAO();
+	private FinanceiroDAO financeiroDAO = new FinanceiroDAO();
 
 	private MembroDataModel membroDataModel; 
 
@@ -98,9 +105,35 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void add(ActionEvent actionEvent) {
-		try{
+		try{calculaDesconto();
+			System.out.println(usuarioDTO.getFinanceiroDTO().getValorMensalidade());
 			usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
-			usuarioDAO.save(usuarioDTO);
+			if(usuarioDTO.getId() !=null){
+				//verifica se existe um novo anexo, pois o anexo é salvo ao capturar
+				usuarioDTO.setAnexoDTO(usuarioDAO.getById(usuarioDTO.getId()).getAnexoDTO());
+
+				Calendar c = new GregorianCalendar();
+				c.setTime(usuarioDTO.getFinanceiroDTO().getDataPagamento());
+				Map<String, Object> filtrosConsulta = new HashMap<String, Object>();
+				filtrosConsulta.put("mes", c.get(Calendar.MONTH));
+				filtrosConsulta.put("ano", c.get(Calendar.YEAR));
+				filtrosConsulta.put("usuarioDTO.id", usuarioDTO.getId());
+				//teste para verificar se o usuario ja pagou no mes
+				List<FinanceiroDTO> f = financeiroDAO.listCriterio(null, filtrosConsulta , 1);
+
+				if(!f.isEmpty()){
+					usuarioDTO.getFinanceiroDTO().setId(f.get(0).getId());
+				}
+
+			}
+			
+			
+			usuarioDTO = usuarioDAO.save(usuarioDTO);
+			usuarioDTO.getFinanceiroDTO().setUsuarioDTO(usuarioDTO);
+			usuarioDTO.getFinanceiroDTO().getDia();
+			usuarioDTO.getFinanceiroDTO().getMes();
+			usuarioDTO.getFinanceiroDTO().getAno();
+			usuarioDTO = usuarioDAO.save(usuarioDTO);
 			addMessage("Salvo");
 			usuarioDTO = new UsuarioDTO();
 			listUsuarioDTO = usuarioDAO.list();
@@ -175,9 +208,9 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		ParametroDAO parametroDAO = new ParametroDAO();
 		ParametroDTO p = parametroDAO.recuperaParametro("mensalidade");
 		if(p != null && p.getValor() != null)
-			usuarioDTO.getFinanceiroDTO().setValorMensalidade(Double.valueOf(p.getValor()) - Double.valueOf(p.getValor()) * usuarioDTO.getDesconto());
+			usuarioDTO.getFinanceiroDTO().setValorComDesconto(Double.valueOf(p.getValor()) - Double.valueOf(p.getValor()) * usuarioDTO.getDesconto());
 		else
-			usuarioDTO.getFinanceiroDTO().setValorMensalidade(0d);
+			usuarioDTO.getFinanceiroDTO().setValorComDesconto(0d);
 	}
 
 	public UsuarioDTO getUsuarioDTO() {
