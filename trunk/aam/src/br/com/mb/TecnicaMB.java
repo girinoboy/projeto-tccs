@@ -6,10 +6,13 @@ package br.com.mb;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.UploadedFile;
 
 import br.com.dao.TecnicaDAO;
 import br.com.dto.TecnicaDTO;
@@ -27,6 +30,7 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 	private List<TecnicaDTO> listTecnicaDTO = new ArrayList<TecnicaDTO>();
 	private TecnicaDTO[] listSelectedTecnicaDTO;
 	private TecnicaDataModel tecnicaDataModel;
+	private UploadedFile file;
 
 	/**
 	 * 
@@ -41,6 +45,13 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 			e.printStackTrace();
 		}
 	}
+	
+    public void upload() {  
+        if(file != null) {  
+            FacesMessage msg = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");  
+            FacesContext.getCurrentInstance().addMessage(null, msg);  
+        }  
+    }  
 	
 	public void check(SelectEvent event) {
 		System.out.println("in check");
@@ -117,5 +128,13 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 	public void setTecnicaDataModel(TecnicaDataModel tecnicaDataModel) {
 		this.tecnicaDataModel = tecnicaDataModel;
 	}
+	
+	public UploadedFile getFile() {  
+        return file;  
+    }  
+  
+    public void setFile(UploadedFile file) {  
+        this.file = file;  
+    }
 
 }

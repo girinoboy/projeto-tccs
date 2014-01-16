@@ -53,6 +53,14 @@
     
  		</h:form>
  		
+ 		<p:dialog header="Apagar?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:outputText value="Deseja realmente excluir essa escola?" />
+		    <f:facet name="footer">
+			 	<p:commandButton value="Excluir" update=":growl,form:panel"  icon="ui-icon-close" actionListener="#{escolaMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />                 
+			 	<p:commandButton value="Cancelar" oncomplete="PF('dlg').hide()" immediate="true" />                 
+			</f:facet>
+		</p:dialog>
+ 		
  		<p:dialog id="multiDialog" header="Car Detail" widgetVar="multiCarDialog"  
 	              height="300" showEffect="fade" hideEffect="explode">  
 	  

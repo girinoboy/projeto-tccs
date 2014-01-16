@@ -3,34 +3,70 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"  
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:decorate template="layout.xhtml">
 	<ui:define id="centro" name="centro">
  		<h:form id="form">
  			<p:panel id="panel1" header="Financeiro">
  				<h:outputLabel value="Mensalidade: *" for="mensalidade"/>
-				<p:inputText id="mensalidade" required="true" value="#{financeiroMB.financeiroDTO.valorMensalidade}" size="5"/>R$
+ 				<pe:inputNumber id="valor" value="#{financeiroMB.financeiroDTO.valorMensalidade}" symbol="R$ " size="5" required="true" />
+ 				<p:watermark for="valor" value="R$ " />
+		        <p:message for="valor" />
 				<p:spacer height="40"/>
  				<p:commandButton value="Salvar Alterações" actionListener="#{financeiroMB.add}"  update="form,:messages,:growl,panel" />
- 			</p:panel>
+ 			
 
  			<p:separator id="separator"/>
- 			Consulta de Pagamentos
- 			<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.financeiroDTO}" rowKey="#{financeiro.id}" editable="false" editMode="fale" paginator="true" rows="10">  
- 				 <p:column headerText="Nome">  
+ 			Consulta de Pagamentos <p:calendar pattern="MMM/yyyy" showButtonPanel="true" navigator="true" id="customCal"/>
+ 			<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.financeiroDTO}" rowKey="#{financeiro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 				<p:column headerText="Nome">  
 		            <h:outputText value="#{financeiro.usuarioDTO.nome}" /> 
-		        </p:column> 
-		        <p:column headerText="Nome">  
-		            <h:outputText value="#{financeiro.usuarioDTO.financeiroDTO.situacao}" /> 
 		        </p:column>
- 				  <p:column headerText="Nome">  
-		            <h:outputText value="#{financeiro.usuarioDTO.desconto}" /> 
+		        
+		        <p:column headerText="Situação">
+		        	<p:cellEditor>  
+	                	<f:facet name="output"><h:outputText value="#{financeiro.usuarioDTO.financeiroDTO.situacao ? 'Ok' : 'Pendente'}" /></f:facet>  
+	                  	<f:facet name="input">
+	                    	<h:selectOneMenu value="#{financeiro.usuarioDTO.financeiroDTO.situacao}" style="width:100%">  
+		                    	<f:selectItem itemLabel="ok" itemValue="true" />
+								<f:selectItem itemLabel="pendente" itemValue="false" />  
+		                    </h:selectOneMenu> 
+		                </f:facet>
+	              	</p:cellEditor>
 		        </p:column>
-		        <p:column headerText="Nome">  
+		        
+ 				  <p:column headerText="Desconto">
+		            	<p:cellEditor>  
+		                	<f:facet name="output"><h:outputText value="#{financeiro.usuarioDTO.desconto*100}%" /></f:facet>  
+		                  	<f:facet name="input">
+		                  		<p:selectOneMenu id="desconto" effect="fade" required="true"
+									value="#{financeiro.usuarioDTO.desconto}" style="width:100%">
+									<p:ajax event="change" listener="#{usuarioMB.calculaDesconto}"
+		                                update="panel" />
+									<f:selectItem itemLabel="Selcione" itemValue=""	/>
+									<f:selectItem itemLabel="0%" itemValue="0.0" />
+									<f:selectItem itemLabel="10%" itemValue="0.1" />
+									<f:selectItem itemLabel="20%" itemValue="0.2" />
+									<f:selectItem itemLabel="30%" itemValue="0.3" />
+									<f:selectItem itemLabel="40%" itemValue="0.4" />
+									<f:selectItem itemLabel="50%" itemValue="0.5" />
+									<f:selectItem itemLabel="60%" itemValue="0.6" />
+									<f:selectItem itemLabel="70%" itemValue="0.7" />
+									<f:selectItem itemLabel="80%" itemValue="0.8" />
+									<f:selectItem itemLabel="90%" itemValue="0.9" />
+									<f:selectItem itemLabel="100%" itemValue="1.0" />
+								</p:selectOneMenu>		                  				                  
+			                </f:facet>
+		              	</p:cellEditor>
+		        </p:column>
+		        
+		        <p:column headerText="Valor da Mensalidade">  
 		            <h:outputText value="#{financeiro.usuarioDTO.financeiroDTO.valorComDesconto}" /> 
 		        </p:column>
 		    </p:dataTable> 
+		    </p:panel>
  		</h:form>
 	</ui:define>
 </ui:decorate>
