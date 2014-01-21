@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+
+<ui:decorate template="layout.xhtml">  
+	<ui:define id="centro" name="centro"> 
+ 		<h:form id="form">
+ 		<p:panel header="História">
+ 			<p:tabMenu activeIndex="1">
+	 			<p:menuitem value="Yagyu" url="/listYagyu.xhtml" icon="ui-icon-document" update=":center" />  
+			    <p:menuitem value="Dojo" url="/listDojo.xhtml" icon="ui-icon-document" update=":center"/>  
+			</p:tabMenu>
+			
+			<p:commandButton value="Incluir Novo" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" update=":center" />
+ 			<p:commandButton value="Excluir" actionListener="#{historiaMB.del}"  update="form,:messages,:growl,panel" />
+ 			
+			<p:separator id="separator"/>
+			
+			<p:dataTable id="panel" var="historia" value="#{historiaMB.historiaDataModel}" selection="#{historiaMB.listSelectedHistoriaDTO}" rowKey="#{historia.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 			
+ 				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
+				
+				<p:column selectionMode="multiple" style="width:2%" />
+ 				  
+		        <p:column headerText="Nome">
+		            <h:outputText value="#{historia.nome}"/>
+		        </p:column>
+		        
+		        <p:column headerText="">
+			        <p:commandLink id="ajax" update="panel" actionListener="#{historiaMB.edit}" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">  
+				        <h:outputText value="Alterar" />
+				    </p:commandLink>
+		        </p:column>
+		        
+		    </p:dataTable>
+			
+		</p:panel>	
+		</h:form>
+ 	</ui:define>  
+</ui:decorate>  
+</html>

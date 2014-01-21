@@ -8,18 +8,13 @@
 <ui:decorate template="layout.xhtml">  
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
- 			<p:commandButton value="Incluir Novo" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" update=":center" />
-
- 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl,panel" />
-
- 			<p:separator id="separator"/>
- 			
- 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuarioDTO}" rowKey="#{membro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
- 			
- 				  
-		        
-		    </p:dataTable> 
- 		
+ 		<p:panel header="História">
+ 			<p:tabMenu activeIndex="0">
+	 			<p:menuitem value="Yagyu" url="/listYagyu.xhtml" icon="ui-icon-document" update=":center"/>  
+			    <p:menuitem value="Dojo" url="/listDojo.xhtml" icon="ui-icon-document" update=":center"/>  
+			</p:tabMenu>
+			<p:separator id="separator"/>
+		</p:panel>	
  		</h:form>
  	</ui:define>  
 </ui:decorate>  
