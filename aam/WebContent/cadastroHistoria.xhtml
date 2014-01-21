@@ -10,7 +10,7 @@
 	<ui:define id="centro" name="centro">
 		<h:form id="form">
 
-			<p:panel id="panel" header="História">
+			<p:panel id="panel" header="Historia">
 		    	<h:inputHidden id="idhistoria" value="#{historiaMB.historiaDTO.id}" />
 		        <h:panelGrid id="pg" columns="4" cellpadding="5">
 		        
@@ -21,6 +21,20 @@
 		            </p:inputText>
 		            <p:message for="titulo" />
 		            
+		            <p:selectOneRadio id="customRadio" value="#{historiaMB.historiaDTO.categoria}" layout="custom" required="true" label="Marcado Para">  
+				       <f:selectItem itemLabel="Option 1" itemValue="true" />  
+				       <f:selectItem itemLabel="Option 2" itemValue="false" />  
+				    </p:selectOneRadio>
+				    <h:outputText for="opt1" value="Categoria: *" />
+		            <h:panelGrid columns="2">
+			            <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>
+						<h:outputLabel for="opt1" value="Yagyu" />
+			            <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>
+				        <h:outputLabel for="opt2" value="Dojo" />
+		            </h:panelGrid>
+		            <p:message for="customRadio" />
+		            <br/>
+		             
 		            <h:outputLabel for="descricao" value="Descrição: " />
 		            <p:inputTextarea id="descricao" rows="5" cols="30" counter="counter" maxlength="200"       
 				    	value="#{historiaMB.historiaDTO.descricao}" 
