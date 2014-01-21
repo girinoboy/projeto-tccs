@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:decorate template="layout.xhtml">
+	<ui:define id="centro" name="centro">
+		<h:form id="form">
+
+			<p:panel id="panel" header="História">
+		    	<h:inputHidden id="idhistoria" value="#{historiaMB.historiaDTO.id}" />
+		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		        
+		        	<h:outputLabel for="titulo" value="Título: *" />
+		            <p:inputText id="titulo" size="80"
+		                value="#{historiaMB.historiaDTO.titulo}" required="true" label="Título">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            <p:message for="titulo" />
+		            
+		            <h:outputLabel for="descricao" value="Descrição: " />
+		            <p:inputTextarea id="descricao" rows="5" cols="30" counter="counter" maxlength="200"       
+				    	value="#{historiaMB.historiaDTO.descricao}" 
+				    	counterTemplate="{0} characters remaining." autoResize="false"/>  
+				  	<p:watermark for="descricao" value=" " />
+				  	<br/>
+				  	<p:message for="descricao" />
+					<h:outputText id="counter" />
+		            
+		            <f:facet name="footer">
+			          	<p:commandButton value="Salvar" actionListener="#{historiaMB.add}" id="withIcon"   
+			            update=":growl,panel,customRadio" icon="ui-icon-disk" />
+			            <p:commandButton value="Reset" type="reset" /> 
+			            <p:commandButton value="Voltar" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
+		  			</f:facet>
+		        </h:panelGrid>  
+		    </p:panel>
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>
