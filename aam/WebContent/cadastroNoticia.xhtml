@@ -27,9 +27,9 @@
 				    <h:outputText for="opt1" value="Marcado Para: *" />
 		            <h:panelGrid columns="2">
 			            <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>
-						<p:calendar locale="pt" showButtonPanel="true" navigator="true"
+						<p:calendar locale="pt" showButtonPanel="true" navigator="true" label="Data"
 							value="#{noticiaMB.noticiaDTO.marcadoPara}" id="popupButtonCal"
-							showOn="button" valueChangeListener="1800" readonly="true"/>
+							showOn="button" valueChangeListener="1800" readonly="false"/>
 			            <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>
 				        <h:outputLabel for="opt2" value="Sem Data" />
 		            </h:panelGrid>
@@ -46,15 +46,35 @@
 					<h:outputText id="counter" />
 		            
 		            <f:facet name="footer">
-			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon"   
+			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon" 
 			            update=":growl,panel,customRadio" icon="ui-icon-disk" />
-			            <p:commandButton value="Reset" type="reset" /> 
-			            <p:commandButton value="Voltar" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
+			            <p:commandButton value="Reset" type="reset" />
+			            <p:commandButton value="Voltar" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 		  			</f:facet>
-		        </h:panelGrid>  
+		        </h:panelGrid>
+				
+		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();"/> <p:commandButton icon="ui-icon-closethick"/>
+
 		    </p:panel>
- 		
  		</h:form>
+ 		
+		<p:dialog header="Adicionar Grupo de Técnicas" widgetVar="dlgN" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:form>
+  				<h:panelGrid columns="2">
+				    
+				    <h:outputLabel value="Nome" for="nome"/>
+				  	<p:inputText id="nome" size="50" value="#{tecnicaMB.tecnicaDTO.nome}"/>
+				  	
+				  	<br/>
+				    <p:fileUpload value="#{tecnicaMB.file}" mode="simple"/>
+				  	<f:facet name="footer">
+					    <p:commandButton value="Salvar" ajax="false" actionListener="#{tecnicaMB.add}" update="panel"/>
+				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgN').hide()" immediate="true" />
+			  		</f:facet>
+		  		</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
  	</ui:define>  
 </ui:decorate>  
 </html>

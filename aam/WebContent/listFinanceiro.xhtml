@@ -11,7 +11,7 @@
  		<h:form id="form">
  			<p:panel id="panel1" header="Financeiro">
  				<h:outputLabel value="Mensalidade: *" for="mensalidade"/>
- 				<pe:inputNumber id="valor" value="#{financeiroMB.financeiroDTO.valorMensalidade}" symbol="R$ " size="5" required="true" />
+ 				<pe:inputNumber id="valor" value="#{financeiroMB.financeiroDTO.valorMensalidade}" symbol="R$ " size="7" required="true" />
  				<p:watermark for="valor" value="R$ " />
 		        <p:message for="valor" />
 				<p:spacer height="40"/>

@@ -8,8 +8,9 @@
 <ui:decorate template="layout.xhtml">  
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
+ 			<p:panel header="Técnica">
  			<p:commandButton id="selectButton4" value="Incluir Novo" icon="ui-icon-gear" title="teste" update=":growl" onclick="PF('dlgT').show();" actionListener="#{tecnicaMB.edit}"/>  
- 			<p:commandButton value="Incluir Novo" action="/cadastroTecnnica.xhtml?faces-redirect=true" immediate="true" update=":center" />
+ 			<p:commandButton value="Incluir Novo" action="/cadastroTecnica.xhtml?faces-redirect=true" immediate="true" update=":center" />
 
  			<p:commandButton value="Excluir" actionListener="#{tecnicaMB.del}"  update="form,:messages,:growl,panel" />
 
@@ -32,19 +33,19 @@
 		        </p:column>
 		    </p:dataTable> 
  		
+ 			</p:panel>
  		</h:form>
- 		
  		<p:dialog header="Adicionar Grupo de Técnicas" widgetVar="dlgT" modal="true" appendToBody="true" resizable="false" draggable="true">
 		    <h:form enctype="multipart/form-data">
-  				<h:panelGrid columns="3">
-				    <p:messages showDetail="true"/>
+  				<h:panelGrid columns="2">
+				    
 				    <h:outputLabel value="Nome" for="nome"/>
-				  	<p:inputText id="nome" size="80"/>
+				  	<p:inputText id="nome" size="50" value="#{tecnicaMB.tecnicaDTO.nome}"/>
 				  	
-				  	<br/><p:spacer height="1"/>
+				  	<br/>
 				    <p:fileUpload value="#{tecnicaMB.file}" mode="simple"/>
 				  	<f:facet name="footer">
-					    <p:commandButton value="Salvar" ajax="false" actionListener="#{tecnicaMB.upload}"/>
+					    <p:commandButton value="Salvar" ajax="false" actionListener="#{tecnicaMB.add}" update="panel"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgT').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>

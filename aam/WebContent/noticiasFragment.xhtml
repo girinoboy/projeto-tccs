@@ -38,12 +38,15 @@
 					</h:outputText>
 		        </p:column>
 		        <p:column headerText="">
-			        <p:commandLink id="ajax" update="panel" actionListener="#{noticiaMB.edit}" action="/cadastroNoticia.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">  
+			        <p:commandLink id="ajax" update="panel" actionListener="#{noticiaMB.edit}" action="/cadastroNoticia.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
+			        	<f:setPropertyActionListener target="#{noticiaMB.noticiaDTO}" value="#{noticia}" />  
 				        <h:outputText value="Alterar" />  
 				    </p:commandLink>
 		        </p:column>
 
 			</p:dataTable>
+			
 		</p:panel>
 	</h:form>
+	
 </ui:composition>
