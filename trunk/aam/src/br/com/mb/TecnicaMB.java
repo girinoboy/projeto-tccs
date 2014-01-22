@@ -15,6 +15,7 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.model.UploadedFile;
 
 import br.com.dao.TecnicaDAO;
+import br.com.dto.AnexoDTO;
 import br.com.dto.TecnicaDTO;
 import br.com.utility.TecnicaDataModel;
 
@@ -58,10 +59,23 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 		System.out.println(listSelectedTecnicaDTO);
 	}
 
-	public void add(ActionEvent actionEvent) throws Exception {
-		tecnicaDAO.save(tecnicaDTO);
-		tecnicaDTO = new TecnicaDTO();
-		addMessage("salvo");
+	public void add(ActionEvent actionEvent){
+		try{
+			if(file != null) {
+				AnexoDTO anexoDTO = new AnexoDTO();
+				anexoDTO.setNome(file.getFileName());
+				anexoDTO.setAnexo(file.getContents());
+				anexoDTO.setTamanho(file.getSize());
+				anexoDTO.setContentType(file.getContentType());
+	
+				tecnicaDTO.setAnexoDTO(anexoDTO);
+			}
+			tecnicaDAO.save(tecnicaDTO);
+			tecnicaDTO = new TecnicaDTO();
+			addMessage("salvo");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 	}
 

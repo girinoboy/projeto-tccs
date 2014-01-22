@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
@@ -20,6 +21,7 @@ import br.com.utility.NoticiaDataModel;
  *
  */
 @ManagedBean
+@SessionScoped
 public class NoticiaMB extends GenericoMB implements ModeloMB{
 	
 	private NoticiaDAO noticiaDAO = new NoticiaDAO();
@@ -48,6 +50,7 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {
+		noticiaDTO.setUsuarioDTO(getUserSession());
 		noticiaDAO.save(noticiaDTO);
 		noticiaDTO = new NoticiaDTO();
 		addMessage("salvo");
@@ -55,7 +58,7 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		System.out.println(noticiaDTO);
 		
 	}
 

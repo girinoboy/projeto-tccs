@@ -1,31 +1,24 @@
-package br.com.mb;
+package br.com.utility;
 
 import java.io.ByteArrayInputStream;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import br.com.dao.AnexoDAO;
 import br.com.dto.AnexoDTO;
-import br.com.dto.UsuarioDTO;
+import br.com.mb.GenericoMB;
 
-public class GenericoMB {
+public class Util extends GenericoMB{
 	
 	private AnexoDAO anexoDAO = new AnexoDAO();
-	
-	public UsuarioDTO getUserSession(){
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		return ((UsuarioDTO) session.getAttribute("usuarioAutenticado"));
+
+	public Util() {
+		// TODO Auto-generated constructor stub
 	}
 	
-	public void addMessage(String summary) {  
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);  
-		FacesContext.getCurrentInstance().addMessage(null, message);  
-	}
 	
 	public StreamedContent getDynamicImage() {
 		byte[] emptyImage = new byte[0];

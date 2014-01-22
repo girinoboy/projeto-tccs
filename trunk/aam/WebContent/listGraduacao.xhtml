@@ -11,8 +11,26 @@
  			<p:commandButton value="Incluir Novo" action="/cadastroGraduacao.xhtml?faces-redirect=true" immediate="true" update=":center" />
  			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl,panel" />
  			<p:separator id="separator"/>
- 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuarioDTO}" rowKey="#{membro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
- 			
+ 			<p:dataTable id="panel" var="graduacao" value="#{graduacaoMB.graduacaoDataModel}" selection="#{graduacaoMB.listSelectedGraduacaoDTO}" rowKey="#{graduacao.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 				<p:ajax event="rowSelectCheckbox" listener="#{graduacaoMB.check}"   />
+				
+				<p:column selectionMode="multiple" style="width:2%" />
+				
+				<p:column headerText="Foto">  
+		        	<p:graphicImage value="#{graduacaoMB.dynamicImage}" style="width:60px;height:60px">
+						<f:param name="image_id" value="#{graduacao.anexoDTO.id}"/>
+					</p:graphicImage>
+		        </p:column>
+ 				  
+		        <p:column headerText="Nome">
+		            <h:outputText value="#{graduacao.nome}"/>
+		        </p:column>
+		        
+		        <p:column headerText="">
+			        <p:commandLink id="ajax" update="panel" actionListener="#{graduacaoMB.edit}" action="/cadastroGraduacao.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">  
+				        <h:outputText value="Alterar" />
+				    </p:commandLink>
+		        </p:column>
 		    </p:dataTable> 
  		</h:form>
  	</ui:define>  

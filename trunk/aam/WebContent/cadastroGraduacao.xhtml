@@ -20,6 +20,15 @@
 		            <p:watermark for="nome" value="Nome completo" />
 		            <p:message for="nome" />
 		            
+		            <br/>
+		            <p:selectCheckboxMenu id="grupoTecnica" value="#{graduacaoMB.listSelectedTecnicaDTO}" label="Grupos Técnicas" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:220px" converter="tecnica">  
+						<f:selectItems value="#{tecnicaMB.listTecnicaDTO}"
+								var="tecnica" itemLabel="#{tecnica.nome}"
+								itemValue="#{tecnica}" />
+				    </p:selectCheckboxMenu>
+				    <br/>
+				    <p:message for="grupoTecnica" />
+		            
 		            <h:outputLabel for="conhecimentos" value="Conhecimentos exigidos: " />
 		            <p:inputTextarea id="conhecimentos" rows="5" cols="30" counter="counter" maxlength="200"       
 				    	value="#{graduacaoMB.graduacaoDTO.conhecimentos}" 
@@ -32,7 +41,7 @@
 			          	<p:commandButton value="Salvar" actionListener="#{graduacaoMB.add}" id="withIcon"   
 			            update=":growl" icon="ui-icon-disk" />
 			            <p:commandButton value="Reset" type="reset" /> 
-			            <p:commandButton value="Voltar" action="/membros.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
+			            <p:commandButton value="Voltar" action="/listGraduacao.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
 		  			</f:facet>
 		        </h:panelGrid>  
 		    </p:panel>
