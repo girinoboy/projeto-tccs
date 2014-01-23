@@ -13,7 +13,9 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.SelectEvent;
 
 import br.com.dao.NoticiaDAO;
+import br.com.dto.LinkDTO;
 import br.com.dto.NoticiaDTO;
+import br.com.utility.AbstractDataModel;
 import br.com.utility.NoticiaDataModel;
 
 /**
@@ -29,6 +31,8 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 	private List<NoticiaDTO> listNoticiaDTO = new ArrayList<NoticiaDTO>();
 	private NoticiaDTO[] listSelectedNoticiaDTO;
 	private NoticiaDataModel noticiaDataModel; 
+	private AbstractDataModel<LinkDTO> linkDataModel;
+	private LinkDTO[] listSelectedLinkDTO;
 
 	/**
 	 * 
@@ -119,6 +123,22 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 
 	public void setNoticiaDataModel(NoticiaDataModel noticiaDataModel) {
 		this.noticiaDataModel = noticiaDataModel;
+	}
+
+	public AbstractDataModel<LinkDTO> getLinkDataModel() {
+		return linkDataModel;
+	}
+
+	public void setLinkDataModel(AbstractDataModel<LinkDTO> linkDataModel) {
+		this.linkDataModel = linkDataModel;
+	}
+
+	public LinkDTO[] getListSelectedLinkDTO() {
+		return listSelectedLinkDTO;
+	}
+
+	public void setListSelectedLinkDTO(LinkDTO[] listSelectedLinkDTO) {
+		this.listSelectedLinkDTO = listSelectedLinkDTO;
 	}
 
 }

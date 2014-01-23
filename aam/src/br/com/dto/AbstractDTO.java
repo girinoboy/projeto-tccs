@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass; 
 
 @MappedSuperclass 
-public abstract class AbstractBean implements Serializable { 
+public abstract class AbstractDTO implements Serializable { 
 
 	@Id 
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY) 
@@ -38,8 +38,8 @@ public abstract class AbstractBean implements Serializable {
 		if (getClass() != obj.getClass()) 
 			return false; 
 
-		return (obj instanceof AbstractBean) ? (this.getId() == null ? this == obj 
-				: this.getId().equals(((AbstractBean) obj).getId())) 
+		return (obj instanceof AbstractDTO) ? (this.getId() == null ? this == obj 
+				: this.getId().equals(((AbstractDTO) obj).getId())) 
 				: false; 
 	} 
 

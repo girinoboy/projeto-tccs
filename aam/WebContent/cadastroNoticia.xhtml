@@ -54,7 +54,19 @@
 		        </h:panelGrid>
 				
 		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();"/> <p:commandButton icon="ui-icon-closethick"/>
-
+				
+				
+				<p:dataTable id="panel" var=link value="#{noticiaMB.linkDataModel}" selection="#{noticiaMB.listSelectedLinkDTO}" rowKey="#{link.id}" paginator="true" rows="10">  
+ 			
+	 				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
+					
+					<p:column selectionMode="multiple" style="width:2%" />
+	 				  
+			        <p:column headerText="Nome">
+			            <h:outputText value="#{link.nome}"/>
+			        </p:column>
+		        
+		        </p:dataTable>
 		    </p:panel>
  		</h:form>
  		
