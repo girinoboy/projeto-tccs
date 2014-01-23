@@ -35,13 +35,17 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 	 */
 	public HistoriaMB() {
 		try {
-			listHistoriaDTO = historiaDAO.list();
-
-			historiaDataModel = new HistoriaDataModel(listHistoriaDTO);
+			atualizaLista();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void atualizaLista() throws Exception{
+		listHistoriaDTO = historiaDAO.list();
+
+		historiaDataModel = new HistoriaDataModel(listHistoriaDTO);
 	}
 	
 	public void check(SelectEvent event) {
@@ -52,6 +56,7 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 	public void add(ActionEvent actionEvent) throws Exception {
 		historiaDAO.save(historiaDTO);
 		historiaDTO = new HistoriaDTO();
+		atualizaLista();
 		addMessage("salvo");
 		
 	}
@@ -72,14 +77,12 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 			}else{
 				addMessage("Nenhum Item Selecionado.");
 			}
-
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			try {
-				listHistoriaDTO = historiaDAO.list();
-
-				historiaDataModel = new HistoriaDataModel(listHistoriaDTO);
+				atualizaLista();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
