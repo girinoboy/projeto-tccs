@@ -29,7 +29,7 @@ import org.hibernate.annotations.Cascade;
  */
 @Entity
 @Table(name="usuario")
-public class UsuarioDTO {
+public class UsuarioDTO extends AbstractDTO{
 
 	@Id 
 	@GeneratedValue(strategy= GenerationType.IDENTITY)

@@ -11,7 +11,7 @@ import javax.faces.convert.FacesConverter;
 import org.primefaces.component.picklist.PickList; 
 import org.primefaces.model.DualListModel; 
 
-import br.com.dto.AbstractBean;
+import br.com.dto.AbstractDTO;
 
 @FacesConverter(value = "primeFacesPickListConverter") 
 public class PrimeFacesPickListConverter implements Converter { 
@@ -25,7 +25,7 @@ public class PrimeFacesPickListConverter implements Converter {
 					.hasNext();) { 
 				Object o = iterator.next(); 
 				String id = (new StringBuilder()).append( 
-						((AbstractBean) o).getId()).toString(); 
+						((AbstractDTO) o).getId()).toString(); 
 				if (arg2.equals(id)) { 
 					ret = o; 
 					break; 
@@ -37,7 +37,7 @@ public class PrimeFacesPickListConverter implements Converter {
 						.hasNext();) { 
 					Object o = iterator1.next(); 
 					String id = (new StringBuilder()).append( 
-							((AbstractBean) o).getId()).toString(); 
+							((AbstractDTO) o).getId()).toString(); 
 					if (arg2.equals(id)) { 
 						ret = o; 
 						break; 
@@ -51,8 +51,8 @@ public class PrimeFacesPickListConverter implements Converter {
 
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) { 
 		String str = ""; 
-		if (arg2 instanceof AbstractBean) 
-			str = ((AbstractBean) arg2).getId().toString(); 
+		if (arg2 instanceof AbstractDTO) 
+			str = ((AbstractDTO) arg2).getId().toString(); 
 		return str; 
 	} 
 } 
