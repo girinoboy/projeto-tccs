@@ -20,7 +20,10 @@
 
  			<p:separator id="separator"/>
  			Consulta de Pagamentos <p:calendar pattern="MMM/yyyy" showButtonPanel="true" navigator="true" id="customCal"/>
- 			<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.financeiroDTO}" rowKey="#{financeiro.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 			<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.financeiroDTO}" rowKey="#{financeiro.id}" editable="true" editMode="cell" paginator="true" rows="10">
+ 			
+ 				<p:ajax event="cellEdit" listener="#{financeiroMB.onCellEdit}" update=":messages,:growl,panel" />
+ 			  
  				<p:column headerText="Nome">  
 		            <h:outputText value="#{financeiro.usuarioDTO.nome}" /> 
 		        </p:column>
@@ -30,8 +33,8 @@
 	                	<f:facet name="output"><h:outputText value="#{financeiro.usuarioDTO.financeiroDTO.situacao ? 'Ok' : 'Pendente'}" /></f:facet>  
 	                  	<f:facet name="input">
 	                    	<h:selectOneMenu value="#{financeiro.usuarioDTO.financeiroDTO.situacao}" style="width:100%">  
-		                    	<f:selectItem itemLabel="ok" itemValue="true" />
-								<f:selectItem itemLabel="pendente" itemValue="false" />  
+		                    	<f:selectItem itemLabel="Ok" itemValue="true" />
+								<f:selectItem itemLabel="Pendente" itemValue="false" />  
 		                    </h:selectOneMenu> 
 		                </f:facet>
 	              	</p:cellEditor>
@@ -63,7 +66,7 @@
 		        </p:column>
 		        
 		        <p:column headerText="Valor da Mensalidade">  
-		            <h:outputText value="#{financeiro.usuarioDTO.financeiroDTO.valorComDesconto}" /> 
+		            <h:outputText value="#{financeiro.valorComDesconto}" /> 
 		        </p:column>
 		    </p:dataTable> 
 		    </p:panel>

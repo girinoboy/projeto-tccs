@@ -40,10 +40,10 @@
   				<h:panelGrid columns="2">
 				    
 				    <h:outputLabel value="Nome" for="nome"/>
-				  	<p:inputText id="nome" size="50" value="#{tecnicaMB.tecnicaDTO.nome}"/>
+				  	<p:inputText id="nome" size="50" value="#{tecnicaMB.tecnicaDTO.nome}" maxlength="50"/>
 				  	
 				  	<br/>
-				    <p:fileUpload value="#{tecnicaMB.file}" mode="simple"/>
+				    <p:fileUpload value="#{tecnicaMB.file}" mode="simple" allowTypes="/(\.|\/)(pdf)$/"/>
 				  	<f:facet name="footer">
 					    <p:commandButton value="Salvar" ajax="false" actionListener="#{tecnicaMB.add}" update="panel"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgT').hide()" immediate="true" />

@@ -30,50 +30,51 @@
 							sizeLimit="65535" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 							label="Selecione" />
 
+						<p:watermark for="nome" value="Nome completo" />
+						<p:message for="nome" />
 						<h:outputLabel for="nome" value="Nome: *" />
-						<p:inputText id="nome" size="45"
+						<p:inputText id="nome" size="45" maxlength="50"
 							value="#{usuarioMB.usuarioDTO.nome}" required="true" label="Nome">
 							<f:validateLength minimum="2" />
 						</p:inputText>
-						<p:watermark for="nome" value="Nome completo" />
-						<p:message for="nome" />
 
+						<p:watermark for="cpf" value=" " />
+						<p:message for="cpf" />
 						<h:outputLabel for="cpf" value="CPF: *" />
 						<p:inputMask value="#{usuarioMB.usuarioDTO.cpf}"
 							mask="999.999.999-99" id="cpf" size="15" required="true"
 							label="CPF">
 							<f:validateLength minimum="2" />
 						</p:inputMask>
-						<p:watermark for="cpf" value=" " />
-						<p:message for="cpf" />
 
-						<h:outputLabel for="rg" value="RG: *" />
-						<p:inputText id="rg" value="#{usuarioMB.usuarioDTO.rg}">
-							<p:clientValidator event="keyup" size="15" required="true"
-								label="RG" />
-							<f:validateLength minimum="2" />
-						</p:inputText>
 						<p:watermark for="rg" value=" " />
 						<p:message for="rg" />
+						<h:outputLabel for="rg" value="RG: *" />
+						<p:inputText id="rg" value="#{usuarioMB.usuarioDTO.rg}" validatorMessage="Apenas numeros" required="true" label="RG">
+							<p:clientValidator event="keyup" size="15" required="true"
+								label="RG" />
+								<f:validateRegex pattern="^[0-9]*$" /> 
+							<f:validateLength minimum="2" />
+						</p:inputText>
 
-						<h:outputText for="dataNascimento" value="Data de nascimento: *"
-							required="true" />
+						<h:outputText for="dataNascimento" value="Data de nascimento: *" required="true" />
 						<p:calendar locale="pt" showButtonPanel="true" navigator="true" value="#{usuarioMB.usuarioDTO.dataNascimento}" id="popupButtonCal"
 							showOn="button" valueChangeListener="1800" readonly="true"/>
 
+						<p:watermark for="sexo" value=" " />
+						<p:message for="sexo" />
 						<h:outputLabel for="sexo" value="Sexo: *" />
 						<p:selectOneRadio id="sexo" value="#{usuarioMB.usuarioDTO.sexo}"
-							required="true">
+							required="true" label="Sexo">
 							<f:selectItem itemLabel="Feminino" itemValue="0" />
 							<f:selectItem itemLabel="Masculino" itemValue="1" />
 						</p:selectOneRadio>
-						<p:watermark for="sexo" value=" " />
-						<p:message for="sexo" />
-
 
 						<!-- E-mail -->
-						<h:outputText for="email" value="E-mail: *" />
-						<p:inputText size="45" required="true" label="email" value="#{usuarioMB.usuarioDTO.email}"/>
+						<h:outputLabel for="email" value="Email: *" />
+			            <p:inputText id="email" value="#{usuarioMB.usuarioDTO.email}" required="true" label="Email" maxlength="50">
+			                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			            </p:inputText>
 
 						<!-- Telefone -->
 						<h:outputText for="telefone" value="Telefone: " />
@@ -88,15 +89,15 @@
 
 						<!-- Login -->
 						<h:outputText for="login" value="Login: *" />
-						<p:inputText size="15" required="true" label="login" value="#{usuarioMB.usuarioDTO.usuario}"/>
+						<p:inputText size="15" required="true" label="login" value="#{usuarioMB.usuarioDTO.usuario}" maxlength="20"/>
 
 						<!-- Senha -->
 						<h:outputText for="senha" value="Senha: *" />
-						<p:password size="15" required="true" label="senha" value="#{usuarioMB.usuarioDTO.senha}"/>
+						<p:password size="15" required="true" label="senha" value="#{usuarioMB.usuarioDTO.senha}" maxlength="20"/>
 						
 						<!-- Graduação -->
 						<h:outputLabel for="graduacao" value="Graduação: *" />
-						<p:selectOneMenu id="graduacao"
+						<p:selectOneMenu id="graduacao" label="Graduação"
 							value="#{usuarioMB.usuarioDTO.graduacaoDTO}" effect="fade"
 							converter="graduacao" required="true">
 							<f:selectItem itemLabel="Selecione" itemValue="" />
