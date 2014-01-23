@@ -56,9 +56,9 @@
 		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();"/> <p:commandButton icon="ui-icon-closethick"/>
 				
 				
-				<p:dataTable id="panel" var=link value="#{noticiaMB.linkDataModel}" selection="#{noticiaMB.listSelectedLinkDTO}" rowKey="#{link.id}" paginator="true" rows="10">  
+				<p:dataTable id="dataTable" var="link" value="#{noticiaMB.linkDataModel}" selection="#{noticiaMB.listSelectedLinkDTO}" rowKey="#{link.id}" paginator="true" rows="10">  
  			
-	 				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
+	 				<p:ajax event="rowSelectCheckbox" listener="#{noticiaMB.check}"   />
 					
 					<p:column selectionMode="multiple" style="width:2%" />
 	 				  
