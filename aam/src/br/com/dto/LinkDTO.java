@@ -26,6 +26,7 @@ public class LinkDTO extends AbstractDTO{
 	private static final long serialVersionUID = -5801329818411040951L;
 	
 	private String nome;
+	private String url;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	@JoinColumn(name = "historia_id", insertable = true, updatable = true, nullable = true)
@@ -48,6 +49,14 @@ public class LinkDTO extends AbstractDTO{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public HistoriaDTO getHistoriaDTO() {

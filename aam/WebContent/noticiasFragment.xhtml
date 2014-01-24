@@ -7,7 +7,7 @@
 		<p:panel header="Notícias">
 			<p:commandButton value="Incluir Novo"
 				action="/cadastroNoticia.xhtml?faces-redirect=true" immediate="true"
-				update=":center" />
+				update=":center" actionListener="#{noticiaMB.reset}"/>
 
 			<p:commandButton value="Excluir" actionListener="#{noticiaMB.del}"
 				update="form,:messages,:growl,panel" />
@@ -39,7 +39,7 @@
 		        </p:column>
 		        <p:column headerText="">
 			        <p:commandLink id="ajax" update="panel" actionListener="#{noticiaMB.edit}" action="/cadastroNoticia.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
-			        	<f:setPropertyActionListener target="#{noticiaMB.noticiaDTO}" value="#{noticia}" />  
+			        	<f:setPropertyActionListener value="#{noticia}" target="#{noticiaMB.noticiaDTO}"/>  
 				        <h:outputText value="Alterar" />  
 				    </p:commandLink>
 		        </p:column>

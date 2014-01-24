@@ -4,6 +4,7 @@
 package br.com.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -38,6 +40,8 @@ public class NoticiaDTO {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;//usuario marcador, ou o que registrou a noticia
+	@OneToMany(targetEntity=LinkDTO.class, mappedBy = "noticiaDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL,CascadeType.PERSIST, CascadeType.MERGE})
+	private List<LinkDTO> listLinkDTO;
 
 	/**
 	 * 
@@ -101,6 +105,14 @@ public class NoticiaDTO {
 
 	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
 		this.usuarioDTO = usuarioDTO;
+	}
+
+	public List<LinkDTO> getListLinkDTO() {
+		return listLinkDTO;
+	}
+
+	public void setListLinkDTO(List<LinkDTO> listLinkDTO) {
+		this.listLinkDTO = listLinkDTO;
 	}
 
 

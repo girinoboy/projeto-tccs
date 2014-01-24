@@ -12,9 +12,11 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
 
+import br.com.dao.LinkDAO;
 import br.com.dao.NoticiaDAO;
 import br.com.dto.LinkDTO;
 import br.com.dto.NoticiaDTO;
+import br.com.dto.UsuarioDTO;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.NoticiaDataModel;
 
@@ -25,13 +27,16 @@ import br.com.utility.NoticiaDataModel;
 @ManagedBean
 @SessionScoped
 public class NoticiaMB extends GenericoMB implements ModeloMB{
-	
+
 	private NoticiaDAO noticiaDAO = new NoticiaDAO();
 	private NoticiaDTO noticiaDTO = new NoticiaDTO();
 	private List<NoticiaDTO> listNoticiaDTO = new ArrayList<NoticiaDTO>();
 	private NoticiaDTO[] listSelectedNoticiaDTO;
-	private NoticiaDataModel noticiaDataModel; 
+	private NoticiaDataModel noticiaDataModel;
+	private LinkDAO linkDAO = new LinkDAO();
+	private LinkDTO linkDTO = new LinkDTO();
 	private AbstractDataModel<LinkDTO> linkDataModel;
+	private List<LinkDTO> listLinkDTO = new ArrayList<LinkDTO>();
 	private LinkDTO[] listSelectedLinkDTO;
 
 	/**
@@ -47,23 +52,39 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 			e.printStackTrace();
 		}
 	}
-	
+
+	public void reset(ActionEvent event){
+		noticiaDTO = new NoticiaDTO();
+		linkDataModel = new AbstractDataModel<LinkDTO>();
+	}
+
 	public void check(SelectEvent event) {
 		System.out.println("in check");
 		System.out.println(listSelectedNoticiaDTO);
+		System.out.println(listSelectedLinkDTO);
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {
+
 		noticiaDTO.setUsuarioDTO(getUserSession());
-		noticiaDAO.save(noticiaDTO);
+		noticiaDTO = noticiaDAO.save(noticiaDTO);
+		//salva todos os links nas respctivas noticias
+		for (LinkDTO l : listLinkDTO) {
+			l.setNoticiaDTO(noticiaDTO);
+			linkDAO.save(l);
+		}
+		linkDataModel = new AbstractDataModel<LinkDTO>();
 		noticiaDTO = new NoticiaDTO();
+
 		addMessage("salvo");
-		
+
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
 		System.out.println(noticiaDTO);
-		
+		if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
+			linkDataModel = new AbstractDataModel<LinkDTO>(noticiaDTO.getListLinkDTO());
+		}
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
@@ -90,10 +111,29 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 				e.printStackTrace();
 			}
 		}
-		
+
+	}
+
+	public void addLink(ActionEvent actionEvent) throws Exception{
+		if(listLinkDTO == null){
+			listLinkDTO = new ArrayList<LinkDTO>();
+		}
+		listLinkDTO.add(linkDAO.save(linkDTO));
+		linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+	}
+
+	public void delLink(ActionEvent actionEvent) throws Exception{
+		for (LinkDTO l : listSelectedLinkDTO) {
+			linkDAO.delete(l);
+			listLinkDTO.remove(l);
+		}
+		linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
 	}
 
 	public NoticiaDTO getNoticiaDTO() {
+		if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
+			linkDataModel = new AbstractDataModel<LinkDTO>(noticiaDTO.getListLinkDTO());
+		}
 		return noticiaDTO;
 	}
 
@@ -139,6 +179,22 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 
 	public void setListSelectedLinkDTO(LinkDTO[] listSelectedLinkDTO) {
 		this.listSelectedLinkDTO = listSelectedLinkDTO;
+	}
+
+	public LinkDTO getLinkDTO() {
+		return linkDTO;
+	}
+
+	public void setLinkDTO(LinkDTO linkDTO) {
+		this.linkDTO = linkDTO;
+	}
+
+	public List<LinkDTO> getListLinkDTO() {
+		return listLinkDTO;
+	}
+
+	public void setListLinkDTO(List<LinkDTO> listLinkDTO) {
+		this.listLinkDTO = listLinkDTO;
 	}
 
 }
