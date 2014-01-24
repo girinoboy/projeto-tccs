@@ -14,7 +14,7 @@
 			    <p:menuitem value="Dojo" url="/listDojo.xhtml" icon="ui-icon-document" update=":center"/>  
 			</p:tabMenu>
 			
-			<p:commandButton value="Incluir Novo" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" update=":center" />
+			<p:commandButton value="Incluir Novo" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" update=":center" actionListener="#{historiaMB.reset}"/>
  			<p:commandButton value="Excluir" actionListener="#{historiaMB.del}"  update="form,:messages,:growl,panel" />
  			
 			<p:separator id="separator"/>
@@ -30,7 +30,8 @@
 		        </p:column>
 		        
 		        <p:column headerText="">
-			        <p:commandLink id="ajax" update="panel" actionListener="#{historiaMB.edit}" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">  
+			        <p:commandLink id="ajax" update="panel" actionListener="#{historiaMB.edit}" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
+			        	<f:setPropertyActionListener value="#{historia}" target="#{historiaMB.historiaDTO}"/>  
 				        <h:outputText value="Alterar" />
 				    </p:commandLink>
 		        </p:column>

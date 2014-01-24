@@ -48,6 +48,10 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 		historiaDataModel = new HistoriaDataModel(listHistoriaDTO);
 	}
 	
+	public void reset(ActionEvent event){
+		historiaDTO = new HistoriaDTO();
+	}
+	
 	public void check(SelectEvent event) {
 		System.out.println("in check");
 		System.out.println(listSelectedHistoriaDTO);
