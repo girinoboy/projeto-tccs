@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
 
 import br.com.dao.GraduacaoDAO;
 import br.com.dto.GraduacaoDTO;
+import br.com.dto.LinkDTO;
+import br.com.dto.NoticiaDTO;
 import br.com.dto.TecnicaDTO;
+import br.com.utility.AbstractDataModel;
 import br.com.utility.GraduacaoDataModel;
 
 
 @ManagedBean
+@SessionScoped
 public class GraduacaoMB extends GenericoMB implements ModeloMB{
 	
 	private GraduacaoDAO graduacaoDAO = new GraduacaoDAO();
@@ -32,6 +37,10 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void reset(ActionEvent event){
+		graduacaoDTO = new GraduacaoDTO();
 	}
 	
 	public void check(SelectEvent event) {
