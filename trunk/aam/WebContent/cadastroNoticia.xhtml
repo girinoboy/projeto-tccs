@@ -11,19 +11,21 @@
  		
  			<p:panel id="panel" header="Notícias">
 		    	<h:inputHidden id="idnoticia" value="#{noticiaMB.noticiaDTO.id}" />
-		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		        <h:panelGrid id="pg" columns="2" cellpadding="5">
 		        
+		        	<br/>
+		            <p:message for="titulo" />
 		        	<h:outputLabel for="titulo" value="Título: *" />
 		            <p:inputText id="titulo" size="80"
 		                value="#{noticiaMB.noticiaDTO.titulo}" required="true" label="Título">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
-		            <p:message for="titulo" />
 		            
 		            <p:selectOneRadio id="customRadio" value="#{noticiaMB.noticiaDTO.semData}" layout="custom" required="true" label="Marcado Para">  
 				       <f:selectItem itemLabel="Option 1" itemValue="true" />  
 				       <f:selectItem itemLabel="Option 2" itemValue="false" />  
 				    </p:selectOneRadio>
+		            <p:message for="customRadio" />
 				    <h:outputText for="opt1" value="Marcado Para: *" />
 		            <h:panelGrid columns="2">
 			            <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>
@@ -33,54 +35,55 @@
 			            <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>
 				        <h:outputLabel for="opt2" value="Sem Data" />
 		            </h:panelGrid>
-		            <p:message for="customRadio" />
-		            <br/>
-		             
+		            
 		            <h:outputLabel for="descricao" value="Descrição: " />
 		            <p:inputTextarea id="descricao" rows="5" cols="30" counter="counter" maxlength="200"       
 				    	value="#{noticiaMB.noticiaDTO.descricao}" 
 				    	counterTemplate="{0} characters remaining." autoResize="false"/>  
 				  	<p:watermark for="descricao" value=" " />
-				  	<br/>
-				  	<p:message for="descricao" />
 					<h:outputText id="counter" />
 		            
-		            <f:facet name="footer">
-			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon" 
-			            update=":growl,panel,customRadio" icon="ui-icon-disk" />
-			            <p:commandButton value="Reset" type="reset" />
-			            <p:commandButton value="Voltar" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/>
-		  			</f:facet>
 		        </h:panelGrid>
 				
-		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();"/> <p:commandButton icon="ui-icon-closethick"/>
+		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true"/> 
+		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{noticiaMB.delLink}" update="dataTable" immediate="true"/>
 				
 				
-				<p:dataTable id="dataTable" var="link" value="#{noticiaMB.linkDataModel}" selection="#{noticiaMB.listSelectedLinkDTO}" rowKey="#{link.id}" paginator="true" rows="10">  
- 			
+				<p:dataTable id="dataTable" var="link" value="#{noticiaMB.linkDataModel}" selection="#{noticiaMB.listSelectedLinkDTO}" rowKey="#{link.nome}">  
+
 	 				<p:ajax event="rowSelectCheckbox" listener="#{noticiaMB.check}"   />
 					
 					<p:column selectionMode="multiple" style="width:2%" />
 	 				  
 			        <p:column headerText="Nome">
-			            <h:outputText value="#{link.nome}"/>
+			        	<p:commandLink id="ajax" update=":form:panel" action="#{link.url}" style="margin-right:20px;" >  
+					    	<h:outputText value="#{link.nome}"/> 
+					   	</p:commandLink> 
+			            
 			        </p:column>
 		        
 		        </p:dataTable>
+		        
+		        <f:facet name="footer">
+			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon" 
+			            update=":growl,panel,customRadio" icon="ui-icon-disk" />
+			            <p:commandButton value="Reset" type="reset" />
+			            <p:commandButton value="Voltar" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/>
+		  			</f:facet>
 		    </p:panel>
  		</h:form>
  		
-		<p:dialog header="Adicionar Grupo de Técnicas" widgetVar="dlgN" modal="true" appendToBody="true" resizable="false" draggable="true">
+		<p:dialog header="Adicionar Link" widgetVar="dlgN" modal="true" appendToBody="true" resizable="false" draggable="true">
 		    <h:form>
   				<h:panelGrid columns="2">
 				    
 				    <h:outputLabel value="Nome" for="nome"/>
-				  	<p:inputText id="nome" size="50" value="#{tecnicaMB.tecnicaDTO.nome}"/>
+				  	<p:inputText id="nome" size="50" value="#{noticiaMB.linkDTO.nome}"/>
 				  	
-				  	<br/>
-				    <p:fileUpload value="#{tecnicaMB.file}" mode="simple"/>
+				  	<h:outputLabel value="URL" for="url"/>
+				  	<p:inputText id="url" size="50" value="#{noticiaMB.linkDTO.url}"/>
 				  	<f:facet name="footer">
-					    <p:commandButton value="Salvar" ajax="false" actionListener="#{tecnicaMB.add}" update="panel"/>
+					    <p:commandButton value="Salvar" ajax="false" actionListener="#{noticiaMB.addLink}" update="dataTable"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgN').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>

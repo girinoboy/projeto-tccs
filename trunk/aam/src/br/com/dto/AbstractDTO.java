@@ -9,10 +9,14 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass 
 public abstract class AbstractDTO implements Serializable { 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id 
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY) 
-	private Integer id; 
-
+	private Integer id;
+	
 	public Integer getId() { 
 		return id; 
 	} 
