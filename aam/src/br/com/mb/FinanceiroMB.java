@@ -34,6 +34,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	private FinanceiroDTO financeiroDTO = new FinanceiroDTO();
 	private FinanceiroDAO financeiroDAO = new FinanceiroDAO();
 	private List<FinanceiroDTO> listFinanceiroDTO;
+	private FinanceiroDTO selectedFinanceiroDTO = new FinanceiroDTO();
 
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	/**
@@ -122,6 +123,24 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 
 	public void setListFinanceiroDTO(List<FinanceiroDTO> listFinanceiroDTO) {
 		this.listFinanceiroDTO = listFinanceiroDTO;
+	}
+
+	public void atualiza(ActionEvent event) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void reset(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public FinanceiroDTO getSelectedFinanceiroDTO() {
+		return selectedFinanceiroDTO;
+	}
+
+	public void setSelectedFinanceiroDTO(FinanceiroDTO selectedFinanceiroDTO) {
+		this.selectedFinanceiroDTO = selectedFinanceiroDTO;
 	}
 
 }

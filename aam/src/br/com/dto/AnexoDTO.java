@@ -34,7 +34,7 @@ public class AnexoDTO {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	@Lob @Basic(fetch=FetchType.LAZY)
-	@Column(columnDefinition="BLOB")
+	@Column(columnDefinition="MEDIUMBLOB")//para mysql
 	private byte[] anexo;
 	private String nome;
 	@Column(name ="content_type")

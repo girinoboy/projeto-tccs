@@ -44,7 +44,7 @@
 					<h:outputText id="counter" />
 		            
 		        </h:panelGrid>
-				
+				<br/>
 		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true"/> 
 		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{noticiaMB.delLink}" update="dataTable" immediate="true"/>
 				
@@ -56,10 +56,9 @@
 					<p:column selectionMode="multiple" style="width:2%" />
 	 				  
 			        <p:column headerText="Nome">
-			        	<p:commandLink id="ajax" update=":form:panel" action="#{link.url}" style="margin-right:20px;" >  
-					    	<h:outputText value="#{link.nome}"/> 
-					   	</p:commandLink> 
-			            
+				        <h:outputLink value="http://#{link.url}" target="_blank">
+							<h:outputText value="#{link.nome}"/>
+						</h:outputLink>
 			        </p:column>
 		        
 		        </p:dataTable>
@@ -68,7 +67,7 @@
 			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon" 
 			            update=":growl,panel,customRadio" icon="ui-icon-disk" />
 			            <p:commandButton value="Reset" type="reset" />
-			            <p:commandButton value="Voltar" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/>
+			            <p:commandButton value="Voltar" actionListener="#{noticiaMB.atualiza}" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 		  			</f:facet>
 		    </p:panel>
  		</h:form>

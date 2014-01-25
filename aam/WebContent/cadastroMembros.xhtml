@@ -18,16 +18,16 @@
 				<div align="center">
 					<h:panelGrid id="pg" columns="2" cellpadding="1">
 
-						<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}"
+						<p:graphicImage id="avatar" value="#{genericoMB.dynamicImage}"
 							style="width:60px;height:60px">
 							<f:param id="av" name="image_id"
-								value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
+								value="#{genericoMB.userSession.anexoDTO.id}" />
 						</p:graphicImage>
 						<p:fileUpload size="15"
 							fileUploadListener="#{usuarioMB.handleFileUpload}"
 							mode="advanced"
 							update=":messages,:growl,avatar,av,idUsuario,idAnexo" auto="true"
-							sizeLimit="65535" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+							sizeLimit="5000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 							label="Selecione" />
 
 						<p:watermark for="nome" value="Nome completo" />
@@ -59,7 +59,7 @@
 
 						<h:outputText for="dataNascimento" value="Data de nascimento: *" required="true" />
 						<p:calendar locale="pt" showButtonPanel="true" navigator="true" value="#{usuarioMB.usuarioDTO.dataNascimento}" id="popupButtonCal"
-							showOn="button" valueChangeListener="1800" readonly="true"/>
+							showOn="button" valueChangeListener="1800"/>
 
 						<p:watermark for="sexo" value=" " />
 						<p:message for="sexo" />
@@ -143,7 +143,7 @@
 						<f:facet name="footer">
 							<div align="right"><p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
 								id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
-							<p:commandButton value="Cancelar"
+							<p:commandButton value="Cancelar" actionListener="#{usuarioMB.atualiza}"
 								action="/listMembros.xhtml?faces-redirect=true" immediate="true"
 								update=":center" /></div>
 						</f:facet>

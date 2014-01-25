@@ -20,7 +20,7 @@
 
  			<p:separator id="separator"/>
  			Consulta de Pagamentos <p:calendar pattern="MMM/yyyy" showButtonPanel="true" navigator="true" id="customCal"/>
- 			<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.financeiroDTO}" rowKey="#{financeiro.id}" editable="true" editMode="cell" paginator="true" rows="10">
+ 			<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.selectedFinanceiroDTO}" rowKey="#{financeiro.id}" editable="true" editMode="cell" paginator="true" rows="10">
  			
  				<p:ajax event="cellEdit" listener="#{financeiroMB.onCellEdit}" update=":messages,:growl,panel" />
  			  

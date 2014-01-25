@@ -1,6 +1,6 @@
 package br.com.mb;
 
-import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -18,24 +19,28 @@ import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 import br.com.dao.AnexoDAO;
 import br.com.dao.FinanceiroDAO;
 import br.com.dao.GraduacaoDAO;
 import br.com.dao.ParametroDAO;
 import br.com.dao.UsuarioDAO;
-import br.com.dto.AnexoDTO;
 import br.com.dto.FinanceiroDTO;
 import br.com.dto.GraduacaoDTO;
 import br.com.dto.ParametroDTO;
 import br.com.dto.UsuarioDTO;
+import br.com.utility.AbstractDataModel;
+import br.com.utility.Constantes;
 import br.com.utility.MembroDataModel;
 
 @ManagedBean
+@SessionScoped
 public class UsuarioMB extends GenericoMB implements ModeloMB{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8789376951090610154L;
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private List<UsuarioDTO> listUsuarioDTO = new ArrayList<UsuarioDTO>();
@@ -45,20 +50,35 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	private AnexoDAO anexoDAO = new AnexoDAO();
 	private FinanceiroDAO financeiroDAO = new FinanceiroDAO();
 
-	private MembroDataModel membroDataModel; 
+	private AbstractDataModel<UsuarioDTO> membroDataModel; 
 
 	public UsuarioMB(){
 		try {
-			listUsuarioDTO = usuarioDAO.list();
-			listGraduacaoDTO = graduacaoDAO.list();
-
-			membroDataModel = new MembroDataModel(listUsuarioDTO);
+			atualiza(null);
 
 			//			listUsuarioDTO = new ArrayList<UsuarioDTO>();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	public void atualiza(ActionEvent event) throws Exception {
+		listUsuarioDTO = usuarioDAO.list();
+		listGraduacaoDTO = graduacaoDAO.list();
+		membroDataModel = new AbstractDataModel<UsuarioDTO>(listUsuarioDTO);
+
+	}
+
+	public void reset(ActionEvent event) {
+		usuarioDTO = new UsuarioDTO();
+		membroDataModel = new AbstractDataModel<UsuarioDTO>();
+	}
+
+	public void onRowSelect(SelectEvent event) throws IOException {  
+		usuarioDTO = (UsuarioDTO) event.getObject();  
+
+		FacesContext.getCurrentInstance().getExternalContext().redirect("cadastroMembros.xhtml"); 
+	}  
 
 	public void handleFileUpload(FileUploadEvent event) throws Exception {
 
@@ -84,45 +104,80 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void add(ActionEvent actionEvent) {
-		try{calculaDesconto();
-			System.out.println(usuarioDTO.getFinanceiroDTO().getValorMensalidade());
-			usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
-			if(usuarioDTO.getId() !=null){
-				//verifica se existe um novo anexo, pois o anexo é salvo ao capturar
-				usuarioDTO.setAnexoDTO(usuarioDAO.getById(usuarioDTO.getId()).getAnexoDTO());
+		try{
+			validaCPF();
+			validaLogin();
+			calculaDesconto();
+		System.out.println(usuarioDTO.getFinanceiroDTO().getValorMensalidade());
+		usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
+		if(usuarioDTO.getId() !=null){
+			//verifica se existe um novo anexo, pois o anexo é salvo ao capturar
+			usuarioDTO.setAnexoDTO(usuarioDAO.getById(usuarioDTO.getId()).getAnexoDTO());
 
-				Calendar c = new GregorianCalendar();
-				c.setTime(usuarioDTO.getFinanceiroDTO().getDataPagamento());
-				Map<String, Object> filtrosConsulta = new HashMap<String, Object>();
-				filtrosConsulta.put("mes", c.get(Calendar.MONTH));
-				filtrosConsulta.put("ano", c.get(Calendar.YEAR));
-				filtrosConsulta.put("usuarioDTO.id", usuarioDTO.getId());
-				//teste para verificar se o usuario ja pagou no mes
-				List<FinanceiroDTO> f = financeiroDAO.listCriterio(null, filtrosConsulta , 1);
+			Calendar c = new GregorianCalendar();
+			c.setTime(usuarioDTO.getFinanceiroDTO().getDataPagamento());
+			Map<String, Object> filtrosConsulta = new HashMap<String, Object>();
+			filtrosConsulta.put("mes", c.get(Calendar.MONTH));
+			filtrosConsulta.put("ano", c.get(Calendar.YEAR));
+			filtrosConsulta.put("usuarioDTO.id", usuarioDTO.getId());
+			//teste para verificar se o usuario ja pagou no mes
+			List<FinanceiroDTO> f = financeiroDAO.listCriterio(null, filtrosConsulta , 1);
 
-				if(!f.isEmpty()){
-					usuarioDTO.getFinanceiroDTO().setId(f.get(0).getId());
-				}
-
+			if(!f.isEmpty()){
+				usuarioDTO.getFinanceiroDTO().setId(f.get(0).getId());
 			}
-			
-			
-			usuarioDTO = usuarioDAO.save(usuarioDTO);
-			usuarioDTO.getFinanceiroDTO().setUsuarioDTO(usuarioDTO);
-			usuarioDTO.getFinanceiroDTO().getDia();
-			usuarioDTO.getFinanceiroDTO().getMes();
-			usuarioDTO.getFinanceiroDTO().getAno();
-			usuarioDTO = usuarioDAO.save(usuarioDTO);
-			addMessage("Salvo");
-			usuarioDTO = new UsuarioDTO();
-			listUsuarioDTO = usuarioDAO.list();
+
+		}
+
+
+		usuarioDTO = usuarioDAO.save(usuarioDTO);
+		usuarioDTO.getFinanceiroDTO().setUsuarioDTO(usuarioDTO);
+		usuarioDTO.getFinanceiroDTO().getDia();
+		usuarioDTO.getFinanceiroDTO().getMes();
+		usuarioDTO.getFinanceiroDTO().getAno();
+		usuarioDTO = usuarioDAO.save(usuarioDTO);
+		addMessage("Salvo");
+		usuarioDTO = new UsuarioDTO();
+		listUsuarioDTO = usuarioDAO.list();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 
 	}
 
+	private void validaLogin() throws Exception {
+		try {
+		
+		if(usuarioDAO.validaLogin(usuarioDTO)){
+			addMessage("login existente");
+			throw new Exception("login invalido");
+		}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	private void validaCPF() throws Exception {
+		try {
+			
+			if(usuarioDAO.validaCPF(usuarioDTO)){
+				addMessage("cpf existente");
+				throw new Exception("cpf invalido");
+			}
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		
+		
+	}
+
 	public void edit(ActionEvent actionEvent) throws Exception {
+		atualiza(null);
 		addMessage("Salvo");
 
 	}
@@ -138,16 +193,13 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			}else{
 				addMessage("Nenhum Item Selecionado.");
 			}
-
+			
 		}catch(Exception e){
+			addMessage(e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try {
-				listUsuarioDTO = usuarioDAO.list();
-
-				listGraduacaoDTO = graduacaoDAO.list();
-
-				membroDataModel = new MembroDataModel(listUsuarioDTO);
+				atualiza(null);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -182,7 +234,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		System.out.println("in check");
 		System.out.println(listSelectedUsuarioDTO);
 	}
-	
+
 	public void calculaDesconto() throws HibernateException, Exception{
 		ParametroDAO parametroDAO = new ParametroDAO();
 		ParametroDTO p = parametroDAO.recuperaParametro("mensalidade");
@@ -217,11 +269,11 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 
-	public MembroDataModel getMembroDataModel() {
+	public AbstractDataModel<UsuarioDTO> getMembroDataModel() {
 		return membroDataModel;
 	}
 
-	public void setMembroDataModel(MembroDataModel membroDataModel) {
+	public void setMembroDataModel(AbstractDataModel<UsuarioDTO> membroDataModel) {
 		this.membroDataModel = membroDataModel;
 	}
 

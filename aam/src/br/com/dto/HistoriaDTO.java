@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,6 +24,9 @@ public class HistoriaDTO {
 	private Boolean categoria;
 	private String titulo;
 	private String descricao;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
+	private UsuarioDTO usuarioDTO;//usuario marcador, ou o que registrou a noticia
 	@OneToMany(targetEntity=LinkDTO.class, mappedBy = "historiaDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL,CascadeType.PERSIST, CascadeType.MERGE})
 	private List<LinkDTO> listLinkDTO;
 
@@ -67,6 +72,14 @@ public class HistoriaDTO {
 
 	public void setListLinkDTO(List<LinkDTO> listLinkDTO) {
 		this.listLinkDTO = listLinkDTO;
+	}
+
+	public UsuarioDTO getUsuarioDTO() {
+		return usuarioDTO;
+	}
+
+	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+		this.usuarioDTO = usuarioDTO;
 	}
 
 }

@@ -11,26 +11,26 @@
  		<h:form id="form">
  		
  			<p:panel id="panel" header="Resultados de avaliação">
- 			
+ 				<h:inputHidden id="idResultadoAvaliacao" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.id}" />
 		        <h:panelGrid id="pg" columns="4" cellpadding="5">
 		        
 		        	<h:outputLabel value="Nome: " for="nome"/>
-		            <p:autoComplete value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.usuarioDTO}" id="nome" completeMethod="#{resuldoAvaliacaoMB.completarUsuario}"
+		            <p:autoComplete value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.usuarioDTO}" id="nome" completeMethod="#{resultadoAvaliacaoMB.completarUsuario}"
 	                    var="u" itemLabel="#{u.nome}" itemValue="#{u}" converter="usuario" forceSelection="true" cache="false" >
-	                    <p:ajax event="itemSelect" listener="#{resuldoAvaliacaoMB.handleSelect}" update="panel" />
+	                    <p:ajax event="itemSelect" listener="#{resultadoAvaliacaoMB.handleSelect}" update="panel" />
 		            </p:autoComplete>
 		       		<p:watermark for="nome" value="Nome completo" />
 		            <p:message for="nome" />
 
 					<h:outputLabel for="dataPagamento" value="Data: *" required="true"/>
-		            <p:calendar value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.data}" id="dataPagamento" required="true"/>
+		            <p:calendar value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.data}" id="dataPagamento" required="true"/>
 		            <p:watermark for="dataPagamento" value="__/__/____" />
 		            <p:message for="dataPagamento" />
 		            
 		            <h:outputLabel for="graduacao" value="Graduacao: *" />
-			        <p:selectOneMenu id="graduacao" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.usuarioDTO.graduacaoDTO}" effect="fade" converter="graduacao" required="true"> 
+			        <p:selectOneMenu id="graduacao" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.usuarioDTO.graduacaoDTO}" effect="fade" converter="graduacao" required="true"> 
 			            <f:selectItem itemLabel="Selecione" itemValue="" />
-			            <f:selectItems value="#{resuldoAvaliacaoMB.listGraduacaoDTO}" var="graduacao" itemLabel="#{graduacao.nome}" itemValue="#{graduacao}"/>
+			            <f:selectItems value="#{resultadoAvaliacaoMB.listGraduacaoDTO}" var="graduacao" itemLabel="#{graduacao.nome}" itemValue="#{graduacao}"/>
 			        </p:selectOneMenu>
 		            <p:watermark for="graduacao" value=" " />
 		            <p:message for="graduacao" />
@@ -38,27 +38,27 @@
 		            <h:outputText value="Notas da Avaliação:" />
 		            <p:row>
 		            	<h:outputLabel for="tecnica" value="Tecnica: *" /> <p:spacer width="57" height="10" />
-		            	<pe:inputNumber id="tecnica" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.tecnica}" required="true" label="Tecnica" maxlength="4"/><br/>
+		            	<pe:inputNumber id="tecnica" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.tecnica}" required="true" label="Tecnica" maxlength="4"/><br/>
 			            <h:outputLabel for="luta" value="Luta: *" /> <p:spacer width="80" height="10" />
-			            <pe:inputNumber id="luta" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.luta}" required="true" label="Luta" maxlength="4"/><br/>
+			            <pe:inputNumber id="luta" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.luta}" required="true" label="Luta" maxlength="4"/><br/>
 			            <h:outputLabel for="conhecimentos" value="Conhecimentos: *" />
-			            <pe:inputNumber id="conhecimentos" value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.conhecimentos}" required="true" label="Conhecimentos" maxlength="4"/>
+			            <pe:inputNumber id="conhecimentos" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.conhecimentos}" required="true" label="Conhecimentos" maxlength="4"/>
 		            </p:row>
 		            <p:message for="tecnica" />
 		            <p:message for="luta" />
 		            
 		            <h:outputLabel for="comentarios" value="Comentarios: " />
 		            <p:inputTextarea id="comentarios" rows="5" cols="30" counter="counter" maxlength="200"
-				    	value="#{resuldoAvaliacaoMB.resuldoAvaliacaoDTO.comentarios}"
+				    	value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.comentarios}"
 				    	counterTemplate="{0} characters remaining." autoResize="false"/>
 				  	<p:watermark for="comentarios" value=" " />
 				  	<p:message for="comentarios" />
 					<h:outputText id="counter" />
 		            
 		            <f:facet name="footer">
-			          	<p:commandButton value="Salvar" actionListener="#{resuldoAvaliacaoMB.add}" id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
+			          	<p:commandButton value="Salvar" actionListener="#{resultadoAvaliacaoMB.add}" id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
 			            <p:commandButton value="Reset" type="reset" />
-			            <p:commandButton value="Voltar" action="/resultadoAvaliacoes.xhtml?faces-redirect=true" immediate="true" update=":center"/>
+			            <p:commandButton value="Voltar" actionListener="#{resultadoAvaliacaoMB.atualiza}" action="/listResultadoAvaliacoes.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 		  			</f:facet>
 		        </h:panelGrid>  
 		    </p:panel> 

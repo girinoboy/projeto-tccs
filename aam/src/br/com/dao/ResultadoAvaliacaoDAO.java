@@ -8,25 +8,25 @@ import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.dto.ResuldoAvaliacaoDTO;
+import br.com.dto.ResultadoAvaliacaoDTO;
 import br.com.factory.HibernateUtility;
 
-public class ResuldoAvaliacaoDAO extends GenericoDAO<ResuldoAvaliacaoDTO, Serializable>{
+public class ResultadoAvaliacaoDAO extends GenericoDAO<ResultadoAvaliacaoDTO, Serializable>{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ResuldoAvaliacaoDAO() {
+	public ResultadoAvaliacaoDAO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ResuldoAvaliacaoDTO buscarNotaMesSelecionado(ResuldoAvaliacaoDTO resuldoAvaliacaoDTO) throws HibernateException, Exception {
+	public ResultadoAvaliacaoDTO buscarNotaMesSelecionado(ResultadoAvaliacaoDTO resuldoAvaliacaoDTO) throws HibernateException, Exception {
 		Calendar data = new GregorianCalendar();
 		data.setTime(resuldoAvaliacaoDTO.getData());
 		
-		ResuldoAvaliacaoDTO result = (ResuldoAvaliacaoDTO) HibernateUtility.getSession().createCriteria(ResuldoAvaliacaoDTO.class)
+		ResultadoAvaliacaoDTO result = (ResultadoAvaliacaoDTO) HibernateUtility.getSession().createCriteria(ResultadoAvaliacaoDTO.class)
 				.add(Restrictions.sqlRestriction(" month(data)=" + (data.get(Calendar.MONTH)+1))) 
 				//.add(Restrictions.ilike("data", data.getTime()))
 				.addOrder(Order.asc("data"))

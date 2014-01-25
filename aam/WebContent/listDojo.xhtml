@@ -19,7 +19,7 @@
  			
 			<p:separator id="separator"/>
 			
-			<p:dataTable id="panel" var="historia" value="#{historiaMB.historiaDataModel}" selection="#{historiaMB.listSelectedHistoriaDTO}" rowKey="#{historia.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+			<p:dataTable id="panel" var="historia" value="#{historiaMB.dojoDataModel}" selection="#{historiaMB.listSelectedHistoriaDTO}" rowKey="#{historia.id}" editable="true" editMode="cell" paginator="true" rows="10">  
  			
  				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
 				

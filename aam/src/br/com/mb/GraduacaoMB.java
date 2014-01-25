@@ -39,6 +39,10 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 		}
 	}
 	
+	public void atualiza(ActionEvent event) throws Exception {
+		
+	}
+	
 	public void reset(ActionEvent event){
 		graduacaoDTO = new GraduacaoDTO();
 	}
@@ -50,6 +54,7 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 	
 	public void add(ActionEvent actionEvent) throws Exception {
 		graduacaoDAO.save(graduacaoDTO);
+		reset(null);
 		addMessage("salvo.");
 		
 	}
@@ -103,6 +108,5 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 	public void setListSelectedTecnicaDTO(TecnicaDTO[] listSelectedTecnicaDTO) {
 		this.listSelectedTecnicaDTO = listSelectedTecnicaDTO;
 	}
-
 
 }

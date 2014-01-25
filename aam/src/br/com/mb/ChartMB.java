@@ -29,7 +29,7 @@ import org.primefaces.model.chart.PieChartModel;
 
 import br.com.dao.ChartDAO;
 import br.com.dao.UsuarioDAO;
-import br.com.dto.ResuldoAvaliacaoDTO;
+import br.com.dto.ResultadoAvaliacaoDTO;
 import br.com.dto.UsuarioDTO;
 
 
@@ -94,7 +94,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 		series1.setMarkerStyle("diamond");
 
 
-		List<ResuldoAvaliacaoDTO> a = null;
+		List<ResultadoAvaliacaoDTO> a = null;
 		try {
 			a = chartDAO.cMediaGeralAcademia(dataInicial,dataFinal);
 		} catch (Exception e) {
@@ -128,7 +128,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 		series1.setMarkerStyle("diamond");
 
 
-		List<ResuldoAvaliacaoDTO> a = null;
+		List<ResultadoAvaliacaoDTO> a = null;
 		try {
 			a = chartDAO.cNotaMediaGraduacao(usuarioDTO);
 		} catch (Exception e) {
@@ -137,7 +137,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMM/yyyy");
 
-		for (ResuldoAvaliacaoDTO ra : a) {
+		for (ResultadoAvaliacaoDTO ra : a) {
 			series1.set(sdf.format(ra.getData()), (ra.getLuta()+ra.getTecnica()+ra.getConhecimentos())/3);
 		}
 		if(series1.getData().size() == 0){
@@ -159,7 +159,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 		series1.setLabel("Notas");
 		series1.setMarkerStyle("diamond");
 
-		List<ResuldoAvaliacaoDTO> a = null;
+		List<ResultadoAvaliacaoDTO> a = null;
 		try {
 			if(idUsuario != null && !idUsuario.equals("")){
 				usuarioDTO = usuarioDAO.getById(Integer.valueOf(idUsuario));
@@ -171,7 +171,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMM/yyyy");
 
-		for (ResuldoAvaliacaoDTO ra : a) {
+		for (ResultadoAvaliacaoDTO ra : a) {
 			series1.set(sdf.format(ra.getData()), (ra.getLuta()+ra.getTecnica()+ra.getConhecimentos())/3);
 		}
 

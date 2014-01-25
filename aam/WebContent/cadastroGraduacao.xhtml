@@ -21,7 +21,7 @@
 		            <p:message for="nome" />
 		            
 		            <br/>
-		            <p:selectCheckboxMenu id="grupoTecnica" value="#{graduacaoMB.listSelectedTecnicaDTO}" label="Grupos Técnicas" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:220px" converter="tecnica">  
+		            <p:selectCheckboxMenu id="grupoTecnica" value="#{graduacaoMB.listSelectedTecnicaDTO}" label="Grupos Técnicas" filter="true" filterText="Filter" filterMatchMode="startsWith"  converter="tecnica">  
 						<f:selectItems value="#{tecnicaMB.listTecnicaDTO}"
 								var="tecnica" itemLabel="#{tecnica.nome}"
 								itemValue="#{tecnica}" />
@@ -39,7 +39,7 @@
 		            
 		            <f:facet name="footer">
 			          	<p:commandButton value="Salvar" actionListener="#{graduacaoMB.add}" id="withIcon"   
-			            update=":growl" icon="ui-icon-disk" />
+			            update=":growl,panel" icon="ui-icon-disk" />
 			            <p:commandButton value="Reset" type="reset" /> 
 			            <p:commandButton value="Voltar" action="/listGraduacao.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
 		  			</f:facet>

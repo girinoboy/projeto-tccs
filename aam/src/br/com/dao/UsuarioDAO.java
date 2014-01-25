@@ -29,8 +29,8 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 	public UsuarioDAO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+
 	public UsuarioDTO verificaLoginSenha(UsuarioDTO usuario) throws HibernateException, Exception {
 		try{
 			usuario = (UsuarioDTO) HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
@@ -43,7 +43,7 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 		return usuario;
 
 	}
-	
+
 	public void saveTheme(String theme, UsuarioDTO usuario) throws HibernateException, Exception {
 		//Nome da classe e atributo
 		String updateQuery = "UPDATE Usuario obj SET tema = :valor WHERE obj.id = :idUsuario";  
@@ -51,9 +51,9 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 		.setString("valor", theme)
 		.setLong("idUsuario",usuario.getId())
 		.executeUpdate();
-		
+
 		HibernateUtility.commitTransaction();
-		
+
 	}
 
 
@@ -62,6 +62,30 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 		for (UsuarioDTO usuario : listUser) { 
 			HibernateUtility.getSession().save(usuario);
 		}
+	}
+
+
+	public boolean validaLogin(UsuarioDTO usuarioDTO) throws Exception{
+		UsuarioDTO usuario = (UsuarioDTO) HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
+				.add(Restrictions.eq("usuario", usuarioDTO.getUsuario()))
+				.add(Restrictions.ne("id", usuarioDTO.getId() == null ? 0:usuarioDTO.getId()))
+				.uniqueResult();
+		if(usuario == null)
+			return false;
+		else
+			return true;
+	}
+
+
+	public boolean validaCPF(UsuarioDTO usuarioDTO) throws Exception{
+		UsuarioDTO usuario = (UsuarioDTO) HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
+				.add(Restrictions.eq("cpf", usuarioDTO.getCpf()))
+				.add(Restrictions.ne("id", usuarioDTO.getId() == null ? 0:usuarioDTO.getId()))
+				.uniqueResult();
+		if(usuario == null)
+			return false;
+		else
+			return true;
 	}
 
 

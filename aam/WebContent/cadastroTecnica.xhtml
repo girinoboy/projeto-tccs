@@ -9,37 +9,45 @@
 <ui:decorate template="layout.xhtml">
 	<ui:define id="centro" name="centro">
 		<h:form id="form">
-
+			<script type="text/javascript">  
+				function start() {  
+				    PF('statusDialog').show();  
+				}  
+				  
+				function stop() {  
+				    PF('statusDialog').hide();  
+				}  
+        	</script>
+        	<p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">  
+			    <p:graphicImage value="/design/ajaxloadingbar.gif" />  
+			</p:dialog>
 			<p:panel id="panel" header="Adicionar Grupo de Tecnicas">
 
-				<h:inputHidden id="idUsuario" value="#{usuarioMB.usuarioDTO.id}" />
+				<h:inputHidden id="idtecnica" value="#{tecnicaMB.tecnicaDTO.id}" />
 				<h:inputHidden id="idAnexo"
-					value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
+					value="#{tecnicaMB.tecnicaDTO.anexoDTO.id}" />
 				<div align="center">
 					<h:panelGrid id="pg" columns="2" cellpadding="1">
 
-						<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}"
-							style="width:60px;height:60px">
-							<f:param id="av" name="image_id"
-								value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
-						</p:graphicImage>
-						<p:fileUpload size="15"
-							fileUploadListener="#{usuarioMB.handleFileUpload}"
-							mode="advanced"
-							update=":messages,:growl,avatar,av,idUsuario,idAnexo" auto="true"
-							sizeLimit="65535" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-							label="Selecione" />
-
-						<h:outputLabel for="nome" value="Nome: *" />
-						<p:inputText id="nome" size="45"
-							value="#{usuarioMB.usuarioDTO.nome}" required="true" label="Nome">
-							<f:validateLength minimum="2" />
-						</p:inputText>
 						<p:watermark for="nome" value="Nome completo" />
 						<p:message for="nome" />
+						<h:outputLabel for="nome" value="Nome: *" />
+						<p:inputText id="nome" size="45"
+							value="#{tecnicaMB.tecnicaDTO.nome}" required="true" label="Nome">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						
+						<p:commandButton id="downloadLink" value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop)"   
+						        icon="ui-icon-arrowthichk-s">  
+						    <p:fileDownload value="#{tecnicaMB.dynamicImage}" >  
+						    	<f:param id="av" name="image_id"
+								value="#{tecnicaMB.tecnicaDTO.anexoDTO.id}" />
+							</p:fileDownload>
+						</p:commandButton>
+						<p:fileUpload value="#{tecnicaMB.file}" mode="simple" allowTypes="/(\.|\/)(pdf)$/"/>
 						
 						<f:facet name="footer">
-							<div align="right"><p:commandButton value="Salvar" actionListener="#{usuarioMB.edit}"
+							<div align="right"><p:commandButton value="Salvar" actionListener="#{tecnicaMB.edit}"
 								id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
 							<p:commandButton value="Cancelar"
 								action="/listTecnica.xhtml?faces-redirect=true" immediate="true"

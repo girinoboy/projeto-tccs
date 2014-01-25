@@ -85,7 +85,7 @@
 			<p:layoutUnit id="right" position="east" style="text-align:center">
 				<h:form>
 					<p:menu>
-						<p:menuitem value="Resultados de Avaliação"	outcome="resultadoAvaliacoes" />
+						<p:menuitem value="Resultados de Avaliação"	outcome="listResultadoAvaliacoes" />
 						<p:menuitem value="Grafico de desempenho" outcome="graficoDesempenho" />
 						<p:menuitem value="Relatório de Participação" />
 						<p:menuitem value="Relatório de Gestão" />
@@ -94,7 +94,11 @@
 					<br />
 					<br />
 					<br />
-					<h:graphicImage value="/images/avatar_small.jpg" />
+					<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}"
+						style="width:60px;height:60px">
+						<f:param id="av" name="image_id"
+							value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
+					</p:graphicImage>
 					<p:menu>
 					<p:menuitem value="Sair" outcome="login" />
 					</p:menu>
