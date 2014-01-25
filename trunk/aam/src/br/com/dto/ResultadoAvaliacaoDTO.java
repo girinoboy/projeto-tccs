@@ -15,8 +15,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="resultado_avaliacao")
-public class ResuldoAvaliacaoDTO {
+public class ResultadoAvaliacaoDTO extends AbstractDTO{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6207979261320831785L;
 	@Id 
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
@@ -29,7 +33,7 @@ public class ResuldoAvaliacaoDTO {
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
 
-	public ResuldoAvaliacaoDTO() {
+	public ResultadoAvaliacaoDTO() {
 		// TODO Auto-generated constructor stub
 	}
 

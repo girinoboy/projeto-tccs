@@ -8,6 +8,7 @@
 <ui:decorate template="layout.xhtml">  
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
+ 			<p:panel header="Campeonato">
  			<p:commandButton value="Incluir Novo" action="/cadastroCampeonato.xhtml?faces-redirect=true" immediate="true" update=":center" />
 
  			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl,panel" />
@@ -19,7 +20,7 @@
  				  
 		        
 		    </p:dataTable> 
- 		
+ 			</p:panel>
  		</h:form>
  	</ui:define>  
 </ui:decorate>  

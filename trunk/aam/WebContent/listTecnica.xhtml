@@ -9,8 +9,7 @@
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
  			<p:panel header="Técnica">
- 			<p:commandButton id="selectButton4" value="Incluir Novo" icon="ui-icon-gear" title="teste" update=":growl" onclick="PF('dlgT').show();" actionListener="#{tecnicaMB.edit}"/>  
- 			<p:commandButton value="Incluir Novo" action="/cadastroTecnica.xhtml?faces-redirect=true" immediate="true" update=":center" />
+ 			<p:commandButton id="selectButton4" value="Incluir Novo" title="teste" update=":growl,:formT:displayT" onclick="PF('dlgT').show();" actionListener="#{tecnicaMB.reset}"/>  
 
  			<p:commandButton value="Excluir" actionListener="#{tecnicaMB.del}"  update="form,:messages,:growl,panel" />
 
@@ -19,15 +18,19 @@
  			<p:dataTable id="panel" var="tecnica" value="#{tecnicaMB.tecnicaDataModel}" selection="#{tecnicaMB.listSelectedTecnicaDTO}" rowKey="#{tecnica.id}" editable="true" editMode="cell" paginator="true" rows="10">  
  			
  				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
+ 				<p:ajax event="rowSelect" listener="#{tecnicaMB.onRowSelect}"/>
 				
 				<p:column selectionMode="multiple" style="width:2%" />
  				  
 		        <p:column headerText="Nome">
-		            <h:outputText value="#{tecnica.nome}"/>
+		            <p:commandLink value="#{tecnica.nome}" immediate="true" ajax="false" icon="ui-icon-arrowthichk-s">
+		            	<p:fileDownload value="#{tecnicaMB.dynamicImage}" />  
+		            </p:commandLink>
 		        </p:column>
 		        
 		        <p:column headerText="">
-			        <p:commandLink id="ajax" update="panel" actionListener="#{tecnicaMB.edit}" action="/cadastroTecnica.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">  
+			        <p:commandLink id="ajax" update="panel,:formT:displayT" actionListener="#{tecnicaMB.edit}" action="/cadastroTecnica.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
+			        	<f:setPropertyActionListener value="#{tecnica}" target="#{tecnicaMB.tecnicaDTO}"/>  
 				        <h:outputText value="Alterar" />
 				    </p:commandLink>
 		        </p:column>
@@ -36,8 +39,9 @@
  			</p:panel>
  		</h:form>
  		<p:dialog header="Adicionar Grupo de Técnicas" widgetVar="dlgT" modal="true" appendToBody="true" resizable="false" draggable="true">
-		    <h:form enctype="multipart/form-data">
-  				<h:panelGrid columns="2">
+		    <h:form id="formT" enctype="multipart/form-data">
+		    	<h:inputHidden id="idTecnica" value="#{tecnicaMB.tecnicaDTO.id}" />
+  				<h:panelGrid id="displayT" columns="2">
 				    
 				    <h:outputLabel value="Nome" for="nome"/>
 				  	<p:inputText id="nome" size="50" value="#{tecnicaMB.tecnicaDTO.nome}" maxlength="50"/>
@@ -45,7 +49,7 @@
 				  	<br/>
 				    <p:fileUpload value="#{tecnicaMB.file}" mode="simple" allowTypes="/(\.|\/)(pdf)$/"/>
 				  	<f:facet name="footer">
-					    <p:commandButton value="Salvar" ajax="false" actionListener="#{tecnicaMB.add}" update="panel"/>
+					    <p:commandButton value="Salvar" ajax="false" actionListener="#{tecnicaMB.add}" update="form:panel"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgT').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>

@@ -44,15 +44,51 @@
 				  	<p:message for="descricao" />
 					<h:outputText id="counter" />
 		            
-		            <f:facet name="footer">
-			          	<p:commandButton value="Salvar" actionListener="#{historiaMB.add}" id="withIcon"   
-			            update=":growl,panel,customRadio" icon="ui-icon-disk" />
-			            <p:commandButton value="Reset" type="reset" /> 
-			            <p:commandButton value="Voltar" action="/listHistoria.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
-		  			</f:facet>
 		        </h:panelGrid>
+		        <br/>
+		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true"/> 
+		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{historiaMB.delLink}" update="dataTable" immediate="true"/>
+				
+				
+				<p:dataTable id="dataTable" var="link" value="#{historiaMB.linkDataModel}" selection="#{historiaMB.listSelectedLinkDTO}" rowKey="#{link.nome}">  
+
+	 				<p:ajax event="rowSelectCheckbox" listener="#{historiaMB.check}"   />
+					
+					<p:column selectionMode="multiple" style="width:2%" />
+	 				  
+			        <p:column headerText="Nome">
+				        <h:outputLink value="http://#{link.url}" target="_blank">
+							<h:outputText value="#{link.nome}"/>
+						</h:outputLink>
+			        </p:column>
+		        
+		        </p:dataTable>
+		        
+		        <f:facet name="footer">
+		          	<p:commandButton value="Salvar" actionListener="#{historiaMB.add}" id="withIcon"   
+		            update=":growl,panel,customRadio" icon="ui-icon-disk" />
+		            <p:commandButton value="Reset" type="reset" /> 
+		            <p:commandButton value="Voltar" action="/listHistoria.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
+	  			</f:facet>
 		    </p:panel>
 		</h:form>
+		
+		<p:dialog header="Adicionar Link" widgetVar="dlgN" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:form>
+  				<h:panelGrid columns="2">
+				    
+				    <h:outputLabel value="Nome" for="nome"/>
+				  	<p:inputText id="nome" size="50" value="#{historiaMB.linkDTO.nome}"/>
+				  	
+				  	<h:outputLabel value="URL" for="url"/>
+				  	<p:inputText id="url" size="50" value="#{historiaMB.linkDTO.url}"/>
+				  	<f:facet name="footer">
+					    <p:commandButton value="Salvar" ajax="false" actionListener="#{historiaMB.addLink}" update="dataTable"/>
+				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgN').hide()" immediate="true" />
+			  		</f:facet>
+		  		</h:panelGrid>
+			</h:form>
+		</p:dialog>
 	</ui:define>
 </ui:decorate>
 </html>

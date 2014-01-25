@@ -12,7 +12,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.dto.ResuldoAvaliacaoDTO;
+import br.com.dto.ResultadoAvaliacaoDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.factory.HibernateUtility;
 
@@ -21,7 +21,7 @@ import br.com.factory.HibernateUtility;
  *
  */
 @SuppressWarnings("unchecked")
-public class ChartDAO extends GenericoDAO<ResuldoAvaliacaoDTO, Serializable>{
+public class ChartDAO extends GenericoDAO<ResultadoAvaliacaoDTO, Serializable>{
 
 
 	/**
@@ -29,10 +29,10 @@ public class ChartDAO extends GenericoDAO<ResuldoAvaliacaoDTO, Serializable>{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public List<ResuldoAvaliacaoDTO> listByIdUsuario(UsuarioDTO usuarioDTO) throws Exception {
-		List<ResuldoAvaliacaoDTO> result;
+	public List<ResultadoAvaliacaoDTO> listByIdUsuario(UsuarioDTO usuarioDTO) throws Exception {
+		List<ResultadoAvaliacaoDTO> result;
 		try{
-			result =  HibernateUtility.getSession().createCriteria(ResuldoAvaliacaoDTO.class)
+			result =  HibernateUtility.getSession().createCriteria(ResultadoAvaliacaoDTO.class)
 					.add(Restrictions.eq("usuarioDTO.id", usuarioDTO.getId()))
 					.addOrder(Order.asc("data"))
 					.list();
@@ -44,10 +44,10 @@ public class ChartDAO extends GenericoDAO<ResuldoAvaliacaoDTO, Serializable>{
 	}
 
 
-	public List<ResuldoAvaliacaoDTO> cNotaMediaGraduacao(UsuarioDTO usuarioDTO) throws Exception {
-		List<ResuldoAvaliacaoDTO> result;
+	public List<ResultadoAvaliacaoDTO> cNotaMediaGraduacao(UsuarioDTO usuarioDTO) throws Exception {
+		List<ResultadoAvaliacaoDTO> result;
 		try{
-			result = HibernateUtility.getSession().createCriteria(ResuldoAvaliacaoDTO.class)
+			result = HibernateUtility.getSession().createCriteria(ResultadoAvaliacaoDTO.class)
 					.createCriteria("usuarioDTO.graduacaoDTO").add(Restrictions.eq("id", usuarioDTO.getGraduacaoDTO().getId()))
 					.list();
 
@@ -59,8 +59,8 @@ public class ChartDAO extends GenericoDAO<ResuldoAvaliacaoDTO, Serializable>{
 	}
 
 
-	public List<ResuldoAvaliacaoDTO> cMediaGeralAcademia(Date dataInicial, Date dataFinal) throws Exception {
-		List<ResuldoAvaliacaoDTO> result;
+	public List<ResultadoAvaliacaoDTO> cMediaGeralAcademia(Date dataInicial, Date dataFinal) throws Exception {
+		List<ResultadoAvaliacaoDTO> result;
 		try{/*
 			result = HibernateUtility.getSession().createCriteria(ResuldoAvaliacaoDTO.class)
 

@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+
+<ui:decorate template="layout.xhtml">  
+	<ui:define id="centro" name="centro"> 
+ 		<h:form id="form">
+ 			<p:panel header="Resultado de Avaliações">
+ 			<p:commandButton value="Incluir Novo" action="/cadastroResultadoAvaliacoes.xhtml?faces-redirect=true" immediate="true" update=":center"/>
+			<p:commandButton value="Excluir" actionListener="#{resultadoAvaliacaoMB.del}" update="form,:messages,:growl,panel" />
+ 			
+ 			<p:separator id="separator"/>
+ 			
+ 			<p:dataTable id="panel" var="ra" 
+ 				value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDataModel}" 
+ 				selection="#{resultadoAvaliacaoMB.listSelectedResultadoAvaliacaoDTO}"
+ 				rowKey="#{ra.id}" editable="false" editMode="cell"
+				paginator="true" rows="10"> 
+ 			
+ 				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
+				
+				<p:column selectionMode="multiple" style="width:2%" /> 
+		  
+		        <p:column headerText="Nome">  
+		            <h:outputText value="#{ra.usuarioDTO.nome}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="Graduação">  
+		            <h:outputText value="#{ra.usuarioDTO.graduacaoDTO.nome}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="Data">  
+		            <h:outputText value="#{ra.data}">
+						<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy"/>
+					</h:outputText>  
+		        </p:column>  
+		        
+		        <p:column headerText="">
+			        <p:commandLink id="ajax" update="panel" actionListener="#{resultadoAvaliacaoMB.edit}" action="/cadastroResultadoAvaliacoes.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
+			        	<f:setPropertyActionListener value="#{ra}" target="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO}"/>    
+				        <h:outputText value="Alterar" />
+				    </p:commandLink>
+		        </p:column>
+		    </p:dataTable> 
+		    </p:panel>
+ 		</h:form>
+ 	</ui:define>  
+</ui:decorate>  
+</html>

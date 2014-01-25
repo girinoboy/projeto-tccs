@@ -31,6 +31,10 @@ import org.hibernate.annotations.Cascade;
 @Table(name="usuario")
 public class UsuarioDTO extends AbstractDTO{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7036085825781563231L;
 	@Id 
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;

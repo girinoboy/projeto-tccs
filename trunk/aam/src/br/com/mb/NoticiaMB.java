@@ -16,7 +16,6 @@ import br.com.dao.LinkDAO;
 import br.com.dao.NoticiaDAO;
 import br.com.dto.LinkDTO;
 import br.com.dto.NoticiaDTO;
-import br.com.dto.UsuarioDTO;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.NoticiaDataModel;
 
@@ -52,9 +51,16 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 			e.printStackTrace();
 		}
 	}
+	
+	public void atualiza(ActionEvent event) throws Exception{
+		listNoticiaDTO = noticiaDAO.list();
+
+		noticiaDataModel = new NoticiaDataModel(listNoticiaDTO);
+	}
 
 	public void reset(ActionEvent event){
 		noticiaDTO = new NoticiaDTO();
+		listLinkDTO = new ArrayList<LinkDTO>();
 		linkDataModel = new AbstractDataModel<LinkDTO>();
 	}
 

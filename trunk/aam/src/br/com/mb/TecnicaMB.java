@@ -3,11 +3,13 @@
  */
 package br.com.mb;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -24,6 +26,7 @@ import br.com.utility.TecnicaDataModel;
  *
  */
 @ManagedBean
+@SessionScoped
 public class TecnicaMB extends GenericoMB implements ModeloMB{
 	
 	private TecnicaDAO tecnicaDAO = new TecnicaDAO();
@@ -38,13 +41,23 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 	 */
 	public TecnicaMB() {
 		try {
-			listTecnicaDTO = tecnicaDAO.list();
-
-			tecnicaDataModel = new TecnicaDataModel(listTecnicaDTO);
+			 atualiza(null);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void atualiza(ActionEvent event) throws Exception {
+		listTecnicaDTO = tecnicaDAO.list();
+
+		tecnicaDataModel = new TecnicaDataModel(listTecnicaDTO);
+		
+	}
+
+	public void reset(ActionEvent event) {
+		tecnicaDTO = new TecnicaDTO();
+		
 	}
 	
     public void upload() {  
@@ -52,7 +65,13 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
             FacesMessage msg = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");  
             FacesContext.getCurrentInstance().addMessage(null, msg);  
         }  
-    }  
+    }
+    
+    public void onRowSelect(SelectEvent event) throws IOException {  
+    	tecnicaDTO = (TecnicaDTO) event.getObject();  
+
+		//FacesContext.getCurrentInstance().getExternalContext().redirect("cadastroMembros.xhtml"); 
+	} 
 	
 	public void check(SelectEvent event) {
 		System.out.println("in check");
@@ -73,6 +92,7 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 			tecnicaDAO.save(tecnicaDTO);
 			tecnicaDTO = new TecnicaDTO();
 			addMessage("salvo");
+			atualiza(null);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -80,7 +100,7 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		System.out.println(tecnicaDTO);
 		
 	}
 
