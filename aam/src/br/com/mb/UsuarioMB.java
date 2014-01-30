@@ -89,6 +89,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 		//usuarioDTO = usuarioDAO.save(usuarioDTO);
 		usuarioDTO.setAnexoDTO(anexoDAO.save(usuarioDTO.getAnexoDTO()));
+		setUserSession(usuarioDTO);
 		addMessage("Imagem add");
 	}
 

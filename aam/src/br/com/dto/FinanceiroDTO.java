@@ -52,6 +52,8 @@ public class FinanceiroDTO {
 
 			ano = data.get(Calendar.YEAR);
 
+		}else{
+			dataPagamento = new Date();
 		}
 		getDia();
 		getMes();
@@ -83,13 +85,15 @@ public class FinanceiroDTO {
 	}
 
 	public Date getDataPagamento() {
+		if(dataPagamento == null)
+			dataPagamento = new Date();
+		getDia();
+		getMes();
+		getAno();
 		return dataPagamento;
 	}
 
 	public void setDataPagamento(Date dataPagamento) {
-		getDia();
-		getMes();
-		getAno();
 		this.dataPagamento = dataPagamento;
 	}
 

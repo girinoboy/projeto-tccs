@@ -3,6 +3,7 @@
  */
 package br.com.mb;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -15,6 +16,7 @@ import javax.faces.event.ActionEvent;
 
 import org.hibernate.HibernateException;
 import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.SelectEvent;
 
 import br.com.dao.FinanceiroDAO;
 import br.com.dao.ParametroDAO;
@@ -90,9 +92,12 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 		//		Object oldValue = event.getOldValue();
 		//		Object newValue = event.getNewValue();
 		UsuarioDTO usuarioDTO = listFinanceiroDTO.get(event.getRowIndex()).getUsuarioDTO();
+		//		usuarioDTO.setFinanceiroDTO(financeiroDTO);
 		usuarioDTO.getFinanceiroDTO().setValorComDesconto(calculaDesconto(usuarioDTO));
+		System.out.println(usuarioDTO.getFinanceiroDTO().getDataPagamento());
+		System.out.println(usuarioDTO.getFinanceiroDTO().getDia());
 		usuarioDAO.save(usuarioDTO);
-//		listFinanceiroDTO = financeiroDAO.list();
+		//		listFinanceiroDTO = financeiroDAO.list();
 		atualizaMensalidade();
 		//		if(newValue != null && !newValue.equals(oldValue)) {
 		//			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
@@ -108,6 +113,14 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 		else
 			return(0d);
 	}
+
+	public void handleDateSelect(SelectEvent event) throws Exception {  
+
+		listFinanceiroDTO = financeiroDAO.consultaPorMesAno(event.getObject());
+		FacesContext facesContext = FacesContext.getCurrentInstance();  
+		SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");  
+		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));  
+	}  
 
 	public FinanceiroDTO getFinanceiroDTO() {
 		return financeiroDTO;
@@ -127,12 +140,12 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 
 	public void atualiza(ActionEvent event) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void reset(ActionEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public FinanceiroDTO getSelectedFinanceiroDTO() {
