@@ -91,7 +91,7 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 			}
 			tecnicaDAO.save(tecnicaDTO);
 			tecnicaDTO = new TecnicaDTO();
-			addMessage("salvo");
+			addMessage("Operação realizada com sucesso!");
 			atualiza(null);
 		}catch(Exception e){
 			e.printStackTrace();

@@ -73,7 +73,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	public void add(ActionEvent actionEvent) throws Exception {
 		atualizaMensalidade();
 		listFinanceiroDTO = financeiroDAO.list();
-		addMessage("Salvo.");
+		addMessage("Operação realizada com sucesso!.");
 		//financeiroDAO.save(financeiroDTO);
 
 	}

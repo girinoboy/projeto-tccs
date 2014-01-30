@@ -137,7 +137,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		usuarioDTO.getFinanceiroDTO().getMes();
 		usuarioDTO.getFinanceiroDTO().getAno();
 		usuarioDTO = usuarioDAO.save(usuarioDTO);
-		addMessage("Salvo");
+		addMessage("Operação realizada com sucesso!");
 		usuarioDTO = new UsuarioDTO();
 		listUsuarioDTO = usuarioDAO.list();
 		}catch(Exception e){
@@ -179,7 +179,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void edit(ActionEvent actionEvent) throws Exception {
 		atualiza(null);
-		addMessage("Salvo");
+		addMessage("Operação realizada com sucesso!");
 
 	}
 

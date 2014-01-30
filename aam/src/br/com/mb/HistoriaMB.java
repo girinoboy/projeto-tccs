@@ -96,7 +96,7 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 		
 		reset(null);
 		atualizaLista();
-		addMessage("salvo");
+		addMessage("Operação realizada com sucesso!");
 		
 	}
 
