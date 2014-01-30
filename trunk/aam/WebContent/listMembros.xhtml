@@ -56,7 +56,7 @@
  		</h:form>
  		
  		<p:dialog header="Apagar?" widgetVar="dlgD" modal="true" appendToBody="true" resizable="false" draggable="true">
-		    <h:outputText value="Deseja realmente excluir esse(s) item(ns)?" />
+		    <h:outputText value="Tem certeza que deseja realizar essa exclusão?" />
 		    <f:facet name="footer">
 			 	<p:commandButton value="Excluir" update=":growl,form:panel"  icon="ui-icon-close" actionListener="#{usuarioMB.del}" immediate="true" oncomplete="PF('dlgD').hide()" />                 
 			 	<p:commandButton value="Cancelar" oncomplete="PF('dlgD').hide()" immediate="true" />                 

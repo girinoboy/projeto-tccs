@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:decorate template="layout.xhtml">
+	<ui:define id="centro" name="centro">
+		<h:form id="form">
+			<p:panel id="panel1" header="Relatório de Gestão Financeira">
+				<center>
+ 				Data Inicial: 
+ 				<p:calendar value="#{financeiroMB.financeiroDTO.dataPagamento}"
+					pattern="dd/MMM/yyyy" showButtonPanel="true" navigator="true"
+					id="customCal1" required="true" locale="pt">
+					<p:ajax event="dateSelect"
+						listener="#{financeiroMB.handleDateSelect}" update=":growl,panel" />
+				</p:calendar>
+				<br/>
+				Data Final:<p:spacer height="10"/>
+				<p:calendar value="#{financeiroMB.financeiroDTO.dataPagamento}"
+					pattern="dd/MMM/yyyy" showButtonPanel="true" navigator="true"
+					id="customCal2" required="true" locale="pt">
+					<p:ajax event="dateSelect"
+						listener="#{financeiroMB.handleDateSelect}" update=":growl,panel" />
+				</p:calendar>
+				</center>
+				<br/>
+				<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.selectedFinanceiroDTO}" rowKey="#{financeiro.id}" editable="true" editMode="cell" paginator="true" rows="10">
+				
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>

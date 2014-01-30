@@ -55,7 +55,7 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 	public void add(ActionEvent actionEvent) throws Exception {
 		graduacaoDAO.save(graduacaoDTO);
 		reset(null);
-		addMessage("salvo.");
+		addMessage("Operação realizada com sucesso!.");
 		
 	}
 

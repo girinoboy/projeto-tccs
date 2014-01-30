@@ -82,7 +82,7 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 		linkDataModel = new AbstractDataModel<LinkDTO>();
 		noticiaDTO = new NoticiaDTO();
 
-		addMessage("salvo");
+		addMessage("Operação realizada com sucesso!");
 
 	}
 

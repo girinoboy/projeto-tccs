@@ -81,7 +81,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 		if(a!=null)
 			resultadoAvaliacaoDTO.setId(a.getId());
 		resuldoAvaliacaoDAO.save(resultadoAvaliacaoDTO);
-		addMessage("Salvo");
+		addMessage("Operação realizada com sucesso!");
 		resultadoAvaliacaoDTO = new ResultadoAvaliacaoDTO();
 
 	}
