@@ -21,12 +21,12 @@
 						<p:graphicImage id="avatar" value="#{genericoMB.dynamicImage}"
 							style="width:60px;height:60px">
 							<f:param id="av" name="image_id"
-								value="#{genericoMB.userSession.anexoDTO.id}" />
+								value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
 						</p:graphicImage>
 						<p:fileUpload size="15"
 							fileUploadListener="#{usuarioMB.handleFileUpload}"
 							mode="advanced"
-							update=":messages,:growl,avatar,av,idUsuario,idAnexo" auto="true"
+							update=":messages,:growl,avatar,av,idUsuario,idAnexo,:formR:avatar" auto="true"
 							sizeLimit="5000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 							label="Selecione" />
 

@@ -24,9 +24,15 @@ public class GenericoMB implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private AnexoDAO anexoDAO = new AnexoDAO();
+	private HttpSession session;
+	
+	public void setUserSession(UsuarioDTO usuarioDTO){
+		session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessão caso ñ exista - false retorna nulo caso ñ exista
+		session.setAttribute("usuarioAutenticado", usuarioDTO);
+	}
 	
 	public UsuarioDTO getUserSession(){
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		return ((UsuarioDTO) session.getAttribute("usuarioAutenticado"));
 	}
 	

@@ -44,6 +44,36 @@
 			    width: 363px;
 			}
 		</style>
+		<script>
+		PrimeFaces.locales['pt'] = {
+			    closeText: 'Fechar',
+			    prevText: 'Anterior',
+			    nextText: 'Próximo',
+			    currentText: 'Começo',
+			    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+			    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+			    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+			    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+			    dayNamesMin: ['D','S','T','Q','Q','S','S'],
+			    weekHeader: 'Semana',
+			    firstDay: 0,
+			    isRTL: false,
+			    showMonthAfterYear: false,
+			    yearSuffix: '',
+			    timeOnlyTitle: 'Só Horas',
+			    timeText: 'Tempo',
+			    hourText: 'Hora',
+			    minuteText: 'Minuto',
+			    secondText: 'Segundo',
+			    ampm: false,
+			    month: 'Mês',
+			    week: 'Semana',
+			    day: 'Dia',
+			    allDayText : 'Todo o Dia'
+			};
+
+		</script>
+		
 	</h:head>
 
 
@@ -83,7 +113,7 @@
 			</p:layoutUnit>
 
 			<p:layoutUnit id="right" position="east" style="text-align:center">
-				<h:form>
+				<h:form id="formR">
 					<p:menu>
 						<p:menuitem value="Resultados de Avaliação"	outcome="listResultadoAvaliacoes" />
 						<p:menuitem value="Grafico de desempenho" outcome="graficoDesempenho" />
@@ -95,9 +125,9 @@
 					<br />
 					<br />
 					<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}"
-						style="width:60px;height:60px">
+						style="width:60px;height:60px" cache="false" rendered="true">
 						<f:param id="av" name="image_id"
-							value="#{usuarioMB.usuarioDTO.anexoDTO.id}" />
+							value="#{genericoMB.userSession.anexoDTO.id}" />
 					</p:graphicImage>
 					<p:menu>
 					<p:menuitem value="Sair" outcome="login" />
