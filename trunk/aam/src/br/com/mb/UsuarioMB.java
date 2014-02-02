@@ -133,6 +133,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 		usuarioDTO = usuarioDAO.save(usuarioDTO);
 		usuarioDTO.getFinanceiroDTO().setUsuarioDTO(usuarioDTO);
+		usuarioDTO.getFinanceiroDTO().setSituacao(false);
 		usuarioDTO.getFinanceiroDTO().getDia();
 		usuarioDTO.getFinanceiroDTO().getMes();
 		usuarioDTO.getFinanceiroDTO().getAno();

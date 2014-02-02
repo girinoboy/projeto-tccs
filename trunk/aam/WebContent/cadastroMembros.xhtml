@@ -72,7 +72,7 @@
 
 						<!-- E-mail -->
 						<h:outputLabel for="email" value="Email: *" />
-			            <p:inputText id="email" value="#{usuarioMB.usuarioDTO.email}" required="true" label="Email" maxlength="50">
+			            <p:inputText id="email" value="#{usuarioMB.usuarioDTO.email}" required="true" label="Email" maxlength="50" validatorMessage="Email inválido">
 			                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 			            </p:inputText>
 

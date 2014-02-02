@@ -22,7 +22,7 @@
  			Consulta de Pagamentos <p:calendar value="#{financeiroMB.financeiroDTO.dataPagamento}" pattern="dd/MMM/yyyy" showButtonPanel="true" navigator="true" id="customCal" required="true" locale="pt">  
 								       <p:ajax event="dateSelect" listener="#{financeiroMB.handleDateSelect}" update=":growl,panel" />  
 								   </p:calendar>
- 			<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.selectedFinanceiroDTO}" rowKey="#{financeiro.id}" editable="true" editMode="cell" paginator="true" rows="10">
+ 			<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.selectedFinanceiroDTO}" rowKey="#{financeiro.id}" editable="true" editMode="cell" paginator="true" rows="20">
  			
  				<p:ajax event="cellEdit" listener="#{financeiroMB.onCellEdit}" update=":messages,:growl,panel" />
  			  

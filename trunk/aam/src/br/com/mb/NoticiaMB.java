@@ -89,7 +89,8 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 	public void edit(ActionEvent actionEvent) throws Exception {
 		System.out.println(noticiaDTO);
 		if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
-			linkDataModel = new AbstractDataModel<LinkDTO>(noticiaDTO.getListLinkDTO());
+			listLinkDTO = noticiaDTO.getListLinkDTO();
+			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
 		}
 	}
 
@@ -138,6 +139,7 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 
 	public NoticiaDTO getNoticiaDTO() {
 		if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
+			listLinkDTO = noticiaDTO.getListLinkDTO();
 			linkDataModel = new AbstractDataModel<LinkDTO>(noticiaDTO.getListLinkDTO());
 		}
 		return noticiaDTO;

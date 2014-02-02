@@ -27,7 +27,8 @@ public class ResultadoAvaliacaoDAO extends GenericoDAO<ResultadoAvaliacaoDTO, Se
 		data.setTime(resuldoAvaliacaoDTO.getData());
 		
 		ResultadoAvaliacaoDTO result = (ResultadoAvaliacaoDTO) HibernateUtility.getSession().createCriteria(ResultadoAvaliacaoDTO.class)
-				.add(Restrictions.sqlRestriction(" month(data)=" + (data.get(Calendar.MONTH)+1))) 
+				.add(Restrictions.sqlRestriction(" month(data)=" + (data.get(Calendar.MONTH)+1)))
+				.add(Restrictions.eq("usuarioDTO.id", resuldoAvaliacaoDTO.getUsuarioDTO().getId()))
 				//.add(Restrictions.ilike("data", data.getTime()))
 				.addOrder(Order.asc("data"))
 				.uniqueResult();
