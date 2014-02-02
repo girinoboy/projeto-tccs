@@ -21,7 +21,7 @@
 		            <p:message for="nome" />
 		            
 		            <br/>
-		            <p:selectCheckboxMenu id="grupoTecnica" value="#{graduacaoMB.listSelectedTecnicaDTO}" label="Grupos Técnicas" filter="true" filterText="Filter" filterMatchMode="startsWith"  converter="tecnica">  
+		            <p:selectCheckboxMenu id="grupoTecnica" value="#{graduacaoMB.graduacaoDTO.listTecnica}" label="Grupos Técnicas" filter="true" filterText="Filter" filterMatchMode="startsWith"  converter="tecnica">  
 						<f:selectItems value="#{tecnicaMB.listTecnicaDTO}"
 								var="tecnica" itemLabel="#{tecnica.nome}"
 								itemValue="#{tecnica}" />

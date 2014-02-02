@@ -101,7 +101,7 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		System.out.println(historiaDTO);
 		
 	}
 
@@ -148,6 +148,10 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public HistoriaDTO getHistoriaDTO() {
+		if(historiaDTO!=null && historiaDTO.getListLinkDTO()!=null){
+			listLinkDTO = historiaDTO.getListLinkDTO();
+			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+		}
 		return historiaDTO;
 	}
 

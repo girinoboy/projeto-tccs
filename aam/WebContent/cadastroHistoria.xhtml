@@ -36,7 +36,7 @@
 		            <br/>
 		             
 		            <h:outputLabel for="descricao" value="Descrição: " />
-		            <p:inputTextarea id="descricao" rows="5" cols="30" counter="counter" maxlength="200"       
+		            <p:inputTextarea id="descricao" rows="5" cols="30" counter="counter" maxlength="2000"       
 				    	value="#{historiaMB.historiaDTO.descricao}" 
 				    	counterTemplate="{0} characters remaining." autoResize="false"/>  
 				  	<p:watermark for="descricao" value=" " />
@@ -83,7 +83,7 @@
 				  	<h:outputLabel value="URL" for="url"/>
 				  	<p:inputText id="url" size="50" value="#{historiaMB.linkDTO.url}"/>
 				  	<f:facet name="footer">
-					    <p:commandButton value="Salvar" ajax="false" actionListener="#{historiaMB.addLink}" update="dataTable"/>
+					    <p:commandButton value="Salvar" actionListener="#{historiaMB.addLink}" update=":form:dataTable" oncomplete="PF('dlgN').hide()"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgN').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>

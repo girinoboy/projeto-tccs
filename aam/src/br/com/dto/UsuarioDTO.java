@@ -159,6 +159,9 @@ public class UsuarioDTO extends AbstractDTO{
 	}
 
 	public String getTema() {
+		if(tema==null){
+			tema ="flick";
+		}
 		return tema;
 	}
 

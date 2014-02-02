@@ -11,10 +11,7 @@ import org.primefaces.event.SelectEvent;
 
 import br.com.dao.GraduacaoDAO;
 import br.com.dto.GraduacaoDTO;
-import br.com.dto.LinkDTO;
-import br.com.dto.NoticiaDTO;
 import br.com.dto.TecnicaDTO;
-import br.com.utility.AbstractDataModel;
 import br.com.utility.GraduacaoDataModel;
 
 
@@ -22,6 +19,10 @@ import br.com.utility.GraduacaoDataModel;
 @SessionScoped
 public class GraduacaoMB extends GenericoMB implements ModeloMB{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1718094179027910495L;
 	private GraduacaoDAO graduacaoDAO = new GraduacaoDAO();
 	private GraduacaoDTO graduacaoDTO = new GraduacaoDTO();
 	private List<GraduacaoDTO> listGraduacaoDTO = new ArrayList<GraduacaoDTO>();
@@ -31,16 +32,16 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 	
 	public GraduacaoMB() {
 		try {
-			listGraduacaoDTO = graduacaoDAO.list();
-			//getDynamicImage();
-			graduacaoDataModel = new GraduacaoDataModel(listGraduacaoDTO);
+			atualiza(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void atualiza(ActionEvent event) throws Exception {
-		
+		listGraduacaoDTO = graduacaoDAO.list();
+		//getDynamicImage();
+		graduacaoDataModel = new GraduacaoDataModel(listGraduacaoDTO);
 	}
 	
 	public void reset(ActionEvent event){
@@ -53,19 +54,51 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 	}
 	
 	public void add(ActionEvent actionEvent) throws Exception {
+//		for (TecnicaDTO e : listSelectedTecnicaDTO) {
+//			graduacaoDTO.setListTecnica(new ArrayList<TecnicaDTO>());
+//			graduacaoDTO.getListTecnica().add(e);
+//		}
+		
 		graduacaoDAO.save(graduacaoDTO);
 		reset(null);
+		atualiza(actionEvent);
 		addMessage("Operação realizada com sucesso!.");
 		
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		System.out.println(graduacaoDTO);
+		List<TecnicaDTO> a = new ArrayList<TecnicaDTO>();
+		if(graduacaoDTO.getListTecnica() !=null)
+		for (TecnicaDTO e : graduacaoDTO.getListTecnica() ) {
+			a.add(e);
+		}
+		graduacaoDTO.setListTecnica(a);
 		
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		try{
+			//System.out.println(listSelectedTecnicaDTO);
+			for (GraduacaoDTO n : listSelectedGraduacaoDTO) {
+				graduacaoDAO.delete(n);
+			}
+			if(listSelectedGraduacaoDTO.length >0){
+				addMessage("Apagado.");
+			}else{
+				addMessage("Nenhum Item Selecionado.");
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try {
+				reset(null);
+				atualiza(actionEvent);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 

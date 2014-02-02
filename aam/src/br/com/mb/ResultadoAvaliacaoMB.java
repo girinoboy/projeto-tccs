@@ -51,7 +51,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 	}
 	
 	public void reset(ActionEvent event) {
-		
+		resultadoAvaliacaoDTO = new ResultadoAvaliacaoDTO();
 	}
 
 	public void handleSelect(SelectEvent event) {  
@@ -82,6 +82,8 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 			resultadoAvaliacaoDTO.setId(a.getId());
 		resuldoAvaliacaoDAO.save(resultadoAvaliacaoDTO);
 		addMessage("Operação realizada com sucesso!");
+		atualiza(actionEvent);
+		reset(actionEvent);
 		resultadoAvaliacaoDTO = new ResultadoAvaliacaoDTO();
 
 	}

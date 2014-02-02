@@ -36,6 +36,11 @@ public class GenericoMB implements Serializable{
 		return ((UsuarioDTO) session.getAttribute("usuarioAutenticado"));
 	}
 	
+	public Boolean getAdm(){
+		session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		return ((Boolean) session.getAttribute("adm"));
+	}
+	
 	public void addMessage(String summary) {  
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);  
 		FacesContext.getCurrentInstance().addMessage(null, message);  

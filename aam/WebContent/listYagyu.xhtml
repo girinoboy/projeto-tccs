@@ -15,11 +15,11 @@
 			</p:tabMenu>
 			
 			<p:commandButton value="Incluir Novo" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" update=":center" actionListener="#{historiaMB.reset}"/>
- 			<p:commandButton value="Excluir" actionListener="#{historiaMB.del}"  update="form,:messages,:growl,panel" />
+ 			<p:commandButton value="Excluir" update="form,:messages,:growl,panel" onclick="PF('dlgD').show();"/>
  			
 			<p:separator id="separator"/>
 			
-			<p:dataTable id="panel" var="historia" value="#{historiaMB.yagyuDataModel}" selection="#{historiaMB.listSelectedHistoriaDTO}" rowKey="#{historia.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+			<p:dataTable id="panel" var="historia" value="#{historiaMB.yagyuDataModel}" selection="#{historiaMB.listSelectedHistoriaDTO}" rowKey="#{historia.id}" editable="true" editMode="cell" paginator="true" rows="20">  
  			
  				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
 				
@@ -32,7 +32,8 @@
 		        <p:column headerText="">
 			        <p:commandLink id="ajax" update="panel" actionListener="#{historiaMB.edit}" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
 			        	<f:setPropertyActionListener value="#{historia}" target="#{historiaMB.historiaDTO}"/>  
-				        <h:outputText value="Alterar" />
+				        <h:outputText value="Alterar" rendered="#{genericoMB.adm}"/>
+				        <h:outputText value="Visualizar" rendered="#{!genericoMB.adm}"/>
 				    </p:commandLink>
 		        </p:column>
 		        
@@ -40,6 +41,13 @@
 			
 		</p:panel>	
 		</h:form>
+		<p:dialog header="Apagar?" widgetVar="dlgD" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:outputText value="Tem certeza que deseja realizar essa exclusão?" />
+		    <f:facet name="footer">
+			 	<p:commandButton value="Excluir" update=":growl,form:panel"  icon="ui-icon-close" actionListener="#{historiaMB.del}" immediate="true" oncomplete="PF('dlgD').hide()" />                 
+			 	<p:commandButton value="Cancelar" oncomplete="PF('dlgD').hide()" immediate="true" />                 
+			</f:facet>
+		</p:dialog>
  	</ui:define>  
 </ui:decorate>  
 </html>

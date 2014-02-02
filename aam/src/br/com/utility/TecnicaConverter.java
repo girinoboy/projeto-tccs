@@ -35,7 +35,7 @@ public class TecnicaConverter implements Converter {
             return null;
         } else {
             try {
-                int number = Integer.parseInt(submittedValue);
+            	Integer number = Integer.parseInt(submittedValue);
                 /*
                 for (TecnicaDTO t : tecnicaDB) {
                     if (u.getId() == number) {

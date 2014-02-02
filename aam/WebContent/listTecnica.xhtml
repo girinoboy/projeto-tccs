@@ -11,11 +11,11 @@
  			<p:panel header="Técnica">
  			<p:commandButton id="selectButton4" value="Incluir Novo" title="teste" update=":growl,:formT:displayT" onclick="PF('dlgT').show();" actionListener="#{tecnicaMB.reset}"/>  
 
- 			<p:commandButton value="Excluir" actionListener="#{tecnicaMB.del}"  update="form,:messages,:growl,panel" />
+ 			<p:commandButton value="Excluir" update="form,:messages,:growl,panel" onclick="PF('dlgD').show();"/>
 
  			<p:separator id="separator"/>
  			
- 			<p:dataTable id="panel" var="tecnica" value="#{tecnicaMB.tecnicaDataModel}" selection="#{tecnicaMB.listSelectedTecnicaDTO}" rowKey="#{tecnica.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 			<p:dataTable id="panel" var="tecnica" value="#{tecnicaMB.tecnicaDataModel}" selection="#{tecnicaMB.listSelectedTecnicaDTO}" rowKey="#{tecnica.id}" editable="true" editMode="cell" paginator="true" rows="20">  
  			
  				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
  				<p:ajax event="rowSelect" listener="#{tecnicaMB.onRowSelect}"/>
@@ -31,7 +31,8 @@
 		        <p:column headerText="">
 			        <p:commandLink id="ajax" update="panel,:formT:displayT" actionListener="#{tecnicaMB.edit}" action="/cadastroTecnica.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
 			        	<f:setPropertyActionListener value="#{tecnica}" target="#{tecnicaMB.tecnicaDTO}"/>  
-				        <h:outputText value="Alterar" />
+				        <h:outputText value="Alterar" rendered="#{genericoMB.adm}"/>
+				        <h:outputText value="Visualizar" rendered="#{!genericoMB.adm}"/>
 				    </p:commandLink>
 		        </p:column>
 		    </p:dataTable> 
@@ -44,16 +45,24 @@
   				<h:panelGrid id="displayT" columns="2">
 				    
 				    <h:outputLabel value="Nome" for="nome"/>
-				  	<p:inputText id="nome" size="50" value="#{tecnicaMB.tecnicaDTO.nome}" maxlength="50"/>
+				  	<p:inputText id="nome" size="50" value="#{tecnicaMB.tecnicaDTO.nome}" maxlength="50" required="true" label="Nome"/>
 				  	
 				  	<br/>
-				    <p:fileUpload value="#{tecnicaMB.file}" mode="simple" allowTypes="/(\.|\/)(pdf)$/"/>
+				    <p:fileUpload value="#{tecnicaMB.file}" mode="simple" allowTypes="/(\.|\/)(pdf)$/" required="true"/>
 				  	<f:facet name="footer">
-					    <p:commandButton value="Salvar" ajax="false" actionListener="#{tecnicaMB.add}" update="form:panel"/>
+					    <p:commandButton value="Salvar" ajax="false" actionListener="#{tecnicaMB.add}" update=":growl,:form:panel" oncomplete="PF('dlgT').hide()"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgT').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>
 			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="Apagar?" widgetVar="dlgD" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:outputText value="Tem certeza que deseja realizar essa exclusão?" />
+		    <f:facet name="footer">
+			 	<p:commandButton value="Excluir" update=":growl,form:panel"  icon="ui-icon-close" actionListener="#{tecnicaMB.del}" immediate="true" oncomplete="PF('dlgD').hide()" />                 
+			 	<p:commandButton value="Cancelar" oncomplete="PF('dlgD').hide()" immediate="true" />                 
+			</f:facet>
 		</p:dialog>
  		
  		  

@@ -80,7 +80,7 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 
 	public void add(ActionEvent actionEvent){
 		try{
-			if(file != null) {
+			if(file != null && !file.getFileName().equals("") && file.getContentType().contains("pdf")) {
 				AnexoDTO anexoDTO = new AnexoDTO();
 				anexoDTO.setNome(file.getFileName());
 				anexoDTO.setAnexo(file.getContents());
@@ -88,10 +88,12 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 				anexoDTO.setContentType(file.getContentType());
 	
 				tecnicaDTO.setAnexoDTO(anexoDTO);
+				tecnicaDAO.save(tecnicaDTO);
+				addMessage("Operação realizada com sucesso!");
+			}else{
+				addMessage("Anexo obrigatorio.");
 			}
-			tecnicaDAO.save(tecnicaDTO);
 			tecnicaDTO = new TecnicaDTO();
-			addMessage("Operação realizada com sucesso!");
 			atualiza(null);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -101,6 +103,8 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 
 	public void edit(ActionEvent actionEvent) throws Exception {
 		System.out.println(tecnicaDTO);
+		tecnicaDAO.save(tecnicaDTO);
+		addMessage("Operação realizada com sucesso!");
 		
 	}
 
