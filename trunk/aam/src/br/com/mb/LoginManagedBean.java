@@ -16,6 +16,7 @@ import br.com.dao.ParametroDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.ParametroDTO;
 import br.com.dto.UsuarioDTO;
+import br.com.utility.Constantes;
 
 
 @ManagedBean
@@ -89,13 +90,14 @@ public class LoginManagedBean {
 			session = (HttpSession) ctx.getExternalContext().getSession(false);
 
 			session.removeAttribute("usuarioAutenticado");
+			session.removeAttribute("adm");
 			//session.setAttribute("usuarioAutenticado", null);
 			//session.setAttribute("usuarioSession", null);
 			//session.setAttribute("indexController", null);
 
-			//			ctx.getExternalContext().redirect(ctx.getExternalContext().getRequestContextPath() + "/" + Constantes.PAGINA_INDEX);
-
 			session.invalidate();
+			ctx.getExternalContext().redirect(ctx.getExternalContext().getRequestContextPath() + "/" + Constantes.PAGINA_LOGIN);
+
 
 		} catch (Exception e) {
 

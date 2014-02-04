@@ -65,7 +65,7 @@
 		        
 		        <f:facet name="footer">
 			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon" 
-			            update=":growl,panel,customRadio" icon="ui-icon-disk" />
+			            update=":growl,panel,customRadio" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
 			            <p:commandButton value="Reset" type="reset" />
 			            <p:commandButton value="Voltar" actionListener="#{noticiaMB.atualiza}" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 		  			</f:facet>
@@ -82,7 +82,7 @@
 				  	<h:outputLabel value="URL" for="url"/>
 				  	<p:inputText id="url" size="50" value="#{noticiaMB.linkDTO.url}"/>
 				  	<f:facet name="footer">
-					    <p:commandButton value="Salvar" actionListener="#{noticiaMB.addLink}" update=":form:dataTable" oncomplete="PF('dlgN').hide()"/>
+					    <p:commandButton value="Salvar" actionListener="#{noticiaMB.addLink}" update=":form:dataTable" oncomplete="PF('dlgN').hide()" rendered="#{genericoMB.adm}"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgN').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>

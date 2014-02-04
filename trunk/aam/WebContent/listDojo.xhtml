@@ -14,8 +14,8 @@
 			    <p:menuitem value="Dojo" url="/listDojo.xhtml" icon="ui-icon-document" update=":center"/>  
 			</p:tabMenu>
 			
-			<p:commandButton value="Incluir Novo" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" update=":center" actionListener="#{historiaMB.reset}"/>
- 			<p:commandButton value="Excluir" update="form,:messages,:growl,panel" onclick="PF('dlgD').show();"/>
+			<p:commandButton value="Incluir Novo" action="/cadastroHistoria.xhtml?faces-redirect=true" immediate="true" update=":center" actionListener="#{historiaMB.reset}" rendered="#{genericoMB.adm}"/>
+ 			<p:commandButton value="Excluir" update="form,:messages,:growl,panel" onclick="PF('dlgD').show();" rendered="#{genericoMB.adm}"/>
  			
 			<p:separator id="separator"/>
 			
