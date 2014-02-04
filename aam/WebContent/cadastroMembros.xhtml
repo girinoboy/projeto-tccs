@@ -142,7 +142,7 @@
 
 						<f:facet name="footer">
 							<div align="right"><p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
-								id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
+								id="withIcon" update=":growl,panel" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
 							<p:commandButton value="Cancelar" actionListener="#{usuarioMB.atualiza}"
 								action="/listMembros.xhtml?faces-redirect=true" immediate="true"
 								update=":center" /></div>

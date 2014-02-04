@@ -9,9 +9,9 @@
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
  			<p:panel header="Técnica">
- 			<p:commandButton id="selectButton4" value="Incluir Novo" title="teste" update=":growl,:formT:displayT" onclick="PF('dlgT').show();" actionListener="#{tecnicaMB.reset}"/>  
+ 			<p:commandButton id="selectButton4" value="Incluir Novo" title="teste" update=":growl,:formT:displayT" onclick="PF('dlgT').show();" actionListener="#{tecnicaMB.reset}" rendered="#{genericoMB.adm}"/>  
 
- 			<p:commandButton value="Excluir" update="form,:messages,:growl,panel" onclick="PF('dlgD').show();"/>
+ 			<p:commandButton value="Excluir" update="form,:messages,:growl,panel" onclick="PF('dlgD').show();" rendered="#{genericoMB.adm}"/>
 
  			<p:separator id="separator"/>
  			

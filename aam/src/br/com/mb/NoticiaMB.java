@@ -87,6 +87,7 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
+		reset(actionEvent);
 		System.out.println(noticiaDTO);
 		if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
 			listLinkDTO = noticiaDTO.getListLinkDTO();

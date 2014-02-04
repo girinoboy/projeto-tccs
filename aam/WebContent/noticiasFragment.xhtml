@@ -7,10 +7,10 @@
 		<p:panel header="Notícias">
 			<p:commandButton value="Incluir Novo"
 				action="/cadastroNoticia.xhtml?faces-redirect=true" immediate="true"
-				update=":center" actionListener="#{noticiaMB.reset}"/>
+				update=":center" actionListener="#{noticiaMB.reset}" rendered="#{genericoMB.adm}"/>
 
 			<p:commandButton value="Excluir" 
-				update="form,:messages,:growl,panel" onclick="PF('dlgD').show();"/>
+				update="form,:messages,:growl,panel" onclick="PF('dlgD').show();" rendered="#{genericoMB.adm}"/>
 
 			<p:separator id="separator" />
 

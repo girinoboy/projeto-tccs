@@ -15,7 +15,7 @@
  				<p:watermark for="valor" value="R$ " />
 		        <p:message for="valor" />
 				<p:spacer height="40"/>
- 				<p:commandButton value="Salvar Alterações" actionListener="#{financeiroMB.add}"  update="form,:messages,:growl,panel" />
+ 				<p:commandButton value="Salvar Alterações" actionListener="#{financeiroMB.add}"  update="form,:messages,:growl,panel" rendered="#{genericoMB.adm}"/>
  			
 
  			<p:separator id="separator"/>

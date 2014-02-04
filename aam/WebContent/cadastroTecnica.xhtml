@@ -48,7 +48,7 @@
 						
 						<f:facet name="footer">
 							<div align="right"><p:commandButton value="Salvar" actionListener="#{tecnicaMB.edit}"
-								id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
+								id="withIcon" update=":growl,panel" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
 							<p:commandButton value="Cancelar"
 								action="/listTecnica.xhtml?faces-redirect=true" immediate="true"
 								update=":center" /></div>

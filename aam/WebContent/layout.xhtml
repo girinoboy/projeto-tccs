@@ -130,7 +130,7 @@
 							value="#{genericoMB.userSession.anexoDTO.id}" />
 					</p:graphicImage>
 					<p:menu>
-					<p:menuitem value="Sair" outcome="login" />
+					<p:menuitem value="Sair" actionListener="#{loginManagedBean.logout}"/>
 					</p:menu>
 				</h:form>
 			</p:layoutUnit>
