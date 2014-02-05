@@ -11,13 +11,28 @@
  			<p:panel header="Campeonato">
  			<p:commandButton value="Incluir Novo" action="/cadastroCampeonato.xhtml?faces-redirect=true" immediate="true" update=":center" />
 
- 			<p:commandButton value="Excluir" actionListener="#{usuarioMB.del}"  update="form,:messages,:growl,panel" />
+ 			<p:commandButton value="Excluir" actionListener="#{campeonatoMB.del}"  update="form,:messages,:growl,panel" />
 
  			<p:separator id="separator"/>
  			
- 			<p:dataTable id="panel" var="membro" value="#{usuarioMB.membroDataModel}" selection="#{usuarioMB.listSelectedUsuarioDTO}" rowKey="#{membro.id}" editable="true" editMode="cell" paginator="true" rows="20">  
+ 			<p:dataTable id="panel" var="campeonato" value="#{campeonatoMB.campeonatoDataModel}" selection="#{campeonatoMB.listSelectedCampeonatoDTO}" rowKey="#{campeonato.id}" editable="true" editMode="cell" paginator="true" rows="10">  
  			
- 				  
+ 				<p:column headerText="Nome">
+		            <h:outputText value="#{campeonato.titulo}"/>
+		        </p:column>
+		        
+		        <p:column headerText="Data">
+					<h:outputText value="#{campeonato.data}">
+						<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy"/>
+					</h:outputText>
+		        </p:column>
+		        
+		        <p:column headerText="">
+			        <p:commandLink id="ajax" update="panel" actionListener="#{campeonatoMB.edit}" action="/cadastroCampeonato.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
+			        	<f:setPropertyActionListener value="#{campeonato}" target="#{campeonatoMB.campeonatoDTO}"/>
+				        <h:outputText value="Alterar" />
+				    </p:commandLink>
+		        </p:column>
 		        
 		    </p:dataTable> 
  			</p:panel>

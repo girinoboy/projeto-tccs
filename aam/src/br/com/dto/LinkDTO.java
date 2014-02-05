@@ -35,6 +35,10 @@ public class LinkDTO extends AbstractDTO{
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	@JoinColumn(name = "noticia_id", insertable = true, updatable = true, nullable = true)
 	private NoticiaDTO noticiaDTO;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	@JoinColumn(name = "campeonato_id", insertable = true, updatable = true, nullable = true)
+	private CampeonatoDTO campeonatoDTO;
 
 	/**
 	 * 
@@ -73,6 +77,14 @@ public class LinkDTO extends AbstractDTO{
 
 	public void setNoticiaDTO(NoticiaDTO noticiaDTO) {
 		this.noticiaDTO = noticiaDTO;
+	}
+
+	public CampeonatoDTO getCampeonatoDTO() {
+		return campeonatoDTO;
+	}
+
+	public void setCampeonatoDTO(CampeonatoDTO campeonatoDTO) {
+		this.campeonatoDTO = campeonatoDTO;
 	}
 
 }
