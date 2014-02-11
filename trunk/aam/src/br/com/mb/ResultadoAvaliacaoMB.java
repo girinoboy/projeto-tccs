@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
@@ -81,11 +82,10 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 		if(a!=null)
 			resultadoAvaliacaoDTO.setId(a.getId());
 		resuldoAvaliacaoDAO.save(resultadoAvaliacaoDTO);
-		addMessage("Operação realizada com sucesso!");
 		atualiza(actionEvent);
 		reset(actionEvent);
-		resultadoAvaliacaoDTO = new ResultadoAvaliacaoDTO();
-
+		addMessage("Operação realizada com sucesso!");
+		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {

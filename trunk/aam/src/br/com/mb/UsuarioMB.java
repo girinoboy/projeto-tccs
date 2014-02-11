@@ -31,7 +31,6 @@ import br.com.dto.ParametroDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.Constantes;
-import br.com.utility.MembroDataModel;
 
 @ManagedBean
 @SessionScoped
@@ -109,73 +108,74 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			validaCPF();
 			validaLogin();
 			calculaDesconto();
-		System.out.println(usuarioDTO.getFinanceiroDTO().getValorMensalidade());
-		usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
-		if(usuarioDTO.getId() !=null){
-			//verifica se existe um novo anexo, pois o anexo é salvo ao capturar
-			usuarioDTO.setAnexoDTO(usuarioDAO.getById(usuarioDTO.getId()).getAnexoDTO());
+			System.out.println(usuarioDTO.getFinanceiroDTO().getValorMensalidade());
+			usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
+			if(usuarioDTO.getId() !=null){
+				//verifica se existe um novo anexo, pois o anexo é salvo ao capturar
+				usuarioDTO.setAnexoDTO(usuarioDAO.getById(usuarioDTO.getId()).getAnexoDTO());
 
-			Calendar c = new GregorianCalendar();
-			c.setTime(usuarioDTO.getFinanceiroDTO().getDataPagamento());
-			Map<String, Object> filtrosConsulta = new HashMap<String, Object>();
-			filtrosConsulta.put("mes", c.get(Calendar.MONTH));
-			filtrosConsulta.put("ano", c.get(Calendar.YEAR));
-			filtrosConsulta.put("usuarioDTO.id", usuarioDTO.getId());
-			//teste para verificar se o usuario ja pagou no mes
-			List<FinanceiroDTO> f = financeiroDAO.listCriterio(null, filtrosConsulta , 1);
+				Calendar c = new GregorianCalendar();
+				c.setTime(usuarioDTO.getFinanceiroDTO().getDataPagamento());
+				Map<String, Object> filtrosConsulta = new HashMap<String, Object>();
+				filtrosConsulta.put("mes", c.get(Calendar.MONTH));
+				filtrosConsulta.put("ano", c.get(Calendar.YEAR));
+				filtrosConsulta.put("usuarioDTO.id", usuarioDTO.getId());
+				//teste para verificar se o usuario ja pagou no mes
+				List<FinanceiroDTO> f = financeiroDAO.listCriterio(null, filtrosConsulta , 1);
 
-			if(!f.isEmpty()){
-				usuarioDTO.getFinanceiroDTO().setId(f.get(0).getId());
+				if(!f.isEmpty()){
+					usuarioDTO.getFinanceiroDTO().setId(f.get(0).getId());
+				}
+
 			}
 
-		}
 
-
-		usuarioDTO = usuarioDAO.save(usuarioDTO);
-		usuarioDTO.getFinanceiroDTO().setUsuarioDTO(usuarioDTO);
-		usuarioDTO.getFinanceiroDTO().setSituacao(false);
-		usuarioDTO.getFinanceiroDTO().getDia();
-		usuarioDTO.getFinanceiroDTO().getMes();
-		usuarioDTO.getFinanceiroDTO().getAno();
-		usuarioDTO = usuarioDAO.save(usuarioDTO);
-		addMessage("Operação realizada com sucesso!");
-		usuarioDTO = new UsuarioDTO();
-		listUsuarioDTO = usuarioDAO.list();
+			usuarioDTO = usuarioDAO.save(usuarioDTO);
+			usuarioDTO.getFinanceiroDTO().setUsuarioDTO(usuarioDTO);
+			usuarioDTO.getFinanceiroDTO().setSituacao(false);
+			usuarioDTO.getFinanceiroDTO().getDia();
+			usuarioDTO.getFinanceiroDTO().getMes();
+			usuarioDTO.getFinanceiroDTO().getAno();
+			usuarioDTO = usuarioDAO.save(usuarioDTO);
+			addMessage("Operação realizada com sucesso!");
+			usuarioDTO = new UsuarioDTO();
+			listUsuarioDTO = usuarioDAO.list();
+			//redireciona para a home apos incluir
+			FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-
 	}
 
 	private void validaLogin() throws Exception {
 		try {
-		
-		if(usuarioDAO.validaLogin(usuarioDTO)){
-			addMessage("login existente");
-			throw new Exception("login invalido");
-		}
-		
+
+			if(usuarioDAO.validaLogin(usuarioDTO)){
+				addMessage("login existente");
+				throw new Exception("login invalido");
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 	}
 
 	private void validaCPF() throws Exception {
 		try {
-			
+
 			if(usuarioDAO.validaCPF(usuarioDTO)){
 				addMessage("cpf existente");
 				throw new Exception("cpf invalido");
 			}
-			
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw e;
-			}
-		
-		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+
+
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
@@ -195,7 +195,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			}else{
 				addMessage("Nenhum Item Selecionado.");
 			}
-			
+
 		}catch(Exception e){
 			addMessage(e.getMessage());
 			e.printStackTrace();

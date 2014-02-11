@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
@@ -12,6 +13,7 @@ import org.primefaces.event.SelectEvent;
 import br.com.dao.GraduacaoDAO;
 import br.com.dto.GraduacaoDTO;
 import br.com.dto.TecnicaDTO;
+import br.com.utility.Constantes;
 import br.com.utility.GraduacaoDataModel;
 
 
@@ -62,7 +64,8 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 		graduacaoDAO.save(graduacaoDTO);
 		reset(null);
 		atualiza(actionEvent);
-		addMessage("Operação realizada com sucesso!.");
+		addMessage("Operação realizada com sucesso!");
+		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
 		
 	}
 

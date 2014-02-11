@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
@@ -17,6 +18,7 @@ import br.com.dao.NoticiaDAO;
 import br.com.dto.LinkDTO;
 import br.com.dto.NoticiaDTO;
 import br.com.utility.AbstractDataModel;
+import br.com.utility.Constantes;
 import br.com.utility.NoticiaDataModel;
 
 /**
@@ -27,6 +29,7 @@ import br.com.utility.NoticiaDataModel;
 @SessionScoped
 public class NoticiaMB extends GenericoMB implements ModeloMB{
 
+	private static final long serialVersionUID = -3399714918960475131L;
 	private NoticiaDAO noticiaDAO = new NoticiaDAO();
 	private NoticiaDTO noticiaDTO = new NoticiaDTO();
 	private List<NoticiaDTO> listNoticiaDTO = new ArrayList<NoticiaDTO>();
@@ -69,6 +72,13 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 		System.out.println(listSelectedNoticiaDTO);
 		System.out.println(listSelectedLinkDTO);
 	}
+	
+	public void handleDateSelect(SelectEvent event) {  
+//        FacesContext facesContext = FacesContext.getCurrentInstance();  
+//        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");  
+//        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+		noticiaDTO.setSemData(false);
+    } 
 
 	public void add(ActionEvent actionEvent) throws Exception {
 
@@ -79,10 +89,12 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 			l.setNoticiaDTO(noticiaDTO);
 			linkDAO.save(l);
 		}
-		linkDataModel = new AbstractDataModel<LinkDTO>();
-		noticiaDTO = new NoticiaDTO();
-
+		
+		reset(actionEvent);
+		atualiza(actionEvent);
+		
 		addMessage("Operação realizada com sucesso!");
+		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
 
 	}
 
@@ -111,11 +123,8 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 			e.printStackTrace();
 		}finally{
 			try {
-				listNoticiaDTO = noticiaDAO.list();
-
-				noticiaDataModel = new NoticiaDataModel(listNoticiaDTO);
+				atualiza(actionEvent);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -138,10 +147,10 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 		linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
 	}
 
-	public NoticiaDTO getNoticiaDTO() {
+	public NoticiaDTO getNoticiaDTO() throws Exception {
 		if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
-			listLinkDTO = noticiaDTO.getListLinkDTO();
-			linkDataModel = new AbstractDataModel<LinkDTO>(noticiaDTO.getListLinkDTO());
+			listLinkDTO = linkDAO.listByIdNoticiaDTO(noticiaDTO.getId());
+			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
 		}
 		return noticiaDTO;
 	}

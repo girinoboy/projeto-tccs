@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
@@ -19,6 +20,7 @@ import br.com.dto.CampeonatoDTO;
 import br.com.dto.LinkDTO;
 import br.com.dto.ResultadoDTO;
 import br.com.utility.AbstractDataModel;
+import br.com.utility.Constantes;
 
 /**
  * @author marcleonio.medeiros
@@ -81,7 +83,7 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
 		
 	}
 
