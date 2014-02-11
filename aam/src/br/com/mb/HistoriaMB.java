@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
@@ -17,6 +18,7 @@ import br.com.dao.LinkDAO;
 import br.com.dto.HistoriaDTO;
 import br.com.dto.LinkDTO;
 import br.com.utility.AbstractDataModel;
+import br.com.utility.Constantes;
 import br.com.utility.HistoriaDataModel;
 
 /**
@@ -97,6 +99,7 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 		reset(null);
 		atualizaLista();
 		addMessage("Operação realizada com sucesso!");
+		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
 		
 	}
 
@@ -147,9 +150,9 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 		linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
 	}
 
-	public HistoriaDTO getHistoriaDTO() {
+	public HistoriaDTO getHistoriaDTO() throws Exception {
 		if(historiaDTO!=null && historiaDTO.getListLinkDTO()!=null){
-			listLinkDTO = historiaDTO.getListLinkDTO();
+			listLinkDTO = linkDAO.listByIdHistoriaDTO(historiaDTO.getId());
 			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
 		}
 		return historiaDTO;

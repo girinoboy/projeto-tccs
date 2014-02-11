@@ -41,7 +41,7 @@
 			          	<p:commandButton value="Salvar" actionListener="#{graduacaoMB.add}" id="withIcon"   
 			            update=":growl,panel" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
 			            <p:commandButton value="Reset" type="reset" /> 
-			            <p:commandButton value="Voltar" action="/listGraduacao.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
+			            <p:commandButton value="Voltar" actionListener="#{graduacaoMB.atualiza}" action="/listGraduacao.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
 		  			</f:facet>
 		        </h:panelGrid>  
 		    </p:panel>

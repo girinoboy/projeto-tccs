@@ -83,7 +83,7 @@
 		          	<p:commandButton value="Salvar" actionListener="#{campeonatoMB.add}" id="withIcon"   
 		            update=":growl,panel" icon="ui-icon-disk" />
 		            <p:commandButton value="Reset" type="reset" /> 
-		            <p:commandButton value="Voltar" action="/listCampeonato.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
+		            <p:commandButton value="Voltar" actionListener="#{campeonatoMB.atualiza}" action="/listCampeonato.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
 	  			</f:facet>
 		    </p:panel>
  		

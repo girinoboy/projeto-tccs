@@ -5,8 +5,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
 
-<ui:decorate template="layout.xhtml">  
-	<ui:define id="centro" name="centro"> 
+<ui:decorate template="layout.xhtml">
+	<ui:define id="centro" name="centro">
  		<h:form id="form">
  		
  			<p:panel id="panel" header="Notícias">
@@ -17,13 +17,13 @@
 		            <p:message for="titulo" />
 		        	<h:outputLabel for="titulo" value="Título: *" />
 		            <p:inputText id="titulo" size="80"
-		                value="#{noticiaMB.noticiaDTO.titulo}" required="true" label="Título">
+		                value="#{noticiaMB.noticiaDTO.titulo}" required="true" label="Título" maxlength="50">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            
 		            <p:selectOneRadio id="customRadio" value="#{noticiaMB.noticiaDTO.semData}" layout="custom" required="true" label="Marcado Para">  
-				       <f:selectItem itemLabel="Option 1" itemValue="true" />  
-				       <f:selectItem itemLabel="Option 2" itemValue="false" />  
+				       <f:selectItem itemLabel="Option 1" itemValue="false" />
+				       <f:selectItem itemLabel="Option 2" itemValue="true" />
 				    </p:selectOneRadio>
 		            <p:message for="customRadio" />
 				    <h:outputText for="opt1" value="Marcado Para: *" />
@@ -31,30 +31,32 @@
 			            <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>
 						<p:calendar locale="pt" showButtonPanel="true" navigator="true" label="Data"
 							value="#{noticiaMB.noticiaDTO.marcadoPara}" id="popupButtonCal"
-							showOn="button" valueChangeListener="1800" readonly="false"/>
+							showOn="button" valueChangeListener="1800" readonly="false">
+					        <p:ajax event="dateSelect" listener="#{noticiaMB.handleDateSelect}" update="customRadio,opt1,opt2" />
+					    </p:calendar>
 			            <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>
 				        <h:outputLabel for="opt2" value="Sem Data" />
 		            </h:panelGrid>
 		            
 		            <h:outputLabel for="descricao" value="Descrição: " />
-		            <p:inputTextarea id="descricao" rows="5" cols="30" counter="counter" maxlength="200"       
-				    	value="#{noticiaMB.noticiaDTO.descricao}" 
-				    	counterTemplate="{0} characters remaining." autoResize="false"/>  
+		            <p:inputTextarea id="descricao" rows="5" cols="30" counter="counter" maxlength="200"    
+				    	value="#{noticiaMB.noticiaDTO.descricao}"
+				    	counterTemplate="{0} characters remaining." autoResize="false"/>
 				  	<p:watermark for="descricao" value=" " />
 					<h:outputText id="counter" />
 		            
 		        </h:panelGrid>
 				<br/>
-		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true"/> 
+		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true"/>
 		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{noticiaMB.delLink}" update="dataTable" immediate="true"/>
 				
 				
 				<p:dataTable id="dataTable" var="link" value="#{noticiaMB.linkDataModel}" selection="#{noticiaMB.listSelectedLinkDTO}" rowKey="#{link.nome}">  
 
-	 				<p:ajax event="rowSelectCheckbox" listener="#{noticiaMB.check}"   />
+	 				<p:ajax event="rowSelectCheckbox" listener="#{noticiaMB.check}"/>
 					
 					<p:column selectionMode="multiple" style="width:2%" />
-	 				  
+	 				
 			        <p:column headerText="Nome">
 				        <h:outputLink value="http://#{link.url}" target="_blank">
 							<h:outputText value="#{link.nome}"/>
@@ -64,7 +66,7 @@
 		        </p:dataTable>
 		        
 		        <f:facet name="footer">
-			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon" 
+			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon"
 			            update=":growl,panel,customRadio" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
 			            <p:commandButton value="Reset" type="reset" />
 			            <p:commandButton value="Voltar" actionListener="#{noticiaMB.atualiza}" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/>

@@ -19,6 +19,7 @@ import org.primefaces.model.UploadedFile;
 import br.com.dao.TecnicaDAO;
 import br.com.dto.AnexoDTO;
 import br.com.dto.TecnicaDTO;
+import br.com.utility.Constantes;
 import br.com.utility.TecnicaDataModel;
 
 /**
@@ -95,6 +96,7 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 			}
 			tecnicaDTO = new TecnicaDTO();
 			atualiza(null);
+			FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_TECNICA);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

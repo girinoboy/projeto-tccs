@@ -20,5 +20,6 @@ public class Constantes {
 	public static final Integer ADMINISTRADOR = 1;
 	public static final String PAGINA_INDEX = "layout.xhtml";
 	public static final String PAGINA_LOGIN = "login.xhtml";
+	public static final String PAGINA_TECNICA = "listTecnica.xhtml";
 
 }
