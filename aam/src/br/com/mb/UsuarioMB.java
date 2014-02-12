@@ -192,7 +192,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		try{
 			//System.out.println(listSelectedUsuarioDTO);
 			for (UsuarioDTO u : listSelectedUsuarioDTO) {
-				usuarioDAO.delete(u);
+				usuarioDAO.delete(u);//colocar uma flag para desativar usuario ao em vez de excluir definitivamente do bd
 			}
 			if(listSelectedUsuarioDTO.length >0){
 				addMessage("Apagado.");
@@ -201,41 +201,12 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			}
 
 		}catch(Exception e){
-			try{
-				for (UsuarioDTO u : listSelectedUsuarioDTO) {
-					usuarioDAO.delete(u);
-				}
-				if(listSelectedUsuarioDTO.length >0){
-					addMessage("Apagado.");
-				}else{
-					addMessage("Nenhum Item Selecionado.");
-				}
-			}catch(Exception e1){
-				try{
-					for (UsuarioDTO u : listSelectedUsuarioDTO) {
-						usuarioDAO.delete(u);
-					}
-					if(listSelectedUsuarioDTO.length >0){
-						addMessage("Apagado.");
-					}else{
-						addMessage("Nenhum Item Selecionado.");
-					}
-				}catch(Exception e2){
-
-				}
-			}finally{
-				try {
-					atualiza(null);
-				} catch (Exception e3) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			addMessage("Registro não pode ser apagado.");
+			e.printStackTrace();
 		}finally{
 			try {
 				atualiza(null);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

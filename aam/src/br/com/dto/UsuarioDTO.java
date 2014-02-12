@@ -53,7 +53,8 @@ public class UsuarioDTO extends AbstractDTO{
 	private String endereco;
 	private String telefone;
 	private Double desconto;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
 	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
 	private GraduacaoDTO graduacaoDTO;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -68,7 +69,7 @@ public class UsuarioDTO extends AbstractDTO{
 	private FinanceiroDTO financeiroDTO;
 	@OneToMany(targetEntity=FinanceiroDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL,CascadeType.PERSIST, CascadeType.MERGE})
 	private List<FinanceiroDTO> listFinanceiroDTO;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "perfil_id", insertable = true, updatable = true, nullable = true)
 	private PerfilDTO perfilDTO;
 	
