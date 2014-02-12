@@ -70,7 +70,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void reset(ActionEvent event) {
 		usuarioDTO = new UsuarioDTO();
-//		membroDataModel = new AbstractDataModel<UsuarioDTO>();
+		//		membroDataModel = new AbstractDataModel<UsuarioDTO>();
 	}
 
 	public void onRowSelect(SelectEvent event) throws IOException {  
@@ -88,7 +88,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 		//usuarioDTO = usuarioDAO.save(usuarioDTO);
 		usuarioDTO.setAnexoDTO(anexoDAO.save(usuarioDTO.getAnexoDTO()));
-//		setUserSession(usuarioDTO);
+		//		setUserSession(usuarioDTO);
 		addMessage("Imagem add");
 	}
 
@@ -201,8 +201,36 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			}
 
 		}catch(Exception e){
-			addMessage(e.getMessage());
-			e.printStackTrace();
+			try{
+				for (UsuarioDTO u : listSelectedUsuarioDTO) {
+					usuarioDAO.delete(u);
+				}
+				if(listSelectedUsuarioDTO.length >0){
+					addMessage("Apagado.");
+				}else{
+					addMessage("Nenhum Item Selecionado.");
+				}
+			}catch(Exception e1){
+				try{
+					for (UsuarioDTO u : listSelectedUsuarioDTO) {
+						usuarioDAO.delete(u);
+					}
+					if(listSelectedUsuarioDTO.length >0){
+						addMessage("Apagado.");
+					}else{
+						addMessage("Nenhum Item Selecionado.");
+					}
+				}catch(Exception e2){
+
+				}
+			}finally{
+				try {
+					atualiza(null);
+				} catch (Exception e3) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}finally{
 			try {
 				atualiza(null);
