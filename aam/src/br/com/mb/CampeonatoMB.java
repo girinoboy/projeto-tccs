@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -27,26 +27,26 @@ import br.com.utility.Constantes;
  *
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class CampeonatoMB extends GenericoMB implements ModeloMB{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4722198864111611255L;
-	
+
 	private CampeonatoDTO campeonatoDTO = new CampeonatoDTO();
 	private CampeonatoDAO campeonatoDAO = new CampeonatoDAO();
 	private List<CampeonatoDTO> listCampeonatoDTO = new ArrayList<CampeonatoDTO>();
 	private AbstractDataModel<CampeonatoDTO> campeonatoDataModel;
 	private CampeonatoDTO[] listSelectedCampeonatoDTO;
-	
+
 	private LinkDAO linkDAO = new LinkDAO();
 	private LinkDTO linkDTO = new LinkDTO();
 	private AbstractDataModel<LinkDTO> linkDataModel;
 	private List<LinkDTO> listLinkDTO = new ArrayList<LinkDTO>();
 	private LinkDTO[] listSelectedLinkDTO;
-	
+
 	private ResultadoDAO resultadoDAO = new ResultadoDAO();
 	private ResultadoDTO resultadoDTO = new ResultadoDTO();
 	private AbstractDataModel<ResultadoDTO> resultadoDataModel;
@@ -66,37 +66,79 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 
 	public void atualiza(ActionEvent event) throws Exception {
 		listCampeonatoDTO = campeonatoDAO.list();
-
 		campeonatoDataModel = new AbstractDataModel<CampeonatoDTO>(listCampeonatoDTO);
-		
+
 	}
 
 	public void reset(ActionEvent event) {
 		campeonatoDTO = new CampeonatoDTO();
+
 		listCampeonatoDTO = new ArrayList<CampeonatoDTO>();
 		campeonatoDataModel = new AbstractDataModel<CampeonatoDTO>(listCampeonatoDTO);
-		
+
+		listLinkDTO = new ArrayList<LinkDTO>();
+		linkDataModel = new AbstractDataModel<LinkDTO>();
+
+		listResultadoDTO = new ArrayList<ResultadoDTO>();
+		resultadoDataModel = new AbstractDataModel<ResultadoDTO>();
+
 	}
-	
+
 	public void check(SelectEvent event) {
 		System.out.println("in check");
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {
-		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
-		
+		//		campeonatoDTO.setUsuarioDTO(getUserSession());
+		campeonatoDTO = campeonatoDAO.save(campeonatoDTO);
+		//salva todos os links nas respctivas noticias
+		for (LinkDTO l : listLinkDTO) {
+			l.setCampeonatoDTO(campeonatoDTO);
+			linkDAO.save(l);
+		}
+		//salva todos os resultados nas respctivas noticias
+		for (ResultadoDTO r : listResultadoDTO) {
+			r.setCampeonatoDTO(campeonatoDTO);
+			resultadoDAO.save(r);
+		}
+
+		reset(actionEvent);
+		atualiza(actionEvent);
+
+		addMessage("Operação realizada com sucesso!");
+		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_CAMPEONATO);
+
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try{
+			//System.out.println(listSelectedNoticiaDTO);
+			for (CampeonatoDTO n : listSelectedCampeonatoDTO) {
+				campeonatoDAO.delete(n);
+			}
+			if(listSelectedCampeonatoDTO.length >0){
+				addMessage("Apagado.");
+			}else{
+				addMessage("Nenhum Item Selecionado.");
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try {
+				atualiza(actionEvent);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
-	
+
 	public void addLink(ActionEvent actionEvent) throws Exception{
 		if(listLinkDTO == null){
 			listLinkDTO = new ArrayList<LinkDTO>();
@@ -113,7 +155,45 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 		linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
 	}
 
+	public void addResultado(ActionEvent actionEvent) throws Exception{
+		if(listResultadoDTO == null){
+			listResultadoDTO = new ArrayList<ResultadoDTO>();
+		}
+		listResultadoDTO.add(resultadoDAO.save(resultadoDTO));
+		resultadoDataModel = new AbstractDataModel<ResultadoDTO>(listResultadoDTO);
+	}
+
+	public void delResultado(ActionEvent actionEvent) throws Exception{
+		for (ResultadoDTO l : listSelectedResultadoDTO) {
+			resultadoDAO.delete(l);
+			listResultadoDTO.remove(l);
+		}
+		resultadoDataModel = new AbstractDataModel<ResultadoDTO>(listResultadoDTO);
+	}
+
+
 	public CampeonatoDTO getCampeonatoDTO() {
+		try {
+			if(campeonatoDTO!=null && campeonatoDTO.getListResultadoDTO()!=null){
+				List<ResultadoDTO> listResultadoDTO = resultadoDAO.listByIdCampeonatoDTO(campeonatoDTO.getId());
+				if(listResultadoDTO.size() > this.listResultadoDTO.size()){
+					this.listResultadoDTO = listResultadoDTO;
+				}
+			}
+			if(campeonatoDTO!=null && campeonatoDTO.getListLinkDTO()!=null){
+				List<LinkDTO> listLinkDTO = linkDAO.listByIdCampeonatoDTO(campeonatoDTO.getId());
+				if(listLinkDTO.size() > this.listLinkDTO.size()){
+					this.listLinkDTO = listLinkDTO;
+				}
+			}
+			if(listLinkDTO.size() == campeonatoDTO.getListLinkDTO().size())
+				linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+			if(listResultadoDTO.size() == campeonatoDTO.getListResultadoDTO().size())
+				campeonatoDTO.setListResultadoDTO(listResultadoDTO);
+		}catch(Exception e){
+			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+			resultadoDataModel = new AbstractDataModel<ResultadoDTO>(listResultadoDTO);
+		}
 		return campeonatoDTO;
 	}
 

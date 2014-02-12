@@ -89,11 +89,11 @@
 
 						<!-- Login -->
 						<h:outputText for="login" value="Login: *" />
-						<p:inputText size="15" required="true" label="login" value="#{usuarioMB.usuarioDTO.usuario}" maxlength="20"/>
+						<p:inputText id="login" size="15" required="true" label="login" value="#{usuarioMB.usuarioDTO.usuario}" maxlength="20"/>
 
 						<!-- Senha -->
 						<h:outputText for="senha" value="Senha: *" />
-						<p:password size="15" required="true" label="senha" value="#{usuarioMB.usuarioDTO.senha}" maxlength="20"/>
+						<p:password id="senha" size="15" required="true" label="senha" value="#{usuarioMB.usuarioDTO.senha}" maxlength="20" redisplay="true"/>
 						
 						<!-- Graduação -->
 						<h:outputLabel for="graduacao" value="Graduação: *" />

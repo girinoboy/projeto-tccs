@@ -54,7 +54,7 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void atualiza(ActionEvent event) throws Exception{
 		listNoticiaDTO = noticiaDAO.list();
 
@@ -72,13 +72,13 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 		System.out.println(listSelectedNoticiaDTO);
 		System.out.println(listSelectedLinkDTO);
 	}
-	
+
 	public void handleDateSelect(SelectEvent event) {  
-//        FacesContext facesContext = FacesContext.getCurrentInstance();  
-//        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");  
-//        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+		//        FacesContext facesContext = FacesContext.getCurrentInstance();  
+		//        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");  
+		//        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
 		noticiaDTO.setSemData(false);
-    } 
+	} 
 
 	public void add(ActionEvent actionEvent) throws Exception {
 
@@ -89,22 +89,22 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 			l.setNoticiaDTO(noticiaDTO);
 			linkDAO.save(l);
 		}
-		
+
 		reset(actionEvent);
 		atualiza(actionEvent);
-		
+
 		addMessage("Operação realizada com sucesso!");
 		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
 
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
-		reset(actionEvent);
+		//		reset(actionEvent);
 		System.out.println(noticiaDTO);
-		if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
-			listLinkDTO = noticiaDTO.getListLinkDTO();
-			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
-		}
+		//		if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
+		//			listLinkDTO = noticiaDTO.getListLinkDTO();
+		//			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+		//		}
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
@@ -148,8 +148,13 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public NoticiaDTO getNoticiaDTO() throws Exception {
-		if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
-			listLinkDTO = linkDAO.listByIdNoticiaDTO(noticiaDTO.getId());
+		try{
+			if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
+				listLinkDTO = linkDAO.listByIdNoticiaDTO(noticiaDTO.getId());
+				if(listLinkDTO.size() == noticiaDTO.getListLinkDTO().size())
+					linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+			}
+		}catch(Exception e){
 			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
 		}
 		return noticiaDTO;

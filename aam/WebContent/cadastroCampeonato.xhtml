@@ -15,16 +15,16 @@
 		            <p:watermark for="nome" value="Nome do Campeonato" />
 		            <p:message for="nome" />
 		        	<h:outputLabel for="nome" value="Nome: *" />
-		            <p:inputText id="nome" size="80"
+		            <p:inputText id="nome" size="80" maxlength="50"
 		                value="#{campeonatoMB.campeonatoDTO.nome}" required="true" label="Nome">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            
 		            <p:watermark for="dataNascimento" value="__/__/____" />
 		            <p:message for="dataNascimento" />
-		            <h:outputText for="dataNascimento" value="Data de nascimento: *" required="true" />
+		            <h:outputText for="dataNascimento" value="Data: *" required="true" />
 					<p:calendar locale="pt" showButtonPanel="true" navigator="true" value="#{campeonatoMB.campeonatoDTO.data}" id="dataNascimento"
-						showOn="button" valueChangeListener="1800"/>
+						showOn="button" valueChangeListener="1800" required="true"/>
 		            
 		            
 				  	<p:watermark for="descricao" value=" " />
@@ -39,7 +39,7 @@
 		        </h:panelGrid>
 		        
 		        <br/>
-		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true"/> 
+		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgL').show();" immediate="true"/> 
 		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{campeonatoMB.delLink}" update="dataTable" immediate="true"/>
 				
 				
@@ -58,7 +58,7 @@
 		        </p:dataTable>
 		        
 		        <p:separator id="separator"/>
-		        Resultados <p:commandButton icon="ui-icon-plusthick" actionListener="#{campeonatoMB.addResultado}" immediate="true" update="dataTableR"/> 
+		        Resultados <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgR').show();" immediate="true" /> 
 		 		   		   <p:commandButton icon="ui-icon-closethick" actionListener="#{campeonatoMB.delResultado}" update="dataTableR" immediate="true"/>
 		 		
 		 		<p:dataTable id="dataTableR" var="resultado" value="#{campeonatoMB.resultadoDataModel}" selection="#{campeonatoMB.listSelectedResultadoDTO}" rowKey="#{resultado.usuarioDTO.nome}">  
@@ -68,28 +68,26 @@
 					<p:column selectionMode="multiple" style="width:2%" />
 	 				  
 			        <p:column headerText="Nome">
-				        <h:outputLink value="http://#{link.url}" target="_blank">
-							<h:outputText value="#{link.nome}"/>
-						</h:outputLink>
+						<h:outputText value="#{resultado.usuarioDTO.nome}"/>
 			        </p:column>
 			        
 			        <p:column headerText="Posição">
-			        	<p:inputText maxlength="80"/>
+			        	<h:outputText value="#{resultado.posicao}"/>
 			        </p:column>
 		        
 		        </p:dataTable>
 		        
 		        <f:facet name="footer">
 		          	<p:commandButton value="Salvar" actionListener="#{campeonatoMB.add}" id="withIcon"   
-		            update=":growl,panel" icon="ui-icon-disk" />
-		            <p:commandButton value="Reset" type="reset" /> 
+		            update=":growl,panel" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
+		            <p:commandButton value="Reset" type="reset" rendered="#{genericoMB.adm}"/> 
 		            <p:commandButton value="Voltar" actionListener="#{campeonatoMB.atualiza}" action="/listCampeonato.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
 	  			</f:facet>
 		    </p:panel>
  		
  		</h:form>
  		
- 		<p:dialog header="Adicionar Link" widgetVar="dlgN" modal="true" appendToBody="true" resizable="false" draggable="true">
+ 		<p:dialog header="Adicionar Link" widgetVar="dlgL" modal="true" appendToBody="true" resizable="false" draggable="true">
 		    <h:form>
   				<h:panelGrid columns="2">
 				    
@@ -99,12 +97,32 @@
 				  	<h:outputLabel value="URL" for="url"/>
 				  	<p:inputText id="url" size="50" value="#{campeonatoMB.linkDTO.url}"/>
 				  	<f:facet name="footer">
-					    <p:commandButton value="Salvar" ajax="false" actionListener="#{campeonatoMB.addLink}" update="dataTable"/>
-				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgN').hide()" immediate="true" />
+					    <p:commandButton value="Salvar" ajax="false" actionListener="#{campeonatoMB.addLink}" update=":form:dataTable"/>
+				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgL').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>
 			</h:form>
 		</p:dialog>
+		
+		
+		<p:dialog header="Adicionar Resultado" widgetVar="dlgR" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:form>
+  				<h:panelGrid columns="2">
+				    
+				    <h:outputLabel value="Nome" for="nomeR"/>
+				  	<p:inputText id="nomeR" size="50" value="#{campeonatoMB.resultadoDTO.usuarioDTO.nome}"/>
+				  	
+				  	<h:outputLabel value="Posição" for="posicao"/>
+				  	<p:inputText id="posicao" size="50" value="#{campeonatoMB.resultadoDTO.posicao}"/>
+				  	<f:facet name="footer">
+					    <p:commandButton value="Salvar" ajax="false" actionListener="#{campeonatoMB.addResultado}" update=":form:dataTableR"/>
+				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgR').hide()" immediate="true" />
+			  		</f:facet>
+		  		</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+		
  	</ui:define>  
 </ui:decorate>  
 </html>

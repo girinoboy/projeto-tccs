@@ -11,36 +11,51 @@
  		
  		<p:panel id="panel" header="Graduação">
 		    	<h:inputHidden id="idgraduacao" value="#{graduacaoMB.graduacaoDTO.id}" />
-		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		    	<h:inputHidden id="idAnexo"		value="#{graduacaoMB.graduacaoDTO.anexoDTO.id}" />
+		        <h:panelGrid id="pg" columns="2" cellpadding="5">
+		        
+		        	<p:graphicImage id="avatar" value="#{genericoMB.dynamicImage}"
+						style="width:60px;height:60px">
+						<f:param id="av" name="image_id"
+							value="#{graduacaoMB.graduacaoDTO.anexoDTO.id}" />
+					</p:graphicImage>
+					<p:fileUpload size="15" value="#{graduacaoMB.file}"
+						fileUploadListener="#{graduacaoMB.handleFileUpload}"
+						mode="advanced"
+						update=":messages,:growl,avatar,av,idgraduacao,idAnexo,:formR:avatar" auto="true"
+						sizeLimit="5000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						label="Selecione" />
+		        
+		            <p:watermark for="nome" value="Nome completo" />
+		            <p:message for="nome" />
 		        	<h:outputLabel for="nome" value="Nome: *" />
 		            <p:inputText id="nome" size="80"
 		                value="#{graduacaoMB.graduacaoDTO.nome}" required="true" label="Nome">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
-		            <p:watermark for="nome" value="Nome completo" />
-		            <p:message for="nome" />
 		            
+				    <br/>
+				    <p:message for="grupoTecnica" />
 		            <br/>
 		            <p:selectCheckboxMenu id="grupoTecnica" value="#{graduacaoMB.graduacaoDTO.listTecnica}" label="Grupos Técnicas" filter="true" filterText="Filter" filterMatchMode="startsWith"  converter="tecnica">  
 						<f:selectItems value="#{tecnicaMB.listTecnicaDTO}"
 								var="tecnica" itemLabel="#{tecnica.nome}"
 								itemValue="#{tecnica}" />
 				    </p:selectCheckboxMenu>
-				    <br/>
-				    <p:message for="grupoTecnica" />
 		            
+				  	<p:watermark for="conhecimentos" value=" " />
+				  	<p:message for="conhecimentos" />
 		            <h:outputLabel for="conhecimentos" value="Conhecimentos exigidos: " />
 		            <p:inputTextarea id="conhecimentos" rows="5" cols="30" counter="counter" maxlength="200"       
 				    	value="#{graduacaoMB.graduacaoDTO.conhecimentos}" 
 				    	counterTemplate="{0} characters remaining." autoResize="false"/>  
-				  	<p:watermark for="conhecimentos" value=" " />
-				  	<p:message for="conhecimentos" />
+				  	<br/>
 					<h:outputText id="counter" />
 		            
 		            <f:facet name="footer">
 			          	<p:commandButton value="Salvar" actionListener="#{graduacaoMB.add}" id="withIcon"   
 			            update=":growl,panel" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
-			            <p:commandButton value="Reset" type="reset" /> 
+			            <p:commandButton value="Reset" type="reset" rendered="#{genericoMB.adm}"/> 
 			            <p:commandButton value="Voltar" actionListener="#{graduacaoMB.atualiza}" action="/listGraduacao.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
 		  			</f:facet>
 		        </h:panelGrid>  

@@ -24,7 +24,7 @@ public class HistoriaDTO {
 	private Boolean categoria;
 	private String titulo;
 	private String descricao;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;//usuario marcador, ou o que registrou a noticia
 	@OneToMany(targetEntity=LinkDTO.class, mappedBy = "historiaDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL,CascadeType.PERSIST, CascadeType.MERGE})

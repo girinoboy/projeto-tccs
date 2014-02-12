@@ -36,7 +36,7 @@ public class GraduacaoDTO extends AbstractDTO{
 	private Integer id;
 	private String nome;
 	private String conhecimentos;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;//usuario que cadastrou a tecnica ou alterou
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -117,6 +117,8 @@ public class GraduacaoDTO extends AbstractDTO{
 	}
 
 	public AnexoDTO getAnexoDTO() {
+		if(anexoDTO == null)
+			anexoDTO = new AnexoDTO();
 		return anexoDTO;
 	}
 

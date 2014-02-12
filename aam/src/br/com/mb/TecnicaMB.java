@@ -89,14 +89,18 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 				anexoDTO.setContentType(file.getContentType());
 	
 				tecnicaDTO.setAnexoDTO(anexoDTO);
+				//salva nome com codificacao certa
+				tecnicaDTO.setNome(new String (tecnicaDTO.getNome().getBytes ("iso-8859-1"), "UTF-8"));
 				tecnicaDAO.save(tecnicaDTO);
 				addMessage("Operação realizada com sucesso!");
 			}else{
 				addMessage("Anexo obrigatorio.");
 			}
 			tecnicaDTO = new TecnicaDTO();
+			reset(actionEvent);
 			atualiza(null);
-			FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_TECNICA);
+			
+//			FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_TECNICA);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -123,6 +127,8 @@ public class TecnicaMB extends GenericoMB implements ModeloMB{
 			}
 
 		}catch(Exception e){
+			if(e.getCause().getMessage().contains("foreign key"))
+				addMessage("Fk relacionadas não podem ser apagadas.");
 			e.printStackTrace();
 		}finally{
 			try {
