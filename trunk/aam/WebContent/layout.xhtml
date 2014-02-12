@@ -101,13 +101,13 @@
 			<p:layoutUnit id="left" position="west">
 				<h:form>
 					<p:menu>
-						<p:menuitem value="História" outcome="listHistoria" update="centro"/>
-						<p:menuitem value="Membros" outcome="listMembros" update="centro" />
-						<p:menuitem value="Técnicas" outcome="listTecnica" update="centro"/>
-						<p:menuitem value="Graduação" outcome="listGraduacao" update="centro" />
-						<p:menuitem value="Campeonatos" outcome="listCampeonato" update="centro"/>
-						<p:menuitem value="Notícias" outcome="listNoticia" update="centro"/>
-						<p:menuitem value="Financeiro" outcome="listFinanceiro" update="centro" rendered="#{genericoMB.adm}"/>
+						<p:menuitem value="História" outcome="listHistoria" update="centro" actionListener="#{historiaMB.atualiza}"/>
+						<p:menuitem value="Membros" outcome="listMembros" update="centro" actionListener="#{usuarioMB.atualiza}"/>
+						<p:menuitem value="Técnicas" outcome="listTecnica" update="centro" actionListener="#{tecnicaMB.atualiza}"/>
+						<p:menuitem value="Graduação" outcome="listGraduacao" update="centro" actionListener="#{graduacaoMB.atualiza}"/>
+						<p:menuitem value="Campeonatos" outcome="listCampeonato" update="centro" actionListener="#{campeonatoMB.atualiza}"/>
+						<p:menuitem value="Notícias" outcome="listNoticia" update="centro" actionListener="#{noticiaMB.atualiza}"/>
+						<p:menuitem value="Financeiro" outcome="listFinanceiro" update="centro" actionListener="#{financeiroMB.atualiza}" rendered="#{genericoMB.adm}"/>
 					</p:menu>
 				</h:form>
 			</p:layoutUnit>
@@ -115,7 +115,7 @@
 			<p:layoutUnit id="right" position="east" style="text-align:center">
 				<h:form id="formR">
 					<p:menu>
-						<p:menuitem value="Resultados de Avaliação"	outcome="listResultadoAvaliacoes" />
+						<p:menuitem value="Resultados de Avaliação"	outcome="listResultadoAvaliacoes" actionListener="#{resultadoAvaliacaoMB.atualiza}"/>
 						<p:menuitem value="Grafico de desempenho" outcome="graficoDesempenho" />
 						<p:menuitem value="Relatório de Participação" />
 						<p:menuitem value="Relatório de Gestão" outcome="relatorioGestao.xhtml"/>

@@ -73,8 +73,8 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 	public void reset(ActionEvent event) {
 		campeonatoDTO = new CampeonatoDTO();
 
-		listCampeonatoDTO = new ArrayList<CampeonatoDTO>();
-		campeonatoDataModel = new AbstractDataModel<CampeonatoDTO>(listCampeonatoDTO);
+//		listCampeonatoDTO = new ArrayList<CampeonatoDTO>();
+//		campeonatoDataModel = new AbstractDataModel<CampeonatoDTO>(listCampeonatoDTO);
 
 		listLinkDTO = new ArrayList<LinkDTO>();
 		linkDataModel = new AbstractDataModel<LinkDTO>();

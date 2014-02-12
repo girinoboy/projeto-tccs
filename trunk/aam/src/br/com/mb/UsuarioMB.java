@@ -70,7 +70,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void reset(ActionEvent event) {
 		usuarioDTO = new UsuarioDTO();
-		membroDataModel = new AbstractDataModel<UsuarioDTO>();
+//		membroDataModel = new AbstractDataModel<UsuarioDTO>();
 	}
 
 	public void onRowSelect(SelectEvent event) throws IOException {  
@@ -275,7 +275,9 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 
-	public AbstractDataModel<UsuarioDTO> getMembroDataModel() {
+	public AbstractDataModel<UsuarioDTO> getMembroDataModel() throws Exception {
+		if(membroDataModel == null || membroDataModel.getRowCount()==-1)
+			atualiza(null);
 		return membroDataModel;
 	}
 
