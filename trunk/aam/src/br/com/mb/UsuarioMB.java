@@ -88,7 +88,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 		//usuarioDTO = usuarioDAO.save(usuarioDTO);
 		usuarioDTO.setAnexoDTO(anexoDAO.save(usuarioDTO.getAnexoDTO()));
-		setUserSession(usuarioDTO);
+//		setUserSession(usuarioDTO);
 		addMessage("Imagem add");
 	}
 
@@ -109,7 +109,8 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			validaLogin();
 			calculaDesconto();
 			System.out.println(usuarioDTO.getFinanceiroDTO().getValorMensalidade());
-			usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
+			if(usuarioDTO.getAnexoDTO().getId() !=null)
+				usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
 			if(usuarioDTO.getId() !=null){
 				//verifica se existe um novo anexo, pois o anexo é salvo ao capturar
 				usuarioDTO.setAnexoDTO(usuarioDAO.getById(usuarioDTO.getId()).getAnexoDTO());
@@ -140,8 +141,10 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			addMessage("Operação realizada com sucesso!");
 			usuarioDTO = new UsuarioDTO();
 			listUsuarioDTO = usuarioDAO.list();
+			reset(null);
+			atualiza(null);
 			//redireciona para a home apos incluir
-			FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
+			FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_USUARIO);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -180,6 +183,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void edit(ActionEvent actionEvent) throws Exception {
 		atualiza(null);
+		System.out.println(usuarioDTO);
 		addMessage("Operação realizada com sucesso!");
 
 	}

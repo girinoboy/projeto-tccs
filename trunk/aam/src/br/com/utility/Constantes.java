@@ -21,5 +21,9 @@ public class Constantes {
 	public static final String PAGINA_INDEX = "layout.xhtml";
 	public static final String PAGINA_LOGIN = "login.xhtml";
 	public static final String PAGINA_TECNICA = "listTecnica.xhtml";
+	public static final String PAGINA_GRADUACAO = "listGraduacao.xhtml";
+	public static final String PAGINA_USUARIO = "listMembros.xhtml";
+	public static final String PAGINA_HISTORIA = "listHistoria.xhtml";
+	public static final String PAGINA_CAMPEONATO = "listCampeonato.xhtml";
 
 }

@@ -40,7 +40,7 @@ public class AnexoDTO {
 	@Column(name ="content_type")
 	private String contentType;
 	private Long tamanho;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
 

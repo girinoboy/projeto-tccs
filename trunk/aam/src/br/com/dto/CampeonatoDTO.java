@@ -9,9 +9,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,9 +24,9 @@ public class CampeonatoDTO extends AbstractDTO{
 	 * 
 	 */
 	private static final long serialVersionUID = -6175523350743924889L;
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
 	private String nome;
 	private Date data;
 	private String descricao;
@@ -45,13 +42,13 @@ public class CampeonatoDTO extends AbstractDTO{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public String getNome() {
 		return nome;

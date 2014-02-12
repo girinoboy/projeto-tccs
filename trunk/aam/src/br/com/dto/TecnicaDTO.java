@@ -3,6 +3,8 @@
  */
 package br.com.dto;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -38,6 +42,14 @@ public class TecnicaDTO extends AbstractDTO{
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	@JoinColumn(name = "anexos_id", insertable = true, updatable = true, nullable = true)
 	private AnexoDTO anexoDTO;
+	
+	@ManyToMany  (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
+	@JoinTable(name = "graduacao_tecnica", joinColumns = { @JoinColumn(name = "tecnica_id",
+	unique = false, nullable = false, insertable = true,updatable=true) },
+	inverseJoinColumns = { @JoinColumn(name = "graduacao_id",
+	unique = false, nullable = false, insertable = true,updatable=true) })
+//	@LazyCollection(value = null)@LazyCollection(LazyCollectionOption.EXTRA)
+	private List<GraduacaoDTO> listGraduacaoDTO;
 
 	/**
 	 * 
@@ -76,6 +88,14 @@ public class TecnicaDTO extends AbstractDTO{
 
 	public void setAnexoDTO(AnexoDTO anexoDTO) {
 		this.anexoDTO = anexoDTO;
+	}
+
+	public List<GraduacaoDTO> getListGraduacaoDTO() {
+		return listGraduacaoDTO;
+	}
+
+	public void setListGraduacaoDTO(List<GraduacaoDTO> listGraduacaoDTO) {
+		this.listGraduacaoDTO = listGraduacaoDTO;
 	}
 
 }

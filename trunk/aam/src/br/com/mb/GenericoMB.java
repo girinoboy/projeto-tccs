@@ -23,7 +23,7 @@ public class GenericoMB implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private AnexoDAO anexoDAO = new AnexoDAO();
+	protected AnexoDAO anexoDAO = new AnexoDAO();
 	private HttpSession session;
 	
 	public void setUserSession(UsuarioDTO usuarioDTO){

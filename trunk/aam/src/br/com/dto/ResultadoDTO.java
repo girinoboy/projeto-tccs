@@ -33,12 +33,12 @@ public class ResultadoDTO extends AbstractDTO{
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	private String posicao;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@Cascade({org.hibernate.annotations.CascadeType.REFRESH})
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH )
+	@Cascade({org.hibernate.annotations.CascadeType.REFRESH})
 	@JoinColumn(name = "campeonato_id", insertable = true, updatable = true, nullable = true)
 	private CampeonatoDTO campeonatoDTO;
 	
@@ -66,6 +66,8 @@ public class ResultadoDTO extends AbstractDTO{
 	}
 
 	public UsuarioDTO getUsuarioDTO() {
+		if(usuarioDTO==null)
+			usuarioDTO = new UsuarioDTO();
 		return usuarioDTO;
 	}
 

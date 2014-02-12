@@ -8,10 +8,15 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.UploadedFile;
 
 import br.com.dao.GraduacaoDAO;
+import br.com.dao.GraduacaoTecnicaDAO;
+import br.com.dto.AnexoDTO;
 import br.com.dto.GraduacaoDTO;
+import br.com.dto.GraduacaoTecnicaDTO;
 import br.com.dto.TecnicaDTO;
 import br.com.utility.Constantes;
 import br.com.utility.GraduacaoDataModel;
@@ -31,6 +36,9 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 	private GraduacaoDataModel graduacaoDataModel;
 	private GraduacaoDTO[] listSelectedGraduacaoDTO;
 	private TecnicaDTO[] listSelectedTecnicaDTO;
+	private List<TecnicaDTO> listTecnicaDTO;
+	private GraduacaoTecnicaDAO graduacaoTecnicaDAO = new GraduacaoTecnicaDAO();
+	private UploadedFile file;
 	
 	public GraduacaoMB() {
 		try {
@@ -65,18 +73,18 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 		reset(null);
 		atualiza(actionEvent);
 		addMessage("Operação realizada com sucesso!");
-		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
+		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_GRADUACAO);
 		
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
 		System.out.println(graduacaoDTO);
-		List<TecnicaDTO> a = new ArrayList<TecnicaDTO>();
-		if(graduacaoDTO.getListTecnica() !=null)
-		for (TecnicaDTO e : graduacaoDTO.getListTecnica() ) {
-			a.add(e);
-		}
-		graduacaoDTO.setListTecnica(a);
+//		List<TecnicaDTO> a = new ArrayList<TecnicaDTO>();
+//		if(graduacaoDTO.getListTecnica() !=null)
+//		for (TecnicaDTO e : graduacaoDTO.getListTecnica() ) {
+//			a.add(e);
+//		}
+//		graduacaoDTO.setListTecnica(a);
 		
 	}
 
@@ -104,8 +112,36 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 		}
 		
 	}
+	
+	public void handleFileUpload(FileUploadEvent event) throws Exception {
+		AnexoDTO anexoDTO = new AnexoDTO();
+		graduacaoDTO.setAnexoDTO(anexoDTO);
+		graduacaoDTO.getAnexoDTO().setNome(event.getFile().getFileName());
+		graduacaoDTO.getAnexoDTO().setAnexo(event.getFile().getContents());
+		graduacaoDTO.getAnexoDTO().setTamanho(event.getFile().getSize());
+		graduacaoDTO.getAnexoDTO().setContentType(event.getFile().getContentType());
+
+		//usuarioDTO = usuarioDAO.save(usuarioDTO);
+		graduacaoDTO.setAnexoDTO(anexoDAO.save(graduacaoDTO.getAnexoDTO()));
+//		setUserSession(usuarioDTO);
+		addMessage("Imagem add");
+	}
 
 	public GraduacaoDTO getGraduacaoDTO() {
+		try{
+		if(graduacaoDTO!=null && graduacaoDTO.getListTecnica()!=null){
+			listTecnicaDTO = new ArrayList<TecnicaDTO>();
+			List<GraduacaoTecnicaDTO> listGraduacaoTecnicaDTO = graduacaoTecnicaDAO.listByIdGraduacaoDTO(graduacaoDTO.getId());
+			for (GraduacaoTecnicaDTO graduacaoTecnicaDTO : listGraduacaoTecnicaDTO) {
+				listTecnicaDTO.add(graduacaoTecnicaDTO.getTecnicaDTO());
+			}
+			if(listTecnicaDTO.size() == graduacaoDTO.getListTecnica().size())
+				graduacaoDTO.setListTecnica(listTecnicaDTO);
+//			tecnicaDataModel = new AbstractDataModel<TecnicaDTO>(listTecnicaDTO);
+		}
+		}catch(Exception e){
+			graduacaoDTO.setListTecnica(listTecnicaDTO);
+		}
 		return graduacaoDTO;
 	}
 
@@ -143,6 +179,14 @@ public class GraduacaoMB extends GenericoMB implements ModeloMB{
 
 	public void setListSelectedTecnicaDTO(TecnicaDTO[] listSelectedTecnicaDTO) {
 		this.listSelectedTecnicaDTO = listSelectedTecnicaDTO;
+	}
+
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	public void setFile(UploadedFile file) {
+		this.file = file;
 	}
 
 }

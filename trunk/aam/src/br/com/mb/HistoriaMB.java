@@ -28,7 +28,7 @@ import br.com.utility.HistoriaDataModel;
 @ManagedBean
 @SessionScoped
 public class HistoriaMB extends GenericoMB implements ModeloMB{
-	
+
 	/**
 	 * 
 	 */
@@ -40,7 +40,7 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 	private HistoriaDataModel historiaDataModel; 
 	private AbstractDataModel<HistoriaDTO> dojoDataModel;
 	private AbstractDataModel<HistoriaDTO> yagyuDataModel;
-	
+
 	private LinkDAO linkDAO = new LinkDAO();
 	private LinkDTO linkDTO = new LinkDTO();
 	private AbstractDataModel<LinkDTO> linkDataModel;
@@ -58,29 +58,29 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void atualiza(ActionEvent event) throws Exception {
 		atualizaLista();
-		
+
 	}
-	
+
 	private void atualizaLista() throws Exception{
 		listHistoriaDTO = historiaDAO.list();
 
 		historiaDataModel = new HistoriaDataModel(listHistoriaDTO);
-		
+
 		yagyuDataModel = new AbstractDataModel<HistoriaDTO>(historiaDAO.list(true));
 		dojoDataModel = new AbstractDataModel<HistoriaDTO>(historiaDAO.list(false));
 	}
-	
+
 	public void reset(ActionEvent event){
 		historiaDTO = new HistoriaDTO();
 		listLinkDTO = new ArrayList<LinkDTO>();
 		linkDataModel = new AbstractDataModel<LinkDTO>();
-//		dojoDataModel = new AbstractDataModel<HistoriaDTO>();
-//		yagyuDataModel = new AbstractDataModel<HistoriaDTO>();
+		//		dojoDataModel = new AbstractDataModel<HistoriaDTO>();
+		//		yagyuDataModel = new AbstractDataModel<HistoriaDTO>();
 	}
-	
+
 	public void check(SelectEvent event) {
 		System.out.println("in check");
 		System.out.println(listSelectedHistoriaDTO);
@@ -89,23 +89,23 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 	public void add(ActionEvent actionEvent) throws Exception {
 		historiaDTO.setUsuarioDTO(getUserSession());
 		historiaDAO.save(historiaDTO);
-		
+
 		//salva todos os links nas respctivas historia
-				for (LinkDTO l : listLinkDTO) {
-					l.setHistoriaDTO(historiaDTO);
-					linkDAO.save(l);
-				}
-		
+		for (LinkDTO l : listLinkDTO) {
+			l.setHistoriaDTO(historiaDTO);
+			linkDAO.save(l);
+		}
+
 		reset(null);
 		atualizaLista();
 		addMessage("Operação realizada com sucesso!");
-		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
-		
+		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_HISTORIA);
+
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {
 		System.out.println(historiaDTO);
-		
+
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
@@ -119,7 +119,7 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 			}else{
 				addMessage("Nenhum Item Selecionado.");
 			}
-			
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -130,10 +130,10 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
-	
+
+
 	public void addLink(ActionEvent actionEvent) throws Exception{
 		if(listLinkDTO == null){
 			listLinkDTO = new ArrayList<LinkDTO>();
@@ -151,8 +151,13 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public HistoriaDTO getHistoriaDTO() throws Exception {
-		if(historiaDTO!=null && historiaDTO.getListLinkDTO()!=null){
-			listLinkDTO = linkDAO.listByIdHistoriaDTO(historiaDTO.getId());
+		try{
+			if(historiaDTO!=null && historiaDTO.getListLinkDTO()!=null){
+				listLinkDTO = linkDAO.listByIdHistoriaDTO(historiaDTO.getId());
+				if(listLinkDTO.size() == historiaDTO.getListLinkDTO().size())
+					linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+			}
+		}catch(Exception e){
 			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
 		}
 		return historiaDTO;
