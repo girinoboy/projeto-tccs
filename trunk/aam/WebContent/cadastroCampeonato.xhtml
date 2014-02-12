@@ -81,7 +81,7 @@
 		          	<p:commandButton value="Salvar" actionListener="#{campeonatoMB.add}" id="withIcon"   
 		            update=":growl,panel" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
 		            <p:commandButton value="Reset" type="reset" rendered="#{genericoMB.adm}"/> 
-		            <p:commandButton value="Voltar" actionListener="#{campeonatoMB.atualiza}" action="/listCampeonato.xhtml?faces-redirect=true" immediate="true" update=":center"/> 
+		            <p:commandButton value="Voltar" oncomplete="PF('dlgV').show()" immediate="true"/> 
 	  			</f:facet>
 		    </p:panel>
  		
@@ -117,6 +117,19 @@
 				  	<f:facet name="footer">
 					    <p:commandButton value="Salvar" ajax="false" actionListener="#{campeonatoMB.addResultado}" update=":form:dataTableR"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgR').hide()" immediate="true" />
+			  		</f:facet>
+		  		</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="" widgetVar="dlgV" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:form>
+  				<h:panelGrid columns="2">
+  					<h:outputText value="Todos os dados alterados e não salvos serão perdidos, deseja continuar com esta ação?" />
+				    
+				  	<f:facet name="footer">
+					    <p:commandButton value="Sim" actionListener="#{campeonatoMB.atualiza}" action="/listCampeonato.xhtml?faces-redirect=true" immediate="true" update=":center"/>
+				  		<p:commandButton value="Não" oncomplete="PF('dlgV').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>
 			</h:form>
