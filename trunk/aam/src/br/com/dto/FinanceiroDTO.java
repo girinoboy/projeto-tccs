@@ -15,17 +15,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 /**
  * @author Marcleônio
  *
  */
 @Entity
 @Table(name = "financeiro")
-public class FinanceiroDTO {
+public class FinanceiroDTO extends AbstractDTO{
 	
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6460619305824910342L;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
 	private Boolean situacao;
 	@Column(name="valor_mensalidade")
 	private Double valorMensalidade;
@@ -36,7 +42,8 @@ public class FinanceiroDTO {
 	private Integer dia;
 	private Integer mes;
 	private Integer ano;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
 
@@ -60,13 +67,13 @@ public class FinanceiroDTO {
 		getAno();
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public Double getValorMensalidade() {
 		return valorMensalidade;
