@@ -33,8 +33,8 @@ public class ResultadoDTO extends AbstractDTO{
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	private String posicao;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	@Cascade({org.hibernate.annotations.CascadeType.REFRESH})
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH )

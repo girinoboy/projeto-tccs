@@ -47,6 +47,7 @@ public class UsuarioDTO extends AbstractDTO{
 	private String cpf;
 	private String email;
 	private String tema;
+	@Column(name="ativo_inativo")
 	private Boolean ativoInativo;
 	private String sexo;
 	private String rg;
@@ -62,6 +63,7 @@ public class UsuarioDTO extends AbstractDTO{
 	@JoinColumn(name = "anexos_id", insertable = true, updatable = true, nullable = true)
 	private AnexoDTO anexoDTO;
 	@OneToMany(targetEntity=AnexoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY)
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private List<AnexoDTO> listAnexoDTO;
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)//uma pessoa so tem um pagamento por mes
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})

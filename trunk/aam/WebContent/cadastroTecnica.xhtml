@@ -32,7 +32,7 @@
 						<p:watermark for="nome" value="Nome completo" />
 						<p:message for="nome" />
 						<h:outputLabel for="nome" value="Nome: *" />
-						<p:inputText id="nome" size="45"
+						<p:inputText id="nome" size="45" maxlength="50"
 							value="#{tecnicaMB.tecnicaDTO.nome}" required="true" label="Nome">
 							<f:validateLength minimum="2" />
 						</p:inputText>

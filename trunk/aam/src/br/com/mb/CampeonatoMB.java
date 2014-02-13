@@ -19,6 +19,7 @@ import br.com.dao.ResultadoDAO;
 import br.com.dto.CampeonatoDTO;
 import br.com.dto.LinkDTO;
 import br.com.dto.ResultadoDTO;
+import br.com.dto.UsuarioDTO;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.Constantes;
 
@@ -82,6 +83,17 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 		listResultadoDTO = new ArrayList<ResultadoDTO>();
 		resultadoDataModel = new AbstractDataModel<ResultadoDTO>();
 
+	}
+	
+	public void handleSelect(SelectEvent event) {  
+
+		try {
+			resultadoDTO.setUsuarioDTO((UsuarioDTO)event.getObject()) ;
+
+			addMessage("Graduação:" + resultadoDTO.getUsuarioDTO().getGraduacaoDTO().getNome().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void check(SelectEvent event) {

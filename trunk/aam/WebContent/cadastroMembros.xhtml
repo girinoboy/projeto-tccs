@@ -41,7 +41,7 @@
 						<p:watermark for="cpf" value=" " />
 						<p:message for="cpf" />
 						<h:outputLabel for="cpf" value="CPF: *" />
-						<p:inputMask value="#{usuarioMB.usuarioDTO.cpf}"
+						<p:inputMask value="#{usuarioMB.usuarioDTO.cpf}" disabled="#{!genericoMB.adm}"
 							mask="999.999.999-99" id="cpf" size="15" required="true"
 							label="CPF">
 							<f:validateLength minimum="2" />
@@ -89,7 +89,7 @@
 
 						<!-- Login -->
 						<h:outputText for="login" value="Login: *" />
-						<p:inputText id="login" size="15" required="true" label="login" value="#{usuarioMB.usuarioDTO.usuario}" maxlength="20"/>
+						<p:inputText id="login" size="15" required="true" label="login" value="#{usuarioMB.usuarioDTO.usuario}" maxlength="20" disabled="#{!genericoMB.adm}"/>
 
 						<!-- Senha -->
 						<h:outputText for="senha" value="Senha: *" />
@@ -97,7 +97,7 @@
 						
 						<!-- Graduação -->
 						<h:outputLabel for="graduacao" value="Graduação: *" />
-						<p:selectOneMenu id="graduacao" label="Graduação"
+						<p:selectOneMenu id="graduacao" label="Graduação" disabled="#{!genericoMB.adm}"
 							value="#{usuarioMB.usuarioDTO.graduacaoDTO}" effect="fade"
 							converter="graduacao" required="true">
 							<f:selectItem itemLabel="Selecione" itemValue="" />
@@ -108,7 +108,7 @@
 
 						<!-- Status -->
 						<h:outputText for="status" value="Status:" />
-						<p:selectOneRadio id="status"
+						<p:selectOneRadio id="status" disabled="#{!genericoMB.adm}"
 							value="#{usuarioMB.usuarioDTO.ativoInativo}">
 							<f:selectItem itemLabel="Ativo" itemValue="true" />
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
@@ -116,7 +116,7 @@
 
 						<!-- Desconto -->
 						<h:outputLabel for="desconto" value="Desconto: *" />
-						<p:selectOneMenu id="desconto" effect="fade" required="true"
+						<p:selectOneMenu id="desconto" effect="fade" required="true" disabled="#{!genericoMB.adm}"
 							value="#{usuarioMB.usuarioDTO.desconto}" size="30">
 							<p:ajax event="change" listener="#{usuarioMB.calculaDesconto}"
                                 update="valorMensalidade" />
@@ -141,16 +141,31 @@
 
 
 						<f:facet name="footer">
-							<div align="right"><p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
-								id="withIcon" update=":growl,panel" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
-							<p:commandButton value="Cancelar" actionListener="#{usuarioMB.atualiza}"
-								action="/listMembros.xhtml?faces-redirect=true" immediate="true"
-								update=":center" /></div>
+							<div align="right">
+								<p:commandButton value="Salvar" actionListener="#{usuarioMB.add}"
+									id="withIcon" update=":growl,panel" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
+								<p:commandButton value="Cancelar" actionListener="#{usuarioMB.atualiza}"
+									oncomplete="PF('dlgV').show()" immediate="true"/>
+							</div>
 						</f:facet>
 					</h:panelGrid>
 				</div>
 			</p:panel>
 		</h:form>
+		
+		<p:dialog header="" widgetVar="dlgV" modal="true" appendToBody="true" resizable="false" draggable="true">
+		    <h:form>
+  				<h:panelGrid columns="2">
+  					<h:outputText value="Todos os dados alterados e não salvos serão perdidos, deseja continuar com esta ação?" />
+				    
+				  	<f:facet name="footer">
+					    <p:commandButton value="Sim" actionListener="#{campeonatoMB.atualiza}" action="/listMembros.xhtml?faces-redirect=true" immediate="true" update=":center"/>
+				  		<p:commandButton value="Não" oncomplete="PF('dlgV').hide()" immediate="true" />
+			  		</f:facet>
+		  		</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
 	</ui:define>
 </ui:decorate>
 </html>
