@@ -41,7 +41,7 @@
 		        </p:column>  
 		  
 		        <p:column headerText="Ativo/Inativo">  
-		        	<p:cellEditor>  
+		        	<p:cellEditor rendered="#{genericoMB.adm}">  
 	                	<f:facet name="output"><h:outputText value="#{membro.ativoInativo ? 'Ativo' : 'Inativo'}" /></f:facet>  
 	                  	<f:facet name="input">
 	                    	<h:selectOneMenu value="#{membro.ativoInativo}" style="width:100%">  
@@ -49,7 +49,8 @@
 								<f:selectItem itemLabel="Inativo" itemValue="false" />  
 		                    </h:selectOneMenu> 
 		                </f:facet>
-	              	</p:cellEditor>  
+	              	</p:cellEditor>
+	              	<h:outputText value="#{membro.ativoInativo ? 'Ativo' : 'Inativo'}" rendered="#{!genericoMB.adm}"/>
 		        </p:column>  
 		        
 		    </p:dataTable> 
