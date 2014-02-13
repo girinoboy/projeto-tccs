@@ -62,7 +62,11 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void atualiza(ActionEvent event) throws Exception {
-		listUsuarioDTO = usuarioDAO.list();
+		if(getAdm()){
+			listUsuarioDTO = usuarioDAO.list();
+		}else{
+			listUsuarioDTO = usuarioDAO.listById(getUserSession().getId());
+		}
 		listGraduacaoDTO = graduacaoDAO.list();
 		membroDataModel = new AbstractDataModel<UsuarioDTO>(listUsuarioDTO);
 

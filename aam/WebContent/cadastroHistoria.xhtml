@@ -15,7 +15,7 @@
 		        <h:panelGrid id="pg" columns="4" cellpadding="5">
 		        
 		        	<h:outputLabel for="titulo" value="Título: *" />
-		            <p:inputText id="titulo" size="80"
+		            <p:inputText id="titulo" size="80" maxlength="50"
 		                value="#{historiaMB.historiaDTO.titulo}" required="true" label="Título">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
@@ -46,8 +46,8 @@
 		            
 		        </h:panelGrid>
 		        <br/>
-		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true"/> 
-		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{historiaMB.delLink}" update="dataTable" immediate="true"/>
+		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true" rendered="#{genericoMB.adm}"/> 
+		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{historiaMB.delLink}" update="dataTable" immediate="true" rendered="#{genericoMB.adm}"/>
 				
 				
 				<p:dataTable id="dataTable" var="link" value="#{historiaMB.linkDataModel}" selection="#{historiaMB.listSelectedLinkDTO}" rowKey="#{link.nome}">  
@@ -78,7 +78,7 @@
   				<h:panelGrid columns="2">
 				    
 				    <h:outputLabel value="Nome" for="nome"/>
-				  	<p:inputText id="nome" size="50" value="#{historiaMB.linkDTO.nome}"/>
+				  	<p:inputText id="nome" size="50" value="#{historiaMB.linkDTO.nome}" maxlength="50"/>
 				  	
 				  	<h:outputLabel value="URL" for="url"/>
 				  	<p:inputText id="url" size="50" value="#{historiaMB.linkDTO.url}"/>

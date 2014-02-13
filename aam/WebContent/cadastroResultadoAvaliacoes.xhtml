@@ -57,7 +57,7 @@
 		            
 		            <f:facet name="footer">
 			          	<p:commandButton value="Salvar" actionListener="#{resultadoAvaliacaoMB.add}" id="withIcon" update=":growl,panel" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
-			            <p:commandButton value="Reset" type="reset" />
+			            <p:commandButton value="Reset" type="reset" rendered="#{genericoMB.adm}"/>
 			            <p:commandButton value="Cancelar" actionListener="#{resultadoAvaliacaoMB.atualiza}" action="/listResultadoAvaliacoes.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 		  			</f:facet>
 		        </h:panelGrid>  

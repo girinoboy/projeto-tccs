@@ -25,5 +25,6 @@ public class Constantes {
 	public static final String PAGINA_USUARIO = "listMembros.xhtml";
 	public static final String PAGINA_HISTORIA = "listHistoria.xhtml";
 	public static final String PAGINA_CAMPEONATO = "listCampeonato.xhtml";
+	public static final String PAGINA_RESULTADO_AVALIACAO = "listResultadoAvaliacoes.xhtml";
 
 }

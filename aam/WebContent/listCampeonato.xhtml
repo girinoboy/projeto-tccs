@@ -32,7 +32,8 @@
 		        <p:column headerText="">
 			        <p:commandLink id="ajax" update="panel" actionListener="#{campeonatoMB.edit}" action="/cadastroCampeonato.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
 			        	<f:setPropertyActionListener value="#{campeonato}" target="#{campeonatoMB.campeonatoDTO}"/>
-				        <h:outputText value="Alterar" />
+				        <h:outputText value="Alterar" rendered="#{genericoMB.adm}"/>
+				        <h:outputText value="Visualizar" rendered="#{!genericoMB.adm}"/>
 				    </p:commandLink>
 		        </p:column>
 		        

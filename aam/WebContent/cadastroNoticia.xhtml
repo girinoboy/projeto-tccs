@@ -16,8 +16,8 @@
 		        	<br/>
 		            <p:message for="titulo" />
 		        	<h:outputLabel for="titulo" value="Título: *" />
-		            <p:inputText id="titulo" size="80"
-		                value="#{noticiaMB.noticiaDTO.titulo}" required="true" label="Título" maxlength="50">
+		            <p:inputText id="titulo" size="80" maxlength="50"
+		                value="#{noticiaMB.noticiaDTO.titulo}" required="true" label="Título">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            
@@ -47,8 +47,8 @@
 		            
 		        </h:panelGrid>
 				<br/>
-		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true"/>
-		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{noticiaMB.delLink}" update="dataTable" immediate="true"/>
+		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgN').show();" immediate="true" rendered="#{genericoMB.adm}"/>
+		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{noticiaMB.delLink}" update="dataTable" immediate="true" rendered="#{genericoMB.adm}"/>
 				
 				
 				<p:dataTable id="dataTable" var="link" value="#{noticiaMB.linkDataModel}" selection="#{noticiaMB.listSelectedLinkDTO}" rowKey="#{link.nome}">  
@@ -68,7 +68,7 @@
 		        <f:facet name="footer">
 			          	<p:commandButton value="Salvar" actionListener="#{noticiaMB.add}" id="withIcon"
 			            update=":growl,panel,customRadio" icon="ui-icon-disk" rendered="#{genericoMB.adm}"/>
-			            <p:commandButton value="Reset" type="reset" />
+			            <p:commandButton value="Reset" type="reset" rendered="#{genericoMB.adm}"/>
 			            <p:commandButton value="Cancelar" actionListener="#{noticiaMB.atualiza}" action="/listNoticia.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 		  			</f:facet>
 		    </p:panel>
@@ -79,7 +79,7 @@
   				<h:panelGrid columns="2">
 				    
 				    <h:outputLabel value="Nome" for="nome"/>
-				  	<p:inputText id="nome" size="50" value="#{noticiaMB.linkDTO.nome}"/>
+				  	<p:inputText id="nome" size="50" value="#{noticiaMB.linkDTO.nome}" maxlength="50"/>
 				  	
 				  	<h:outputLabel value="URL" for="url"/>
 				  	<p:inputText id="url" size="50" value="#{noticiaMB.linkDTO.url}"/>

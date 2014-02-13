@@ -85,7 +85,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 		atualiza(actionEvent);
 		reset(actionEvent);
 		addMessage("Operação realizada com sucesso!");
-		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_INDEX);
+		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_RESULTADO_AVALIACAO);
 	}
 
 	public void edit(ActionEvent actionEvent) throws Exception {

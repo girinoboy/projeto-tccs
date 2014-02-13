@@ -2,6 +2,10 @@ package br.com.mb;
 
 import java.io.ByteArrayInputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -12,9 +16,12 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import br.com.dao.AnexoDAO;
+import br.com.dao.GenericoDAO;
+import br.com.dao.UsuarioDAO;
 import br.com.dto.AnexoDTO;
 import br.com.dto.TecnicaDTO;
 import br.com.dto.UsuarioDTO;
+import br.com.utility.Constantes;
 
 @ManagedBean
 public class GenericoMB implements Serializable{
@@ -25,6 +32,7 @@ public class GenericoMB implements Serializable{
 	private static final long serialVersionUID = 1L;
 	protected AnexoDAO anexoDAO = new AnexoDAO();
 	private HttpSession session;
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	
 	public void setUserSession(UsuarioDTO usuarioDTO){
 		session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessão caso ñ exista - false retorna nulo caso ñ exista
@@ -44,6 +52,16 @@ public class GenericoMB implements Serializable{
 	public void addMessage(String summary) {  
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);  
 		FacesContext.getCurrentInstance().addMessage(null, message);  
+	}
+	
+	public List<UsuarioDTO> completarUsuario(String query) throws Exception {
+		List<UsuarioDTO> suggestions = new ArrayList<UsuarioDTO>();
+		
+		Map<String, Object> filtrosConsulta = new HashMap<String, Object>();
+		filtrosConsulta.put("nome", query);
+		suggestions = usuarioDAO .listCriterio(null, filtrosConsulta, Constantes.TIPO_CONSULTA_ILIKE);
+
+		return suggestions;
 	}
 	
 	public StreamedContent getDynamicImage() {

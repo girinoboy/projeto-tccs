@@ -39,8 +39,8 @@
 		        </h:panelGrid>
 		        
 		        <br/>
-		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgL').show();" immediate="true"/> 
-		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{campeonatoMB.delLink}" update="dataTable" immediate="true"/>
+		 		Links <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgL').show();" immediate="true" rendered="#{genericoMB.adm}"/> 
+		 		      <p:commandButton icon="ui-icon-closethick" actionListener="#{campeonatoMB.delLink}" update="dataTable" immediate="true" rendered="#{genericoMB.adm}"/>
 				
 				
 				<p:dataTable id="dataTable" var="link" value="#{campeonatoMB.linkDataModel}" selection="#{campeonatoMB.listSelectedLinkDTO}" rowKey="#{link.nome}">  
@@ -58,8 +58,8 @@
 		        </p:dataTable>
 		        
 		        <p:separator id="separator"/>
-		        Resultados <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgR').show();" immediate="true" /> 
-		 		   		   <p:commandButton icon="ui-icon-closethick" actionListener="#{campeonatoMB.delResultado}" update="dataTableR" immediate="true"/>
+		        Resultados <p:commandButton icon="ui-icon-plusthick" onclick="PF('dlgR').show();" immediate="true" rendered="#{genericoMB.adm}"/> 
+		 		   		   <p:commandButton icon="ui-icon-closethick" actionListener="#{campeonatoMB.delResultado}" update="dataTableR" immediate="true" rendered="#{genericoMB.adm}"/>
 		 		
 		 		<p:dataTable id="dataTableR" var="resultado" value="#{campeonatoMB.resultadoDataModel}" selection="#{campeonatoMB.listSelectedResultadoDTO}" rowKey="#{resultado.usuarioDTO.nome}">  
 
@@ -92,7 +92,7 @@
   				<h:panelGrid columns="2">
 				    
 				    <h:outputLabel value="Nome" for="nome"/>
-				  	<p:inputText id="nome" size="50" value="#{campeonatoMB.linkDTO.nome}"/>
+				  	<p:inputText id="nome" size="50" value="#{campeonatoMB.linkDTO.nome}" maxlength="50"/>
 				  	
 				  	<h:outputLabel value="URL" for="url"/>
 				  	<p:inputText id="url" size="50" value="#{campeonatoMB.linkDTO.url}"/>
@@ -110,7 +110,10 @@
   				<h:panelGrid columns="2">
 				    
 				    <h:outputLabel value="Nome" for="nomeR"/>
-				  	<p:inputText id="nomeR" size="50" value="#{campeonatoMB.resultadoDTO.usuarioDTO.nome}"/>
+				    <p:autoComplete value="#{campeonatoMB.resultadoDTO.usuarioDTO}" id="nomeR" completeMethod="#{campeonatoMB.completarUsuario}"
+	                    var="u" itemLabel="#{u.nome}" itemValue="#{u}" converter="usuario" forceSelection="true" cache="false" >
+	                    <p:ajax event="itemSelect" listener="#{campeonatoMB.handleSelect}" update=":form:dataTableR" />
+		            </p:autoComplete>
 				  	
 				  	<h:outputLabel value="Posição" for="posicao"/>
 				  	<p:inputText id="posicao" size="50" value="#{campeonatoMB.resultadoDTO.posicao}"/>

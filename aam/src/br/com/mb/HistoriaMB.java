@@ -87,9 +87,9 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {
+		
 		historiaDTO.setUsuarioDTO(getUserSession());
-		historiaDAO.save(historiaDTO);
-
+		historiaDTO = historiaDAO.save(historiaDTO);
 		//salva todos os links nas respctivas historia
 		for (LinkDTO l : listLinkDTO) {
 			l.setHistoriaDTO(historiaDTO);
@@ -98,6 +98,7 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 
 		reset(null);
 		atualizaLista();
+		
 		addMessage("Operação realizada com sucesso!");
 		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_HISTORIA);
 
