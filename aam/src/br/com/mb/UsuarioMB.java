@@ -62,11 +62,11 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void atualiza(ActionEvent event) throws Exception {
-		if(getAdm()){
+//		if(getAdm()){
 			listUsuarioDTO = usuarioDAO.list();
-		}else{
-			listUsuarioDTO = usuarioDAO.listById(getUserSession().getId());
-		}
+//		}else{
+//			listUsuarioDTO = usuarioDAO.listById(getUserSession().getId());
+//		}
 		listGraduacaoDTO = graduacaoDAO.list();
 		membroDataModel = new AbstractDataModel<UsuarioDTO>(listUsuarioDTO);
 
@@ -79,8 +79,11 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void onRowSelect(SelectEvent event) throws IOException {  
 		usuarioDTO = (UsuarioDTO) event.getObject();  
-
-		FacesContext.getCurrentInstance().getExternalContext().redirect("cadastroMembros.xhtml"); 
+		if(!getAdm() && getUserSession().getId() == usuarioDTO.getId()){
+			FacesContext.getCurrentInstance().getExternalContext().redirect("cadastroMembros.xhtml"); 
+		}else if(getAdm()){
+			FacesContext.getCurrentInstance().getExternalContext().redirect("cadastroMembros.xhtml");
+		}
 	}  
 
 	public void handleFileUpload(FileUploadEvent event) throws Exception {
