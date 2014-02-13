@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.model.DefaultStreamedContent;
@@ -90,5 +91,5 @@ public class GenericoMB implements Serializable{
 
 		return new DefaultStreamedContent(new ByteArrayInputStream(emptyImage), "image/png");
 	}
-
+	
 }

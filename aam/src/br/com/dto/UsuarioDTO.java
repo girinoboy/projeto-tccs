@@ -35,9 +35,9 @@ public class UsuarioDTO extends AbstractDTO{
 	 * 
 	 */
 	private static final long serialVersionUID = 7036085825781563231L;
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
 	private String usuario;
 	private String senha;
 	private String nome;
@@ -82,36 +82,36 @@ public class UsuarioDTO extends AbstractDTO{
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final UsuarioDTO other = (UsuarioDTO) obj;
-        if (this.id == null){
-        	return false;
-        }
-        if (!this.id.equals(other.id)) {
-            return false;
-        }
-        return true;
-    }
-	
-	public UsuarioDTO(String nome, int i) {
-		this.id = i;
-		this.nome = nome;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Override
+//    public boolean equals(Object obj) {
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (getClass() != obj.getClass()) {
+//            return false;
+//        }
+//        final UsuarioDTO other = (UsuarioDTO) obj;
+//        if (this.id == null){
+//        	return false;
+//        }
+//        if (!this.id.equals(other.id)) {
+//            return false;
+//        }
+//        return true;
+//    }
+//	
+//	public UsuarioDTO(String nome, int i) {
+//		this.id = i;
+//		this.nome = nome;
+//	}
+//
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public String getUsuario() {
 		return usuario;
