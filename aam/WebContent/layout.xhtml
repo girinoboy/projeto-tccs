@@ -114,6 +114,7 @@
 
 			<p:layoutUnit id="right" position="east" style="text-align:center">
 				<h:form id="formR">
+				<div>
 					<p:menu>
 						<p:menuitem value="Resultados de Avaliação"	outcome="listResultadoAvaliacoes" actionListener="#{resultadoAvaliacaoMB.atualiza}"/>
 						<p:menuitem value="Grafico de desempenho" outcome="graficoDesempenho" />
@@ -124,14 +125,17 @@
 					<br />
 					<br />
 					<br />
-					<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}"
-						style="width:60px;height:60px" cache="false" rendered="true">
-						<f:param id="av" name="image_id"
-							value="#{genericoMB.userSession.anexoDTO.id}" />
-					</p:graphicImage>
+					<p:commandLink actionListener="#{usuarioMB.visualizarCadastro}">
+						<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}"
+							style="width:150px;height:150px;padding:50px;float:left;" cache="false" rendered="true">
+							<f:param id="av" name="image_id"
+								value="#{genericoMB.userSession.anexoDTO.id}" />
+						</p:graphicImage>
+					</p:commandLink>
 					<p:menu>
 					<p:menuitem value="Sair" actionListener="#{loginManagedBean.logout}"/>
 					</p:menu>
+					</div>
 				</h:form>
 			</p:layoutUnit>
 
