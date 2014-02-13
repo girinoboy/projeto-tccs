@@ -79,12 +79,17 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void onRowSelect(SelectEvent event) throws IOException {  
 		usuarioDTO = (UsuarioDTO) event.getObject();  
-		if(!getAdm() && getUserSession().getId() == usuarioDTO.getId()){
+		if(!getAdm() && getUserSession().getId().equals(usuarioDTO.getId())){
 			FacesContext.getCurrentInstance().getExternalContext().redirect("cadastroMembros.xhtml"); 
 		}else if(getAdm()){
 			FacesContext.getCurrentInstance().getExternalContext().redirect("cadastroMembros.xhtml");
 		}
-	}  
+	}
+	
+	public void visualizarCadastro(ActionEvent event) throws IOException{
+		usuarioDTO = getUserSession();  
+		FacesContext.getCurrentInstance().getExternalContext().redirect("cadastroMembros.xhtml");
+	}
 
 	public void handleFileUpload(FileUploadEvent event) throws Exception {
 
