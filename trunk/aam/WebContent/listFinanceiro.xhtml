@@ -31,7 +31,7 @@
 		        </p:column>
 		        
 		        <p:column headerText="Situação">
-		        	<p:cellEditor>  
+		        	<p:cellEditor rendered="#{genericoMB.adm}">  
 	                	<f:facet name="output"><h:outputText value="#{financeiro.usuarioDTO.financeiroDTO.situacao ? 'Ok' : 'Pendente'}" /></f:facet>  
 	                  	<f:facet name="input">
 	                    	<h:selectOneMenu value="#{financeiro.usuarioDTO.financeiroDTO.situacao}" style="width:100%">  
@@ -40,10 +40,11 @@
 		                    </h:selectOneMenu> 
 		                </f:facet>
 	              	</p:cellEditor>
+	              	<h:outputText value="#{financeiro.usuarioDTO.financeiroDTO.situacao ? 'Ok' : 'Pendente'}" rendered="#{!genericoMB.adm}"/>
 		        </p:column>
 		        
  				  <p:column headerText="Desconto">
-		            	<p:cellEditor>  
+		            	<p:cellEditor rendered="#{genericoMB.adm}">  
 		                	<f:facet name="output"><h:outputText value="#{financeiro.usuarioDTO.desconto*100}%" /></f:facet>  
 		                  	<f:facet name="input">
 		                  		<p:selectOneMenu id="desconto" effect="fade" required="true"
@@ -65,6 +66,7 @@
 								</p:selectOneMenu>		                  				                  
 			                </f:facet>
 		              	</p:cellEditor>
+		              	<h:outputText value="#{financeiro.usuarioDTO.desconto*100}%" rendered="#{!genericoMB.adm}"/>
 		        </p:column>
 		        
 		        <p:column headerText="Valor da Mensalidade">  

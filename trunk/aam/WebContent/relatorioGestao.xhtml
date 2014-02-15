@@ -28,9 +28,75 @@
 				</p:calendar>
 				</center>
 				<br/>
-				<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listFinanceiroDTO}" selection="#{financeiroMB.selectedFinanceiroDTO}" rowKey="#{financeiro.id}" editable="true" editMode="cell" paginator="true" rows="20">
-				
+				<p:commandButton value="Emitir" actionListener="#{financeiroMB.a}" id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
+				<br/>
+				<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listRelatorioGestaoMensalDTO}"  rowKey="#{financeiro.mesAno}" editable="false" editMode="cell" >
+					<p:columnGroup type="header">
+						<p:row>  
+			                <p:column rowspan="1" headerText="Mês/Ano" />  
+			                <p:column colspan="3" headerText="Stats" />  
+			            </p:row>  
+			  
+			            <p:row>  
+			                <p:column headerText="Ativos" />  
+			                <p:column headerText="Inativos" />  
+			                <p:column headerText="Sem Pendencia" />
+			                <p:column headerText="Com Pendencia" />  
+			            </p:row>
+			        </p:columnGroup>
+			        <p:subTable var="stats" value="#{financeiro.statusGestaoDTO}">  
+				        <f:facet name="header">  
+			              #{financeiro.mesAno}   
+			            </f:facet> 
+			  
+			            <p:column>  
+			                #{stats.membrosAtivos}  
+			            </p:column>  
+			  
+			            <p:column>  
+			                #{stats.membrosInativos}  
+			            </p:column>  
+			  
+			            <p:column>  
+			                #{stats.membrosSemPendencia}  
+			            </p:column>  
+			            
+			            <p:column>  
+			                #{stats.membrosComPendencia}  
+			            </p:column> 
+			  
+			            <p:columnGroup type="footer">
+			                <p:row>
+			                    <p:column footerText="Total Membros: " style="text-align:right"/>
+			                    <p:column footerText="#{stats.totalMembros}" />
+			                    <p:column footerText="Total Arrecadado: " style="text-align:right"/>
+			                    <p:column footerText="#{stats.totalArrecadado}" />
+			                </p:row>
+			            </p:columnGroup>
+			        </p:subTable>
 				</p:dataTable>
+				
+<!-- 				<p:panel header="Exportar Todos os Dados">   -->
+<!-- 			        <h:commandLink>   -->
+<!-- 			            <p:graphicImage value="/images/excel.png" />   -->
+<!-- 			            <p:dataExporter type="xls" target="tbl" fileName="cars" />   -->
+<!-- 			        </h:commandLink>   -->
+			  
+<!-- 			        <h:commandLink>   -->
+<!-- 			            <p:graphicImage value="/img/pdf.png" />   -->
+<!-- 			            <p:dataExporter type="pdf" target="panel" fileName="cars"/>   -->
+<!-- 			        </h:commandLink>   -->
+			          
+<!-- 			        <h:commandLink>   -->
+<!-- 			            <p:graphicImage value="/images/csv.png" />   -->
+<!-- 			            <p:dataExporter type="csv" target="tbl" fileName="cars" />   -->
+<!-- 			        </h:commandLink>   -->
+			          
+<!-- 			        <h:commandLink>   -->
+<!-- 			            <p:graphicImage value="/images/xml.png" />   -->
+<!-- 			            <p:dataExporter type="xml" target="tbl" fileName="cars" />   -->
+<!-- 			        </h:commandLink>   -->
+<!-- 			    </p:panel> -->
 			</p:panel>
 		</h:form>
 	</ui:define>
