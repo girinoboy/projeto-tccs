@@ -30,6 +30,13 @@ public class PerfilDTO {
 	public PerfilDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	public PerfilDTO(Integer id) {
+		this.id=id;
+		if(id.equals(1))
+			this.nome="Administrador";
+		if(id.equals(2))
+			this.nome="Aluno";
+	}
 	
 	@Override
     public boolean equals(Object obj) {
