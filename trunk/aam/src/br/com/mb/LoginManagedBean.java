@@ -42,7 +42,7 @@ public class LoginManagedBean {
 			adm = usuarioDTO!=null&& usuarioDTO.getUsuario().equals("admin") && usuarioDTO.getPerfilDTO().getId().equals(1);
 			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessão caso ñ exista - false retorna nulo caso ñ exista
 			
-			if(usuarioDTO != null && usuarioDTO.getTema() != null){
+			if(usuarioDTO != null && usuarioDTO.getTema() != null && usuarioDTO.getPerfilDTO().getId() !=null){
 				loggedIn = true;
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", usuarioDTO.getUsuario());
 				session.setAttribute("usuarioAutenticado", usuarioDTO);
