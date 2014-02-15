@@ -49,7 +49,7 @@ public class LoginManagedBean {
 				session.setAttribute("adm", adm);
 				FacesContext.getCurrentInstance().getExternalContext().redirect("layout.xhtml");
 				//gp.setTheme(usuario.getTema());
-			} if(usuarioDTO==null && adm){
+			} if(usuarioDTO==null && usuarioDAO.list().size()==0){
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem Vindo", "Admin");
 				usuarioDTO = new UsuarioDTO();
 				//configura parametros do sistema
