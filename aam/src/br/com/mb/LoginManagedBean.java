@@ -15,6 +15,7 @@ import org.primefaces.context.RequestContext;
 import br.com.dao.ParametroDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.ParametroDTO;
+import br.com.dto.PerfilDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.utility.Constantes;
 
@@ -35,9 +36,10 @@ public class LoginManagedBean {
 		FacesMessage msg = null;
 		boolean loggedIn = false;
 		String retorno = "ok";
-		boolean adm = usuarioDTO.getUsuario().equals("admin") && usuarioDTO.getSenha().equals("admin");
+		boolean adm = false;
 		try{
 			usuarioDTO = usuarioDAO.verificaLoginSenha(usuarioDTO);
+			adm = usuarioDTO!=null&& usuarioDTO.getUsuario().equals("admin") && usuarioDTO.getPerfilDTO().getId().equals(1);
 			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessão caso ñ exista - false retorna nulo caso ñ exista
 			
 			if(usuarioDTO != null && usuarioDTO.getTema() != null){
@@ -56,6 +58,7 @@ public class LoginManagedBean {
 				usuarioDTO.setTema("flick");
 				usuarioDTO.setNome("Administrador do Sistema");
 				usuarioDTO.setDataNascimento(new Date());
+				usuarioDTO.setPerfilDTO(new PerfilDTO(1));
 				usuarioDAO.save(usuarioDTO);
 				ParametroDAO parametroDAO =new ParametroDAO();
 				ParametroDTO p = new ParametroDTO();
