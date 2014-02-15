@@ -1,18 +1,7 @@
-/**
- * 
- */
 package br.com.dto;
 
-import java.util.Date;
-
-/**
- * @author Marcleônio
- *
- */
-public class RelatorioGestaoMensal {
+public class StatusGestaoDTO {
 	
-	private Date startDate;
-	private Date endDate;
 	private Integer membrosAtivos;
 	private Integer membrosInativos;
 	private Integer membrosSemPendencia;
@@ -20,31 +9,24 @@ public class RelatorioGestaoMensal {
 	private Integer TotalMembros;
 	private Integer TotalArrecadado;
 
-	/**
-	 * 
-	 */
-	public RelatorioGestaoMensal() {
+	public StatusGestaoDTO() {
 		// TODO Auto-generated constructor stub
-	}
-	
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
 	}
 
 	public Integer getMembrosAtivos() {
 		return membrosAtivos;
+	}
+
+	public StatusGestaoDTO(Integer membrosAtivos, Integer membrosInativos,
+			Integer membrosSemPendencia, Integer membrosComPendencia,
+			Integer totalMembros, Integer totalArrecadado) {
+		super();
+		this.membrosAtivos = membrosAtivos;
+		this.membrosInativos = membrosInativos;
+		this.membrosSemPendencia = membrosSemPendencia;
+		this.membrosComPendencia = membrosComPendencia;
+		TotalMembros = totalMembros;
+		TotalArrecadado = totalArrecadado;
 	}
 
 	public void setMembrosAtivos(Integer membrosAtivos) {

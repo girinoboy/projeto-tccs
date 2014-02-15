@@ -83,11 +83,11 @@ public class GraduacaoDTO extends AbstractDTO{
 //        hash = 31 * hash + this.id;
 //        return hash;
 //    }
-
+	@Override
 	public Integer getId() {
 		return id;
 	}
-
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}

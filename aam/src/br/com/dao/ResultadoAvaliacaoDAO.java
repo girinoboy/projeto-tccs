@@ -9,7 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.dto.RelatorioGestaoMensal;
+import br.com.dto.RelatorioGestaoMensalDTO;
 import br.com.dto.ResultadoAvaliacaoDTO;
 import br.com.factory.HibernateUtility;
 
@@ -40,7 +40,7 @@ public class ResultadoAvaliacaoDAO extends GenericoDAO<ResultadoAvaliacaoDTO, Se
 	
 	
 	
-	public List<?> listRelatorioGestaoMensal(RelatorioGestaoMensal relatorioGestaoMensal) throws Exception {
+	public List<?> listRelatorioGestaoMensal(RelatorioGestaoMensalDTO relatorioGestaoMensal) throws Exception {
 		List<?> result;
 		try{
 			result =  HibernateUtility.getSession().createSQLQuery("select * from"

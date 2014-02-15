@@ -25,9 +25,11 @@ import br.com.dao.FinanceiroDAO;
 import br.com.dao.GraduacaoDAO;
 import br.com.dao.ParametroDAO;
 import br.com.dao.UsuarioDAO;
+import br.com.dto.AnexoDTO;
 import br.com.dto.FinanceiroDTO;
 import br.com.dto.GraduacaoDTO;
 import br.com.dto.ParametroDTO;
+import br.com.dto.PerfilDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.Constantes;
@@ -92,7 +94,8 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void handleFileUpload(FileUploadEvent event) throws Exception {
-
+		AnexoDTO anexoDTO = new AnexoDTO();
+		usuarioDTO.setAnexoDTO(anexoDTO);
 		usuarioDTO.getAnexoDTO().setNome(event.getFile().getFileName());
 		usuarioDTO.getAnexoDTO().setAnexo(event.getFile().getContents());
 		usuarioDTO.getAnexoDTO().setTamanho(event.getFile().getSize());
@@ -121,11 +124,11 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			validaLogin();
 			calculaDesconto();
 			System.out.println(usuarioDTO.getFinanceiroDTO().getValorMensalidade());
-			if(usuarioDTO.getAnexoDTO().getId() !=null)
-				usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
+//			if(usuarioDTO.getAnexoDTO().getId() !=null)
+//				usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
 			if(usuarioDTO.getId() !=null){
 				//verifica se existe um novo anexo, pois o anexo é salvo ao capturar
-				usuarioDTO.setAnexoDTO(usuarioDAO.getById(usuarioDTO.getId()).getAnexoDTO());
+//				usuarioDTO.setAnexoDTO(usuarioDAO.getById(usuarioDTO.getId()).getAnexoDTO());
 
 				Calendar c = new GregorianCalendar();
 				c.setTime(usuarioDTO.getFinanceiroDTO().getDataPagamento());
@@ -141,8 +144,8 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 				}
 
 			}
-
-
+			if(usuarioDTO.getPerfilDTO()==null)
+				usuarioDTO.setPerfilDTO(new PerfilDTO(2));
 			usuarioDTO = usuarioDAO.save(usuarioDTO);
 			usuarioDTO.getFinanceiroDTO().setUsuarioDTO(usuarioDTO);
 			usuarioDTO.getFinanceiroDTO().setSituacao(false);

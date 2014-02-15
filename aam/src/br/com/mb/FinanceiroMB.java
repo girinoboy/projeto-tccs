@@ -3,14 +3,16 @@
  */
 package br.com.mb;
 
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -23,6 +25,8 @@ import br.com.dao.ParametroDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.FinanceiroDTO;
 import br.com.dto.ParametroDTO;
+import br.com.dto.RelatorioGestaoMensalDTO;
+import br.com.dto.StatusGestaoDTO;
 import br.com.dto.UsuarioDTO;
 
 /**
@@ -33,10 +37,13 @@ import br.com.dto.UsuarioDTO;
 @RequestScoped
 public class FinanceiroMB extends GenericoMB implements ModeloMB{
 
+	private static final long serialVersionUID = 5253517323316896638L;
 	private FinanceiroDTO financeiroDTO = new FinanceiroDTO();
 	private FinanceiroDAO financeiroDAO = new FinanceiroDAO();
 	private List<FinanceiroDTO> listFinanceiroDTO;
 	private FinanceiroDTO selectedFinanceiroDTO = new FinanceiroDTO();
+	
+	private List<RelatorioGestaoMensalDTO> listRelatorioGestaoMensalDTO = new ArrayList<RelatorioGestaoMensalDTO>();
 
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	/**
@@ -44,10 +51,9 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	 */
 	public FinanceiroMB() {
 		try {
-			listFinanceiroDTO = financeiroDAO.list();
+//			listFinanceiroDTO = financeiroDAO.list();
 
 			atualizaMensalidade();
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,6 +61,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	}
 
 	private void atualizaMensalidade()throws Exception {
+		listFinanceiroDTO = financeiroDAO.consultaPorMesAno(new Date());
 		ParametroDAO parametroDAO = new ParametroDAO();
 		ParametroDTO p = parametroDAO.recuperaParametro("mensalidade");
 		if(financeiroDTO==null){
@@ -67,14 +74,15 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 		}else{
 			financeiroDTO.setValorMensalidade(Double.valueOf(p.getValor()));
 		}
-
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {
-		atualizaMensalidade();
-		listFinanceiroDTO = financeiroDAO.list();
-		addMessage("Operação realizada com sucesso!.");
-		//financeiroDAO.save(financeiroDTO);
+		 if(getAdm()){
+			atualizaMensalidade();
+			//listFinanceiroDTO = financeiroDAO.consultaPorMesAno(new Date());
+			addMessage("Operação realizada com sucesso!.");
+			//financeiroDAO.save(financeiroDTO);
+		 }
 
 	}
 
@@ -89,20 +97,23 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void onCellEdit(CellEditEvent event) throws Exception {
-		//		Object oldValue = event.getOldValue();
-		//		Object newValue = event.getNewValue();
-		UsuarioDTO usuarioDTO = listFinanceiroDTO.get(event.getRowIndex()).getUsuarioDTO();
-		//		usuarioDTO.setFinanceiroDTO(financeiroDTO);
-		usuarioDTO.getFinanceiroDTO().setValorComDesconto(calculaDesconto(usuarioDTO));
-		System.out.println(usuarioDTO.getFinanceiroDTO().getDataPagamento());
-		System.out.println(usuarioDTO.getFinanceiroDTO().getDia());
-		usuarioDAO.save(usuarioDTO);
-		//		listFinanceiroDTO = financeiroDAO.list();
-		atualizaMensalidade();
-		//		if(newValue != null && !newValue.equals(oldValue)) {
-		//			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
-		//			FacesContext.getCurrentInstance().addMessage(null, msg);
-		//		}
+		 if(getAdm()){
+			//Object oldValue = event.getOldValue();
+			//Object newValue = event.getNewValue();
+			UsuarioDTO usuarioDTO = listFinanceiroDTO.get(event.getRowIndex()).getUsuarioDTO();
+			//usuarioDTO.setFinanceiroDTO(financeiroDTO);
+			usuarioDTO.getFinanceiroDTO().setValorComDesconto(calculaDesconto(usuarioDTO));
+			System.out.println(usuarioDTO.getFinanceiroDTO().getDataPagamento());
+			System.out.println(usuarioDTO.getFinanceiroDTO().getDia());
+			usuarioDTO.getFinanceiroDTO().setDataPagamento(financeiroDTO.getDataPagamento());
+			usuarioDAO.save(usuarioDTO);
+			//listFinanceiroDTO = financeiroDAO.list();
+			atualizaMensalidade();
+			//if(newValue != null && !newValue.equals(oldValue)) {
+			//	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
+			//	FacesContext.getCurrentInstance().addMessage(null, msg);
+			//}
+		 }
 	}
 
 	public Double calculaDesconto(UsuarioDTO usuarioDTO) throws HibernateException, Exception{
@@ -120,7 +131,33 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 		FacesContext facesContext = FacesContext.getCurrentInstance();  
 		SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");  
 		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));  
-	}  
+	} 
+	
+	public void a(ActionEvent actionEvent) throws Exception{
+		RelatorioGestaoMensalDTO relatorioGestaoMensal = null;
+		List<?> a = financeiroDAO.listRelatorioGestaoMensal(relatorioGestaoMensal);
+		RelatorioGestaoMensalDTO  b;
+		Iterator it = a.iterator();
+		while(it.hasNext())  
+		{
+			Object[] c = (Object[]) it.next();  
+			System.out.println(c[0]);
+			System.out.println(c[1]);
+			b =  new RelatorioGestaoMensalDTO(c[6],c[7]);
+			Integer membrosComPendencia = ((BigInteger) c[4]).intValue();
+			Integer membrosAtivos = c[1] == null ? 0:((BigInteger) c[1]).intValue();
+			Integer membrosSemPendencia = ((BigInteger) c[3]).intValue();
+			Integer totalMembros = ((BigInteger) c[0]).intValue();
+			Integer membrosInativos = ((BigInteger) c[2]).intValue();
+			Integer totalArrecadado = ((Double) c[5]).intValue();
+			b.getStatusGestaoDTO().add(new StatusGestaoDTO(membrosAtivos, membrosInativos, membrosSemPendencia, membrosComPendencia, totalMembros, totalArrecadado));
+			listRelatorioGestaoMensalDTO.add(b);
+
+		}
+		
+		
+		addMessage("Teste: "+a.size()); 
+	}
 
 	public FinanceiroDTO getFinanceiroDTO() {
 		return financeiroDTO;
@@ -154,6 +191,15 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 
 	public void setSelectedFinanceiroDTO(FinanceiroDTO selectedFinanceiroDTO) {
 		this.selectedFinanceiroDTO = selectedFinanceiroDTO;
+	}
+
+	public List<RelatorioGestaoMensalDTO> getListRelatorioGestaoMensalDTO() {
+		return listRelatorioGestaoMensalDTO;
+	}
+
+	public void setListRelatorioGestaoMensalDTO(
+			List<RelatorioGestaoMensalDTO> listRelatorioGestaoMensalDTO) {
+		this.listRelatorioGestaoMensalDTO = listRelatorioGestaoMensalDTO;
 	}
 
 }
