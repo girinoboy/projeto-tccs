@@ -75,8 +75,14 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void reset(ActionEvent event) {
-		usuarioDTO = new UsuarioDTO();
+		try {
+			usuarioDTO = new UsuarioDTO();
+			listGraduacaoDTO = graduacaoDAO.list();
 		//		membroDataModel = new AbstractDataModel<UsuarioDTO>();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void onRowSelect(SelectEvent event) throws IOException {  
