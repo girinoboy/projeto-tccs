@@ -14,29 +14,29 @@
  			
  			<p:separator id="separator"/>
  			
- 			<p:dataTable id="panel" var="ra" 
- 				value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDataModel}" 
+ 			<p:dataTable id="panel" var="ra"
+ 				value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDataModel}"
  				selection="#{resultadoAvaliacaoMB.listSelectedResultadoAvaliacaoDTO}"
  				rowKey="#{ra.id}" editable="false" editMode="cell"
-				paginator="true" rows="20"> 
+				paginator="true" rows="20">
  			
  				<p:ajax event="rowSelectCheckbox" listener="#{tecnicaMB.check}"   />
 				
-				<p:column selectionMode="multiple" style="width:2%" /> 
+				<p:column selectionMode="multiple" style="width:2%" />
 		  
 		        <p:column headerText="Nome">  
-		            <h:outputText value="#{ra.usuarioDTO.nome}" />  
-		        </p:column>  
+		            <h:outputText value="#{ra.usuarioDTO.nome}" />
+		        </p:column>
 		  
-		        <p:column headerText="Graduação">  
-		            <h:outputText value="#{ra.usuarioDTO.graduacaoDTO.nome}" />  
-		        </p:column>  
+		        <p:column headerText="Graduação">
+		            <h:outputText value="#{ra.graduacaoDTO.nome}" />
+		        </p:column>
 		  
-		        <p:column headerText="Data">  
+		        <p:column headerText="Data">
 		            <h:outputText value="#{ra.data}">
 						<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy"/>
-					</h:outputText>  
-		        </p:column>  
+					</h:outputText>
+		        </p:column>
 		        
 		        <p:column headerText="">
 			        <p:commandLink id="ajax" update="panel" actionListener="#{resultadoAvaliacaoMB.edit}" action="/cadastroResultadoAvaliacoes.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
