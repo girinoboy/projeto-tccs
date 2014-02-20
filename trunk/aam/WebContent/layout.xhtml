@@ -125,6 +125,7 @@
 					<br />
 					<br />
 					<br />
+					<div>
 					<p:commandLink actionListener="#{usuarioMB.visualizarCadastro}">
 						<p:graphicImage id="avatar" value="#{usuarioMB.dynamicImage}"
 							style="width:150px;height:150px;padding:50px;float:left;" cache="false" rendered="true">
@@ -132,6 +133,10 @@
 								value="#{genericoMB.userSession.anexoDTO.id}" />
 						</p:graphicImage>
 					</p:commandLink>
+						<br/>
+						#{genericoMB.userSession.nome}
+						<br/>
+					</div>
 					<p:menu>
 					<p:menuitem value="Sair" actionListener="#{loginManagedBean.logout}"/>
 					</p:menu>
