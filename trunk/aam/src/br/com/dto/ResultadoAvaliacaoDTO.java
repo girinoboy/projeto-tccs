@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 
 @Entity
 @Table(name="resultado_avaliacao")
@@ -29,6 +31,10 @@ public class ResultadoAvaliacaoDTO extends AbstractDTO{
 	private Double luta;
 	private Double conhecimentos;
 	private String comentarios;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
+	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
+	private GraduacaoDTO graduacaoDTO;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
@@ -91,6 +97,14 @@ public class ResultadoAvaliacaoDTO extends AbstractDTO{
 
 	public void setConhecimentos(Double conhecimentos) {
 		this.conhecimentos = conhecimentos;
+	}
+
+	public GraduacaoDTO getGraduacaoDTO() {
+		return graduacaoDTO;
+	}
+
+	public void setGraduacaoDTO(GraduacaoDTO graduacaoDTO) {
+		this.graduacaoDTO = graduacaoDTO;
 	}
 
 }

@@ -28,7 +28,7 @@
 		            <p:message for="dataPagamento" />
 		            
 		            <h:outputLabel for="graduacao" value="Graduacao: *" />
-			        <p:selectOneMenu id="graduacao" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.usuarioDTO.graduacaoDTO}" effect="fade" converter="graduacao" required="true"> 
+			        <p:selectOneMenu id="graduacao" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.graduacaoDTO}" effect="fade" converter="graduacao" required="true"> 
 			            <f:selectItem itemLabel="Selecione" itemValue="" />
 			            <f:selectItems value="#{resultadoAvaliacaoMB.listGraduacaoDTO}" var="graduacao" itemLabel="#{graduacao.nome}" itemValue="#{graduacao}"/>
 			        </p:selectOneMenu>
