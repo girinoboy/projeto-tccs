@@ -48,7 +48,7 @@ public class ChartDAO extends GenericoDAO<ResultadoAvaliacaoDTO, Serializable>{
 		List<ResultadoAvaliacaoDTO> result;
 		try{
 			result = HibernateUtility.getSession().createCriteria(ResultadoAvaliacaoDTO.class)
-					.createCriteria("usuarioDTO.graduacaoDTO").add(Restrictions.eq("id", usuarioDTO.getGraduacaoDTO().getId()))
+					.createCriteria("graduacaoDTO").add(Restrictions.eq("id", usuarioDTO.getGraduacaoDTO().getId()))
 					.list();
 
 		}catch(Exception e){
