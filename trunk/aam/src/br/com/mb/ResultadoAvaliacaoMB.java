@@ -47,13 +47,14 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 	}
 	
 	public void atualiza(ActionEvent event) throws Exception{
-		listResuldoAvaliacaoDTO = resuldoAvaliacaoDAO.list();
+		listResuldoAvaliacaoDTO = resuldoAvaliacaoDAO.listOrdenada();
 		listGraduacaoDTO = graduacaoDAO.list();
 		resultadoAvaliacaoDataModel = new AbstractDataModel<ResultadoAvaliacaoDTO>(listResuldoAvaliacaoDTO);
 	}
 	
 	public void reset(ActionEvent event) {
 		try {
+			atualiza(null);
 			listGraduacaoDTO = graduacaoDAO.list();
 			resultadoAvaliacaoDTO = new ResultadoAvaliacaoDTO();
 		} catch (Exception e) {

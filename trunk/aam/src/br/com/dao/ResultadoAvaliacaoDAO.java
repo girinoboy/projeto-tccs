@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -71,6 +72,15 @@ public class ResultadoAvaliacaoDAO extends GenericoDAO<ResultadoAvaliacaoDTO, Se
 			throw e;
 		}
 
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ResultadoAvaliacaoDTO> listOrdenada() throws HibernateException, Exception {
+		Criteria query = HibernateUtility.getSession().createCriteria(ResultadoAvaliacaoDTO.class);
+		query.createCriteria("usuarioDTO").addOrder(Order.asc("nome"));
+		query.addOrder(Order.asc("data"));
+		List<ResultadoAvaliacaoDTO> result = query.list();
 		return result;
 	}
 
