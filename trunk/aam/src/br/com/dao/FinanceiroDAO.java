@@ -11,10 +11,10 @@ import java.util.List;
 
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
 
 import br.com.dto.FinanceiroDTO;
 import br.com.dto.RelatorioGestaoMensalDTO;
+import br.com.dto.UsuarioDTO;
 import br.com.factory.HibernateUtility;
 
 /**
@@ -35,31 +35,44 @@ public class FinanceiroDAO extends GenericoDAO<FinanceiroDTO, Serializable>{
 		// TODO Auto-generated constructor stub
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<FinanceiroDTO> consultaPorMesAno(Object object) throws Exception {
 		List<FinanceiroDTO> result;
+		List<UsuarioDTO> resultU;
 		Calendar data = new GregorianCalendar();
 		data.setTime((Date) object);
 		try{
-			List valores = HibernateUtility.getSession().createCriteria(FinanceiroDTO.class)
+			
+			List array = HibernateUtility.getSession().createCriteria(FinanceiroDTO.class)
 					.add(Restrictions.eq("mes",  data.get(Calendar.MONTH)))
 					.add(Restrictions.eq("ano",data.get(Calendar.YEAR)))
-					.setProjection(Projections.projectionList()
-				            .add(Projections.property("usuarioDTO.id"))
-				    )
+					.setProjection(Projections.projectionList().add(Projections.property("usuarioDTO.id"))).list();
+			if(array.isEmpty())
+				array.add(0);
+			resultU = HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
+					.add(Restrictions.not(Restrictions.in("id",array)))
+					.add(Restrictions.isNotNull("financeiroDTO.id"))
 					.list();
+			if(resultU.size()>0){
+				for (UsuarioDTO usuarioDTO : resultU) {
+					usuarioDTO.getFinanceiroDTO().setId(null);
+					usuarioDTO.getFinanceiroDTO().setSituacao(false);
+					usuarioDTO.getFinanceiroDTO().setDataPagamento(data.getTime());
+					usuarioDTO.getFinanceiroDTO().setDia(null);
+					usuarioDTO.getFinanceiroDTO().setMes(null);
+					usuarioDTO.getFinanceiroDTO().setAno(null);
+					usuarioDTO.getFinanceiroDTO().getDataPagamento();
+					try{
+						save(usuarioDTO.getFinanceiroDTO());
+					}catch(Exception e){
+						save(usuarioDTO.getFinanceiroDTO());
+					}
+				}
+			}
 			result =  HibernateUtility.getSession().createCriteria(FinanceiroDTO.class)
-					
-//					.add(Restrictions.eq("mes",  data.get(Calendar.MONTH)))
-//					.add(Restrictions.eq("ano",data.get(Calendar.YEAR)))
-					.add(Restrictions.or(
-							Restrictions.and(Restrictions.eq("mes",  data.get(Calendar.MONTH)), Restrictions.eq("ano",data.get(Calendar.YEAR))),
-					Restrictions.not(Restrictions.in("usuarioDTO.id", valores)))
-					
-					)
+					.add(Restrictions.eq("mes",  data.get(Calendar.MONTH)))
+					.add(Restrictions.eq("ano",data.get(Calendar.YEAR)))
 					.list();
-			
-			
 		}catch(Exception e){
 			throw e;
 		}
