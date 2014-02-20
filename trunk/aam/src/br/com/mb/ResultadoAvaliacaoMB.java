@@ -20,12 +20,15 @@ import br.com.dto.ResultadoAvaliacaoDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.Constantes;
-import br.com.utility.NoticiaDataModel;
 
 @ManagedBean
 @SessionScoped
 public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3823839345575509086L;
 	private ResultadoAvaliacaoDTO resultadoAvaliacaoDTO = new ResultadoAvaliacaoDTO();
 	private ResultadoAvaliacaoDAO resuldoAvaliacaoDAO = new ResultadoAvaliacaoDAO();
 	private List<ResultadoAvaliacaoDTO> listResuldoAvaliacaoDTO = new ArrayList<ResultadoAvaliacaoDTO>();
@@ -37,9 +40,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 
 	public ResultadoAvaliacaoMB() {
 		try {
-			listGraduacaoDTO = graduacaoDAO.list();
-			listResuldoAvaliacaoDTO = resuldoAvaliacaoDAO.list();
-			resultadoAvaliacaoDataModel = new AbstractDataModel<ResultadoAvaliacaoDTO>(listResuldoAvaliacaoDTO);
+			atualiza(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,12 +48,18 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 	
 	public void atualiza(ActionEvent event) throws Exception{
 		listResuldoAvaliacaoDTO = resuldoAvaliacaoDAO.list();
-
+		listGraduacaoDTO = graduacaoDAO.list();
 		resultadoAvaliacaoDataModel = new AbstractDataModel<ResultadoAvaliacaoDTO>(listResuldoAvaliacaoDTO);
 	}
 	
 	public void reset(ActionEvent event) {
-		resultadoAvaliacaoDTO = new ResultadoAvaliacaoDTO();
+		try {
+			listGraduacaoDTO = graduacaoDAO.list();
+			resultadoAvaliacaoDTO = new ResultadoAvaliacaoDTO();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void handleSelect(SelectEvent event) {  
