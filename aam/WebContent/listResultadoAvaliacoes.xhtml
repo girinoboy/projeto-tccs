@@ -42,7 +42,7 @@
 			        <p:commandLink id="ajax" update="panel" actionListener="#{resultadoAvaliacaoMB.edit}" action="/cadastroResultadoAvaliacoes.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
 			        	<f:setPropertyActionListener value="#{ra}" target="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO}"/>    
 				        <h:outputText value="Alterar" rendered="#{genericoMB.adm}"/>
-				        <h:outputText value="Visualizar" rendered="#{!genericoMB.adm}"/>
+				        <h:outputText value="Visualizar" rendered="#{!genericoMB.adm and (genericoMB.userSession.id eq ra.usuarioDTO.id)}"/>
 				    </p:commandLink>
 		        </p:column>
 		    </p:dataTable> 

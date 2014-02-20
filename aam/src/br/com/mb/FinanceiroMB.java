@@ -6,6 +6,7 @@ package br.com.mb;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -42,7 +43,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	private FinanceiroDAO financeiroDAO = new FinanceiroDAO();
 	private List<FinanceiroDTO> listFinanceiroDTO;
 	private FinanceiroDTO selectedFinanceiroDTO = new FinanceiroDTO();
-	
+
 	private List<RelatorioGestaoMensalDTO> listRelatorioGestaoMensalDTO = new ArrayList<RelatorioGestaoMensalDTO>();
 
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -51,7 +52,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	 */
 	public FinanceiroMB() {
 		try {
-//			listFinanceiroDTO = financeiroDAO.list();
+			//listFinanceiroDTO = financeiroDAO.list();
 
 			atualizaMensalidade();
 
@@ -61,7 +62,31 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	}
 
 	private void atualizaMensalidade()throws Exception {
-		listFinanceiroDTO = financeiroDAO.consultaPorMesAno(new Date());
+		listFinanceiroDTO = financeiroDAO.consultaPorMesAno(financeiroDTO.getDataPagamento());
+//		Calendar c = Calendar.getInstance(); 
+//		if(financeiroDTO==null && financeiroDTO.getDataPagamento() ==null){
+//			listFinanceiroDTO = financeiroDAO.consultaPorMesAno(new Date());
+//			c.setTime(new Date());
+//			for (FinanceiroDTO f : listFinanceiroDTO) {
+//				if(!f.getMes().equals(c.get(Calendar.MONTH))){
+//					f.setId(null);
+//					f.setSituacao(false);
+////					f.setValorComDesconto(0d);
+//				}
+//			}
+//		}
+//		else{
+//			listFinanceiroDTO = financeiroDAO.consultaPorMesAno(financeiroDTO.getDataPagamento());
+//			c.setTime(financeiroDTO.getDataPagamento());
+//			for (FinanceiroDTO f : listFinanceiroDTO) {
+//				if(!f.getMes().equals(c.get(Calendar.MONTH))){
+//					f.setId(null);
+//					f.setSituacao(false);
+////					f.setValorComDesconto(0d);
+//				}
+//			}
+//		}
+
 		ParametroDAO parametroDAO = new ParametroDAO();
 		ParametroDTO p = parametroDAO.recuperaParametro("mensalidade");
 		if(financeiroDTO==null){
@@ -77,12 +102,12 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void add(ActionEvent actionEvent) throws Exception {
-		 if(getAdm()){
+		if(getAdm()){
 			atualizaMensalidade();
 			//listFinanceiroDTO = financeiroDAO.consultaPorMesAno(new Date());
 			addMessage("Operação realizada com sucesso!.");
 			//financeiroDAO.save(financeiroDTO);
-		 }
+		}
 
 	}
 
@@ -97,7 +122,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void onCellEdit(CellEditEvent event) throws Exception {
-		 if(getAdm()){
+		if(getAdm()){
 			//Object oldValue = event.getOldValue();
 			//Object newValue = event.getNewValue();
 			UsuarioDTO usuarioDTO = listFinanceiroDTO.get(event.getRowIndex()).getUsuarioDTO();
@@ -113,7 +138,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 			//	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
 			//	FacesContext.getCurrentInstance().addMessage(null, msg);
 			//}
-		 }
+		}
 	}
 
 	public Double calculaDesconto(UsuarioDTO usuarioDTO) throws HibernateException, Exception{
@@ -127,12 +152,23 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 
 	public void handleDateSelect(SelectEvent event) throws Exception {  
 
+//		Calendar c = Calendar.getInstance(); 
+//		Date a = (Date)event.getObject();
 		listFinanceiroDTO = financeiroDAO.consultaPorMesAno(event.getObject());
+//		c.setTime(financeiroDTO.getDataPagamento());
+//		for (FinanceiroDTO f : listFinanceiroDTO) {
+//			if(!f.getMes().equals(c.get(Calendar.MONTH))){
+//				f.setId(null);
+//				f.setSituacao(false);
+////				f.setValorComDesconto(0d);
+//			}
+//		}
+
 		FacesContext facesContext = FacesContext.getCurrentInstance();  
 		SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");  
 		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));  
 	} 
-	
+
 	public void a(ActionEvent actionEvent) throws Exception{
 		RelatorioGestaoMensalDTO relatorioGestaoMensal = null;
 		List<?> a = financeiroDAO.listRelatorioGestaoMensal(relatorioGestaoMensal);
@@ -154,8 +190,8 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 			listRelatorioGestaoMensalDTO.add(b);
 
 		}
-		
-		
+
+
 		addMessage("Teste: "+a.size()); 
 	}
 
