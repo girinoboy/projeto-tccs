@@ -22,7 +22,7 @@ import org.primefaces.event.ToggleEvent;
 public class LayoutMB {
 
 	private String viewedPage = "topGrafico.xhtml"; 
-	private Integer myActiveIndex =3;
+	private Integer myActiveIndex =0;
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public class LayoutMB {
 		}else if(pagina.equals("/mediaGeralAcademia.xhtml")){
 			myActiveIndex =2;
 		}else{
-			myActiveIndex =3;
+			myActiveIndex =0;
 		}
 		
 		viewedPage = "topGrafico.xhtml"; 
