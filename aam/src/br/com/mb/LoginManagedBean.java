@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -27,6 +28,8 @@ public class LoginManagedBean {
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private HttpSession session;
+	@ManagedProperty(value = "#{guestPreferences}")
+	private GuestPreferences gp;
 
 
 	public LoginManagedBean(){}
@@ -48,7 +51,7 @@ public class LoginManagedBean {
 				session.setAttribute("usuarioAutenticado", usuarioDTO);
 				session.setAttribute("adm", adm);
 				FacesContext.getCurrentInstance().getExternalContext().redirect("layout.xhtml");
-				//gp.setTheme(usuario.getTema());
+				gp.setTheme(usuarioDTO.getTema());
 			} if(usuarioDTO==null && usuarioDAO.list().size()==0){
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem Vindo", "Admin");
 				usuarioDTO = new UsuarioDTO();
@@ -136,6 +139,8 @@ public class LoginManagedBean {
 		this.session = session;
 	}
 
-
+	public void setGp(GuestPreferences gp) {  
+		this.gp = gp;  
+	} 
 
 }
