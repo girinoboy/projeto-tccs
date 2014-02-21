@@ -46,7 +46,7 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 
 	public void saveTheme(String theme, UsuarioDTO usuario) throws HibernateException, Exception {
 		//Nome da classe e atributo
-		String updateQuery = "UPDATE Usuario obj SET tema = :valor WHERE obj.id = :idUsuario";  
+		String updateQuery = "UPDATE UsuarioDTO obj SET tema = :valor WHERE obj.id = :idUsuario";  
 		HibernateUtility.getSession().createQuery(updateQuery)
 		.setString("valor", theme)
 		.setLong("idUsuario",usuario.getId())
