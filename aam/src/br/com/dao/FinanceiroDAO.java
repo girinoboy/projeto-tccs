@@ -87,8 +87,8 @@ public class FinanceiroDAO extends GenericoDAO<FinanceiroDTO, Serializable>{
 			result =  HibernateUtility.getSession().createSQLQuery("select "
 					
 						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.mes = financeiro.mes group by mes) as total_usuario,"
-						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.mes = financeiro.mes and ativoInativo = 1 group by mes) ativo,"
-						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.mes = financeiro.mes and ativoInativo = 0 group by mes) inativo,"
+						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.mes = financeiro.mes and ativo_inativo = 1 group by mes) ativo,"
+						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.mes = financeiro.mes and ativo_inativo = 0 group by mes) inativo,"
 						+ " (select count(*) from financeiro f where f.mes = financeiro.mes and situacao = 1) sem_pendencia,"
 						+ " (select count(*) from financeiro f where f.mes = financeiro.mes and situacao = 0) com_pendencia,"
 						+ " (select sum(valor_com_desconto) from financeiro f where f.mes = financeiro.mes) total_arrecadado"
