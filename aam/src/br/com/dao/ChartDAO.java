@@ -74,7 +74,7 @@ public class ChartDAO extends GenericoDAO<ResultadoAvaliacaoDTO, Serializable>{
 					.list();*/
 			
 			result = session.createSQLQuery(
-					"select data,avg(tecnica+luta+conhecimentos)"
+					"select data,avg((tecnica+luta+conhecimentos)/3)"
 					+ " from resultado_avaliacao"
 					+ " where data BETWEEN :dataInicial AND :dataFinal"
 					+ " group by data"
