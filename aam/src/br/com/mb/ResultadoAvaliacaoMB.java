@@ -102,6 +102,15 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
+		for (ResultadoAvaliacaoDTO r : listSelectedResultadoAvaliacaoDTO) {
+			resuldoAvaliacaoDAO.delete(r);//colocar uma flag para desativar usuario ao em vez de excluir definitivamente do bd
+		}
+		if(listSelectedResultadoAvaliacaoDTO.length >0){
+			addMessage("Apagado.");
+		}else{
+			addMessage("Nenhum Item Selecionado.");
+		}
+		
 		System.out.println(resultadoAvaliacaoDTO);
 
 	}
