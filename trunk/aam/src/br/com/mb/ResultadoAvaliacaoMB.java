@@ -102,16 +102,26 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
-		for (ResultadoAvaliacaoDTO r : listSelectedResultadoAvaliacaoDTO) {
-			resuldoAvaliacaoDAO.delete(r);//colocar uma flag para desativar usuario ao em vez de excluir definitivamente do bd
+		try{
+			for (ResultadoAvaliacaoDTO r : listSelectedResultadoAvaliacaoDTO) {
+				resuldoAvaliacaoDAO.delete(r);//colocar uma flag para desativar usuario ao em vez de excluir definitivamente do bd
+			}
+			if(listSelectedResultadoAvaliacaoDTO.length >0){
+				addMessage("Apagado.");
+			}else{
+				addMessage("Nenhum Item Selecionado.");
+			}
+
+		}catch(Exception e){
+			addMessage("Registro não pode ser apagado.");
+			e.printStackTrace();
+		}finally{
+			try {
+				reset(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		if(listSelectedResultadoAvaliacaoDTO.length >0){
-			addMessage("Apagado.");
-		}else{
-			addMessage("Nenhum Item Selecionado.");
-		}
-		reset(null);
-		System.out.println(resultadoAvaliacaoDTO);
 
 	}
 

@@ -42,8 +42,8 @@ public class FinanceiroDTO extends AbstractDTO{
 	private Integer dia;
 	private Integer mes;
 	private Integer ano;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
 

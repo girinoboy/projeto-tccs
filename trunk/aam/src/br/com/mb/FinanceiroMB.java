@@ -128,6 +128,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 			//Object newValue = event.getNewValue();
 			UsuarioDTO usuarioDTO = listFinanceiroDTO.get(event.getRowIndex()).getUsuarioDTO();
 			//usuarioDTO.setFinanceiroDTO(financeiroDTO);
+			usuarioDTO.setFinanceiroDTO(listFinanceiroDTO.get(event.getRowIndex()));
 			usuarioDTO.getFinanceiroDTO().setValorComDesconto(calculaDesconto(usuarioDTO));
 			System.out.println(usuarioDTO.getFinanceiroDTO().getDataPagamento());
 			System.out.println(usuarioDTO.getFinanceiroDTO().getDia());
