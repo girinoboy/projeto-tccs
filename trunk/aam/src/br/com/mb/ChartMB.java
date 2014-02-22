@@ -27,6 +27,7 @@ import org.primefaces.model.chart.PieChartModel;
 
 
 
+
 import br.com.dao.ChartDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.ResultadoAvaliacaoDTO;
@@ -137,8 +138,18 @@ public class ChartMB extends GenericoMB implements Serializable {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMM/yyyy");
 
+		String dataAux = null;
+		double resultp=0d,cont=1d;
 		for (ResultadoAvaliacaoDTO ra : a) {
-			series1.set(sdf.format(ra.getData()), (ra.getLuta()+ra.getTecnica()+ra.getConhecimentos())/3);
+			if(!sdf.format(ra.getData()).equals(dataAux)){
+				resultp = (ra.getLuta()+ra.getTecnica()+ra.getConhecimentos())/3;
+				series1.set(sdf.format(ra.getData()), resultp/cont);
+				cont++;
+			}else{
+				resultp += (ra.getLuta()+ra.getTecnica()+ra.getConhecimentos())/3;
+				series1.set(sdf.format(ra.getData()), resultp/cont);
+			}
+			dataAux=sdf.format(ra.getData());
 		}
 		if(series1.getData().size() == 0){
 			series1.set(0, 0);
