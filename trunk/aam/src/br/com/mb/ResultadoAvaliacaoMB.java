@@ -110,7 +110,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 		}else{
 			addMessage("Nenhum Item Selecionado.");
 		}
-		
+		reset(null);
 		System.out.println(resultadoAvaliacaoDTO);
 
 	}
