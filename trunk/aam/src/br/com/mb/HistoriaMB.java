@@ -141,6 +141,7 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 		}
 		listLinkDTO.add(linkDAO.save(linkDTO));
 		linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+		linkDTO = new LinkDTO();
 	}
 
 	public void delLink(ActionEvent actionEvent) throws Exception{
