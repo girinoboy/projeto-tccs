@@ -172,22 +172,47 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	public void a(ActionEvent actionEvent) throws Exception{
 		RelatorioGestaoMensalDTO relatorioGestaoMensal = null;
 		List<?> a = financeiroDAO.listRelatorioGestaoMensal(relatorioGestaoMensal);
-		RelatorioGestaoMensalDTO  b;
+		RelatorioGestaoMensalDTO  rel =null;
 		Iterator it = a.iterator();
+		String mesAno = null,mesAnoAux=null;
 		while(it.hasNext())  
 		{
 			Object[] c = (Object[]) it.next();  
 			System.out.println(c[0]);
 			System.out.println(c[1]);
-			b =  new RelatorioGestaoMensalDTO(c[6],c[7]);
-			Integer membrosComPendencia = ((BigInteger) c[4]).intValue();
-			Integer membrosAtivos = c[1] == null ? 0:((BigInteger) c[1]).intValue();
-			Integer membrosSemPendencia = ((BigInteger) c[3]).intValue();
-			Integer totalMembros = ((BigInteger) c[0]).intValue();
-			Integer membrosInativos = ((BigInteger) c[2]).intValue();
-			Integer totalArrecadado = ((Double) c[5]).intValue();
-			b.getStatusGestaoDTO().add(new StatusGestaoDTO(membrosAtivos, membrosInativos, membrosSemPendencia, membrosComPendencia, totalMembros, totalArrecadado));
-			listRelatorioGestaoMensalDTO.add(b);
+			mesAno = c[6]+"/"+c[7];
+			if(!mesAno.equals(mesAnoAux)){
+				rel =  new RelatorioGestaoMensalDTO(c[6],c[7]);
+				Integer membrosComPendencia = c[4] == null ? 0:((BigInteger) c[4]).intValue();
+				Integer membrosAtivos = c[1] == null ? 0:((BigInteger) c[1]).intValue();
+				Integer membrosSemPendencia = c[3] == null ? 0:((BigInteger) c[3]).intValue();
+				Integer totalMembros = c[0] == null ? 0:((BigInteger) c[0]).intValue();
+				Integer membrosInativos = c[2] == null ? 0:((BigInteger) c[2]).intValue();
+				Integer totalArrecadado = c[5] == null ? 0:((Double) c[5]).intValue();
+				rel.getStatusGestaoDTO().add(new StatusGestaoDTO(membrosAtivos, membrosInativos, membrosSemPendencia, membrosComPendencia, totalMembros, totalArrecadado));
+				listRelatorioGestaoMensalDTO.add(rel);
+				
+			}
+//			else{
+//				Integer membrosComPendencia = c[4] == null ? 0:((BigInteger) c[4]).intValue();
+//				Integer membrosAtivos = c[1] == null ? 0:((BigInteger) c[1]).intValue();
+//				Integer membrosSemPendencia = c[3] == null ? 0:((BigInteger) c[3]).intValue();
+//				Integer totalMembros = c[0] == null ? 0:((BigInteger) c[0]).intValue();
+//				Integer membrosInativos = c[2] == null ? 0:((BigInteger) c[2]).intValue();
+//				Integer totalArrecadado = c[5] == null ? 0:((Double) c[5]).intValue();
+//				rel.getStatusGestaoDTO().add(new StatusGestaoDTO(membrosAtivos, membrosInativos, membrosSemPendencia, membrosComPendencia, totalMembros, totalArrecadado));
+////				listRelatorioGestaoMensalDTO.add(rel);
+//			}
+			mesAnoAux=mesAno;
+//			b =  new RelatorioGestaoMensalDTO(c[6],c[7]);
+//			Integer membrosComPendencia = ((BigInteger) c[4]).intValue();
+//			Integer membrosAtivos = c[1] == null ? 0:((BigInteger) c[1]).intValue();
+//			Integer membrosSemPendencia = ((BigInteger) c[3]).intValue();
+//			Integer totalMembros = ((BigInteger) c[0]).intValue();
+//			Integer membrosInativos = ((BigInteger) c[2]).intValue();
+//			Integer totalArrecadado = ((Double) c[5]).intValue();
+//			b.getStatusGestaoDTO().add(new StatusGestaoDTO(membrosAtivos, membrosInativos, membrosSemPendencia, membrosComPendencia, totalMembros, totalArrecadado));
+//			listRelatorioGestaoMensalDTO.add(b);
 
 		}
 
