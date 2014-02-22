@@ -150,9 +150,12 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 	public NoticiaDTO getNoticiaDTO() throws Exception {
 		try{
 			if(noticiaDTO!=null && noticiaDTO.getListLinkDTO()!=null){
-				listLinkDTO = linkDAO.listByIdNoticiaDTO(noticiaDTO.getId());
-				if(listLinkDTO.size() == noticiaDTO.getListLinkDTO().size())
-					linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+				List<LinkDTO> listLinkDTO = linkDAO.listByIdNoticiaDTO(noticiaDTO.getId());
+				if(listLinkDTO.size() > this.listLinkDTO.size()){
+					this.listLinkDTO = listLinkDTO;
+				}
+				if(this.listLinkDTO.size() == noticiaDTO.getListLinkDTO().size())
+					linkDataModel = new AbstractDataModel<LinkDTO>(this.listLinkDTO);
 			}
 		}catch(Exception e){
 			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);

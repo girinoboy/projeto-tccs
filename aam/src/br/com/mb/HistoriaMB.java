@@ -155,9 +155,12 @@ public class HistoriaMB extends GenericoMB implements ModeloMB{
 	public HistoriaDTO getHistoriaDTO() throws Exception {
 		try{
 			if(historiaDTO!=null && historiaDTO.getListLinkDTO()!=null){
-				listLinkDTO = linkDAO.listByIdHistoriaDTO(historiaDTO.getId());
-				if(listLinkDTO.size() == historiaDTO.getListLinkDTO().size())
-					linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+				List<LinkDTO> listLinkDTO = linkDAO.listByIdHistoriaDTO(historiaDTO.getId());
+				if(listLinkDTO.size() > this.listLinkDTO.size()){
+					this.listLinkDTO = listLinkDTO;
+				}
+				if(this.listLinkDTO.size() == historiaDTO.getListLinkDTO().size())
+					linkDataModel = new AbstractDataModel<LinkDTO>(this.listLinkDTO);
 			}
 		}catch(Exception e){
 			linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
