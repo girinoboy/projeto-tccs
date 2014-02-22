@@ -32,7 +32,7 @@ public class RelatorioGestaoMensalDTO {
 	}
 	
     public String obterNomeMes(int mes){  
-        String[] meses = {"0","Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",   
+        String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",   
                           "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};  
         return meses[mes];  
     }  
