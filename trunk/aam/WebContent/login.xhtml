@@ -105,11 +105,11 @@
 		
 		    <center style="margin-top: 15%">
 	            <h:panelGrid columns="2" cellpadding="5">
-	                <h:outputLabel for="username" value="Usuário:" />
+	                <h:outputLabel for="username" value="Usuário:" style="FONT-WEIGHT: bold;"/>
 	                <p:inputText value="#{loginManagedBean.usuarioDTO.usuario}"
 	                        id="username" required="true" label="username" />
 	                <br/>  <p:spacer height="0"/> 
-	                <h:outputLabel for="password" value="Senha:" />
+	                <h:outputLabel for="password" value="Senha:" style="FONT-WEIGHT: bold;"/>
 	                <p:password value="#{loginManagedBean.usuarioDTO.senha}"
 	                        id="password" required="true" label="password"/>
 	                <br/><br/>
