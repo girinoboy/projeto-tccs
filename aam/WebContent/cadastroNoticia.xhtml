@@ -76,7 +76,7 @@
  		
 		<p:dialog header="Adicionar Link" widgetVar="dlgN" modal="true" appendToBody="true" resizable="false" draggable="true">
 		    <h:form>
-  				<h:panelGrid columns="2">
+  				<h:panelGrid id="gridLink" columns="2">
 				    
 				    <h:outputLabel value="Nome" for="nome"/>
 				  	<p:inputText id="nome" size="50" value="#{noticiaMB.linkDTO.nome}" maxlength="50"/>
@@ -84,7 +84,7 @@
 				  	<h:outputLabel value="URL" for="url"/>
 				  	<p:inputText id="url" size="50" value="#{noticiaMB.linkDTO.url}"/>
 				  	<f:facet name="footer">
-					    <p:commandButton value="Salvar" actionListener="#{noticiaMB.addLink}" update=":form:dataTable" oncomplete="PF('dlgN').hide()" rendered="#{genericoMB.adm}"/>
+					    <p:commandButton value="Salvar" actionListener="#{noticiaMB.addLink}" update=":form:dataTable,gridLink" oncomplete="PF('dlgN').hide()" rendered="#{genericoMB.adm}"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgN').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>

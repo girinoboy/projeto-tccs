@@ -145,6 +145,7 @@ public class NoticiaMB extends GenericoMB implements ModeloMB{
 			listLinkDTO.remove(l);
 		}
 		linkDataModel = new AbstractDataModel<LinkDTO>(listLinkDTO);
+		linkDTO = new LinkDTO();
 	}
 
 	public NoticiaDTO getNoticiaDTO() throws Exception {
