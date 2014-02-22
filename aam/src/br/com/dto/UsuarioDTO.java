@@ -53,6 +53,7 @@ public class UsuarioDTO extends AbstractDTO{
 	private String endereco;
 	private String telefone;
 	private Double desconto;
+	private Boolean excluido;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
 	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
@@ -78,7 +79,7 @@ public class UsuarioDTO extends AbstractDTO{
 	 * 
 	 */
 	public UsuarioDTO() {
-		// TODO Auto-generated constructor stub
+		setExcluido(false);
 	}
 	
 //	@Override
@@ -273,6 +274,17 @@ public class UsuarioDTO extends AbstractDTO{
 
 	public void setPerfilDTO(PerfilDTO perfilDTO) {
 		this.perfilDTO = perfilDTO;
+	}
+
+	public Boolean getExcluido() {
+		if(excluido == null){
+			excluido= false;
+		}
+		return excluido;
+	}
+
+	public void setExcluido(Boolean excluido) {
+		this.excluido = excluido;
 	}
 
 

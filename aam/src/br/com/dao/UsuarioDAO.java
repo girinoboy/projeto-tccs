@@ -89,4 +89,27 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 	}
 
 
+	public void exclusaoLogica(UsuarioDTO u) throws HibernateException, Exception {
+		String updateQuery = "UPDATE UsuarioDTO obj SET excluido = :valor WHERE obj.id = :idUsuario";  
+		HibernateUtility.getSession().createQuery(updateQuery)
+		.setBoolean("valor", u.getExcluido())
+		.setLong("idUsuario",u.getId())
+		.executeUpdate();
+
+		HibernateUtility.commitTransaction();
+		
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public List<UsuarioDTO> listExclusaoLogica(Boolean excluido) throws HibernateException, Exception {
+		List<UsuarioDTO> result = HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
+				.add(Restrictions.or( 
+						Restrictions.isNull("excluido"),
+						Restrictions.eq("excluido", excluido)))
+						.list();
+		return result;
+	}
+
+
 }

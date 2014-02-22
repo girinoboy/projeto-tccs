@@ -65,7 +65,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void atualiza(ActionEvent event) throws Exception {
 //		if(getAdm()){
-			listUsuarioDTO = usuarioDAO.list();
+			listUsuarioDTO = usuarioDAO.listExclusaoLogica(false);
 //		}else{
 //			listUsuarioDTO = usuarioDAO.listById(getUserSession().getId());
 //		}
@@ -213,7 +213,9 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		try{
 			//System.out.println(listSelectedUsuarioDTO);
 			for (UsuarioDTO u : listSelectedUsuarioDTO) {
-				usuarioDAO.delete(u);//colocar uma flag para desativar usuario ao em vez de excluir definitivamente do bd
+				u.setExcluido(true);
+				usuarioDAO.exclusaoLogica(u);
+//				usuarioDAO.delete(u);//colocar uma flag para desativar usuario ao em vez de excluir definitivamente do bd
 			}
 			if(listSelectedUsuarioDTO.length >0){
 				addMessage("Apagado.");
