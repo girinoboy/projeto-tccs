@@ -95,17 +95,19 @@ public class FinanceiroDAO extends GenericoDAO<FinanceiroDTO, Serializable>{
 		try{
 			result =  HibernateUtility.getSession().createSQLQuery("select "
 					
-						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.id = financeiro.id and (excluido=0 or excluido is null) group by mes) as total_usuario,"
-						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.id = financeiro.id and (excluido=0 or excluido is null) and ativo_inativo = 1 group by mes) ativo,"
-						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.id = financeiro.id and (excluido=0 or excluido is null) and ativo_inativo = 0 group by mes) inativo,"
-						+ " (select count(*) from financeiro f inner join usuario u on f.usuario_id = u.id where f.id = financeiro.id and (excluido=0 or excluido is null) and situacao = 1 ) sem_pendencia,"
-						+ " (select count(*) from financeiro f inner join usuario u on f.usuario_id = u.id where f.id = financeiro.id and (excluido=0 or excluido is null) and situacao = 0) com_pendencia,"
-						+ " (select sum(valor_com_desconto) from financeiro f inner join usuario u on f.usuario_id = u.id where f.id = financeiro.id and (excluido=0 or excluido is null)) total_arrecadado"
+						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null) group by mes,ano) as total_usuario,"
+						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null) and ativo_inativo = 1 group by mes,ano) ativo,"
+						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null) and ativo_inativo = 0 group by mes,ano) inativo,"
+						+ " (select count(*) from financeiro f inner join usuario u on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null) and situacao = 1 group by mes,ano) sem_pendencia,"
+						+ " (select count(*) from financeiro f inner join usuario u on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null) and situacao = 0 group by mes,ano) com_pendencia,"
+						+ " (select sum(valor_com_desconto) from financeiro f inner join usuario u on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null)) total_arrecadado"
+						
 						+ " ,mes,ano"
 
 						+ " from  financeiro "
 						+ " where mes BETWEEN :mesInicial1 and :mesInicial2"
 						+ " and ano BETWEEN :anoFinal1 and :anoFinal2"
+						+ " group by ano,mes"
 						+ " order by ano,mes")
 //					.addEntity(RelatorioGestaoMensalDTO.class)
 						.setParameter("mesInicial1", dataInical.get(Calendar.MONTH))

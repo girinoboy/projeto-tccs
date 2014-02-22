@@ -24,12 +24,14 @@ import br.com.dao.AnexoDAO;
 import br.com.dao.FinanceiroDAO;
 import br.com.dao.GraduacaoDAO;
 import br.com.dao.ParametroDAO;
+import br.com.dao.ResultadoDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.AnexoDTO;
 import br.com.dto.FinanceiroDTO;
 import br.com.dto.GraduacaoDTO;
 import br.com.dto.ParametroDTO;
 import br.com.dto.PerfilDTO;
+import br.com.dto.ResultadoDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.Constantes;
@@ -55,6 +57,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public UsuarioMB(){
 		try {
+			reset(null);
 			atualiza(null);
 
 			//			listUsuarioDTO = new ArrayList<UsuarioDTO>();
@@ -77,6 +80,8 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	public void reset(ActionEvent event) {
 		try {
 			usuarioDTO = new UsuarioDTO();
+			usuarioDTO.setFinanceiroDTO(new FinanceiroDTO());
+			usuarioDTO.setAnexoDTO(new AnexoDTO());
 			listGraduacaoDTO = graduacaoDAO.list();
 		//		membroDataModel = new AbstractDataModel<UsuarioDTO>();
 		} catch (Exception e) {
@@ -215,6 +220,27 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			for (UsuarioDTO u : listSelectedUsuarioDTO) {
 				u.setExcluido(true);
 				usuarioDAO.exclusaoLogica(u);
+//				if(u.getListAnexoDTO().isEmpty()){
+//					u.setListAnexoDTO(null);
+//				}
+//				if(u.getListFinanceiroDTO().isEmpty()){
+//					u.setListFinanceiroDTO(null);
+//				}
+//				if(u.getListResultadoDTO().isEmpty()){
+//					u.setListResultadoDTO(null);
+//				}else{
+//					for (ResultadoDTO r : u.getListResultadoDTO()) {
+//						 ResultadoDAO rdao = new ResultadoDAO();
+//						 rdao.delete(r);
+//					}
+//					u.setListResultadoDTO(null);
+//				}
+//				if(u.getFinanceiroDTO().getId() ==null){
+//					u.setFinanceiroDTO(null);
+//				}
+//				if(u.getAnexoDTO().getId() ==null){
+//					u.setAnexoDTO(null);
+//				}
 //				usuarioDAO.delete(u);//colocar uma flag para desativar usuario ao em vez de excluir definitivamente do bd
 			}
 			if(listSelectedUsuarioDTO.length >0){

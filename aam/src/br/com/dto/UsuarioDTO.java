@@ -62,18 +62,27 @@ public class UsuarioDTO extends AbstractDTO{
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	@JoinColumn(name = "anexos_id", insertable = true, updatable = true, nullable = true)
 	private AnexoDTO anexoDTO;
-	@OneToMany(targetEntity=AnexoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY)
+	@OneToMany(targetEntity=AnexoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade =CascadeType.ALL)
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private List<AnexoDTO> listAnexoDTO;
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)//uma pessoa so tem um pagamento por mes
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	@JoinColumn(name="financeiro_id", referencedColumnName = "id", insertable = true, updatable = true, nullable = true)
 	private FinanceiroDTO financeiroDTO;
-	@OneToMany(targetEntity=FinanceiroDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL,CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(targetEntity=FinanceiroDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private List<FinanceiroDTO> listFinanceiroDTO;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
 	@JoinColumn(name = "perfil_id", insertable = true, updatable = true, nullable = true)
 	private PerfilDTO perfilDTO;
+	@OneToMany(targetEntity=ResultadoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	private List<ResultadoDTO> listResultadoDTO;
+	@OneToMany(targetEntity=ResultadoAvaliacaoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	private List<ResultadoAvaliacaoDTO> listResultadoAvaliacaoDTO;
+	
 	
 	/**
 	 * 
@@ -181,8 +190,6 @@ public class UsuarioDTO extends AbstractDTO{
 	}
 
 	public GraduacaoDTO getGraduacaoDTO() {
-		if(graduacaoDTO==null)
-			graduacaoDTO= new GraduacaoDTO();
 		return graduacaoDTO;
 	}
 
@@ -191,7 +198,7 @@ public class UsuarioDTO extends AbstractDTO{
 	}
 
 	public AnexoDTO getAnexoDTO() {
-		if(anexoDTO == null){
+		if(anexoDTO==null){
 			anexoDTO = new AnexoDTO();
 		}
 		return anexoDTO;
@@ -250,7 +257,7 @@ public class UsuarioDTO extends AbstractDTO{
 	}
 
 	public FinanceiroDTO getFinanceiroDTO() {
-		if(financeiroDTO==null){
+		if(financeiroDTO ==null){
 			financeiroDTO = new FinanceiroDTO();
 		}
 		return financeiroDTO;
@@ -285,6 +292,23 @@ public class UsuarioDTO extends AbstractDTO{
 
 	public void setExcluido(Boolean excluido) {
 		this.excluido = excluido;
+	}
+
+	public List<ResultadoDTO> getListResultadoDTO() {
+		return listResultadoDTO;
+	}
+
+	public void setListResultadoDTO(List<ResultadoDTO> listResultadoDTO) {
+		this.listResultadoDTO = listResultadoDTO;
+	}
+
+	public List<ResultadoAvaliacaoDTO> getListResultadoAvaliacaoDTO() {
+		return listResultadoAvaliacaoDTO;
+	}
+
+	public void setListResultadoAvaliacaoDTO(
+			List<ResultadoAvaliacaoDTO> listResultadoAvaliacaoDTO) {
+		this.listResultadoAvaliacaoDTO = listResultadoAvaliacaoDTO;
 	}
 
 
