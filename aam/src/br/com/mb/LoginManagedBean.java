@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
 import br.com.dao.ParametroDAO;
+import br.com.dao.PerfilDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.ParametroDTO;
 import br.com.dto.PerfilDTO;
@@ -54,6 +55,10 @@ public class LoginManagedBean {
 				gp.setTheme(usuarioDTO.getTema());
 			} if(usuarioDTO==null && usuarioDAO.list().size()==0){
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem Vindo", "Admin");
+				PerfilDAO pDao = new PerfilDAO();
+				pDao.save(new PerfilDTO(1));
+				pDao.save(new PerfilDTO(2));
+				
 				usuarioDTO = new UsuarioDTO();
 				//configura parametros do sistema
 				usuarioDTO.setUsuario("admin");
