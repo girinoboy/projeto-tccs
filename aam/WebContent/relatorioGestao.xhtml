@@ -12,7 +12,7 @@
 			<p:panel id="panel1" header="Relatório de Gestão Financeira">
 				<center>
  				Data Inicial: 
- 				<p:calendar value="#{financeiroMB.financeiroDTO.dataPagamento}"
+ 				<p:calendar value="#{financeiroMB.relatorioGestaoMensalDTO.startDate}"
 					pattern="dd/MMM/yyyy" showButtonPanel="true" navigator="true"
 					id="customCal1" required="true" locale="pt">
 					<p:ajax event="dateSelect"
@@ -20,7 +20,7 @@
 				</p:calendar>
 				<br/>
 				Data Final:<p:spacer height="10"/>
-				<p:calendar value="#{financeiroMB.financeiroDTO.dataPagamento}"
+				<p:calendar value="#{financeiroMB.relatorioGestaoMensalDTO.endDate}"
 					pattern="dd/MMM/yyyy" showButtonPanel="true" navigator="true"
 					id="customCal2" required="true" locale="pt">
 					<p:ajax event="dateSelect"
