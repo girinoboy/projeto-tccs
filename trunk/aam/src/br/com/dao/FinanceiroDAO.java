@@ -14,6 +14,7 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.dto.FinanceiroDTO;
 import br.com.dto.RelatorioGestaoMensalDTO;
+import br.com.dto.ResultadoAvaliacaoDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.factory.HibernateUtility;
 
@@ -72,6 +73,9 @@ public class FinanceiroDAO extends GenericoDAO<FinanceiroDTO, Serializable>{
 			result =  HibernateUtility.getSession().createCriteria(FinanceiroDTO.class)
 					.add(Restrictions.eq("mes",  data.get(Calendar.MONTH)))
 					.add(Restrictions.eq("ano",data.get(Calendar.YEAR)))
+					.createCriteria("usuarioDTO").add(Restrictions.or( 
+						Restrictions.isNull("excluido"),
+						Restrictions.eq("excluido", false)))
 					.list();
 		}catch(Exception e){
 			throw e;
@@ -83,6 +87,11 @@ public class FinanceiroDAO extends GenericoDAO<FinanceiroDTO, Serializable>{
 	
 	public List<?> listRelatorioGestaoMensal(RelatorioGestaoMensalDTO relatorioGestaoMensal) throws Exception {
 		List<?> result;
+		Calendar dataInical = new GregorianCalendar();
+		dataInical.setTime(relatorioGestaoMensal.getStartDate());
+		Calendar dataFinal = new GregorianCalendar();
+		dataFinal.setTime(relatorioGestaoMensal.getEndDate());
+		
 		try{
 			result =  HibernateUtility.getSession().createSQLQuery("select "
 					
@@ -94,8 +103,15 @@ public class FinanceiroDAO extends GenericoDAO<FinanceiroDTO, Serializable>{
 						+ " (select sum(valor_com_desconto) from financeiro f where f.mes = financeiro.mes) total_arrecadado"
 						+ " ,mes,ano"
 
-						+ " from  financeiro")
+						+ " from  financeiro "
+						+ " where mes BETWEEN :mesInicial1 and :mesInicial2"
+						+ " and ano BETWEEN :anoFinal1 and :anoFinal2"
+						+ " order by ano,mes")
 //					.addEntity(RelatorioGestaoMensalDTO.class)
+						.setParameter("mesInicial1", dataInical.get(Calendar.MONTH))
+						.setParameter("mesInicial2", dataFinal.get(Calendar.MONTH))
+						.setParameter("anoFinal1", dataInical.get(Calendar.YEAR))
+						.setParameter("anoFinal2", dataFinal.get(Calendar.YEAR))
 					.list();
 		}catch(Exception e){
 			throw e;

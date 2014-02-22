@@ -47,6 +47,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	private List<RelatorioGestaoMensalDTO> listRelatorioGestaoMensalDTO = new ArrayList<RelatorioGestaoMensalDTO>();
 
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private RelatorioGestaoMensalDTO relatorioGestaoMensalDTO = new RelatorioGestaoMensalDTO();
 	/**
 	 * 
 	 */
@@ -170,8 +171,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	} 
 
 	public void a(ActionEvent actionEvent) throws Exception{
-		RelatorioGestaoMensalDTO relatorioGestaoMensal = null;
-		List<?> a = financeiroDAO.listRelatorioGestaoMensal(relatorioGestaoMensal);
+		List<?> a = financeiroDAO.listRelatorioGestaoMensal(relatorioGestaoMensalDTO);
 		RelatorioGestaoMensalDTO  rel =null;
 		Iterator it = a.iterator();
 		String mesAno = null,mesAnoAux=null;
@@ -261,6 +261,15 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	public void setListRelatorioGestaoMensalDTO(
 			List<RelatorioGestaoMensalDTO> listRelatorioGestaoMensalDTO) {
 		this.listRelatorioGestaoMensalDTO = listRelatorioGestaoMensalDTO;
+	}
+
+	public RelatorioGestaoMensalDTO getRelatorioGestaoMensalDTO() {
+		return relatorioGestaoMensalDTO;
+	}
+
+	public void setRelatorioGestaoMensalDTO(
+			RelatorioGestaoMensalDTO relatorioGestaoMensalDTO) {
+		this.relatorioGestaoMensalDTO = relatorioGestaoMensalDTO;
 	}
 
 }
