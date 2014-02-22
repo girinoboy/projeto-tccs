@@ -90,7 +90,8 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		}
 	}
 
-	public void onRowSelect(SelectEvent event) throws IOException {  
+	public void onRowSelect(SelectEvent event) throws Exception {
+		listGraduacaoDTO = graduacaoDAO.list();
 		usuarioDTO = (UsuarioDTO) event.getObject();  
 		if(!getAdm() && getUserSession().getId().equals(usuarioDTO.getId())){
 			FacesContext.getCurrentInstance().getExternalContext().redirect("cadastroMembros.xhtml"); 
