@@ -56,17 +56,19 @@ public class FinanceiroDAO extends GenericoDAO<FinanceiroDTO, Serializable>{
 					.list();
 			if(resultU.size()>0){
 				for (UsuarioDTO usuarioDTO : resultU) {
-					usuarioDTO.getFinanceiroDTO().setId(null);
-					usuarioDTO.getFinanceiroDTO().setSituacao(false);
-					usuarioDTO.getFinanceiroDTO().setDataPagamento(data.getTime());
-					usuarioDTO.getFinanceiroDTO().setDia(null);
-					usuarioDTO.getFinanceiroDTO().setMes(null);
-					usuarioDTO.getFinanceiroDTO().setAno(null);
-					usuarioDTO.getFinanceiroDTO().getDataPagamento();
-					try{
-						save(usuarioDTO.getFinanceiroDTO());
-					}catch(Exception e){
-						save(usuarioDTO.getFinanceiroDTO());
+					if(((Date) object).after(usuarioDTO.getFinanceiroDTO().getDataPagamento())){
+						usuarioDTO.getFinanceiroDTO().setId(null);
+						usuarioDTO.getFinanceiroDTO().setSituacao(false);
+						usuarioDTO.getFinanceiroDTO().setDataPagamento(data.getTime());
+						usuarioDTO.getFinanceiroDTO().setDia(null);
+						usuarioDTO.getFinanceiroDTO().setMes(null);
+						usuarioDTO.getFinanceiroDTO().setAno(null);
+						usuarioDTO.getFinanceiroDTO().getDataPagamento();
+						try{
+							save(usuarioDTO.getFinanceiroDTO());
+						}catch(Exception e){
+							save(usuarioDTO.getFinanceiroDTO());
+						}
 					}
 				}
 			}
