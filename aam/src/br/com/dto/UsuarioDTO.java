@@ -190,6 +190,9 @@ public class UsuarioDTO extends AbstractDTO{
 	}
 
 	public GraduacaoDTO getGraduacaoDTO() {
+		if(graduacaoDTO==null){
+			graduacaoDTO = new GraduacaoDTO();
+		}
 		return graduacaoDTO;
 	}
 
