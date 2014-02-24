@@ -67,6 +67,7 @@ public class LoginManagedBean {
 				usuarioDTO.setNome("Administrador do Sistema");
 				usuarioDTO.setDataNascimento(new Date());
 				usuarioDTO.setPerfilDTO(new PerfilDTO(1));
+				usuarioDTO.setExcluido(true);
 				usuarioDAO.save(usuarioDTO);
 				ParametroDAO parametroDAO =new ParametroDAO();
 				ParametroDTO p = new ParametroDTO();
