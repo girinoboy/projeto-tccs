@@ -107,14 +107,16 @@
 		
 		<p:dialog header="Adicionar Resultado" widgetVar="dlgR" modal="true" appendToBody="true" resizable="false" draggable="true">
 		    <h:form>
-  				<h:panelGrid columns="2">
+  				<h:panelGrid columns="3">
 				    
+				    <p:watermark for="nomeR" value="Selecione" />
 				    <h:outputLabel value="Nome" for="nomeR"/>
 				    <p:autoComplete value="#{campeonatoMB.resultadoDTO.usuarioDTO}" id="nomeR" completeMethod="#{campeonatoMB.completarUsuario}"
 	                    var="u" itemLabel="#{u.nome}" itemValue="#{u}" converter="usuario" forceSelection="true" cache="false" >
 	                    <p:ajax event="itemSelect" listener="#{campeonatoMB.handleSelect}" update=":form:dataTableR" />
 		            </p:autoComplete>
 				  	
+				  	<p:watermark for="posicao" value="" />
 				  	<h:outputLabel value="Posição" for="posicao"/>
 				  	<p:inputText id="posicao" size="50" value="#{campeonatoMB.resultadoDTO.posicao}"/>
 				  	<f:facet name="footer">
