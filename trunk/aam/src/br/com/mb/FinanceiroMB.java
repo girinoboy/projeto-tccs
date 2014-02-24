@@ -14,6 +14,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -35,7 +36,7 @@ import br.com.dto.UsuarioDTO;
  *
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class FinanceiroMB extends GenericoMB implements ModeloMB{
 
 	private static final long serialVersionUID = 5253517323316896638L;
@@ -126,6 +127,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 		if(getAdm()){
 			//Object oldValue = event.getOldValue();
 			//Object newValue = event.getNewValue();
+			System.out.println(financeiroDTO.getDataPagamento());
 			UsuarioDTO usuarioDTO = listFinanceiroDTO.get(event.getRowIndex()).getUsuarioDTO();
 			//usuarioDTO.setFinanceiroDTO(financeiroDTO);
 			usuarioDTO.setFinanceiroDTO(listFinanceiroDTO.get(event.getRowIndex()));
@@ -133,7 +135,8 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 			System.out.println(usuarioDTO.getFinanceiroDTO().getDataPagamento());
 			System.out.println(usuarioDTO.getFinanceiroDTO().getDia());
 			usuarioDTO.getFinanceiroDTO().setDataPagamento(financeiroDTO.getDataPagamento());
-			usuarioDAO.save(usuarioDTO);
+			financeiroDAO.save(usuarioDTO.getFinanceiroDTO());
+//			usuarioDAO.save(usuarioDTO);
 			//listFinanceiroDTO = financeiroDAO.list();
 			atualizaMensalidade();
 			//if(newValue != null && !newValue.equals(oldValue)) {
