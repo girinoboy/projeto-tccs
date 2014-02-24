@@ -105,8 +105,11 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 	public List<UsuarioDTO> listExclusaoLogica(Boolean excluido) throws HibernateException, Exception {
 		List<UsuarioDTO> result = HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
 				.add(Restrictions.or( 
+						Restrictions.or(
 						Restrictions.isNull("excluido"),
-						Restrictions.eq("excluido", excluido)))
+						Restrictions.eq("id", 1)),//1 = administrador
+						Restrictions.eq("excluido", excluido)
+						))
 						.list();
 		return result;
 	}
