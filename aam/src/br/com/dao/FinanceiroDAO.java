@@ -102,7 +102,7 @@ public class FinanceiroDAO extends GenericoDAO<FinanceiroDTO, Serializable>{
 						+ " (select count(*) from usuario u inner join financeiro f on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null) and ativo_inativo = 0 group by mes,ano) inativo,"
 						+ " (select count(*) from financeiro f inner join usuario u on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null) and situacao = 1 group by mes,ano) sem_pendencia,"
 						+ " (select count(*) from financeiro f inner join usuario u on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null) and situacao = 0 group by mes,ano) com_pendencia,"
-						+ " (select sum(valor_com_desconto) from financeiro f inner join usuario u on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and (excluido=0 or excluido is null)) total_arrecadado"
+						+ " (select sum(valor_com_desconto) from financeiro f inner join usuario u on f.usuario_id = u.id where f.ano = financeiro.ano and f.mes = financeiro.mes and situacao = 1 and (excluido=0 or excluido is null)) total_arrecadado"
 						
 						+ " ,mes,ano"
 
