@@ -29,6 +29,7 @@
 				</center>
 				<br/>
 				<p:commandButton value="Emitir" actionListener="#{financeiroMB.a}" id="withIcon" update=":growl,panel" icon="ui-icon-disk" />
+				<p:commandButton value="Limpar" actionListener="#{financeiroMB.reset}" id="withIcon2" update=":growl,panel"  />
 				<br/>
 				<p:dataTable id="panel" var="financeiro" value="#{financeiroMB.listRelatorioGestaoMensalDTO}"  rowKey="#{financeiro.mesAno}" editable="false" editMode="cell" >
 					<p:columnGroup type="header">

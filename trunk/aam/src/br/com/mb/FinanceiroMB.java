@@ -65,6 +65,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 
 	private void atualizaMensalidade()throws Exception {
 		listFinanceiroDTO = financeiroDAO.consultaPorMesAno(financeiroDTO.getDataPagamento());
+		listRelatorioGestaoMensalDTO = new ArrayList<>();
 //		Calendar c = Calendar.getInstance(); 
 //		if(financeiroDTO==null && financeiroDTO.getDataPagamento() ==null){
 //			listFinanceiroDTO = financeiroDAO.consultaPorMesAno(new Date());
@@ -246,7 +247,7 @@ public class FinanceiroMB extends GenericoMB implements ModeloMB{
 	}
 
 	public void reset(ActionEvent event) {
-		// TODO Auto-generated method stub
+		listRelatorioGestaoMensalDTO = new ArrayList<>();
 
 	}
 
