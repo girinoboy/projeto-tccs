@@ -29,15 +29,15 @@ import org.hibernate.envers.Audited;
 @Audited
 @Table(name = "menu")
 @DynamicUpdate(value=true)
-public class MenuDTO implements Serializable{
+public class MenuDTO extends AbstractDTO{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
+//	/**
+//	 * 
+//	 */
+//	private static final long serialVersionUID = 1L;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "menu_id", insertable = true, updatable = true, nullable = true)
 	private MenuDTO menuDTO;
@@ -93,7 +93,8 @@ public class MenuDTO implements Serializable{
 	public MenuDTO() { ativoInativo = false; setAtivoInativo(false);}
 
 	public MenuDTO(Integer id) {
-		this.id = id;
+		setId(id);
+//		this.id = id;
 	}
 
 
@@ -102,13 +103,13 @@ public class MenuDTO implements Serializable{
 //		return descricao;
 //	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public MenuDTO getMenuDTO() {
 		return menuDTO;

@@ -133,7 +133,7 @@ public class AgendaDAO extends GenericoDAO<AgendaDTO, Serializable>{
 			HibernateUtility.closeSession();
 		}
 		
-		if(list.isEmpty()){
+		if(list == null || list.isEmpty()){
 			return false;
 		}else{
 			return true;

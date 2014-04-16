@@ -14,17 +14,17 @@ import org.hibernate.envers.Audited;
 @Entity
 @Audited
 @Table(name = "permissao_menu")
-public class PermissaoMenuDTO {
+public class PermissaoMenuDTO extends AbstractDTO{
 
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//    private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="menu_id", referencedColumnName = "id", insertable=true,updatable=true,nullable=false)
-    private MenuDTO menuDTO = new MenuDTO();
+    private MenuDTO menuDTO;
     @ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="perfil_id", referencedColumnName = "id",nullable=false)
-    private PerfilDTO perfilDTO = new PerfilDTO();
+    private PerfilDTO perfilDTO;
 
    /* Getters e Setters */
 /*
@@ -50,13 +50,13 @@ public class PermissaoMenuDTO {
         return hash;
     }*/
 
-    public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//    public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public MenuDTO getMenuDTO() {
 		return menuDTO;

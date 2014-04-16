@@ -1,5 +1,6 @@
 package br.com.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,24 +12,34 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuario_perfil")
-public class UsuarioPerfilDTO {
+public class UsuarioPerfilDTO extends AbstractDTO{
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
-	@ManyToOne(fetch = FetchType.EAGER)
+//	@Id
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="usuario_id", referencedColumnName = "id")
-	private UsuarioDTO usuarioDTO = new UsuarioDTO();
+	private UsuarioDTO usuarioDTO;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="perfil_id", referencedColumnName = "id")
-	private PerfilDTO perfilDTO = new PerfilDTO();
+	private PerfilDTO perfilDTO;
+	
+	public UsuarioPerfilDTO(){}
+	
+	public UsuarioPerfilDTO(UsuarioDTO usuarioDTO, PerfilDTO perfilDTO) {
+		super();
+		this.usuarioDTO = usuarioDTO;
+		this.perfilDTO = perfilDTO;
+	}
 
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
+
+//	public Integer getId() {
+//		return id;
+//	}
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 	public UsuarioDTO getUsuarioDTO() {
 		return usuarioDTO;
 	}

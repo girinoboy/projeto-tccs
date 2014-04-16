@@ -18,11 +18,11 @@ import org.hibernate.envers.Audited;
 @Entity
 @Audited
 @Table(name="unidade")
-public class UnidadeDTO {
+public class UnidadeDTO extends AbstractDTO{
 	
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
 	private String nome;
 
 	/**
@@ -32,37 +32,37 @@ public class UnidadeDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final UnidadeDTO other = (UnidadeDTO) obj;
-        if (this.id == null){
-        	return false;
-        }
-        if (!this.id.equals(other.id)) {
-            return false;
-        }
-        return true;
-    }
-
-	public Integer getId() {
-		return id;
-	}
-
-	public UnidadeDTO(Integer id, String nome) {
+	public UnidadeDTO(String nome) {
 		super();
-		this.id = id;
 		this.nome = nome;
 	}
+	
+//	@Override
+//    public boolean equals(Object obj) {
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (getClass() != obj.getClass()) {
+//            return false;
+//        }
+//        final UnidadeDTO other = (UnidadeDTO) obj;
+//        if (this.id == null){
+//        	return false;
+//        }
+//        if (!this.id.equals(other.id)) {
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//	public Integer getId() {
+//		return id;
+//	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public String getNome() {
 		return nome;

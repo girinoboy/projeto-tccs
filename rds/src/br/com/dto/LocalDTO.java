@@ -32,6 +32,11 @@ public class LocalDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public LocalDTO(String nome) {
+		super();
+		this.nome = nome;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
