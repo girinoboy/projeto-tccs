@@ -4,6 +4,7 @@
 package br.com.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,11 +29,11 @@ import org.hibernate.envers.NotAudited;
 @Entity
 @Audited
 @Table(name="usuario")
-public class UsuarioDTO {
+public class UsuarioDTO extends AbstractDTO{
 
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
 	private String usuario;
 	@NotAudited
 	private String senha;
@@ -40,7 +43,7 @@ public class UsuarioDTO {
 	private String cpf;
 	private String email;
 	private String tema;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinColumn(name = "perfil_id", insertable = true, updatable = true, nullable = true)
 	private PerfilDTO perfilDTO;
 	
@@ -48,7 +51,8 @@ public class UsuarioDTO {
 //	@JoinTable(name = "usuario_perfil", joinColumns = { @JoinColumn(name = "usuario_id",   
 //	unique = false, nullable = false, insertable = true,updatable=true) },   
 //	inverseJoinColumns = { @JoinColumn(name = "perfil_id",   
-//	unique = false, nullable = false, insertable = true,updatable=true) })  
+//	unique = false, nullable = false, insertable = true,updatable=true) }) 
+////	@LazyCollection(value = null)@LazyCollection(LazyCollectionOption.EXTRA)
 //	private List<PerfilDTO> listPerfil;
 	
 	/**
@@ -60,43 +64,43 @@ public class UsuarioDTO {
 		}
 	}
 	
-	@Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final UsuarioDTO other = (UsuarioDTO) obj;
-        if (this.id == null){
-        	return false;
-        }
-        if (!this.id.equals(other.id)) {
-            return false;
-        }
-        return true;
-    }
- 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + this.id;
-        return hash;
-    }
-	
-	public UsuarioDTO(String nome, int i) {
-		this.id = i;
-		this.nome = nome;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Override
+//    public boolean equals(Object obj) {
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (getClass() != obj.getClass()) {
+//            return false;
+//        }
+//        final UsuarioDTO other = (UsuarioDTO) obj;
+//        if (this.id == null){
+//        	return false;
+//        }
+//        if (!this.id.equals(other.id)) {
+//            return false;
+//        }
+//        return true;
+//    }
+// 
+//    @Override
+//    public int hashCode() {
+//        int hash = 7;
+//        hash = 31 * hash + this.id;
+//        return hash;
+//    }
+//	
+//	public UsuarioDTO(String nome, int i) {
+//		this.id = i;
+//		this.nome = nome;
+//	}
+//
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public String getUsuario() {
 		return usuario;

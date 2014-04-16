@@ -23,11 +23,11 @@ import org.hibernate.envers.Audited;
 @Entity
 @Audited
 @Table(name = "perfil")
-public class PerfilDTO {
+public class PerfilDTO extends AbstractDTO{
 
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
 	private String nome;
 	private String descricao;
 	private String observacao;
@@ -51,37 +51,44 @@ public class PerfilDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final PerfilDTO other = (PerfilDTO) obj;
-        if (this.id == null){
-        	return false;
-        }
-        if (!this.id.equals(other.id)) {
-            return false;
-        }
-        return true;
-    }
- 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + this.id;
-        return hash;
-    }
+	public PerfilDTO(Integer id) {
+		setId(id);
+//		this.id=id;
+		if(id.equals(1))
+			this.nome="Administrador";
+	}
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Override
+//    public boolean equals(Object obj) {
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (getClass() != obj.getClass()) {
+//            return false;
+//        }
+//        final PerfilDTO other = (PerfilDTO) obj;
+//        if (this.id == null){
+//        	return false;
+//        }
+//        if (!this.id.equals(other.id)) {
+//            return false;
+//        }
+//        return true;
+//    }
+// 
+//    @Override
+//    public int hashCode() {
+//        int hash = 7;
+//        hash = 31 * hash + this.id;
+//        return hash;
+//    }
+//	
+//	public Integer getId() {
+//		return id;
+//	}
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 	public String getDescricao() {
 		return descricao;
 	}

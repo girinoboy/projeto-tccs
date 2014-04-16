@@ -29,11 +29,11 @@ import org.hibernate.envers.Audited;
 @Audited
 @Table(name="agenda")
 @DynamicUpdate(value=true)
-public class AgendaDTO {
+public class AgendaDTO extends AbstractDTO{
 	
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
 	//@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="start_date")
 	private Date startDate;
@@ -67,13 +67,13 @@ public class AgendaDTO {
 		setAllDayDate(getStartDate());
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public Date getStartDate() {
 		return startDate;

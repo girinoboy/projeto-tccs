@@ -1,6 +1,8 @@
 package br.com.mb;
 
 
+import java.util.Date;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -11,8 +13,18 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 
+import br.com.dao.LocalDAO;
+import br.com.dao.MenuDAO;
+import br.com.dao.PerfilDAO;
+import br.com.dao.PerfilMenuDAO;
 import br.com.dao.UsuarioDAO;
+import br.com.dao.UsuarioPerfilDAO;
+import br.com.dto.LocalDTO;
+import br.com.dto.MenuDTO;
+import br.com.dto.PerfilDTO;
+import br.com.dto.PerfilMenuDTO;
 import br.com.dto.UsuarioDTO;
+import br.com.dto.UsuarioPerfilDTO;
 import br.com.utility.Constantes;
 
 
@@ -33,35 +45,88 @@ public class LoginManagedBean extends GenericoMB{
 		FacesMessage msg = null;
 		boolean loggedIn = false;
 		String retorno = "ok";
-		session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessão caso ñ exista - false retorna nulo caso ñ exista
-
-		try{  
-			if(usuarioDTO.getUsuario().equals("admin2") && usuarioDTO.getSenha().equals("admin2")){
-				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem Vindo", "Admin");
-				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
-				usuarioDTO.setId(1);
-				usuarioDTO.setNome("Mark");
-				usuarioDTO.setSenha("123456");
+		boolean adm = false;
+		
+		try{
+			usuarioDTO = usuarioDAO.verificaLoginSenha(usuarioDTO);
+			adm = usuarioDTO!=null&& usuarioDTO.getUsuario().equals("admin") && usuarioDTO.getPerfilDTO().getId().equals(1);
+			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessão caso ñ exista - false retorna nulo caso ñ exista
+			
+			if(usuarioDTO != null && usuarioDTO.getTema() != null){
+				loggedIn = true;
+				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, rb.getString("welcome"), usuarioDTO.getUsuario());
 				session.setAttribute("usuarioAutenticado", usuarioDTO);
-			}else{
-				usuarioDTO = usuarioDAO.verificaLoginSenha(usuarioDTO);
+				session.setAttribute("listMenuAutenticado",usuarioDTO.getPerfilDTO().getListMenu());
+				session.setAttribute("adm", adm);
+	
+				gp.setTheme(usuarioDTO.getTema());
+				
+				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
+			} if(usuarioDTO==null){
+				//cria perfil
+				PerfilDTO perfilDTO = new PerfilDAO().save(new PerfilDTO(1));
+				
+				//cria usuario
+				usuarioDTO = new UsuarioDTO();			
+				usuarioDTO.setUsuario("admin");
+				usuarioDTO.setSenha("admin");
+				usuarioDTO.setTema("flick");
+				usuarioDTO.setNome("Administrador do Sistema");
+				usuarioDTO.setDataNascimento(new Date());
+				usuarioDTO.setPerfilDTO(new PerfilDTO(1));
+				usuarioDTO = usuarioDAO.save(usuarioDTO);
+				
+				//INSERT INTO USUARIO_PERFIL VALUES(1,1,1);
+				new UsuarioPerfilDAO().save(new UsuarioPerfilDTO(usuarioDTO, perfilDTO));
+				
+				//cria menus
+				PerfilMenuDAO perfilMenuDAO = new PerfilMenuDAO();
+				PerfilMenuDTO perfilMenuDTO ;
+				MenuDAO menuDAO = new MenuDAO();
+				MenuDTO menuDTO = new MenuDTO();
+				menuDTO.setNome("exit");
+				menuDTO.setComando("#{loginManagedBean.logout}");
+				menuDTO.setDropIndex(0);
+				menuDTO.setAtivoInativo(true);
+				menuDTO = menuDAO.save(menuDTO);				
+				perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
 
-				if(usuarioDTO != null && usuarioDTO.getTema() != null){
-					loggedIn = true;
-					msg = new FacesMessage(FacesMessage.SEVERITY_INFO, rb.getString("welcome"), usuarioDTO.getUsuario());
-					session.setAttribute("usuarioAutenticado", usuarioDTO);
-					session.setAttribute("listMenuAutenticado",usuarioDTO.getPerfilDTO().getListMenu());
+				menuDTO = new MenuDTO();
+				menuDTO.setNome("accessControl");
+				menuDTO.setUrl("controleAcesso.xhtml");
+				menuDTO.setDropIndex(0);
+				menuDTO.setAtivoInativo(true);
+				menuDTO = menuDAO.save(menuDTO);
+				perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
 
-					gp.setTheme(usuarioDTO.getTema());
-				} else {
-					loggedIn = false;  
-					msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");  
-				}
+				menuDTO = new MenuDTO();
+				menuDTO.setNome("schedule");
+				menuDTO.setUrl("agenda.xhtml");
+				menuDTO.setDropIndex(0);
+				menuDTO.setAtivoInativo(true);
+				menuDTO = menuDAO.save(menuDTO);
+				perfilMenuDTO = perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+				System.out.println(perfilMenuDTO);
+
+				new LocalDAO().save(new LocalDTO("Sala 1"));
+				new LocalDAO().save(new LocalDTO("Sala 2"));
+				
+				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, rb.getString("welcome"), usuarioDTO.getUsuario());
+				
+				session.setAttribute("adm", adm);
+				session.setAttribute("usuarioAutenticado", usuarioDTO);
+				session.setAttribute("listMenuAutenticado",usuarioDTO.getPerfilDTO().getListMenu());
+				gp.setTheme(usuarioDTO.getTema());
+				
+				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
+			}else {
+				loggedIn = false;  
+				msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");  
 			}
-
+	
 			FacesContext.getCurrentInstance().addMessage(null, msg);  
 			context.addCallbackParam("loggedIn", loggedIn);
-
+		
 		}catch(Exception e){
 			e.printStackTrace();
 			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Erro no banco");  
