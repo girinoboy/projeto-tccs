@@ -62,7 +62,7 @@ public class LoginManagedBean extends GenericoMB{
 				gp.setTheme(usuarioDTO.getTema());
 				
 				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
-			} if(usuarioDTO==null){
+			} else if(usuarioDTO==null && usuarioDAO.list().size()==0){
 				//cria perfil
 				PerfilDTO perfilDTO = new PerfilDAO().save(new PerfilDTO(1));
 				
@@ -121,7 +121,8 @@ public class LoginManagedBean extends GenericoMB{
 				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
 			}else {
 				loggedIn = false;  
-				msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");  
+				msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials"); 
+				usuarioDTO = new UsuarioDTO();
 			}
 	
 			FacesContext.getCurrentInstance().addMessage(null, msg);  

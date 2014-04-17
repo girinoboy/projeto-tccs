@@ -50,10 +50,12 @@
 	                        id="password" required="true" label="#{msgs.password}" />
 	                  			<p:tab/><a href="#">#{msgs.askPassword}</a>
 	                <f:facet name="footer">
-	                    <div align="center"><p:commandButton id="loginButton" value="#{msgs.login}" update=":growl"
-	                        actionListener="#{loginManagedBean.login}"
-	                        oncomplete="handleLoginRequest(xhr, status, args)"/>
-	              </div>  </f:facet>
+	                    <div align="center">
+		                    <p:commandButton id="loginButton" value="#{msgs.login}" update=":growl"
+		                        actionListener="#{loginManagedBean.login}"
+		                        oncomplete="handleLoginRequest(xhr, status, args)"/>
+	              		</div> 
+	              </f:facet>
 	            </h:panelGrid>
 	              
 	        </h:form>
