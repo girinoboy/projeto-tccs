@@ -46,7 +46,6 @@ public class GenericoDAO<T, ID extends Serializable> implements Serializable {
             HibernateUtility.beginTransaction();
             obj = HibernateUtility.getSession().merge(objeto);
             HibernateUtility.commitTransaction();
-            HibernateUtility.closeSession();
             return (T) obj;
         } catch (HibernateException hibernateException) {
             cancel();

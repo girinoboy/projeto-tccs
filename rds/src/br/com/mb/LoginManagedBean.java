@@ -62,7 +62,7 @@ public class LoginManagedBean extends GenericoMB{
 				gp.setTheme(usuarioDTO.getTema());
 				
 				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
-			} else if(usuarioDTO==null && usuarioDAO.list().size()==0){
+			} else if(usuarioDTO==null && usuarioDAO.list().size()==0){//extrair para um metodo
 				//cria perfil
 				PerfilDTO perfilDTO = new PerfilDAO().save(new PerfilDTO(1));
 				
@@ -86,7 +86,7 @@ public class LoginManagedBean extends GenericoMB{
 				MenuDTO menuDTO = new MenuDTO();
 				menuDTO.setNome("exit");
 				menuDTO.setComando("#{loginManagedBean.logout}");
-				menuDTO.setDropIndex(0);
+				menuDTO.setDropIndex(3);
 				menuDTO.setAtivoInativo(true);
 				menuDTO = menuDAO.save(menuDTO);				
 				perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
@@ -94,7 +94,16 @@ public class LoginManagedBean extends GenericoMB{
 				menuDTO = new MenuDTO();
 				menuDTO.setNome("accessControl");
 				menuDTO.setUrl("controleAcesso.xhtml");
-				menuDTO.setDropIndex(0);
+				menuDTO.setDropIndex(1);
+				menuDTO.setAtivoInativo(true);
+				menuDTO = menuDAO.save(menuDTO);
+				perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+				
+				menuDTO = new MenuDTO();
+				menuDTO.setNome("profileRegister");
+//				menuDTO.setUrl("controleAcesso.xhtml");
+				menuDTO.setOutcome("cadastrarPerfil.xhtml");
+				menuDTO.setDropIndex(2);
 				menuDTO.setAtivoInativo(true);
 				menuDTO = menuDAO.save(menuDTO);
 				perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
