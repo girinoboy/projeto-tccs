@@ -9,11 +9,11 @@
 		 <script type="text/javascript">  
 	        function handleLoginRequest(xhr, status, args) {
 	            if(args.validationFailed || !args.loggedIn) {
-	                jQuery('#dialog').effect("shake", { times:3 }, 100);  
+	                jQuery('#dialog').effect("shake", { times:3 }, 100);
 	            } else {
-	                dlg.hide();
-	                jQuery('#loginLink').fadeOut();
-	                if(args.perfil !='visitante')
+	            	jQuery('#dialog').fadeOut();
+	                //jQuery('#loginLink').fadeOut();
+	                if(args.perfil =='1')
 	                	jQuery(window.document.location).attr('href','layoutElement.xhtml');
 	                else
 	                	jQuery(window.document.location).attr('href','layoutComplex.xhtml');    
@@ -30,7 +30,7 @@
 		<br />
 		<div align="center">
 			<h:outputLink id="loginLink2" value="javascript:void(0)"
-				onclick="dlg.show()" title="login">
+				onclick="PF('dlg').show()" title="login">
 				<p:graphicImage value="/img/grs.png" />
 			</h:outputLink>
 			<br/>r114v0.0.1

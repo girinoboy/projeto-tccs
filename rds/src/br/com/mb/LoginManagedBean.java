@@ -40,11 +40,10 @@ public class LoginManagedBean extends GenericoMB{
 
 	public LoginManagedBean(){}
 
-	public String login(ActionEvent actionEvent) {
+	public void login(ActionEvent actionEvent) {
 		RequestContext context = RequestContext.getCurrentInstance();
 		FacesMessage msg = null;
 		boolean loggedIn = false;
-		String retorno = "ok";
 		boolean adm = false;
 		
 		try{
@@ -58,13 +57,17 @@ public class LoginManagedBean extends GenericoMB{
 				session.setAttribute("usuarioAutenticado", usuarioDTO);
 				session.setAttribute("listMenuAutenticado",usuarioDTO.getPerfilDTO().getListMenu());
 				session.setAttribute("adm", adm);
-	
-				gp.setTheme(usuarioDTO.getTema());
 				
+				gp.setTheme(usuarioDTO.getTema());
+				context.execute("PF('dlg').hide();");
 				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
 			} else if(usuarioDTO==null && usuarioDAO.list().size()==0){//extrair para um metodo
 				//cria perfil
 				PerfilDTO perfilDTO = new PerfilDAO().save(new PerfilDTO(1));
+				
+				//cria salas
+				new LocalDAO().save(new LocalDTO("Sala 1"));
+				new LocalDAO().save(new LocalDTO("Sala 2"));
 				
 				//cria usuario
 				usuarioDTO = new UsuarioDTO();			
@@ -81,7 +84,6 @@ public class LoginManagedBean extends GenericoMB{
 				
 				//cria menus
 				PerfilMenuDAO perfilMenuDAO = new PerfilMenuDAO();
-				PerfilMenuDTO perfilMenuDTO ;
 				MenuDAO menuDAO = new MenuDAO();
 				MenuDTO menuDTO = new MenuDTO();
 				menuDTO.setNome("exit");
@@ -114,37 +116,34 @@ public class LoginManagedBean extends GenericoMB{
 				menuDTO.setDropIndex(0);
 				menuDTO.setAtivoInativo(true);
 				menuDTO = menuDAO.save(menuDTO);
-				perfilMenuDTO = perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+				
+				PerfilMenuDTO perfilMenuDTO = perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
 				System.out.println(perfilMenuDTO);
 
-				new LocalDAO().save(new LocalDTO("Sala 1"));
-				new LocalDAO().save(new LocalDTO("Sala 2"));
-				
+				loggedIn = true;
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, rb.getString("welcome"), usuarioDTO.getUsuario());
 				
 				session.setAttribute("adm", adm);
 				session.setAttribute("usuarioAutenticado", usuarioDTO);
 				session.setAttribute("listMenuAutenticado",usuarioDTO.getPerfilDTO().getListMenu());
 				gp.setTheme(usuarioDTO.getTema());
-				
+				context.execute("PF('dlg').hide();");
 				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
-			}else {
+			}else{
 				loggedIn = false;  
 				msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials"); 
 				usuarioDTO = new UsuarioDTO();
 			}
-	
-			FacesContext.getCurrentInstance().addMessage(null, msg);  
-			context.addCallbackParam("loggedIn", loggedIn);
-		
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Erro no banco");  
-			FacesContext.getCurrentInstance().addMessage(null, msg); 
+		}finally{
+			context.addCallbackParam("loggedIn", loggedIn);
+			context.addCallbackParam("perfil", usuarioDTO.getPerfilDTO().getId());
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
-
-		context.addCallbackParam("perfil", retorno);
-		return retorno;  
+		
 	}
 
 	public void logout() {
