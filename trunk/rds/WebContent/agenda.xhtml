@@ -38,13 +38,11 @@
 		                allDayText : 'Todo Dia'
 		            };
 
-	        function handleAgendaRequest(xhr, status, args) {
+	        function handleComplete(xhr, status, args) {
 	            if(args.validationFailed) {
-	                jQuery('#eventDialog').effect("shake", { times:3 }, 100);
-	                eventDialog.hide();
+	                jQuery('#dialog').effect("shake", { times:3 }, 100);
 	            } else {
-	            	eventDialog.hide();
-	            	myschedule.update();
+	            	jQuery('#dialog').fadeOut();
 	            }
 	        }
 		</script>
@@ -78,18 +76,18 @@
 			<br/>
 		</h:form>
 		
-		<h:form id="formS">
-		<p:schedule id="s1" value="#{marcarConsultaMB.lazyEventModel}" widgetVar="myschedule" locale="#{localeController.currentLocale}"> 
-     
-            <p:ajax event="dateSelect" listener="#{marcarConsultaMB.onDateSelect}" oncomplete="PF('eventDialog').show()" update="eventDetails,:growl"/> 
-            <p:ajax event="eventSelect" listener="#{marcarConsultaMB.onEventSelect}" oncomplete="PF('eventDialog').show()" update="eventDetails,:growl"/> 
-            <p:ajax event="eventMove" listener="#{marcarConsultaMB.onEventMove}" update=":growl" oncomplete="PF('myschedule').update();"/>
-            <p:ajax event="eventResize" listener="#{marcarConsultaMB.onEventResize}" update=":growl" oncomplete="PF('myschedule').update();"/>
-     
-        </p:schedule> 
-     
+		<h:form id="form">
+			<p:schedule id="s1" value="#{marcarConsultaMB.lazyEventModel}" widgetVar="myschedule" locale="#{localeController.currentLocale}"> 
+	     
+	            <p:ajax event="dateSelect" listener="#{marcarConsultaMB.onDateSelect}" oncomplete="PF('eventDialog').show()" update=":dialog,:growl"/> 
+	            <p:ajax event="eventSelect" listener="#{marcarConsultaMB.onEventSelect}" oncomplete="PF('eventDialog').show()" update=":dialog,:growl"/> 
+	            <p:ajax event="eventMove" listener="#{marcarConsultaMB.onEventMove}" update=":growl" oncomplete="PF('myschedule').update();"/>
+	            <p:ajax event="eventResize" listener="#{marcarConsultaMB.onEventResize}" update=":growl" oncomplete="PF('myschedule').update();"/>
+	     
+	        </p:schedule> 
+      	</h:form>
         <p:dialog id="dialog" widgetVar="eventDialog" header="#{msgs.eventDetails}" showEffect="clip" hideEffect="clip"> 
-        	
+        	<h:form>
             <h:panelGrid id="eventDetails" columns="2"> 
             	<p:outputLabel value="#{msgs.user}" for="basicPojo"/>
 			 	<p:autoComplete value="#{marcarConsultaMB.agendaDTO.usuarioDTO}" id="basicPojo" completeMethod="#{autoCompleteMB.completarUsuario}"  
@@ -119,12 +117,13 @@
                 
                 <f:facet name="footer">
 	                <p:commandButton type="reset" value="#{msgs.reset}" /> 
-	                <p:commandButton value="#{msgs.save}" actionListener="#{marcarConsultaMB.addEvent}" onsuccess="PF('myschedule').update();PF('eventDialog').hide();" rendered="#{marcarConsultaMB.canSave}" update=":growl"/> 
+	                <p:commandButton value="#{msgs.save}" actionListener="#{marcarConsultaMB.addEvent}" oncomplete="handleComplete(xhr, status, args)" rendered="#{marcarConsultaMB.canSave}" update=":growl"/> 
 	                <p:commandButton value="#{msgs.delete}" actionListener="#{marcarConsultaMB.delEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" rendered="#{marcarConsultaMB.canDel}"/>
                 </f:facet>
             </h:panelGrid> 
+            </h:form>
         </p:dialog> 
-     </h:form>
+    
     
 	</h:body>
 	</ui:define>

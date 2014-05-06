@@ -16,6 +16,7 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.PhaseId;
 
 import org.hibernate.HibernateException;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -125,6 +126,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 				lazyEventModel.updateEvent(event);
 				agendaDTO.setId(Integer.valueOf(event.getId()));
 			}
+			agendaDTO.getAllDayDate();
 			if(agendaDTO.getStartDate().after(agendaDTO.getEndDate())){
 				addMessage(rb.getString("msgDataLessEquals"));
 			}else if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
@@ -133,6 +135,13 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 			}else{
 				addMessage(rb.getString("msgPeriodDetracts"));
 			}
+			
+			RequestContext context = RequestContext.getCurrentInstance();
+			context.execute("PF('eventDialog').hide();");
+			context.execute("PF('myschedule').update();");
+			
+			//context.update("form:s1");
+				
 		} catch (Exception e) {
 			addMessage(rb.getString("dateNotFound"));
 			e.printStackTrace();
@@ -170,6 +179,12 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 		agendaDTO.setId(id);
 		agendaDTO = agendaDAO.getById(id);
 		agendaDTO.setAllDay(event.getScheduleEvent().isAllDay());
+		agendaDTO.getAllDayDate();
+		if(this.event.getStartDate().equals(agendaDTO.getStartDate()) && this.event.getEndDate().equals(agendaDTO.getEndDate())){
+			agendaDTO.setAllDay(true);
+		}else{
+			agendaDTO.setAllDay(false);
+		}
 		agendaDTO.setStartDate(this.event.getStartDate());
 		agendaDTO.setEndDate(this.event.getEndDate());
 		
@@ -191,6 +206,7 @@ public class AgendamentoMB extends GenericoMB implements Serializable {
 		agendaDTO.setId(id);
 		agendaDTO.setStartDate(this.event.getStartDate());
 		agendaDTO.setEndDate(this.event.getEndDate());
+		agendaDTO.getAllDayDate();
 		
 		if(!agendaDAO.verificaPeriodoImpeditivo(agendaDTO)){
 			agendaDTO = agendaDAO.save(agendaDTO);
