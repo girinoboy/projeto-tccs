@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="layoutElement.xhtml">
+	<ui:define name="centro">
+		<h:form id="form">
+            <p:panel header="#{msgs.accessControl}" style="margin-top: 10px; width: 700px;">
+                <h:panelGrid columns="2">
+                    <h:selectOneMenu value="#{controleAcessoMB.perfil.id}">
+                        <f:selectItem itemValue="0" itemLabel="#{msgs.select}"/>
+                        <f:selectItems value="#{perfilMB.listPerfil}" var="perfil"
+                                       itemValue="#{perfil.id}" itemLabel="#{perfil.nome}"/>
+                        <p:ajax event="change" listener="#{controleAcessoMB.carregaPermissoesUsuarioDTO}"
+                                update="panelPermissoes" />
+                    </h:selectOneMenu>
+                    <p:ajaxStatus>
+                        <f:facet name="start">
+                            <h:graphicImage value="./img/ajax_load.gif" alt="load"/>
+                        </f:facet>
+                        <f:facet name="complete">
+                            <h:outputText value="" />
+                        </f:facet>
+                    </p:ajaxStatus>
+                </h:panelGrid>
+            </p:panel>
+<!--             <p:panel header="Adicionar Menu" style="margin-top: 10px; margin-bottom: 10px; width: 700px;"> -->
+<!-- 				private String nome; -->
+<!--             	private MenuDTO menuDTO; -->
+<!-- 				private String comando; -->
+<!-- 				private String url; -->
+<!-- 				private String outcome; -->
+<!-- 				private String icone; -->
+<!-- 				private Boolean ativoInativo; -->
+<!-- 				private Integer dropIndex; -->
+<!--             </p:panel> -->
+            <p:panel header="#{msgs.treeDragDrop}" id="panelPermissoes" style="margin-top: 10px; margin-bottom: 10px; width: 700px;">
+                <h:panelGrid columns="3">
+                	<h:outputLabel value="#{msgs.activeMenu}" for="treeA"/>
+                	<br/>
+                	<h:outputLabel value="#{msgs.inactiveMenu}" for="treeI"/>
+                	
+	                <p:tree id="treeA" value="#{controleAcessoMB.root}" selectionMode="checkbox" var="no"
+	                        expanded="true" expandAnim="FADE_IN" collapseAnim="FADE_OUT" animate="true" 
+	                        selection="#{controleAcessoMB.nosSelecionados}" propagateSelectionUp="true" propagateSelectionDown="true"
+	                        draggable="true" droppable="true" dragdropScope="demo">
+	                        <p:ajax event="dragdrop" listener="#{controleAcessoMB.onDragDrop}" update=":growl" />
+	                    <p:treeNode>
+	                        <h:outputText value="#{no.nome}" style="margin-left: 10px;"/>
+	                    </p:treeNode>
+	                </p:tree>
+	                
+	                <p:graphicImage alt="Transfer" url="/img/transfer.png" />
+                
+                	<p:tree id="treeI" value="#{controleAcessoMB.rootInactive}" selectionMode="single" var="no"
+	                        expanded="true" expandAnim="FADE_IN" collapseAnim="FADE_OUT" animate="true" 
+	                        selection="#{controleAcessoMB.selectedNode}" propagateSelectionUp="true" propagateSelectionDown="true"
+	                        draggable="true" droppable="true" dragdropScope="demo">
+	                        <p:ajax event="dragdrop" listener="#{controleAcessoMB.onDragDrop}" update=":growl" />
+	                    <p:treeNode>
+	                        <h:outputText value="#{no.nome}" style="margin-left: 10px;"/>
+	                    </p:treeNode>
+	                </p:tree>
+                </h:panelGrid>
+            </p:panel>
+            <p:commandButton value="#{msgs.save}" action="#{controleAcessoMB.salvaPermissoes}" update="panelPermissoes,:growl"/>
+        </h:form>
+	</ui:define>
+</ui:decorate>
+</html>
