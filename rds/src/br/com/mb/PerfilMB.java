@@ -35,10 +35,42 @@ public class PerfilMB extends GenericoMB implements ModeloMB{
 		}
 	}
 	
-	public void addPerfil(ActionEvent actionEvent) throws Exception {
+	@Override
+	public void add(ActionEvent actionEvent) throws Exception {
 		perfilDAO.save(perfilDTO);
 		addMessage("Salvo com sucesso.");
 		perfilDTO = new PerfilDTO();
+		
+	}
+	
+	@Override
+	public void edit(ActionEvent actionEvent) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void del(ActionEvent actionEvent) throws Exception {
+		perfilDAO.delete(perfilDTO);
+		addMessage("Apagado com sucesso.");
+		perfilDTO = new PerfilDTO();
+		
+	}
+
+	@Override
+	public void atualiza(ActionEvent event) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void reset(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void addPerfil(ActionEvent actionEvent) throws Exception {
+		add(null);
 	}
 	
 	public PerfilDTO getPerfilDTO() {
@@ -55,29 +87,5 @@ public class PerfilMB extends GenericoMB implements ModeloMB{
 	public void setListPerfil(List<PerfilDTO> listPerfil) {
 		this.listPerfil = listPerfil;
 	}
-
-	@Override
-	public void add(ActionEvent actionEvent) throws Exception {
-		perfilDAO.save(perfilDTO);
-		addMessage("Salvo com sucesso.");
-		perfilDTO = new PerfilDTO();
-		
-	}
-
-	@Override
-	public void edit(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void del(ActionEvent actionEvent) throws Exception {
-		perfilDAO.delete(perfilDTO);
-		addMessage("Apagado com sucesso.");
-		perfilDTO = new PerfilDTO();
-		
-	}
-	
-	
 
 }

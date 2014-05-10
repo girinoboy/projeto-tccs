@@ -52,6 +52,19 @@ public class LocalMB extends GenericoMB implements ModeloMB{
 		}
 
 	}
+	
+	@Override
+	public void atualiza(ActionEvent event) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void reset(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public List<LocalDTO> getListLocal() {
 		return listLocal;
