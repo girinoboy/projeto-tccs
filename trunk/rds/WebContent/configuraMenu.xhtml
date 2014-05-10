@@ -8,25 +8,78 @@
 <ui:decorate template="layoutElement.xhtml">
 	<ui:define id="centro" name="centro">
  		<h:form id="form">
- 			<h:panelGrid columns="3">
-		        <p:tree id="tree1" value="#{controleAcessoMB.root}" var="node"  selectionMode="single" selection="#{menuMB.selectedNode}"  
-		                draggable="true" droppable="true" dragdropScope="demo">
-		            <p:ajax event="dragdrop" listener="#{menuMB.onDragDrop}" update=":growl" />
-		            <p:treeNode>
-		                <h:outputText value="#{node}" />
-		            </p:treeNode>
-		        </p:tree>
-		  
-		        <p:graphicImage alt="Transfer" url="/img/transfer.png" />
-		  
-		        <p:tree id="tree2" value="#{menuMB.root2}" var="node" selectionMode="single" selection="#{menuMB.selectedNode2}" 
-		                draggable="true" droppable="true" dragdropScope="demo">
-		            <p:ajax event="dragdrop" listener="#{menuMB.onDragDrop}" update=":growl" />
-		            <p:treeNode>
-		                <h:outputText value="#{node}" />
-		            </p:treeNode>
-		        </p:tree>
-		    </h:panelGrid>
+ 			<p:panel id="panel" header="#{msgs.profileData}">
+		    	<h:inputHidden id="idPerfil" value="#{perfilMB.perfilDTO.id}" />
+		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		        	<h:outputLabel for="nome" value="#{msgs.name}: *" />
+		            <p:inputText id="nome" size="80"
+		                value="#{perfilMB.perfilDTO.nome}" required="true" label="Nome">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            <p:watermark for="nome" value="#{msgs.fullName}" />
+		            <p:message for="nome" />
+		            
+		            <f:facet name="footer">
+			          	<p:commandButton value="#{msgs.save}" actionListener="#{menuMB.add}" id="withIcon"
+			            update=":growl,panel,menuList" icon="ui-icon-disk" />
+			            <p:commandButton value="#{msgs.reset}" type="reset" />
+			            <p:commandButton value="#{msgs.back}" action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"/> 
+		  			</f:facet>
+		        </h:panelGrid>  
+		    </p:panel>
+		    
+		    <br/>
+		    
+ 			<p:dataTable var="menu" value="#{menuMB.listMenu}" id="menuList" editable="true" widgetVar="menusTable" draggableRows="true">
+ 				<f:facet name="header">
+		            Lista de Menus editáveis
+		            
+		            <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+		            <p:columnToggler datasource="menuList" trigger="toggler" />
+		            <div style="clear:both" />
+		        </f:facet>
+ 			
+	 			<p:ajax event="rowEdit" listener="#{menuMB.onEdit}" update=":growl" />
+	        	<p:ajax event="rowEditCancel" listener="#{menuMB.onCancel}" update=":growl" />
+	        	
+	        	<p:column headerText="Nome" style="width:30%">
+		            <p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{menu.nome}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                    <p:inputText value="#{menu.nome}" style="width:100%"/>
+		                </f:facet>
+		            </p:cellEditor>
+		        </p:column>
+		        
+		        <p:column id="ativoInativoColumn" filterBy="ativoInativo" headerText="Ativo-Inativo" footerText="equals" filterMatchMode="equals">
+		            <f:facet name="filter">
+		                <p:selectOneButton onchange="PF('menusTable').filter()">
+		                    <f:converter converterId="javax.faces.Boolean" />
+		                    <f:selectItem itemLabel="#{msgs.all}" itemValue="" />
+		                    <f:selectItem itemLabel="Ativo" itemValue="true" />
+		                    <f:selectItem itemLabel="Inativo" itemValue="false" />
+		                </p:selectOneButton>
+		            </f:facet>
+	            	<p:cellEditor>
+		                <f:facet name="output">
+		                	 <h:outputText value="#{menu.ativoInativo ? 'Ativo': 'Inativo'}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                	<h:selectOneMenu value="#{menu.ativoInativo}" >
+		                		<f:selectItem itemLabel="Ativo" itemValue="true"/>
+		                		<f:selectItem itemLabel="Inativo" itemValue="false"/>
+		                    </h:selectOneMenu>
+		                </f:facet>
+		            </p:cellEditor>
+	           
+	        	</p:column>
+	        	
+	        	<p:column style="width:6%">
+		            <p:rowEditor />
+		        </p:column>
+ 			</p:dataTable>
  		</h:form>
  	</ui:define>
 </ui:decorate>
