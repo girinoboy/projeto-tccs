@@ -8,12 +8,12 @@
 <ui:decorate template="layoutElement.xhtml">
 	<ui:define id="centro" name="centro">
  		<h:form id="form">
- 			<p:panel id="panel" header="#{msgs.profileData}">
-		    	<h:inputHidden id="idPerfil" value="#{perfilMB.perfilDTO.id}" />
+ 			<p:panel id="panel" header="#{msgs.menuData}">
+		    	<h:inputHidden id="idMenu" value="#{menuMB.menuDTO.id}" />
 		        <h:panelGrid id="pg" columns="4" cellpadding="5">
 		        	<h:outputLabel for="nome" value="#{msgs.name}: *" />
 		            <p:inputText id="nome" size="80"
-		                value="#{perfilMB.perfilDTO.nome}" required="true" label="Nome">
+		                value="#{menuMB.menuDTO.nome}" required="true" label="Nome">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            <p:watermark for="nome" value="#{msgs.fullName}" />
@@ -25,7 +25,7 @@
 			            <p:commandButton value="#{msgs.reset}" type="reset" />
 			            <p:commandButton value="#{msgs.back}" action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"/> 
 		  			</f:facet>
-		        </h:panelGrid>  
+		        </h:panelGrid>
 		    </p:panel>
 		    
 		    <br/>
@@ -53,6 +53,28 @@
 		            </p:cellEditor>
 		        </p:column>
 		        
+		        <p:column headerText="Comando" style="width:30%">
+		            <p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{menu.comando}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                    <p:inputText value="#{menu.comando}" style="width:100%"/>
+		                </f:facet>
+		            </p:cellEditor>
+		        </p:column>
+		        
+		        <p:column headerText="Comando" style="width:30%">
+		            <p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{menu.dropIndex}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                    <p:inputText value="#{menu.dropIndex}" style="width:100%"/>
+		                </f:facet>
+		            </p:cellEditor>
+		        </p:column>
+		        
 		        <p:column id="ativoInativoColumn" filterBy="ativoInativo" headerText="Ativo-Inativo" footerText="equals" filterMatchMode="equals">
 		            <f:facet name="filter">
 		                <p:selectOneButton onchange="PF('menusTable').filter()">
@@ -73,7 +95,6 @@
 		                    </h:selectOneMenu>
 		                </f:facet>
 		            </p:cellEditor>
-	           
 	        	</p:column>
 	        	
 	        	<p:column style="width:6%">
