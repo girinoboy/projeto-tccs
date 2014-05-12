@@ -5,6 +5,7 @@ package br.com.mb;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.bo.UsuarioBO;
 import br.com.model.Usuario;
@@ -13,7 +14,7 @@ import br.com.model.Usuario;
  * @author Joelson
  *
  */
-@SessionScoped
+@ViewScoped
 @ManagedBean
 public class LoginBean {
 
