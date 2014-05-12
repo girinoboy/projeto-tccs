@@ -38,6 +38,7 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 	private MenuDAO menuDAO = new MenuDAO();
 	private PerfilMenuDAO perfilMenuDAO = new PerfilMenuDAO();
 	private List<MenuDTO>  listMenu = new ArrayList<MenuDTO>();
+	private MenuDTO menuDTO = new MenuDTO();
 
 	/**
 	 * 
@@ -174,6 +175,12 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 
 	public void setListMenu(List<MenuDTO> listMenu) {
 		this.listMenu = listMenu;
+	}
+	public MenuDTO getMenuDTO() {
+		return menuDTO;
+	}
+	public void setMenuDTO(MenuDTO menuDTO) {
+		this.menuDTO = menuDTO;
 	}
 
 }
