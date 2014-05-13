@@ -6,18 +6,18 @@ package br.com.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.model.Usuario;
+import br.com.model.UsuarioDTO;
 import br.com.util.JPAUtil;
 
 /**
  * @author Joelson
  *
  */
-public class UsuarioDAO extends DAO<Usuario>{
+public class UsuarioDAO extends DAO<UsuarioDTO>{
 
 	private static final long serialVersionUID = 2817329528072312197L;
 
-	public boolean existe(Usuario usuario){
+	public boolean existe(UsuarioDTO usuario){
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();
 		

@@ -8,6 +8,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.util.JPAUtil;
@@ -16,17 +17,18 @@ import br.com.util.JPAUtil;
  * @author Joelson
  *
  */
+@SuppressWarnings("unchecked")
 public class DAO<T> implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private final Class<T> classe;
-	EntityManager em;
+	@PersistenceUnit(unitName="projetoPU")
+	private EntityManager em;
 
-	@SuppressWarnings("unchecked")
 	public DAO() {
 		this.classe = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 		try {
-			em = new JPAUtil().getEntityManager();
+			//em = new JPAUtil().getEntityManager();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,7 +51,6 @@ public class DAO<T> implements Serializable{
 		em.close();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public T save(T t) {
 		Object obj = null;
 		// consegue a entity manager
