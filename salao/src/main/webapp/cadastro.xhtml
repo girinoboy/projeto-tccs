@@ -12,60 +12,77 @@
 
 <h:body>
 	<div id="cabecalho"></div>
-	<h:form id="form">
-		<p:panelGrid columns="2">
-			<f:facet name="header">Cadastro de Clientes</f:facet>
 
-			<h:outputLabel for="nome" value="Nome *" />
-			<p:inputText id="nome"
-				value="#{cadastrarCliente.cliente.nome}" label="Nome" />
+	<div id="conteudo">
+		<h:form>
+			<fieldset>
+				<legend>Cadastro de Clientes</legend>
 
-			<h:outputLabel for="cpf" value="CPF *" />
-			<p:inputText id="cpf"
-				value="#{cadastrarCliente.cliente.cpf}" required="true"
-				label="CPF" />
+				<h:panelGrid columns="2">
 
-			<h:outputLabel for="data" value="Data *" />
-			<p:calendar effect="explode" id="data"
-				value="#{cadastrarCliente.cliente.data}" />
+					<p:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" value="#{cadastrarCliente.cliente.nome}"
+						label="Nome" />
 
-			<h:outputLabel for="email" value="Email *" />
-			<p:inputText id="email"
-				value="#{cadastrarCliente.cliente.email}" label="Email" />
+					<p:outputLabel for="cpf" value="CPF:" />
+					<p:inputText id="cpf" value="#{cadastrarCliente.cliente.cpf}"
+						required="true" label="CPF" />
 
-			<h:outputLabel for="telefone" value="Telefone *" />
-			<p:inputText id="telefone"
-				value="#{cadastrarCliente.cliente.telefone}"
-				label="Telefone" />
+					<p:outputLabel for="data" value="Data:" />
+					<p:calendar effect="explode" id="data"
+						value="#{cadastrarCliente.cliente.data}" />
 
-			<h:outputLabel for="sexo" value="Sexo *" />
-			<p:inputText id="sexo"
-				value="#{cadastrarCliente.cliente.sexo}" label="Sexo" />
+					<p:outputLabel for="email" value="Email:" />
+					<p:inputText id="email" value="#{cadastrarCliente.cliente.email}"
+						label="Email" />
 
-			<h:outputLabel for="dataNascimento" value="Data de Nascimento *" />
-			<p:calendar effect="explode" id="dataNascimento"
-				value="#{cadastrarCliente.cliente.dataNascimento}" />
+					<p:outputLabel for="telefone" value="Telefone:" />
+					<p:inputText id="telefone"
+						value="#{cadastrarCliente.cliente.telefone}" label="Telefone" />
 
-			<h:outputLabel for="endereco" value="Endereço *" />
-			<p:inputText id="endereco"
-				value="#{cadastrarCliente.cliente.endereco}"
-				label="Endereço" />
+					<p:outputLabel for="sexo" value="Sexo:" />
+					<p:inputText id="sexo" value="#{cadastrarCliente.cliente.sexo}"
+						label="Sexo" />
 
-			<h:outputLabel for="cidade" value="Cidade *" />
-			<p:inputText id="cidade"
-				value="#{cadastrarCliente.cliente.cidade}" label="Cidade" />
+					<p:outputLabel for="dataNascimento" value="Data de Nascimento:" />
+					<p:calendar effect="explode" id="dataNascimento"
+						value="#{cadastrarCliente.cliente.dataNascimento}" />
 
-			<h:outputLabel for="estado" value="Estado *" />
-			<p:inputText id="estado"
-				value="#{cadastrarCliente.cliente.estado}" label="Estado" />
+					<p:outputLabel for="endereco" value="Endereço:" />
+					<p:inputText id="endereco"
+						value="#{cadastrarCliente.cliente.endereco}" label="Endereço" />
 
-			<h:commandButton action="#{cadastrarCliente.grava}"
-				value="Gravar" />
+					<p:outputLabel for="cidade" value="Cidade *" />
+					<p:inputText id="cidade" value="#{cadastrarCliente.cliente.cidade}"
+						label="Cidade" />
 
-		</p:panelGrid>
-	</h:form>
-		<div id="rodape">
-		Copyright 2014. Todos os direitos reservados a AyalaHairs.ltda.
+					<p:outputLabel for="estado" value="Estado:" />
+					<p:inputText id="estado" value="#{cadastrarCliente.cliente.estado}"
+						label="Estado" />
+
+					<p:commandButton action="#{cadastrarCliente.grava}" value="Gravar" />
+
+				</h:panelGrid>
+			</fieldset>
+		</h:form>
+
+		<h2></h2>
+		<h:form>
+			<fieldset>
+				<legend>Serviços</legend>
+				<p:selectOneRadio id="options" value="">
+					<f:selectItem itemLabel="estética capilar" itemValue="1" />
+					<f:selectItem itemLabel="maquiagem facial" itemValue="2" />
+					<f:selectItem itemLabel="estética mãos e pés" itemValue="3" />
+					<f:selectItem itemLabel="estética depilação" itemValue="4" />
+					<f:selectItem itemLabel="estética depilação" itemValue="5" />
+				</p:selectOneRadio>
+			</fieldset>
+		</h:form>
+
+
 	</div>
+	<div id="rodape">Copyright 2014. Todos os direitos reservados a
+		AyalaHairs.ltda.</div>
 </h:body>
 </html>
