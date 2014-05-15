@@ -20,10 +20,10 @@
  		</message-bundle>
 	</application>
     
-   	<lifecycle>
+<!--    	<lifecycle> -->
 
-    	<phase-listener>br.com.utility.FilterPhaseListener</phase-listener>
+<!--     	<phase-listener>br.com.utility.FilterPhaseListener</phase-listener> -->
 
-	</lifecycle>
+<!-- 	</lifecycle> -->
 
 </faces-config>
