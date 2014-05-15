@@ -18,21 +18,9 @@ import br.com.util.JPAUtil;
  *
  */
 @SuppressWarnings("unchecked")
-public class DAO<T> implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+public class DAO<T> {
+	
 	private final Class<T> classe;
-	@PersistenceUnit(unitName="projeto")
-	private EntityManager em;
-
-	public DAO() {
-		this.classe = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-		try {
-			//em = new JPAUtil().getEntityManager();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public DAO(Class<T> classe) {
 		this.classe = classe;

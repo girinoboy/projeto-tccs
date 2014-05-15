@@ -3,13 +3,11 @@
  */
 package br.com.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,12 +18,10 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-public class Cliente implements Serializable{
-
-	private static final long serialVersionUID = -7871714130485403162L;
+public class Cliente{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private Long id;
 	
 	private String nome;

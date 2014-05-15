@@ -4,21 +4,30 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Login</title>
+	<title>Sistema de Cadastro de Clientes - SISCAD</title>
+	<h:outputStylesheet library="css" name="style.css"/> 
 </h:head>
 
 <h:body>
+	<div id="cabecalho">
+	
+	</div>
+
 	<h:form id="formlogin">
 		<h:panelGrid columns="2" styleClass="campos">
 			<h:outputLabel value="Login:" />
-			<h:inputText value="#{loginBean.usuarioDTO.login}" />
+			<h:inputText value="#{loginBean.usuario.login}" />
 			
 			<h:outputLabel value="Senha:" />
 			<h:inputSecret value="#{loginBean.usuario.senha}" />
 			
-			<h:commandButton action="#{loginBean.efetuaLogin(loginBean.usuarioDTO)}" value="Login" />
+			<h:commandButton action="#{loginBean.efetuaLogin}" value="Login" />
 		</h:panelGrid>	
 	</h:form>
+	
+	<div id="rodape">
+		Copyright 2014. Todos os direitos reservados a AyalaHairs.ltda.
+	</div>
 
 </h:body>
 </html>

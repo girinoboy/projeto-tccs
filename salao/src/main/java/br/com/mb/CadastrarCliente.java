@@ -1,30 +1,29 @@
 package br.com.mb;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
-import br.com.bo.ClienteBO;
+import br.com.dao.DAO;
 import br.com.model.Cliente;
 
+@RequestScoped
 @ManagedBean
-@SessionScoped
 public class CadastrarCliente {
 
-	private ClienteBO clienteBO = new ClienteBO();
+	private Cliente cliente = new Cliente();
 
-	// private Cliente cliente = new Cliente();
-
-	public void adicionar() {
-
-		clienteBO.gravar();
-
+	public void grava() {
+		DAO<Cliente> dao = new DAO<Cliente>(Cliente.class);
+		dao.adicionar(cliente);
+		this.cliente = new Cliente();
 	}
 
-	public ClienteBO getClienteBO() {
-		return clienteBO;
+	public Cliente getCliente() {
+		return this.cliente;
 	}
 
-	public void setClienteBO(ClienteBO clienteBO) {
-		this.clienteBO = clienteBO;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
+
 }
