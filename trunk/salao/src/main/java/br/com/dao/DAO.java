@@ -22,7 +22,7 @@ public class DAO<T> implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private final Class<T> classe;
-	@PersistenceUnit(unitName="projetoPU")
+	@PersistenceUnit(unitName="projeto")
 	private EntityManager em;
 
 	public DAO() {

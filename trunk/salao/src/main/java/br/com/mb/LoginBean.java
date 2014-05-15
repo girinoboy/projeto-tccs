@@ -3,11 +3,13 @@
  */
 package br.com.mb;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.bo.UsuarioBO;
-import br.com.model.UsuarioDTO;
+import br.com.model.Usuario;
 
 /**
  * @author Joelson
@@ -15,16 +17,17 @@ import br.com.model.UsuarioDTO;
  */
 @ViewScoped
 @ManagedBean
-public class LoginBean {
+public class LoginBean implements Serializable{
 
-	private UsuarioDTO usuarioDTO = new UsuarioDTO();
+	private static final long serialVersionUID = -2666993159978308992L;
+	private Usuario usuarioDTO = new Usuario();
 	private UsuarioBO usuarioBO = new UsuarioBO();
 	
 	public void efetuaLogin(){
 		usuarioBO.efetuaLogin(usuarioDTO);
 	}
 	
-	public UsuarioDTO getUsuarioDTO() {
+	public Usuario getUsuarioDTO() {
 		return usuarioDTO;
 	}
 

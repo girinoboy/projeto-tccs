@@ -1,12 +1,13 @@
 <persistence version="1.0"
 	xmlns="http://java.sun.com/xml/ns/persistence">
-	<persistence-unit name="projetoPU" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="projeto" transaction-type="RESOURCE_LOCAL">
 
 		<!-- provedor/implementacao do JPA -->
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<!-- entidade mapeada -->
-		<class>br.com.model.UsuarioDTO</class>
+		<class>br.com.model.Usuario</class>
+		<class>br.com.model.Cliente</class>
 
 		<properties>
 			<!-- dados da conexao -->			
