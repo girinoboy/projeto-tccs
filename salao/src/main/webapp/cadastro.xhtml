@@ -5,15 +5,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Sistema de Cadastro de Clientes - SISCAD</title>
-	<h:outputStylesheet library="css" name="style.css" />
-</h:head>
+<ui:composition template="/_template.xhtml">
 
-<h:body>
-	<div id="cabecalho"></div>
+	<ui:define name="corpo">
 
-	<div id="conteudo">
 		<h:form>
 			<fieldset>
 				<legend>Cadastro de Clientes</legend>
@@ -21,46 +16,46 @@
 				<h:panelGrid columns="2">
 
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" value="#{cadastrarCliente.cliente.nome}"
+					<p:inputText id="nome" value="#{cadastroCliente.cliente.nome}"
 						label="Nome" />
 
 					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputText id="cpf" value="#{cadastrarCliente.cliente.cpf}"
+					<p:inputText id="cpf" value="#{cadastroCliente.cliente.cpf}"
 						required="true" label="CPF" />
 
 					<p:outputLabel for="data" value="Data:" />
 					<p:calendar effect="explode" id="data"
-						value="#{cadastrarCliente.cliente.data}" />
+						value="#{cadastroCliente.cliente.data}" />
 
 					<p:outputLabel for="email" value="Email:" />
-					<p:inputText id="email" value="#{cadastrarCliente.cliente.email}"
+					<p:inputText id="email" value="#{cadastroCliente.cliente.email}"
 						label="Email" />
 
 					<p:outputLabel for="telefone" value="Telefone:" />
 					<p:inputText id="telefone"
-						value="#{cadastrarCliente.cliente.telefone}" label="Telefone" />
+						value="#{cadastroCliente.cliente.telefone}" label="Telefone" />
 
 					<p:outputLabel for="sexo" value="Sexo:" />
-					<p:inputText id="sexo" value="#{cadastrarCliente.cliente.sexo}"
+					<p:inputText id="sexo" value="#{cadastroCliente.cliente.sexo}"
 						label="Sexo" />
 
 					<p:outputLabel for="dataNascimento" value="Data de Nascimento:" />
 					<p:calendar effect="explode" id="dataNascimento"
-						value="#{cadastrarCliente.cliente.dataNascimento}" />
+						value="#{cadastroCliente.cliente.dataNascimento}" />
 
 					<p:outputLabel for="endereco" value="Endereço:" />
 					<p:inputText id="endereco"
-						value="#{cadastrarCliente.cliente.endereco}" label="Endereço" />
+						value="#{cadastroCliente.cliente.endereco}" label="Endereço" />
 
 					<p:outputLabel for="cidade" value="Cidade *" />
-					<p:inputText id="cidade" value="#{cadastrarCliente.cliente.cidade}"
+					<p:inputText id="cidade" value="#{cadastroCliente.cliente.cidade}"
 						label="Cidade" />
 
 					<p:outputLabel for="estado" value="Estado:" />
-					<p:inputText id="estado" value="#{cadastrarCliente.cliente.estado}"
+					<p:inputText id="estado" value="#{cadastroCliente.cliente.estado}"
 						label="Estado" />
 
-					<p:commandButton action="#{cadastrarCliente.grava}" value="Gravar" />
+					<p:commandButton action="#{cadastroCliente.grava}" value="Gravar" />
 
 				</h:panelGrid>
 			</fieldset>
@@ -79,10 +74,7 @@
 				</p:selectOneRadio>
 			</fieldset>
 		</h:form>
+	</ui:define>
+</ui:composition>
 
-
-	</div>
-	<div id="rodape">Copyright 2014. Todos os direitos reservados a
-		AyalaHairs.ltda.</div>
-</h:body>
 </html>

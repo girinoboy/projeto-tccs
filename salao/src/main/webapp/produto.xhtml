@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template.xhtml">
+
+	<ui:define name="corpo">
+
+		<h:form id="formProduto">
+
+			<h:outputText value="Novo Produto"
+				rendered="#{empty produtoBean.produto.id}" />
+			<h:outputText value="Editar Produto"
+				rendered="#{not empty produtoBean.produto.id}" />
+
+			<fieldset>
+				<legend>Cadastro de Serviços</legend>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" for="nome" />
+					<p:inputText id="nome" value="#{produtoBean.produto.nome}" >
+						<f:ajax event="change" />
+					</p:inputText>
+
+					<p:outputLabel value="Descrição:" for="descricao" />
+					<p:inputTextarea id="descricao"
+						value="#{produtoBean.produto.descricao}" >
+							<f:ajax event="change" />
+					</p:inputTextarea>
+
+					<p:outputLabel value="Preço:" for="preco" />
+					<p:inputText id="preco" value="#{produtoBean.produto.preco}" >
+						<f:ajax event="change" />
+					</p:inputText>
+
+					<p:commandButton action="#{produtoBean.grava}" value="Gravar">
+						<f:ajax event="click" />
+					</p:commandButton>
+
+					<p:commandButton action="#" value="Cancelar" />
+
+				</h:panelGrid>
+			</fieldset>
+
+			<p:dataTable value="#{produtoBean.produtos}" var="produto">
+
+				<p:column>
+					<f:facet name="header">Serviços</f:facet>
+						#{produto.nome}
+						
+					</p:column>
+
+
+
+				<p:column>
+					<f:facet name="header">Descrição</f:facet>
+						#{produto.descricao}
+						
+					</p:column>
+
+
+				<p:column>
+					<f:facet name="header">Valor</f:facet>
+						#{produto.preco}
+						
+					</p:column>
+
+				<p:column>
+					<f:facet name="header">Ações</f:facet>
+					<p:commandLink action="#{produtoBean.remove(produto)}"
+						value="Remover">
+						<f:ajax render="@form" />
+					</p:commandLink>
+
+					<p:commandLink value="Alterar">
+						<f:setPropertyActionListener value="#{produto}"
+							target="#{produtoBean.produto}" />
+						<f:ajax render=":formProduto" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

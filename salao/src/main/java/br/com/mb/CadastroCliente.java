@@ -8,7 +8,7 @@ import br.com.model.Cliente;
 
 @RequestScoped
 @ManagedBean
-public class CadastrarCliente {
+public class CadastroCliente {
 
 	private Cliente cliente = new Cliente();
 
