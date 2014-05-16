@@ -1,33 +1,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-	<title>Sistema de Cadastro de Clientes - SISCAD</title>
-	<h:outputStylesheet library="css" name="style.css"/> 
-</h:head>
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="formlogin">
+			<h:panelGrid columns="2" styleClass="campos">
+				<h:outputLabel value="Login:" />
+				<h:inputText value="#{loginBean.usuario.login}" />
 
-<h:body>
-	<div id="cabecalho">
-	
-	</div>
+				<h:outputLabel value="Senha:" />
+				<h:inputSecret value="#{loginBean.usuario.senha}" />
 
-	<h:form id="formlogin">
-		<h:panelGrid columns="2" styleClass="campos">
-			<h:outputLabel value="Login:" />
-			<h:inputText value="#{loginBean.usuario.login}" />
-			
-			<h:outputLabel value="Senha:" />
-			<h:inputSecret value="#{loginBean.usuario.senha}" />
-			
-			<h:commandButton action="#{loginBean.efetuaLogin}" value="Login" />
-		</h:panelGrid>	
-	</h:form>
-	
-	<div id="rodape">
-		Copyright 2014. Todos os direitos reservados a AyalaHairs.ltda.
-	</div>
-
-</h:body>
+				<h:commandButton action="#{loginBean.efetuaLogin}" value="Login" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

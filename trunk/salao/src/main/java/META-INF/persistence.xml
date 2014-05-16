@@ -8,6 +8,9 @@
 		<!-- entidade mapeada -->
 		<class>br.com.model.Usuario</class>
 		<class>br.com.model.Cliente</class>
+		<class>br.com.model.Produto</class>
+		<class>br.com.model.Item</class>
+		<class>br.com.model.NotaFiscal</class>		
 
 		<properties>
 			<!-- dados da conexao -->			
