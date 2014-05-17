@@ -27,7 +27,8 @@ public class NotaFiscal implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Calendar data;
 
-	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="notaFiscal")
+	//@OneToMany(cascade=CascadeType.PERSIST, mappedBy="notaFiscal")
+	@OneToMany
 	private List<Item> itens;
 
 	public Long getId() {
