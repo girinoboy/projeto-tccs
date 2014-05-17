@@ -17,6 +17,12 @@ body {
 	background-color: #6D85F2;
 	height: 60px;
 	position: relative;
+	font-size: 16px;
+	display:block;
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+	color:#FFF;
+	margin-bottom:5px;
+	padding:8px;
 }
 
 #logoCompany {
@@ -70,6 +76,7 @@ body {
 	background-color: #6D85F2;
 	width: 100%;
 	position: fixed;
+	display:block;
 	bottom: 0;
 	padding: 10px 0px;
 	text-align: center;
