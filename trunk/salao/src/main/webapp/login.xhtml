@@ -8,23 +8,26 @@
 	<ui:define name="corpo">
 
 		<h:form id="formlogin">
+		
+		<p:growl id="growl" showDetail="true" />
+		
 			<div align="center">
 			<p:panelGrid columns="2" style="margin-top:160px" >
 				<f:facet name="header">
       			  Sistema de Cadastro - SISCAD
    			 </f:facet>
 
-				<p:outputLabel value="Login:" />
-				<p:inputText value="#{loginBean.usuario.login}" />
+				<p:outputLabel value="Login: *" />
+				<p:inputText value="#{loginBean.usuario.login}" required="true"/>
 
-				<p:outputLabel value="Senha:" />
-				<p:password value="#{loginBean.usuario.senha}" />
+				<p:outputLabel value="Senha: *" />
+				<p:password value="#{loginBean.usuario.senha}" required="true"/>
 
 
 				<f:facet name="footer">
 
 					<p:commandButton action="#{loginBean.efetuaLogin}" value="Login"
-						icon="ui-icon-check" />
+						icon="ui-icon-check" update="growl"/>
 				</f:facet>
 			
 			</p:panelGrid>
