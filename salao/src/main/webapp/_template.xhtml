@@ -12,14 +12,17 @@
 </h:head>
 
 <h:body>
+	<p:growl id="messages"/>
+	
 	<div id="cabecalho">
 		<!-- <h:graphicImage library="imagens" name="xxxx.png"  id="xxxx"/> -->
 	</div>
 
 	<div id="conteudo">
 		<ui:insert name="corpo" />
+		<p:commandButton value="Voltar" action="/menu.xhtml?faces-redirect=true" immediate="true" rendered="#{menuBean.pagina ne '/menu.xhtml'}"/>
 	</div>
-
+	
 	<div id="rodape">Copyright 2014. Todos os direitos reservados a .....</div>
 
 </h:body>

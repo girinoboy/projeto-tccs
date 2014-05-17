@@ -8,6 +8,21 @@
 <ui:composition template="/_template.xhtml">
 
 	<ui:define name="corpo">
+		<h:form id="form1">
+			
+ 
+		    <h3>Menus Principal</h3>
+		    <p:menu>
+		        <p:submenu label="Cadastros">
+		            <p:menuitem value="Usuário" outcome="cadastro" icon="ui-icon-disk" />
+		            <p:menuitem value="Produto" outcome="produto" icon="ui-icon-disk"/>
+		        </p:submenu>
+		        <p:submenu label="Pedidos">
+		            <p:menuitem value="Nota fiscal" outcome="notafiscal" icon="ui-icon-star"/>
+		        </p:submenu>
+		    </p:menu>
+		
+		</h:form>
 		
 	</ui:define>
 </ui:composition>
