@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class NotaFiscal implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Calendar data;
 
-	@OneToMany
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="notaFiscal")
 	private List<Item> itens;
 
 	public Long getId() {
