@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import br.com.dao.UsuarioDAO;
 import br.com.model.Usuario;

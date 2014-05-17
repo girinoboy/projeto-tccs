@@ -6,10 +6,6 @@ package br.com.mb;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-/**
- * @author Marcleônio
- *
- */
 @ManagedBean
 public class MenuBean {
 	

@@ -20,30 +20,35 @@
 				<legend>Cadastro de Serviços</legend>
 				<h:panelGrid columns="2">
 					<p:outputLabel value="Nome:" for="nome" />
-					<p:inputText id="nome" value="#{produtoBean.produto.nome}" >
+					<p:inputText id="nome" value="#{produtoBean.produto.nome}">
 						<f:ajax event="change" />
 					</p:inputText>
 
 					<p:outputLabel value="Descrição:" for="descricao" />
 					<p:inputTextarea id="descricao"
-						value="#{produtoBean.produto.descricao}" >
-							<f:ajax event="change" />
+						value="#{produtoBean.produto.descricao}">
+						<f:ajax event="change" />
 					</p:inputTextarea>
 
 					<p:outputLabel value="Preço:" for="preco" />
-					<p:inputText id="preco" value="#{produtoBean.produto.preco}" >
+					<p:inputText id="preco" value="#{produtoBean.produto.preco}">
 						<f:ajax event="change" />
 					</p:inputText>
-
-					<p:commandButton action="#{produtoBean.grava}" value="Gravar">
-						<f:ajax event="click" />
-					</p:commandButton>
-
-					<p:commandButton action="#" value="Cancelar" />
 
 				</h:panelGrid>
 			</fieldset>
 
+			<div align="right">
+				<p:commandButton action="#{produtoBean.grava}" value="Gravar">
+					<f:ajax event="click" />
+				</p:commandButton>
+				<p:commandButton value="Voltar"
+					action="/menu.xhtml?faces-redirect=true" immediate="true"
+					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
+
+			</div>
+
+			<br></br>
 			<p:dataTable value="#{produtoBean.produtos}" var="produto">
 
 				<p:column>
@@ -69,16 +74,18 @@
 
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
+
 					<p:commandLink action="#{produtoBean.remove(produto)}"
 						value="Remover">
 						<f:ajax render="@form" />
 					</p:commandLink>
-
+					<br />
 					<p:commandLink value="Alterar">
 						<f:setPropertyActionListener value="#{produto}"
 							target="#{produtoBean.produto}" />
 						<f:ajax render=":formProduto" />
 					</p:commandLink>
+
 				</p:column>
 			</p:dataTable>
 
