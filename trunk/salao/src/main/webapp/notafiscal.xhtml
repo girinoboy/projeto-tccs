@@ -11,21 +11,27 @@
 
 		<h:form>
 			<fieldset>
-				<legend>Dados do Item</legend>
-
-				<h:outputLabel value="Produto:" />
+				<legend>Dados do Item</legend>				
+				
+				<p:outputLabel value="Quantidade" />
+				<p:inputText value="#{notaFiscalBean.item.quantidade}" />
+				
+				<p:outputLabel value="Produto:" />
+								
 				<p:selectOneMenu value="#{notaFiscalBean.idProduto}">
 					<f:selectItems value="#{produtoBean.produtos}" var="produto"
 						itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
-				</p:selectOneMenu>
-
-				<p:outputLabel value="Quantidade" />
-				<p:inputText value="#{notaFiscalBean.item.quantidade}" />
-
+				</p:selectOneMenu>				
+				
+			</fieldset>
+			<div align="right">
+				<p:commandButton value="Voltar"
+					action="/menu.xhtml?faces-redirect=true" immediate="true"
+					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
 				<p:commandButton action="#{notaFiscalBean.guardarItem}"
 					value="Guardar Item" />
-			</fieldset>
 
+			</div>
 
 			<fieldset>
 				<legend>Itens da Nota Fiscal</legend>
@@ -41,7 +47,8 @@
 					<p:column>
 						<f:facet name="header">Valor Unitário</f:facet>
 						<h:outputText value="#{item.valorUnitario}">
-							<f:convertNumber type="currency" currencySymbol="R$ " locale="pt_BR" />
+							<f:convertNumber type="currency" currencySymbol="R$ "
+								locale="pt_BR" />
 						</h:outputText>
 
 					</p:column>
@@ -57,7 +64,7 @@
 						<f:facet name="header">Total</f:facet>
 						<h:outputText value="">
 							<f:convertNumber type="currency" currencySymbol="R$ "
-								locale="pt_BR"/>
+								locale="pt_BR" />
 						</h:outputText>
 
 					</p:column>

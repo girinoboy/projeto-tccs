@@ -39,10 +39,6 @@
 					<p:inputText id="sexo" value="#{cadastroCliente.cliente.sexo}"
 						label="Sexo" />
 
-					<p:outputLabel for="dataNascimento" value="Data de Nascimento:" />
-					<p:calendar effect="explode" id="dataNascimento"
-						value="#{cadastroCliente.cliente.dataNascimento}" />
-
 					<p:outputLabel for="endereco" value="Endereço:" />
 					<p:inputText id="endereco"
 						value="#{cadastroCliente.cliente.endereco}" label="Endereço" />
@@ -55,25 +51,20 @@
 					<p:inputText id="estado" value="#{cadastroCliente.cliente.estado}"
 						label="Estado" />
 
-					<p:commandButton action="#{cadastroCliente.grava}" value="Gravar" />
-
 				</h:panelGrid>
 			</fieldset>
+
+
+
 		</h:form>
 
-		<h2></h2>
-		<h:form>
-			<fieldset>
-				<legend>Serviços</legend>
-				<p:selectOneRadio id="options" value="">
-					<f:selectItem itemLabel="estética capilar" itemValue="1" />
-					<f:selectItem itemLabel="maquiagem facial" itemValue="2" />
-					<f:selectItem itemLabel="estética mãos e pés" itemValue="3" />
-					<f:selectItem itemLabel="estética depilação" itemValue="4" />
-					<f:selectItem itemLabel="estética depilação" itemValue="5" />
-				</p:selectOneRadio>
-			</fieldset>
-		</h:form>
+		<div align="right">
+			<p:commandButton value="Voltar"
+				action="/menu.xhtml?faces-redirect=true" immediate="true"
+				rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
+			<p:commandButton action="#{cadastroCliente.grava}" value="Gravar" />
+				
+		</div>
 	</ui:define>
 </ui:composition>
 

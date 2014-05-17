@@ -37,10 +37,6 @@ public class Cliente{
 	private String estado;
 	private String sexo;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_nascimento")
-	private Date dataNascimento;
-
 	public Long getId() {
 		return id;
 	}
@@ -119,14 +115,6 @@ public class Cliente{
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 	
 }
