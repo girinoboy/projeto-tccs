@@ -150,6 +150,14 @@ public class LoginMB extends GenericoMB{
 		menuDTO.setAtivoInativo(true);
 		menuDTO = menuDAO.save(menuDTO);
 		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+		
+		menuDTO = new MenuDTO();
+		menuDTO.setNome("configureMenu");
+		menuDTO.setUrl("configuraMenu.xhtml");
+		menuDTO.setDropIndex(1);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
 
 		menuDTO = new MenuDTO();
 		menuDTO.setNome("manageUser");
