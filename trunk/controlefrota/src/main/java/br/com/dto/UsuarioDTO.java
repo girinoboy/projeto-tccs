@@ -4,18 +4,12 @@
 package br.com.dto;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -31,10 +25,16 @@ import org.hibernate.envers.NotAudited;
 @Table(name="usuario")
 public class UsuarioDTO extends AbstractDTO{
 
-//	@Id 
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//	@Id 
 //	@GeneratedValue(strategy= GenerationType.IDENTITY)
 //	private Integer id;
 	private String usuario;
+	private String matricula;
+	private String telefone;
 	@NotAudited
 	private String senha;
 	private String nome;
@@ -46,6 +46,9 @@ public class UsuarioDTO extends AbstractDTO{
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinColumn(name = "perfil_id", insertable = true, updatable = true, nullable = true)
 	private PerfilDTO perfilDTO;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@JoinColumn(name = "motorista_id", insertable = true, updatable = true, nullable = true)
+	private MotoristaDTO motoristaDTO;
 	
 //	@ManyToMany  (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
 //	@JoinTable(name = "usuario_perfil", joinColumns = { @JoinColumn(name = "usuario_id",   
@@ -160,11 +163,38 @@ public class UsuarioDTO extends AbstractDTO{
 
 
 	public PerfilDTO getPerfilDTO() {
+		if(perfilDTO==null){
+			perfilDTO = new PerfilDTO();
+		}
 		return perfilDTO;
 	}
 
 
 	public void setPerfilDTO(PerfilDTO perfilDTO) {
 		this.perfilDTO = perfilDTO;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public MotoristaDTO getMotoristaDTO() {
+		return motoristaDTO;
+	}
+
+	public void setMotoristaDTO(MotoristaDTO motoristaDTO) {
+		this.motoristaDTO = motoristaDTO;
 	}
 }

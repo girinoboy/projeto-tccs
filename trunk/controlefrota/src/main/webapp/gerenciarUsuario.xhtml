@@ -1,0 +1,110 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="layoutElement.xhtml">
+	<ui:define name="centro">
+		<h:form id="form1">
+			<p:panel id="panel" header="Inserir Usuário">
+		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		        
+		        	<p:watermark for="id" value="" />
+		            <p:message for="id" />
+		        	<h:outputLabel for="id" value="Código do Usuário: *" />
+		            <p:inputText id="id" size="80" value="#{usuarioMB.usuarioDTO.id}" label="Id" disabled="true"/>
+		        
+		        	<p:watermark for="idPerfil" value=" " />
+		            <p:message for="idPerfil" />
+		        	<h:outputLabel for="idPerfil" value="Função: *" />
+		            <p:selectOneRadio id="idPerfil" value="#{usuarioMB.usuarioDTO.perfilDTO.id}" required="true" label="Função">  
+			            <f:selectItem itemLabel="Chefe" itemValue="1" />
+			            <f:selectItem itemLabel="Motorista" itemValue="2" />
+			            <p:ajax update="panel"/>
+			        </p:selectOneRadio>
+		        
+		        	<p:watermark for="matricula" value="" />
+		            <p:message for="matricula" />
+		        	<h:outputLabel for="matricula" value="Matrícula: *" />
+		            <p:inputText id="matricula" size="80"
+		                value="#{usuarioMB.usuarioDTO.matricula}" required="true" label="Matricula">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		        
+		        	<p:watermark for="nome" value="Nome completo" />
+		            <p:message for="nome" />
+		        	<h:outputLabel for="nome" value="Nome: *" />
+		            <p:inputText id="nome" size="80"
+		                value="#{usuarioMB.usuarioDTO.nome}" required="true" label="Nome">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            
+		            <p:watermark for="senha" value="" />
+		            <p:message for="senha" />
+		        	<h:outputLabel for="senha" value="Senha: *" />
+		            <p:password id="senha" size="80"
+		                value="#{usuarioMB.usuarioDTO.senha}" required="true" label="Senha">
+		                <f:validateLength minimum="2" />
+		            </p:password>
+		            
+		            <p:watermark for="telefone" value="(___) ____-____" />  
+		            <p:message for="telefone" />
+		            <h:outputLabel for="telefone" value="Telefone: *" />  
+		            <p:inputMask id="telefone" value="#{usuarioMB.usuarioDTO.telefone}" mask="(999) 9999-9999" required="true"/>
+		            
+		            <p:watermark for="emailE" value="Endereço de email *" />
+		            <p:message for="emailE" />
+		            <h:outputLabel for="emailE" value="Email: " />
+		            <p:inputText id="emailE" value="#{usuarioMB.usuarioDTO.email}" required="true" label="Email">
+		                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+		            </p:inputText>
+		            
+		            <p:watermark for="dataAdmissao" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		            <p:message for="dataAdmissao" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		        	<h:outputLabel for="dataAdmissao" value="Data de Admissao: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		            <p:inputText id="dataAdmissao" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"
+		                value="#{usuarioMB.usuarioDTO.motoristaDTO.dataAdmissao}" required="true" label="Data de Admissao">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            
+		            <p:watermark for="cnh" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		            <p:message for="cnh" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		        	<h:outputLabel for="cnh" value="Número CNH: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		            <p:inputText id="cnh" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"
+		                value="#{usuarioMB.usuarioDTO.motoristaDTO.cnh}" required="true" label="Número CNH">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            
+		            <p:watermark for="validade" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		            <p:message for="validade" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		        	<h:outputLabel for="validade" value="Validade CNH: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		            <p:inputText id="validade" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"
+		                value="#{usuarioMB.usuarioDTO.motoristaDTO.validade}" required="true" label="Validade CNH">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            
+		            <p:watermark for="categoria" value=" " rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		            <p:message for="categoria" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		        	<h:outputLabel for="categoria" value="Categoria: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
+		            <p:selectOneRadio id="categoria" value="#{usuarioMB.usuarioDTO.motoristaDTO.categoria}" required="true" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}">  
+			            <f:selectItem itemLabel="A" itemValue="A" />
+			            <f:selectItem itemLabel="B" itemValue="B" />
+			            <f:selectItem itemLabel="C" itemValue="C" />
+			            <f:selectItem itemLabel="D" itemValue="D" />
+			        </p:selectOneRadio>
+		            
+		            
+		          	<f:facet name="footer">
+			          	<p:commandButton value="#{empty usuarioMB.usuarioDTO.id ? 'Salvar':'Alterar'}" actionListener="#{usuarioMB.add}" id="withIcon"   
+			            update="panel,:messages,:growl" icon="ui-icon-disk" />
+			            <p:commandButton value="Reset" actionListener="#{usuarioMB.reset}" update="panel"/> 
+			            <p:commandButton value="Voltar" action="/index.xhtml?faces-redirect=true" immediate="true"/> 
+		  			</f:facet>
+		        </h:panelGrid>  
+		    </p:panel> 
+		    
+		    </h:form>
+		    </ui:define>
+</ui:decorate>
+</html>
