@@ -14,6 +14,13 @@
 <h:body>
 	<p:growl id="messages"/>
 	
+	<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>
+             
+	<p:dialog modal="true" widgetVar="statusDialog" header="Status"
+	        draggable="false" closable="false">
+	    <p:graphicImage value="resources/imagens/ajaxloadingbar.gif" />
+	</p:dialog>
+	
 	<div id="cabecalho">
 	 <h1>Sistema de Cadastro de Clientes - SISCAD</h1>
 		<!-- <h:graphicImage library="imagens" name="xxxx.png"  id="xxxx"/> -->
