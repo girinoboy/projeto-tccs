@@ -1,5 +1,12 @@
 package br.com.dao;
 
-public class ProdutoDAO {
+import br.com.model.Produto;
+
+public class ProdutoDAO extends DAO<Produto>{
+
+	public ProdutoDAO(Class<Produto> classe) {
+		super(classe);
+		// TODO Auto-generated constructor stub
+	}
 
 }

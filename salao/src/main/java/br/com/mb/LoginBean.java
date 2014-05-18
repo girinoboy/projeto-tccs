@@ -18,7 +18,7 @@ import br.com.model.Usuario;
  */
 @SessionScoped
 @ManagedBean
-public class LoginBean implements Serializable {
+public class LoginBean extends GenericBean {
 
 	/**
 	 * 
@@ -43,6 +43,7 @@ public class LoginBean implements Serializable {
 //			FacesContext.getCurrentInstance().getExternalContext().redirect("menu.xhtml");
 			return "menu";
 		}else{
+			addMessage("Erro ao logar.");
 			this.usuario = new Usuario();
 			return "login";
 		}

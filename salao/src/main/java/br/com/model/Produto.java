@@ -8,26 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Produto implements Serializable{
+public class Produto extends AbstractModel{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3193331642931354967L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 	private String nome;
 	private String descricao;
 	private Double preco;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
