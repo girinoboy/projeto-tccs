@@ -18,7 +18,7 @@
 
 			<fieldset>
 				<legend>Cadastro de Serviços</legend>
-				<h:panelGrid columns="2">
+				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel value="Nome:" for="nome" />
 					<p:inputText id="nome" value="#{produtoBean.produto.nome}">
 						<f:ajax event="change" />
@@ -39,9 +39,7 @@
 			</fieldset>
 
 			<div align="right">
-				<p:commandButton action="#{produtoBean.grava}" value="Gravar">
-					<f:ajax event="click" />
-				</p:commandButton>
+				<p:commandButton action="#{produtoBean.grava}" value="Gravar" update="result"/>
 				<p:commandButton value="Voltar"
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
@@ -49,7 +47,7 @@
 			</div>
 
 			<br></br>
-			<p:dataTable value="#{produtoBean.produtos}" var="produto">
+			<p:dataTable id="result" value="#{produtoBean.produtos}" var="produto">
 
 				<p:column>
 					<f:facet name="header">Serviços</f:facet>
@@ -75,15 +73,13 @@
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
 
-					<p:commandLink action="#{produtoBean.remove(produto)}"
+					<p:commandLink action="#{produtoBean.remove}" update="result,:messages"
 						value="Remover">
-						<f:ajax render="@form" />
+						<f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}" /> 
 					</p:commandLink>
 					<br />
-					<p:commandLink value="Alterar">
-						<f:setPropertyActionListener value="#{produto}"
-							target="#{produtoBean.produto}" />
-						<f:ajax render=":formProduto" />
+					<p:commandLink value="Alterar" update=":formProduto">
+						<f:setPropertyActionListener value="#{produto}"	target="#{produtoBean.produto}" />
 					</p:commandLink>
 
 				</p:column>

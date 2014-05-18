@@ -1,6 +1,5 @@
 package br.com.mb;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -11,7 +10,7 @@ import br.com.model.Produto;
 
 @ViewScoped
 @ManagedBean
-public class ProdutoBean implements Serializable {
+public class ProdutoBean extends GenericBean {
 
 	/**
 	 * 
@@ -30,15 +29,16 @@ public class ProdutoBean implements Serializable {
 		}else{
 			dao.atualiza(produto);
 		}
-		
+		addMessage("Salvo!");
 		produtos = dao.listaTodos();
 		this.produto = new Produto();
 	}
 	
-	public void remove(Produto produto){
+	public void remove(){
 		DAO<Produto> dao = new DAO<Produto>(Produto.class);
 		dao.remove(produto);
 		this.produtos = dao.listaTodos();
+		addMessage("Removido!");
 	}
 	
 	public List<Produto> getProdutos() {
@@ -51,6 +51,10 @@ public class ProdutoBean implements Serializable {
 
 	public Produto getProduto() {
 		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 }
