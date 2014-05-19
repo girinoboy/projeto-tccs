@@ -174,14 +174,12 @@
 
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
-					<p:commandLink action="#{clienteBean.remove}" icon="ui-icon-cart"
-						update="result,:messages" value="Remover">
+					<p:commandLink action="#{clienteBean.remove}" update="result,:messages" value="Remover">
 					<f:setPropertyActionListener value="#{cliente}"
 							target="#{clienteBean.cliente}" />
 					</p:commandLink>
 					<br />
 					<p:commandLink value="Alterar" update=":formCliente">
-					<p:graphicImage value="./imagens/salvar.ico" />
 						<f:setPropertyActionListener value="#{cliente}"
 							target="#{clienteBean.cliente}" />
 					</p:commandLink>

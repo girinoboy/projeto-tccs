@@ -47,8 +47,50 @@
 			</div>
 
 			<fieldset>
-				<legend>Imprimir Nota Fiscal</legend>
-					
+				<legend>Nota Fiscal</legend>
+				<p:accordionPanel value="" var="car">
+					<p:tab title="">
+						<h:panelGrid columns="4" cellpadding="5">
+							<f:facet name="header">
+								Dados da Nota Fiscal
+							</f:facet>						
+							
+							<h:outputText value="Cliente:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.cliente.nome}" />
+
+							<h:outputText value="CPF:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.cliente.cpf}" />
+							
+							<h:outputText value="CNPJ:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.notaFiscal.cnpj}" />
+
+							<h:outputText value="Data:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.cliente.data}" />
+							
+							<h:outputText value="E-mail:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.cliente.email}" />
+
+							<h:outputText value="Endereço:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.cliente.endereco}" />
+							
+								<h:outputText value="Estado:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.cliente.estado}" />
+
+							<h:outputText value="UF:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.cliente.uf}" />
+							
+							<h:outputText value="Produto" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.item.produto}" />
+
+							<h:outputText value="Quantidade:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.item.quantidade}" />
+
+							<h:outputText value="Valor:" style="font-weight: bold" />
+							<h:outputText value="#{notaFiscalBean.item.valorUnitario}" />
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+
 			</fieldset>
 		</h:form>
 	</ui:define>
