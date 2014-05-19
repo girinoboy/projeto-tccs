@@ -11,45 +11,32 @@
 
 		<h:form>
 			<fieldset>
-				<legend>Nota Fiscal</legend>
-				<h:panelGrid columns="4" cellpadding="5">
-					<p:outputLabel value="Nome:" />
-					<p:autoComplete value="#{notaFiscalBean.cliente.nome}" />
-
-					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputText id="cpf" value="#{notaFiscalBean.cliente.cpf}"
-						required="true" label="CPF" />
-
-					<p:outputLabel for="data" value="Data:" />
-					<p:calendar effect="explode" id="data"
-						value="#{notaFiscalBean.cliente.data}" locale="pt_BR"
-						pattern="dd/MM/yyyy" />
-
-					<p:outputLabel value="Produto:" />
-					<p:selectOneMenu value="#{notaFiscalBean.item.produto}"
-						converter="produtoConverter">
-						<f:selectItems value="#{produtoBean.produtos}" var="produto"
-							itemValue="#{produto}" itemLabel="#{produto.nome}" />
-					</p:selectOneMenu>
-
-					<p:outputLabel value="Quantidade" />
-					<p:inputText value="#{notaFiscalBean.item.quantidade}" />
-
-				</h:panelGrid>
+				<legend>Dados do Item</legend>				
+				
+				<p:outputLabel value="Quantidade" />
+				<p:inputText value="#{notaFiscalBean.item.quantidade}" />
+				
+				<p:outputLabel value="Produto:" />
+				
+				<p:selectOneMenu value="#{notaFiscalBean.item.produto}" converter="produtoConverter">
+					<f:selectItems value="#{produtoBean.produtos}" var="produto"
+						itemValue="#{produto}" itemLabel="#{produto.nome}" />
+				</p:selectOneMenu>				
+				
 			</fieldset>
 			<div align="right">
 				<p:commandButton value="Voltar"
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
 				<p:commandButton action="#{notaFiscalBean.guardarItem}"
-					value="Guardar Item" update="result,:messages" />
+					value="Guardar Item" update="result,:messages"/>
 
 			</div>
 
 			<fieldset>
 				<legend>Itens da Nota Fiscal</legend>
-				<p:dataTable id="result" value="#{notaFiscalBean.listItem}"
-					var="item" styleClass="dados" rowStyleClass="impar, par">
+				<p:dataTable id="result" value="#{notaFiscalBean.listItem}" var="item"
+					styleClass="dados" rowStyleClass="impar, par">
 
 					<p:column>
 						<f:facet name="header">Serviços</f:facet>

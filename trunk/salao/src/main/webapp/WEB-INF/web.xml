@@ -5,7 +5,16 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>salao</display-name>
 
-	<!-- Change to "Production" when you are ready to deploy -->
+	<!-- Define a localização em que o estado é salvo. Neste caso temos dois: 
+		server (padrão) que tipicamente salva em HttpSession e client que salva como 
+		campos ocultos na subsequente submissão do formulário. -->
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+
+	<!-- Descreve como a aplicação JSF está em seu ciclo de vida no desenvolvimento 
+		de software -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>

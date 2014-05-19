@@ -13,7 +13,7 @@
 			<fieldset>
 				<legend>Cadastro de Clientes</legend>
 
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="4">
 
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{cadastroCliente.cliente.nome}"
@@ -23,9 +23,17 @@
 					<p:inputText id="cpf" value="#{cadastroCliente.cliente.cpf}"
 						required="true" label="CPF" />
 
+					<p:outputLabel for="sexo" value="Sexo:" />
+					<p:selectOneMenu value="#{cadastroCliente.cliente.sexo}" id="sexo">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+					</p:selectOneMenu>
+
 					<p:outputLabel for="data" value="Data:" />
 					<p:calendar effect="explode" id="data"
-						value="#{cadastroCliente.cliente.data}" />
+						value="#{cadastroCliente.cliente.data}" locale="pt_BR"
+						pattern="dd/MM/yyyy" />
 
 					<p:outputLabel for="email" value="Email:" />
 					<p:inputText id="email" value="#{cadastroCliente.cliente.email}"
@@ -35,35 +43,90 @@
 					<p:inputText id="telefone"
 						value="#{cadastroCliente.cliente.telefone}" label="Telefone" />
 
-					<p:outputLabel for="sexo" value="Sexo:" />
-					<p:inputText id="sexo" value="#{cadastroCliente.cliente.sexo}"
-						label="Sexo" />
-
 					<p:outputLabel for="endereco" value="Endereço:" />
 					<p:inputText id="endereco"
 						value="#{cadastroCliente.cliente.endereco}" label="Endereço" />
+						
+						<p:outputLabel for="cidade" value="Cidade:" />
+					<p:inputText id="cidade"
+						value="#{cadastroCliente.cliente.cidade}" label="Cidade" />
 
-					<p:outputLabel for="cidade" value="Cidade *" />
-					<p:inputText id="cidade" value="#{cadastroCliente.cliente.cidade}"
-						label="Cidade" />
+					<p:outputLabel for="estado" value="Estado *" />
+					<p:selectOneMenu id="estado"
+						value="#{cadastroCliente.cliente.estado}" label="Estado">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItem itemLabel="Acre" itemValue="Acre" />
+						<f:selectItem itemLabel="Alagoas " itemValue="Alagoas" />
+						<f:selectItem itemLabel="Amapá " itemValue="Amapá " />
+						<f:selectItem itemLabel="Amazonas " itemValue="Amazonas " />
+						<f:selectItem itemLabel="Bahia " itemValue="Bahia " />
+						<f:selectItem itemLabel="Ceará " itemValue="Ceará " />
+						<f:selectItem itemLabel="Distrito Federal"
+							itemValue="Distrito Federal" />
+						<f:selectItem itemLabel="Espírito Santo"
+							itemValue="Espírito Santo" />
+						<f:selectItem itemLabel="Goiás" itemValue="Goiás" />
+						<f:selectItem itemLabel="Maranhão " itemValue="Maranhão " />
+						<f:selectItem itemLabel="Mato Grosso" itemValue="Mato Grosso" />
+						<f:selectItem itemLabel="Mato Grosso do Sul"
+							itemValue="Mato Grosso do Sul" />
+						<f:selectItem itemLabel="Minas Gerais" itemValue="Minas Gerais" />
+						<f:selectItem itemLabel="Pará " itemValue="Pará " />
+						<f:selectItem itemLabel="Paraíba " itemValue="Paraíba " />
+						<f:selectItem itemLabel="Paraná " itemValue="Paraná " />
+						<f:selectItem itemLabel="Pernambuco " itemValue="Pernambuco " />
+						<f:selectItem itemLabel="Piauí " itemValue="Piauí " />
+						<f:selectItem itemLabel="Rio de Janeiro "
+							itemValue="Rio de Janeiro " />
+						<f:selectItem itemLabel="Rio Grande do Norte "
+							itemValue="Rio Grande do Norte " />
+						<f:selectItem itemLabel="Rio Grande do Sul "
+							itemValue="Rio Grande do Sul " />
+						<f:selectItem itemLabel="Rondônia  " itemValue="Rondônia " />
+						<f:selectItem itemLabel="Roraima " itemValue="Roraima " />
+						<f:selectItem itemLabel="Santa Catarina "
+							itemValue="Santa Catarina " />
+					</p:selectOneMenu>
 
-					<p:outputLabel for="estado" value="Estado:" />
-					<p:inputText id="estado" value="#{cadastroCliente.cliente.estado}"
-						label="Estado" />
+					<p:outputLabel for="uf" value="UF*" />
+					<p:selectOneMenu id="uf" label="UF"
+						value="#{cadastroCliente.cliente.uf}">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItem itemLabel="AC" itemValue="PB" />
+						<f:selectItem itemLabel="AL" itemValue="AL" />
+						<f:selectItem itemLabel="AM" itemValue="AM" />
+						<f:selectItem itemLabel="BA" itemValue="BA" />
+						<f:selectItem itemLabel="CE" itemValue="CE" />
+						<f:selectItem itemLabel="DF" itemValue="DF" />
+						<f:selectItem itemLabel="ES" itemValue="ES" />
+						<f:selectItem itemLabel="GO" itemValue="GO" />
+						<f:selectItem itemLabel="MA" itemValue="MA" />
+						<f:selectItem itemLabel="MT" itemValue="MT" />
+						<f:selectItem itemLabel="MS" itemValue="MS" />
+						<f:selectItem itemLabel="MG" itemValue="MG" />
+						<f:selectItem itemLabel="PA" itemValue="PA" />
+						<f:selectItem itemLabel="PB" itemValue="PB" />
+						<f:selectItem itemLabel="PR" itemValue="PR" />
+						<f:selectItem itemLabel="PE" itemValue="PE" />
+						<f:selectItem itemLabel="PI" itemValue="PI" />
+						<f:selectItem itemLabel="RJ" itemValue="RJ" />
+						<f:selectItem itemLabel="RN" itemValue="RN" />
+						<f:selectItem itemLabel="RS" itemValue="RS" />
+						<f:selectItem itemLabel="RO" itemValue="RO" />
+						<f:selectItem itemLabel="RR" itemValue="RR" />
+						<f:selectItem itemLabel="SC" itemValue="SC" />
+					</p:selectOneMenu>
 
 				</h:panelGrid>
 			</fieldset>
-
-
-
 		</h:form>
 
 		<div align="right">
 			<p:commandButton value="Voltar"
 				action="/menu.xhtml?faces-redirect=true" immediate="true"
 				rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
-			<p:commandButton action="#{cadastroCliente.grava}" value="Gravar" />
-				
+			<p:commandButton action="#{cadastroCliente.grava}" value="Gravar" update=":messages" />
+
 		</div>
 	</ui:define>
 </ui:composition>

@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import br.com.dao.DAO;
+import br.com.model.Cliente;
 import br.com.model.Item;
 import br.com.model.NotaFiscal;
 
@@ -18,27 +19,28 @@ public class NotaFiscalBean extends GenericBean {
 
 	private Item item = new Item();
 	private NotaFiscal notaFiscal = new NotaFiscal();
+	private Cliente cliente = new Cliente();
 	DAO<Item> dao = new DAO<Item>(Item.class);
 	private List<Item> listItem = new ArrayList<Item>();
-	
-	public NotaFiscalBean(){
+
+	public NotaFiscalBean() {
 		listItem = dao.listaTodos();
 	}
 
 	public void grava() {
-		
-//		dao.adicionar(notaFiscal);
-//
-//		this.notaFiscal = dao.buscaPorId(notaFiscal.getId());
+
+		// dao.adicionar(notaFiscal);
+		//
+		// this.notaFiscal = dao.buscaPorId(notaFiscal.getId());
 
 	}
 
 	public void guardarItem() {
-		
+
 		item.setValorUnitario(item.getProduto().getPreco());
-		
+
 		dao.adicionar(item);
-		
+
 		addMessage("Salvo!");
 		listItem = dao.listaTodos();
 		item = new Item();
@@ -66,6 +68,14 @@ public class NotaFiscalBean extends GenericBean {
 
 	public void setListItem(List<Item> listItem) {
 		this.listItem = listItem;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

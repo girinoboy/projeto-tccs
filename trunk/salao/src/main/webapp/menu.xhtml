@@ -14,11 +14,12 @@
 		    <h3>Menu Principal</h3>
 		    <p:menu>
 		        <p:submenu label="Cadastros">
-		            <p:menuitem value="Usuário" outcome="cadastro" icon="ui-icon-disk" />
-		            <p:menuitem value="Produto" outcome="produto" icon="ui-icon-disk"/>
+		            <p:menuitem value="Usuário" outcome="cadastro" icon="ui-icon-person" />
+		            <p:menuitem value="Produto" outcome="produto" icon="ui-icon-suitcase"/>
 		        </p:submenu>
 		        <p:submenu label="Pedidos">
-		            <p:menuitem value="Nota fiscal" outcome="notafiscal" icon="ui-icon-star"/>
+		         <p:menuitem value="Item" outcome="item" icon="ui-icon-cart"/>
+		            <p:menuitem value="Nota fiscal" outcome="notafiscal" icon="ui-icon-document"/>
 		            <p:menuitem value="Sair" actionListener="#{loginBean.logout}" update=":messages"  icon="ui-icon-close"/>
 		        </p:submenu>
 		    </p:menu>
