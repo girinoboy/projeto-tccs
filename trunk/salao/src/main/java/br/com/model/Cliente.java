@@ -3,6 +3,7 @@
  */
 package br.com.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -17,7 +18,12 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-public class Cliente {
+public class Cliente implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6223958061075647871L;
 
 	@Id
 	@GeneratedValue
@@ -81,10 +87,6 @@ public class Cliente {
 		return telefone;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
 	public String getEndereco() {
 		return endereco;
 	}
@@ -93,12 +95,12 @@ public class Cliente {
 		this.endereco = endereco;
 	}
 
-	public String getUf() {
-		return uf;
+	public String getCidade() {
+		return cidade;
 	}
 
-	public void setUf(String uf) {
-		this.uf = uf;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	public String getEstado() {
@@ -109,6 +111,14 @@ public class Cliente {
 		this.estado = estado;
 	}
 
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
 	public String getSexo() {
 		return sexo;
 	}
@@ -117,12 +127,9 @@ public class Cliente {
 		this.sexo = sexo;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
 
 }
