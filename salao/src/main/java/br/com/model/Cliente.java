@@ -17,12 +17,12 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-public class Cliente{
+public class Cliente {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String nome;
 
 	@Temporal(TemporalType.DATE)
@@ -34,6 +34,7 @@ public class Cliente{
 	private String endereco;
 	private String cidade;
 	private String estado;
+	private String uf;
 	private String sexo;
 
 	public Long getId() {
@@ -92,12 +93,12 @@ public class Cliente{
 		this.endereco = endereco;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public String getUf() {
+		return uf;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
 	public String getEstado() {
@@ -115,5 +116,13 @@ public class Cliente{
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
 }

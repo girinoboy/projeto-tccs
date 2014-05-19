@@ -15,12 +15,12 @@ public class CadastroCliente extends GenericBean{
 	 */
 	private static final long serialVersionUID = 214643162316805969L;
 	private Cliente cliente = new Cliente();
-
+		
 	public void grava() {
 		DAO<Cliente> dao = new DAO<Cliente>(Cliente.class);
 		dao.adicionar(cliente);
-		this.cliente = new Cliente();
 		addMessage("Salvo!");
+		this.cliente = new Cliente();
 	}
 
 	public Cliente getCliente() {
