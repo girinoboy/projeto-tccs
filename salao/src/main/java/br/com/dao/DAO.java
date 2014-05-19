@@ -3,12 +3,9 @@
  */
 package br.com.dao;
 
-import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.util.JPAUtil;

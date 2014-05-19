@@ -9,7 +9,7 @@
 
 	<ui:define name="corpo">
 
-		<h:form>
+		<h:form id="formCliente">
 			<fieldset>
 				<legend>Cadastro de Clientes</legend>
 
@@ -17,39 +17,54 @@
 
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{cadastroCliente.cliente.nome}"
-						label="Nome" />
-
+						label="Nome">
+						<f:ajax event="change" />
+					</p:inputText>
+					
 					<p:outputLabel for="cpf" value="CPF:" />
 					<p:inputText id="cpf" value="#{cadastroCliente.cliente.cpf}"
-						required="true" label="CPF" />
+						required="true" label="CPF">
+						<f:ajax event="change" />
+					</p:inputText>
 
 					<p:outputLabel for="sexo" value="Sexo:" />
 					<p:selectOneMenu value="#{cadastroCliente.cliente.sexo}" id="sexo">
 						<f:selectItem itemLabel="Selecione" itemValue="" />
 						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+						<f:ajax event="change" />
 					</p:selectOneMenu>
 
 					<p:outputLabel for="data" value="Data:" />
 					<p:calendar effect="explode" id="data"
 						value="#{cadastroCliente.cliente.data}" locale="pt_BR"
-						pattern="dd/MM/yyyy" />
+						pattern="dd/MM/yyyy">
+						<f:ajax event="change" />
+					</p:calendar>
 
 					<p:outputLabel for="email" value="Email:" />
 					<p:inputText id="email" value="#{cadastroCliente.cliente.email}"
-						label="Email" />
+						label="Email">
+						<f:ajax event="change" />
+					</p:inputText>
 
 					<p:outputLabel for="telefone" value="Telefone:" />
 					<p:inputText id="telefone"
-						value="#{cadastroCliente.cliente.telefone}" label="Telefone" />
+						value="#{cadastroCliente.cliente.telefone}" label="Telefone">
+						<f:ajax event="change" />
+					</p:inputText>
 
 					<p:outputLabel for="endereco" value="Endereço:" />
 					<p:inputText id="endereco"
-						value="#{cadastroCliente.cliente.endereco}" label="Endereço" />
-						
-						<p:outputLabel for="cidade" value="Cidade:" />
-					<p:inputText id="cidade"
-						value="#{cadastroCliente.cliente.cidade}" label="Cidade" />
+						value="#{cadastroCliente.cliente.endereco}" label="Endereço">
+						<f:ajax event="change" />
+					</p:inputText>
+
+					<p:outputLabel for="cidade" value="Cidade:" />
+					<p:inputText id="cidade" value="#{cadastroCliente.cliente.cidade}"
+						label="Cidade">
+						<f:ajax event="change" />
+					</p:inputText>
 
 					<p:outputLabel for="estado" value="Estado *" />
 					<p:selectOneMenu id="estado"
@@ -119,15 +134,61 @@
 
 				</h:panelGrid>
 			</fieldset>
+
+
+			<div align="right">
+				<p:commandButton value="Voltar"
+					action="/menu.xhtml?faces-redirect=true" immediate="true"
+					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
+				<p:commandButton action="#{cadastroCliente.grava}" value="Gravar"
+					update="result" />
+
+			</div>
+
+			<br></br>
+			<p:dataTable id="result" value="#{clienteBean.clientes}"
+				var="cliente">
+
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+						#{cliente.nome}
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">CPF</f:facet>
+						#{cliente.cpf}
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Data</f:facet>
+					  <h:outputText value="#{cliente.data}">
+                            <f:convertDateTime  locale="pt_BR" pattern="dd/MM/yyyy" />
+                        </h:outputText>
+						 
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">E-mail</f:facet>
+						#{cliente.email}
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Ações</f:facet>
+					<p:commandLink action="#{clienteBean.remove}" icon="ui-icon-cart"
+						update="result,:messages" value="Remover">
+					<f:setPropertyActionListener value="#{cliente}"
+							target="#{clienteBean.cliente}" />
+					</p:commandLink>
+					<br />
+					<p:commandLink value="Alterar" update=":formCliente">
+					<p:graphicImage value="./imagens/salvar.ico" />
+						<f:setPropertyActionListener value="#{cliente}"
+							target="#{clienteBean.cliente}" />
+					</p:commandLink>
+
+				</p:column>
+			</p:dataTable>
 		</h:form>
-
-		<div align="right">
-			<p:commandButton value="Voltar"
-				action="/menu.xhtml?faces-redirect=true" immediate="true"
-				rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
-			<p:commandButton action="#{cadastroCliente.grava}" value="Gravar" update=":messages" />
-
-		</div>
 	</ui:define>
 </ui:composition>
 
