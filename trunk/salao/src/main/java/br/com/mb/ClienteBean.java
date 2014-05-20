@@ -34,8 +34,8 @@ public class ClienteBean extends GenericBean{
 	public void remove(){
 		DAO<Cliente> dao = new DAO<Cliente>(Cliente.class);
 		dao.remove(cliente);
-		this.clientes = dao.listaTodos();
 		addMessage("Removido");
+		this.clientes = dao.listaTodos();
 	}
 	
 	public List<Cliente> getClientes() {
