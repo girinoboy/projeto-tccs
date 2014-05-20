@@ -59,6 +59,28 @@
 	 			<p:ajax event="rowEdit" listener="#{menuMB.onEdit}" update=":growl" />
 	        	<p:ajax event="rowEditCancel" listener="#{menuMB.onCancel}" update=":growl" />
 	        	
+	        	<p:column headerText="id" style="width:30%">
+		            <p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{menu.id}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                    <h:outputText value="#{menu.id}" />
+		                </f:facet>
+		            </p:cellEditor>
+		        </p:column>
+		        
+		        <p:column headerText="menu_id" style="width:30%">
+		            <p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{menu.menuDTO.id}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                    <p:inputText value="#{menu.menuDTO.id}" style="width:100%"/>
+		                </f:facet>
+		            </p:cellEditor>
+		        </p:column>
+	        	
 	        	<p:column headerText="#{msgs.name}" style="width:30%">
 		            <p:cellEditor>
 		                <f:facet name="output">
