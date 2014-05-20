@@ -16,19 +16,19 @@
 				<h:panelGrid columns="4">
 
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" value="#{cadastroCliente.cliente.nome}"
+					<p:inputText id="nome" value="#{clienteBean.cliente.nome}"
 						label="Nome">
 						<f:ajax event="change" />
 					</p:inputText>
 					
 					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputText id="cpf" value="#{cadastroCliente.cliente.cpf}"
+					<p:inputText id="cpf" value="#{clienteBean.cliente.cpf}"
 						required="true" label="CPF">
 						<f:ajax event="change" />
 					</p:inputText>
 
 					<p:outputLabel for="sexo" value="Sexo:" />
-					<p:selectOneMenu value="#{cadastroCliente.cliente.sexo}" id="sexo">
+					<p:selectOneMenu value="#{clienteBean.cliente.sexo}" id="sexo">
 						<f:selectItem itemLabel="Selecione" itemValue="" />
 						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
@@ -37,38 +37,38 @@
 
 					<p:outputLabel for="data" value="Data:" />
 					<p:calendar effect="explode" id="data"
-						value="#{cadastroCliente.cliente.data}" locale="pt_BR"
+						value="#{clienteBean.cliente.data}" locale="pt_BR"
 						pattern="dd/MM/yyyy">
 						<f:ajax event="change" />
 					</p:calendar>
 
 					<p:outputLabel for="email" value="Email:" />
-					<p:inputText id="email" value="#{cadastroCliente.cliente.email}"
+					<p:inputText id="email" value="#{clienteBean.cliente.email}"
 						label="Email">
 						<f:ajax event="change" />
 					</p:inputText>
 
 					<p:outputLabel for="telefone" value="Telefone:" />
 					<p:inputText id="telefone"
-						value="#{cadastroCliente.cliente.telefone}" label="Telefone">
+						value="#{clienteBean.cliente.telefone}" label="Telefone">
 						<f:ajax event="change" />
 					</p:inputText>
 
 					<p:outputLabel for="endereco" value="Endereço:" />
 					<p:inputText id="endereco"
-						value="#{cadastroCliente.cliente.endereco}" label="Endereço">
+						value="#{clienteBean.cliente.endereco}" label="Endereço">
 						<f:ajax event="change" />
 					</p:inputText>
 
 					<p:outputLabel for="cidade" value="Cidade:" />
-					<p:inputText id="cidade" value="#{cadastroCliente.cliente.cidade}"
+					<p:inputText id="cidade" value="#{clienteBean.cliente.cidade}"
 						label="Cidade">
 						<f:ajax event="change" />
 					</p:inputText>
 
 					<p:outputLabel for="estado" value="Estado *" />
 					<p:selectOneMenu id="estado"
-						value="#{cadastroCliente.cliente.estado}" label="Estado">
+						value="#{clienteBean.cliente.estado}" label="Estado">
 						<f:selectItem itemLabel="Selecione" itemValue="" />
 						<f:selectItem itemLabel="Acre" itemValue="Acre" />
 						<f:selectItem itemLabel="Alagoas " itemValue="Alagoas" />
@@ -105,7 +105,7 @@
 
 					<p:outputLabel for="uf" value="UF*" />
 					<p:selectOneMenu id="uf" label="UF"
-						value="#{cadastroCliente.cliente.uf}">
+						value="#{clienteBean.cliente.uf}">
 						<f:selectItem itemLabel="Selecione" itemValue="" />
 						<f:selectItem itemLabel="AC" itemValue="PB" />
 						<f:selectItem itemLabel="AL" itemValue="AL" />
@@ -140,7 +140,7 @@
 				<p:commandButton value="Voltar"
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
-				<p:commandButton action="#{cadastroCliente.grava}" value="Gravar"
+				<p:commandButton action="#{clienteBean.grava}" value="Gravar"
 					update="result" />
 
 			</div>
