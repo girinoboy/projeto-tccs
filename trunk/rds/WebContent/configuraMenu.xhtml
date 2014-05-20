@@ -11,13 +11,30 @@
  			<p:panel id="panel" header="#{msgs.menuData}">
 		    	<h:inputHidden id="idMenu" value="#{menuMB.menuDTO.id}" />
 		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		        	<p:watermark for="nome" value="#{msgs.fullName}" />
+		            <p:message for="nome" />
 		        	<h:outputLabel for="nome" value="#{msgs.name}: *" />
 		            <p:inputText id="nome" size="80"
 		                value="#{menuMB.menuDTO.nome}" required="true" label="Nome">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
-		            <p:watermark for="nome" value="#{msgs.fullName}" />
-		            <p:message for="nome" />
+		            
+		            <p:watermark for="comando" value="#{msgs.fullName}" />
+		            <p:message for="comando" />
+		        	<h:outputLabel for="comando" value="#{msgs.command}: *" />
+		            <p:inputText id="comando" size="80"
+		                value="#{menuMB.menuDTO.comando}" required="true" label="Comando">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            
+		            <p:watermark for="dropIndex" value="#{msgs.fullName}" />
+		            <p:message for="dropIndex" />
+		        	<h:outputLabel for="dropIndex" value="#{msgs.dropIndex}: *" />
+		            <p:inputText id="dropIndex" size="80"
+		                value="#{menuMB.menuDTO.dropIndex}" required="true" label="Droped Index">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            
 		            
 		            <f:facet name="footer">
 			          	<p:commandButton value="#{msgs.save}" actionListener="#{menuMB.add}" id="withIcon"
@@ -42,7 +59,7 @@
 	 			<p:ajax event="rowEdit" listener="#{menuMB.onEdit}" update=":growl" />
 	        	<p:ajax event="rowEditCancel" listener="#{menuMB.onCancel}" update=":growl" />
 	        	
-	        	<p:column headerText="Nome" style="width:30%">
+	        	<p:column headerText="#{msgs.name}" style="width:30%">
 		            <p:cellEditor>
 		                <f:facet name="output">
 		                    <h:outputText value="#{menu.nome}" />
@@ -53,7 +70,7 @@
 		            </p:cellEditor>
 		        </p:column>
 		        
-		        <p:column headerText="Comando" style="width:30%">
+		        <p:column headerText="#{msgs.command}" style="width:30%">
 		            <p:cellEditor>
 		                <f:facet name="output">
 		                    <h:outputText value="#{menu.comando}" />
@@ -64,7 +81,7 @@
 		            </p:cellEditor>
 		        </p:column>
 		        
-		        <p:column headerText="Comando" style="width:30%">
+		        <p:column headerText="#{msgs.dropIndex}" style="width:30%">
 		            <p:cellEditor>
 		                <f:facet name="output">
 		                    <h:outputText value="#{menu.dropIndex}" />
@@ -75,23 +92,23 @@
 		            </p:cellEditor>
 		        </p:column>
 		        
-		        <p:column id="ativoInativoColumn" filterBy="ativoInativo" headerText="Ativo-Inativo" footerText="equals" filterMatchMode="equals">
+		        <p:column id="ativoInativoColumn" filterBy="ativoInativo" headerText="#{msgs.active}-#{msgs.inactive}" footerText="equals" filterMatchMode="equals" style="width:30%">
 		            <f:facet name="filter">
 		                <p:selectOneButton onchange="PF('menusTable').filter()">
 		                    <f:converter converterId="javax.faces.Boolean" />
 		                    <f:selectItem itemLabel="#{msgs.all}" itemValue="" />
-		                    <f:selectItem itemLabel="Ativo" itemValue="true" />
-		                    <f:selectItem itemLabel="Inativo" itemValue="false" />
+		                    <f:selectItem itemLabel="#{msgs.active}" itemValue="true" />
+		                    <f:selectItem itemLabel="#{msgs.inactive}" itemValue="false" />
 		                </p:selectOneButton>
 		            </f:facet>
 	            	<p:cellEditor>
 		                <f:facet name="output">
-		                	 <h:outputText value="#{menu.ativoInativo ? 'Ativo': 'Inativo'}" />
+		                	<h:outputText value="#{menu.ativoInativo ? msgs.active : msgs.inactive}" escape="false" />
 		                </f:facet>
 		                <f:facet name="input">
 		                	<h:selectOneMenu value="#{menu.ativoInativo}" >
-		                		<f:selectItem itemLabel="Ativo" itemValue="true"/>
-		                		<f:selectItem itemLabel="Inativo" itemValue="false"/>
+		                		<f:selectItem itemLabel="#{msgs.active}" itemValue="true"/>
+		                		<f:selectItem itemLabel="#{msgs.inactive}" itemValue="false"/>
 		                    </h:selectOneMenu>
 		                </f:facet>
 		            </p:cellEditor>

@@ -62,64 +62,9 @@ public class LoginManagedBean extends GenericoMB{
 				context.execute("PF('dlg').hide();");
 				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
 			} else if(usuarioDTO==null && usuarioDAO.list().size()==0){//extrair para um metodo
-				//cria perfil
-				PerfilDTO perfilDTO = new PerfilDAO().save(new PerfilDTO(1));
 				
-				//cria salas
-				new LocalDAO().save(new LocalDTO("Sala 1"));
-				new LocalDAO().save(new LocalDTO("Sala 2"));
+				criaMenus();//criando menus iniciais
 				
-				//cria usuario
-				usuarioDTO = new UsuarioDTO();			
-				usuarioDTO.setUsuario("admin");
-				usuarioDTO.setSenha("admin");
-				usuarioDTO.setTema("flick");
-				usuarioDTO.setNome("Administrador do Sistema");
-				usuarioDTO.setDataNascimento(new Date());
-				usuarioDTO.setPerfilDTO(new PerfilDTO(1));
-				usuarioDTO = usuarioDAO.save(usuarioDTO);
-				
-				//INSERT INTO USUARIO_PERFIL VALUES(1,1,1);
-				new UsuarioPerfilDAO().save(new UsuarioPerfilDTO(usuarioDTO, perfilDTO));
-				
-				//cria menus
-				PerfilMenuDAO perfilMenuDAO = new PerfilMenuDAO();
-				MenuDAO menuDAO = new MenuDAO();
-				MenuDTO menuDTO = new MenuDTO();
-				menuDTO.setNome("exit");
-				menuDTO.setComando("#{loginManagedBean.logout}");
-				menuDTO.setDropIndex(3);
-				menuDTO.setAtivoInativo(true);
-				menuDTO = menuDAO.save(menuDTO);				
-				perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
-
-				menuDTO = new MenuDTO();
-				menuDTO.setNome("accessControl");
-				menuDTO.setUrl("controleAcesso.xhtml");
-				menuDTO.setDropIndex(1);
-				menuDTO.setAtivoInativo(true);
-				menuDTO = menuDAO.save(menuDTO);
-				perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
-				
-				menuDTO = new MenuDTO();
-				menuDTO.setNome("profileRegister");
-//				menuDTO.setUrl("controleAcesso.xhtml");
-				menuDTO.setOutcome("cadastrarPerfil.xhtml");
-				menuDTO.setDropIndex(2);
-				menuDTO.setAtivoInativo(true);
-				menuDTO = menuDAO.save(menuDTO);
-				perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
-
-				menuDTO = new MenuDTO();
-				menuDTO.setNome("schedule");
-				menuDTO.setUrl("agenda.xhtml");
-				menuDTO.setDropIndex(0);
-				menuDTO.setAtivoInativo(true);
-				menuDTO = menuDAO.save(menuDTO);
-				
-				PerfilMenuDTO perfilMenuDTO = perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
-				System.out.println(perfilMenuDTO);
-
 				loggedIn = true;
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, rb.getString("welcome"), usuarioDTO.getUsuario());
 				
@@ -143,6 +88,75 @@ public class LoginManagedBean extends GenericoMB{
 			context.addCallbackParam("perfil", usuarioDTO.getPerfilDTO().getId());
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
+		
+	}
+	
+	private void criaMenus() throws Exception {
+		//cria perfil
+		PerfilDTO perfilDTO = new PerfilDAO().save(new PerfilDTO(1));
+		
+		//cria salas
+		new LocalDAO().save(new LocalDTO("Sala 1"));
+		new LocalDAO().save(new LocalDTO("Sala 2"));
+		
+		//cria usuario
+		usuarioDTO = new UsuarioDTO();			
+		usuarioDTO.setUsuario("admin");
+		usuarioDTO.setSenha("admin");
+		usuarioDTO.setTema("flick");
+		usuarioDTO.setNome("Administrador do Sistema");
+		usuarioDTO.setDataNascimento(new Date());
+		usuarioDTO.setPerfilDTO(new PerfilDTO(1));
+		usuarioDTO = usuarioDAO.save(usuarioDTO);
+		
+		//INSERT INTO USUARIO_PERFIL VALUES(1,1,1);
+		new UsuarioPerfilDAO().save(new UsuarioPerfilDTO(usuarioDTO, perfilDTO));
+		
+		//cria menus
+		PerfilMenuDAO perfilMenuDAO = new PerfilMenuDAO();
+		MenuDAO menuDAO = new MenuDAO();
+		MenuDTO menuDTO = new MenuDTO();
+		menuDTO.setNome("exit");
+		menuDTO.setComando("#{loginManagedBean.logout}");
+		menuDTO.setDropIndex(3);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);				
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+
+		menuDTO = new MenuDTO();
+		menuDTO.setNome("accessControl");
+		menuDTO.setUrl("controleAcesso.xhtml");
+		menuDTO.setDropIndex(1);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+		
+		menuDTO = new MenuDTO();
+		menuDTO.setNome("profileRegister");
+//		menuDTO.setUrl("controleAcesso.xhtml");
+		menuDTO.setOutcome("cadastrarPerfil.xhtml");
+		menuDTO.setDropIndex(2);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+		
+		menuDTO = new MenuDTO();
+		menuDTO.setNome("configureMenu");
+		menuDTO.setUrl("configuraMenu.xhtml");
+		menuDTO.setDropIndex(1);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+
+		menuDTO = new MenuDTO();
+		menuDTO.setNome("schedule");
+		menuDTO.setUrl("agenda.xhtml");
+		menuDTO.setDropIndex(0);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);
+		
+		PerfilMenuDTO perfilMenuDTO = perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+		System.out.println(perfilMenuDTO);
 		
 	}
 
