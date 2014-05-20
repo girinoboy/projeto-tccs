@@ -34,6 +34,10 @@ import br.com.dto.PerfilMenuDTO;
 @RequestScoped
 public class MenuMB extends GenericoMB implements ModeloMB{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private MenuModel model;
 	private MenuDAO menuDAO = new MenuDAO();
 	private PerfilMenuDAO perfilMenuDAO = new PerfilMenuDAO();

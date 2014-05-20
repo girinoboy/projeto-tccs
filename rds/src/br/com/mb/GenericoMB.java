@@ -1,5 +1,6 @@
 package br.com.mb;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -11,13 +12,18 @@ import br.com.dto.MenuDTO;
 import br.com.dto.PerfilDTO;
 import br.com.dto.UsuarioDTO;
 @SuppressWarnings("unchecked")
-public class GenericoMB {
+public class GenericoMB implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected ResourceBundle rb;
 	
 	public GenericoMB(){
 		FacesContext fc = FacesContext.getCurrentInstance();
-		rb = ResourceBundle.getBundle("br.com.messages.messages",fc.getViewRoot().getLocale());
+		if(fc.getViewRoot() != null)
+			rb = ResourceBundle.getBundle("br.com.messages.messages",fc.getViewRoot().getLocale());
 	}
 	
 	public UsuarioDTO getUserSession(){
