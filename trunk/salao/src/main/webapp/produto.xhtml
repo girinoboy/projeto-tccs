@@ -27,6 +27,7 @@
 
 					<p:outputLabel value="Preço:" for="preco" />
 					<p:inputText id="preco" value="#{produtoBean.produto.preco}">
+
 						<f:ajax event="change" />
 					</p:inputText>
 
@@ -34,7 +35,8 @@
 			</fieldset>
 
 			<div align="right">
-				<p:commandButton action="#{produtoBean.grava}" value="Gravar" update="result"/>
+				<p:commandButton action="#{produtoBean.grava}" value="Gravar"
+					update="result" />
 				<p:commandButton value="Voltar"
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
@@ -42,7 +44,8 @@
 			</div>
 
 			<br></br>
-			<p:dataTable id="result" value="#{produtoBean.produtos}" var="produto">
+			<p:dataTable id="result" value="#{produtoBean.produtos}"
+				var="produto">
 
 				<p:column>
 					<f:facet name="header">Serviços</f:facet>
@@ -61,20 +64,25 @@
 
 				<p:column>
 					<f:facet name="header">Valor</f:facet>
-						#{produto.preco}
-						
-					</p:column>
+					<h:outputText value="#{produto.preco}">
+						<f:convertNumber type="currency" currencySymbol="R$ "
+							locale="pt_BR" />
+					</h:outputText>
+
+				</p:column>
 
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
 
-					<p:commandLink action="#{produtoBean.remove}" update="result,:messages"
-						value="Remover">
-						<f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}" /> 
+					<p:commandLink action="#{produtoBean.remove}"
+						update="result,:messages" value="Remover">
+						<f:setPropertyActionListener value="#{produto}"
+							target="#{produtoBean.produto}" />
 					</p:commandLink>
 					<br />
 					<p:commandLink value="Alterar" update=":formProduto">
-						<f:setPropertyActionListener value="#{produto}"	target="#{produtoBean.produto}" />
+						<f:setPropertyActionListener value="#{produto}"
+							target="#{produtoBean.produto}" />
 					</p:commandLink>
 
 				</p:column>
