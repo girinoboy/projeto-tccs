@@ -10,6 +10,7 @@
 	<ui:define name="corpo">
 
 		<h:form id="formCliente">
+			<h:inputHidden value="#{clienteBean.cliente.id}" />
 			<fieldset>
 				<legend>Cadastro de Clientes</legend>
 
@@ -17,19 +18,19 @@
 
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{clienteBean.cliente.nome}"
-						label="Nome">						
+						label="Nome">
 					</p:inputText>
-					
-				<p:outputLabel for="cpf" value="CPF:" />
-					 <p:inputMask id="cpf" value="#{clienteBean.cliente.cpf}" mask="999-999-999-99"
-						 label="CPF">						
+
+					<p:outputLabel for="cpf" value="CPF:" />
+					<p:inputMask id="cpf" value="#{clienteBean.cliente.cpf}"
+						mask="999-999-999-99" label="CPF">
 					</p:inputMask>
 
 					<p:outputLabel for="sexo" value="Sexo:" />
 					<p:selectOneMenu value="#{clienteBean.cliente.sexo}" id="sexo">
 						<f:selectItem itemLabel="Selecione" itemValue="" />
 						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />						
+						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
 					</p:selectOneMenu>
 
 					<p:outputLabel for="data" value="Data:" />
@@ -43,15 +44,15 @@
 						label="Email">
 					</p:inputText>
 
-				
+
 					<p:outputLabel for="telefone" value="Telefone:" />
-					<p:inputMask  id="telefone" mask="(999) 9999-9999"
+					<p:inputMask id="telefone" mask="(999) 9999-9999"
 						value="#{clienteBean.cliente.telefone}" label="Telefone">
 					</p:inputMask>
 
 					<p:outputLabel for="endereco" value="Endereço:" />
-					<p:inputText id="endereco"
-						value="#{clienteBean.cliente.endereco}" label="Endereço">
+					<p:inputText id="endereco" value="#{clienteBean.cliente.endereco}"
+						label="Endereço">
 						<f:ajax event="change" />
 					</p:inputText>
 
@@ -62,8 +63,8 @@
 					</p:inputText>
 
 					<p:outputLabel for="estado" value="Estado *" />
-					<p:selectOneMenu id="estado"
-						value="#{clienteBean.cliente.estado}" label="Estado">
+					<p:selectOneMenu id="estado" value="#{clienteBean.cliente.estado}"
+						label="Estado">
 						<f:selectItem itemLabel="Selecione" itemValue="" />
 						<f:selectItem itemLabel="Acre" itemValue="Acre" />
 						<f:selectItem itemLabel="Alagoas " itemValue="Alagoas" />
@@ -138,6 +139,7 @@
 				<p:commandButton action="#{clienteBean.grava}" value="Gravar"
 					update="result" />
 
+
 			</div>
 
 			<br></br>
@@ -156,10 +158,10 @@
 
 				<p:column>
 					<f:facet name="header">Data</f:facet>
-					  <h:outputText value="#{cliente.data}">
-                            <f:convertDateTime  locale="pt_BR" pattern="dd/MM/yyyy" />
-                        </h:outputText>
-						 
+					<h:outputText value="#{cliente.data}">
+						<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+					</h:outputText>
+
 				</p:column>
 
 				<p:column>
@@ -169,8 +171,9 @@
 
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
-					<p:commandLink action="#{clienteBean.remove}" update="result,:messages" value="Remover">
-					<f:setPropertyActionListener value="#{cliente}"
+					<p:commandLink action="#{clienteBean.remove}"
+						update="result,:messages" value="Remover">
+						<f:setPropertyActionListener value="#{cliente}"
 							target="#{clienteBean.cliente}" />
 					</p:commandLink>
 					<br />
