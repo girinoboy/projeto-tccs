@@ -10,10 +10,6 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.util.JPAUtil;
 
-/**
- * @author Joelson
- *
- */
 @SuppressWarnings("unchecked")
 public class DAO<T> {
 	

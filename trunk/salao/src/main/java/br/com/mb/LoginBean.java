@@ -13,10 +13,6 @@ import javax.servlet.http.HttpSession;
 import br.com.dao.UsuarioDAO;
 import br.com.model.Usuario;
 
-/**
- * @author Joelson
- * 
- */
 @SessionScoped
 @ManagedBean
 public class LoginBean extends GenericBean {

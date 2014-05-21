@@ -9,10 +9,6 @@ import javax.persistence.Query;
 import br.com.model.Usuario;
 import br.com.util.JPAUtil;
 
-/**
- * @author Joelson
- *
- */
 public class UsuarioDAO extends DAO<Usuario>{
 
 	public UsuarioDAO(Class<Usuario> classe) {
