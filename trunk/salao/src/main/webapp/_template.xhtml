@@ -8,30 +8,32 @@
 <h:head>
 	<title>Sistema de Cadastro - SISCAD</title>
 	<h:outputStylesheet library="css" name="style.css" />
-	<h:outputScript name="jsf.js"  library="javax.faces" target="head"/>
-	<h:outputScript name="calendario_pt_BR.js" library="js" /> 
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<h:outputScript name="calendario_pt_BR.js" library="js" />
 </h:head>
 
 <h:body>
-	<p:growl id="messages"/>
-	
-	<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>
-             
+	<p:growl id="messages" />
+
+	<p:ajaxStatus onstart="PF('statusDialog').show();"
+		onsuccess="PF('statusDialog').hide();" />
+
 	<p:dialog modal="true" widgetVar="statusDialog" header="Status"
-	        draggable="false" closable="false">
-	    <p:graphicImage value="resources/imagens/ajaxloadingbar.gif" />
+		draggable="false" closable="false">
+		<p:graphicImage value="resources/imagens/ajaxloadingbar.gif" />
 	</p:dialog>
-	
+
 	<div id="cabecalho">
-	 <h1>Sistema de Cadastro - SISCAD</h1>
+		<h1>Sistema de Cadastro - SISCAD</h1>
 		<!-- <h:graphicImage library="imagens" name="xxxx.png"  id="xxxx"/> -->
 	</div>
 
 	<div id="conteudo">
 		<ui:insert name="corpo" />
 	</div>
-	
-	<div id="rodape">Copyright 2014. Todos os direitos reservados Ayla</div>
+
+	<div id="rodape">Copyright 2014. Todos os direitos reservados
+		Ayla</div>
 
 </h:body>
 </html>
