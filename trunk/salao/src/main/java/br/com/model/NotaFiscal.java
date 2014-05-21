@@ -1,7 +1,7 @@
 package br.com.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -24,9 +24,8 @@ public class NotaFiscal implements Serializable {
 	private String cnpj;
 
 	@Temporal(TemporalType.DATE)
-	private Calendar data;
+	private Date data;
 
-	//@OneToMany(cascade=CascadeType.PERSIST, mappedBy="notaFiscal")
 	@OneToMany
 	private List<Item> itens;
 
@@ -46,11 +45,11 @@ public class NotaFiscal implements Serializable {
 		this.cnpj = cnpj;
 	}
 
-	public Calendar getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
