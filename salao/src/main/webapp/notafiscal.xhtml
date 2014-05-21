@@ -17,8 +17,13 @@
 					<p:autoComplete value="#{notaFiscalBean.cliente.nome}" />
 
 					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputText id="cpf" value="#{notaFiscalBean.cliente.cpf}"
+					<p:inputMask id="cpf" value="#{notaFiscalBean.cliente.cpf}" mask="999-999-999-99"
 						required="true" label="CPF" />
+
+					<p:outputLabel for="cnpj" value="CNPJ:" />
+					<p:inputMask id="cnpj" value="#{notaFiscalBean.notaFiscal.cnpj}" mask="99-999-99/9999-99"
+						required="true" label="CNPJ" />
+
 
 					<p:outputLabel for="data" value="Data:" />
 					<p:calendar effect="explode" id="data"
@@ -53,32 +58,32 @@
 						<h:panelGrid columns="4" cellpadding="5">
 							<f:facet name="header">
 								Dados da Nota Fiscal
-							</f:facet>						
-							
+							</f:facet>
+
 							<h:outputText value="Cliente:" style="font-weight: bold" />
 							<h:outputText value="#{notaFiscalBean.cliente.nome}" />
 
 							<h:outputText value="CPF:" style="font-weight: bold" />
 							<h:outputText value="#{notaFiscalBean.cliente.cpf}" />
-							
+
 							<h:outputText value="CNPJ:" style="font-weight: bold" />
 							<h:outputText value="#{notaFiscalBean.notaFiscal.cnpj}" />
 
 							<h:outputText value="Data:" style="font-weight: bold" />
 							<h:outputText value="#{notaFiscalBean.cliente.data}" />
-							
+
 							<h:outputText value="E-mail:" style="font-weight: bold" />
 							<h:outputText value="#{notaFiscalBean.cliente.email}" />
 
 							<h:outputText value="Endereço:" style="font-weight: bold" />
 							<h:outputText value="#{notaFiscalBean.cliente.endereco}" />
-							
-								<h:outputText value="Estado:" style="font-weight: bold" />
+
+							<h:outputText value="Estado:" style="font-weight: bold" />
 							<h:outputText value="#{notaFiscalBean.cliente.estado}" />
 
 							<h:outputText value="UF:" style="font-weight: bold" />
 							<h:outputText value="#{notaFiscalBean.cliente.uf}" />
-							
+
 							<h:outputText value="Produto" style="font-weight: bold" />
 							<h:outputText value="#{notaFiscalBean.item.produto}" />
 
