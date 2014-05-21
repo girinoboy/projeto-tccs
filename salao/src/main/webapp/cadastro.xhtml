@@ -10,48 +10,44 @@
 	<ui:define name="corpo">
 
 		<h:form id="formCliente">
-			<h:inputHidden id="idCliente" value="#{clienteBean.cliente.id}" />
 			<fieldset>
 				<legend>Cadastro de Clientes</legend>
 
-				<h:panelGrid id="panelGrid" columns="4">
+				<h:panelGrid columns="4">
 
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{clienteBean.cliente.nome}"
-						required="true" label="Nome"/>
+						label="Nome">						
+					</p:inputText>
 					
-					<p:outputLabel for="cpf" value="CPF:" />
+				<p:outputLabel for="cpf" value="CPF:" />
 					 <p:inputMask id="cpf" value="#{clienteBean.cliente.cpf}" mask="999-999-999-99"
-						required="true" label="CPF">
-						
+						 label="CPF">						
 					</p:inputMask>
 
 					<p:outputLabel for="sexo" value="Sexo:" />
 					<p:selectOneMenu value="#{clienteBean.cliente.sexo}" id="sexo">
 						<f:selectItem itemLabel="Selecione" itemValue="" />
 						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-						<f:ajax event="change" />
+						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />						
 					</p:selectOneMenu>
 
 					<p:outputLabel for="data" value="Data:" />
 					<p:calendar effect="explode" id="data"
 						value="#{clienteBean.cliente.data}" locale="pt_BR"
 						pattern="dd/MM/yyyy">
-						<f:ajax event="change" />
 					</p:calendar>
 
 					<p:outputLabel for="email" value="Email:" />
 					<p:inputText id="email" value="#{clienteBean.cliente.email}"
 						label="Email">
-						<f:ajax event="change" />
 					</p:inputText>
 
+				
 					<p:outputLabel for="telefone" value="Telefone:" />
 					<p:inputMask  id="telefone" mask="(999) 9999-9999"
 						value="#{clienteBean.cliente.telefone}" label="Telefone">
-						<f:ajax event="change" />
-					 </p:inputMask>
+					</p:inputMask>
 
 					<p:outputLabel for="endereco" value="Endereço:" />
 					<p:inputText id="endereco"
@@ -140,7 +136,7 @@
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
 				<p:commandButton action="#{clienteBean.grava}" value="Gravar"
-					update="result,:messages,panelGrid" />
+					update="result" />
 
 			</div>
 
@@ -173,21 +169,18 @@
 
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
-
-					<p:commandLink action="#{clienteBean.remove}" immediate="true"
-						update="result,:messages" value="Remover">
-						<f:setPropertyActionListener value="#{cliente}"
+					<p:commandLink action="#{clienteBean.remove}" update="result,:messages" value="Remover">
+					<f:setPropertyActionListener value="#{cliente}"
 							target="#{clienteBean.cliente}" />
 					</p:commandLink>
 					<br />
-					<p:commandLink value="Alterar" update=":formCliente" immediate="true">
+					<p:commandLink value="Alterar" update=":formCliente">
 						<f:setPropertyActionListener value="#{cliente}"
 							target="#{clienteBean.cliente}" />
 					</p:commandLink>
 
 				</p:column>
 			</p:dataTable>
-			
 		</h:form>
 	</ui:define>
 </ui:composition>

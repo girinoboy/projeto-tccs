@@ -4,26 +4,19 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 
 import br.com.dao.DAO;
 import br.com.model.Cliente;
 
-@ViewScoped
+@RequestScoped
 @ManagedBean
 public class ClienteBean extends GenericBean{
 
+	private static final long serialVersionUID = 214643162316805969L;
 	
-	private static final long serialVersionUID = 8547551505625337061L;
-
 	private Cliente cliente = new Cliente();
 	
 	private List<Cliente> clientes;
-	
-	public ClienteBean(){
-		clientes = new DAO<Cliente>(Cliente.class).listaTodos();
-		System.out.println(cliente);
-	}
 		
 	public void grava() {
 		DAO<Cliente> dao = new DAO<Cliente>(Cliente.class);
@@ -46,6 +39,9 @@ public class ClienteBean extends GenericBean{
 	}
 	
 	public List<Cliente> getClientes() {
+		if (clientes == null) {
+			clientes = new DAO<Cliente>(Cliente.class).listaTodos();
+		}
 		return clientes;
 	}
 	
