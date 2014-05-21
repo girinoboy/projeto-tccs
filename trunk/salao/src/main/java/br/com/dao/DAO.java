@@ -13,10 +13,13 @@ import br.com.util.JPAUtil;
 @SuppressWarnings("unchecked")
 public class DAO<T> {
 	
-	private final Class<T> classe;
+	protected final Class<T> classe;
+	
+	EntityManager em = null;
 
 	public DAO(Class<T> classe) {
 		this.classe = classe;
+		em = new JPAUtil().getEntityManager();
 	}
 
 	public void adicionar(T t) {
@@ -78,7 +81,7 @@ public class DAO<T> {
 		query.select(query.from(classe));
 
 		List<T> lista = em.createQuery(query).getResultList();
-
+		
 		em.close();
 		return lista;
 	}

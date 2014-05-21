@@ -25,6 +25,9 @@ public class Item implements Serializable{
 
 	@ManyToOne
 	private Produto produto;
+	
+	@ManyToOne
+	private Cliente cliente;
 
 	private Integer quantidade;
 
@@ -68,6 +71,14 @@ public class Item implements Serializable{
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

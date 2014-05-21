@@ -9,20 +9,31 @@
 
 	<ui:define name="corpo">
 
-		<h:form>
+		<h:form id="form1">
 			<fieldset>
-				<legend>Dados do Item</legend>				
+				<legend>Dados do Item</legend>	
 				
-				<p:outputLabel value="Quantidade" />
-				<p:inputText value="#{notaFiscalBean.item.quantidade}" />
+				<h:outputLabel value="Nome: " for="nome"/>  
+	            <p:autoComplete value="#{itemBean.item.cliente}" id="nome" completeMethod="#{autoCompleteBean.completarCliente}"  
+                    var="c" itemLabel="#{c.nome}" itemValue="#{c}" converter="clienteConverter" forceSelection="true" cache="false" >
+                    <p:ajax event="itemSelect" listener="#{clienteBean.handleSelect}" update=":messages,:form1" />  
+	            </p:autoComplete>		
+				
+				<h:outputLabel value="Nota: " for="nota"/>  
+		            <p:autoComplete value="#{itemBean.item.notafiscal}" id="nota" completeMethod="#{autoCompleteBean.completarNota}"  
+	                    var="n" itemLabel="#{n.cnpj}" itemValue="#{n}" converter="notaFiscalConverter" forceSelection="true" cache="false" >
+	                    <p:ajax event="itemSelect" listener="#{notaFiscalBean.handleSelect}" update=":messages,:form1" />  
+		            </p:autoComplete>
 				
 				<p:outputLabel value="Produto:" />
 				
-				<p:selectOneMenu value="#{notaFiscalBean.item.produto}" converter="produtoConverter">
+				<p:selectOneMenu value="#{itemBean.item.produto}" converter="produtoConverter">
 					<f:selectItems value="#{produtoBean.produtos}" var="produto"
 						itemValue="#{produto}" itemLabel="#{produto.nome}" />
 				</p:selectOneMenu>				
 				
+				<p:outputLabel value="Quantidade" />
+				<p:inputText value="#{itemBean.item.quantidade}" />
 			</fieldset>
 			<div align="right">
 				<p:commandButton value="Voltar"
@@ -35,7 +46,7 @@
 
 			<fieldset>
 				<legend>Itens da Nota Fiscal</legend>
-				<p:dataTable id="result" value="#{notaFiscalBean.listItem}" var="item"
+				<p:dataTable id="result" value="#{itemBean.listItem}" var="item"
 					styleClass="dados" rowStyleClass="impar, par">
 
 					<p:column>
