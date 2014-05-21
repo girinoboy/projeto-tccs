@@ -47,13 +47,13 @@
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
 				<p:commandButton action="#{notaFiscalBean.guardarItem}"
-					value="Guardar Item" update=":messages" />
+					value="Guardar Item" update=":messages,accordionPanel" />
 
 			</div>
 
 			<fieldset>
 				<legend>Nota Fiscal</legend>
-				<p:accordionPanel value="" var="car">
+				<p:accordionPanel id="accordionPanel" value="" var="car">
 					<p:tab title="">
 						<h:panelGrid columns="4" cellpadding="5">
 							<f:facet name="header">
