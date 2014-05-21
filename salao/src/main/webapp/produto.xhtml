@@ -10,7 +10,7 @@
 	<ui:define name="corpo">
 
 		<h:form id="formProduto">
-
+			<h:inputHidden id="idProduto" value="#{produtoBean.produto.id}" />
 			<fieldset>
 				<legend>Cadastro de Produtos</legend>
 				<h:panelGrid id="grid" columns="2">
@@ -36,7 +36,7 @@
 
 			<div align="right">
 				<p:commandButton action="#{produtoBean.grava}" value="Gravar"
-					update="result" />
+					update="result,grid" />
 				<p:commandButton value="Voltar"
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />

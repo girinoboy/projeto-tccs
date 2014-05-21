@@ -10,21 +10,20 @@
 	<ui:define name="corpo">
 
 		<h:form id="formCliente">
+			<h:inputHidden id="idCliente" value="#{clienteBean.cliente.id}" />
 			<fieldset>
 				<legend>Cadastro de Clientes</legend>
 
-				<h:panelGrid columns="4">
+				<h:panelGrid id="panelGrid" columns="4">
 
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{clienteBean.cliente.nome}"
-						label="Nome">
-						<f:ajax event="change" />
-					</p:inputText>
+						required="true" label="Nome"/>
 					
 					<p:outputLabel for="cpf" value="CPF:" />
 					 <p:inputMask id="cpf" value="#{clienteBean.cliente.cpf}" mask="999-999-999-99"
 						required="true" label="CPF">
-						<f:ajax event="change" />
+						
 					</p:inputMask>
 
 					<p:outputLabel for="sexo" value="Sexo:" />
@@ -141,7 +140,7 @@
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
 				<p:commandButton action="#{clienteBean.grava}" value="Gravar"
-					update="result" />
+					update="result,:messages,panelGrid" />
 
 			</div>
 
@@ -174,18 +173,21 @@
 
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
-					<p:commandLink action="#{clienteBean.remove}" update="result,:messages" value="Remover">
-					<f:setPropertyActionListener value="#{cliente}"
+
+					<p:commandLink action="#{clienteBean.remove}" immediate="true"
+						update="result,:messages" value="Remover">
+						<f:setPropertyActionListener value="#{cliente}"
 							target="#{clienteBean.cliente}" />
 					</p:commandLink>
 					<br />
-					<p:commandLink value="Alterar" update=":formCliente">
+					<p:commandLink value="Alterar" update=":formCliente" immediate="true">
 						<f:setPropertyActionListener value="#{cliente}"
 							target="#{clienteBean.cliente}" />
 					</p:commandLink>
 
 				</p:column>
 			</p:dataTable>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>
