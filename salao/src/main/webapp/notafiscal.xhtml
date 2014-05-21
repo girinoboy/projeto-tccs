@@ -13,88 +13,30 @@
 			<fieldset>
 				<legend>Nota Fiscal</legend>
 				<h:panelGrid columns="4" cellpadding="5">
-					<p:outputLabel value="Nome:" />
-					<p:autoComplete value="#{notaFiscalBean.cliente.nome}" />
-
-					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputMask id="cpf" value="#{notaFiscalBean.cliente.cpf}" mask="999-999-999-99"
-						required="true" label="CPF" />
-
 					<p:outputLabel for="cnpj" value="CNPJ:" />
 					<p:inputMask id="cnpj" value="#{notaFiscalBean.notaFiscal.cnpj}" mask="99-999-99/9999-99"
-						required="true" label="CNPJ" />
+						label="CNPJ" />
 
 
 					<p:outputLabel for="data" value="Data:" />
 					<p:calendar effect="explode" id="data"
-						value="#{notaFiscalBean.cliente.data}" locale="pt_BR"
+						value="#{notaFiscalBean.notaFiscal.data}" locale="pt_BR"
 						pattern="dd/MM/yyyy" />
-
-					<p:outputLabel value="Produto:" />
-					<p:selectOneMenu value="#{notaFiscalBean.item.produto}"
-						converter="produtoConverter">
-						<f:selectItems value="#{produtoBean.produtos}" var="produto"
-							itemValue="#{produto}" itemLabel="#{produto.nome}" />
-					</p:selectOneMenu>
-
-					<p:outputLabel value="Quantidade" />
-					<p:inputText value="#{notaFiscalBean.item.quantidade}" />
-
+					
 				</h:panelGrid>
 			</fieldset>
 			<div align="right">
 				<p:commandButton value="Voltar"
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
-				<p:commandButton action="#{notaFiscalBean.guardarItem}"
-					value="Guardar Item" update=":messages,accordionPanel" />
+				<p:commandButton action="#{notaFiscalBean.adiciona}"
+					value="Guardar Item" update=":messages" />
 
 			</div>
 
 			<fieldset>
 				<legend>Nota Fiscal</legend>
-				<p:accordionPanel id="accordionPanel" value="" var="car">
-					<p:tab title="">
-						<h:panelGrid columns="4" cellpadding="5">
-							<f:facet name="header">
-								Dados da Nota Fiscal
-							</f:facet>
-
-							<h:outputText value="Cliente:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.cliente.nome}" />
-
-							<h:outputText value="CPF:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.cliente.cpf}" />
-
-							<h:outputText value="CNPJ:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.notaFiscal.cnpj}" />
-
-							<h:outputText value="Data:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.cliente.data}" />
-
-							<h:outputText value="E-mail:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.cliente.email}" />
-
-							<h:outputText value="Endereço:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.cliente.endereco}" />
-
-							<h:outputText value="Estado:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.cliente.estado}" />
-
-							<h:outputText value="UF:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.cliente.uf}" />
-
-							<h:outputText value="Produto" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.item.produto}" />
-
-							<h:outputText value="Quantidade:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.item.quantidade}" />
-
-							<h:outputText value="Valor:" style="font-weight: bold" />
-							<h:outputText value="#{notaFiscalBean.item.valorUnitario}" />
-						</h:panelGrid>
-					</p:tab>
-				</p:accordionPanel>
+					aqui virá dados do cliente e produto com o cnpj da nota
 
 			</fieldset>
 		</h:form>

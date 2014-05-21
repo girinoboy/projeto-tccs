@@ -23,6 +23,8 @@ public class NotaFiscalBean extends GenericBean {
 	DAO<Item> dao = new DAO<Item>(Item.class);
 	private List<Item> listItem = new ArrayList<Item>();
 
+	private List<NotaFiscal> notas;
+
 	public NotaFiscalBean() {
 		listItem = dao.listaTodos();
 	}
@@ -44,6 +46,17 @@ public class NotaFiscalBean extends GenericBean {
 		addMessage("Salvo!");
 		listItem = dao.listaTodos();
 		item = new Item();
+	}
+
+	public void adiciona() {
+		DAO<NotaFiscal> dao = new DAO<NotaFiscal>(NotaFiscal.class);
+		dao.adicionar(notaFiscal);
+		
+		this.notaFiscal = new NotaFiscal();
+		this.item = new Item();
+		addMessage("Dados salvos na Nota Fiscal!");
+		//notas = dao.listaTodos();
+		this.notaFiscal = new NotaFiscal();
 	}
 
 	public NotaFiscal getNotaFiscal() {
@@ -78,4 +91,11 @@ public class NotaFiscalBean extends GenericBean {
 		this.cliente = cliente;
 	}
 
+	public List<NotaFiscal> getNotas() {
+		return notas;
+	}
+
+	public void setNotas(List<NotaFiscal> notas) {
+		this.notas = notas;
+	}
 }
