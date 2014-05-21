@@ -12,7 +12,7 @@
 		<h:form id="formProduto">
 
 			<fieldset>
-				<legend>Cadastro de Serviços</legend>
+				<legend>Cadastro de Produtos</legend>
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel value="Nome:" for="nome" />
 					<p:inputText id="nome" value="#{produtoBean.produto.nome}">
@@ -49,28 +49,19 @@
 
 				<p:column>
 					<f:facet name="header">Serviços</f:facet>
-						#{produto.nome}
-						
+						#{produto.nome}						
 					</p:column>
-
-
-
 				<p:column>
 					<f:facet name="header">Descrição</f:facet>
-						#{produto.descricao}
-						
+						#{produto.descricao}						
 					</p:column>
-
-
 				<p:column>
 					<f:facet name="header">Valor</f:facet>
 					<h:outputText value="#{produto.preco}">
 						<f:convertNumber type="currency" currencySymbol="R$ "
 							locale="pt_BR" />
 					</h:outputText>
-
 				</p:column>
-
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
 
