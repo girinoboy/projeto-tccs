@@ -5,6 +5,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import org.primefaces.event.SelectEvent;
+
 import br.com.dao.DAO;
 import br.com.model.Cliente;
 
@@ -36,6 +38,17 @@ public class ClienteBean extends GenericBean {
 		dao.remove(cliente);
 		addMessage("Removido");
 		this.clientes = dao.listaTodos();
+	}
+	
+	public void handleSelect(SelectEvent event) {  
+
+		try {
+			cliente = (Cliente)event.getObject();
+
+			addMessage("Selected:" + cliente.getId().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<Cliente> getClientes() {

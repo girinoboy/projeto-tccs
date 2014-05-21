@@ -7,14 +7,16 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import br.com.dao.NotaFiscalDAO;
 import br.com.dao.ProdutoDAO;
+import br.com.model.NotaFiscal;
 import br.com.model.Produto;
 
 
-@FacesConverter("produtoConverter")
-public class ProdutoConverter implements Converter {  
+@FacesConverter("notaFiscalConverter")
+public class NotaFiscalConverter implements Converter {  
   
-	private static ProdutoDAO dao = new ProdutoDAO(Produto.class);
+	private static NotaFiscalDAO dao = new NotaFiscalDAO(NotaFiscal.class);
     
     public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue) {
     	
@@ -39,7 +41,7 @@ public class ProdutoConverter implements Converter {
         if (value == null || value.equals("")) {  
             return "";  
         } else {  
-            return String.valueOf(((Produto) value).getId());  
+            return String.valueOf(((NotaFiscal) value).getId());  
         }  
     }  
 }

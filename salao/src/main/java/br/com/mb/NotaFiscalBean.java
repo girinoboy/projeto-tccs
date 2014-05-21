@@ -6,6 +6,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import org.primefaces.event.SelectEvent;
+
 import br.com.dao.DAO;
 import br.com.model.Cliente;
 import br.com.model.Item;
@@ -57,6 +59,17 @@ public class NotaFiscalBean extends GenericBean {
 		addMessage("Dados salvos na Nota Fiscal!");
 		//notas = dao.listaTodos();
 		this.notaFiscal = new NotaFiscal();
+	}
+	
+	public void handleSelect(SelectEvent event) {  
+
+		try {
+			notaFiscal = (NotaFiscal)event.getObject();
+
+			addMessage("Selected:" + notaFiscal.getId().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public NotaFiscal getNotaFiscal() {

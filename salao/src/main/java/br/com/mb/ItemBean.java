@@ -3,9 +3,14 @@ package br.com.mb;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
 import br.com.dao.DAO;
 import br.com.model.Item;
 
+@ViewScoped
+@ManagedBean
 public class ItemBean extends GenericBean {
 
 	private Item item = new Item();
