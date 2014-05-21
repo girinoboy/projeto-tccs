@@ -22,10 +22,10 @@
 					</p:inputText>
 					
 					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputText id="cpf" value="#{clienteBean.cliente.cpf}"
+					 <p:inputMask id="cpf" value="#{clienteBean.cliente.cpf}" mask="999-999-999-99"
 						required="true" label="CPF">
 						<f:ajax event="change" />
-					</p:inputText>
+					</p:inputMask>
 
 					<p:outputLabel for="sexo" value="Sexo:" />
 					<p:selectOneMenu value="#{clienteBean.cliente.sexo}" id="sexo">
@@ -49,10 +49,10 @@
 					</p:inputText>
 
 					<p:outputLabel for="telefone" value="Telefone:" />
-					<p:inputText id="telefone"
+					<p:inputMask  id="telefone" mask="(999) 9999-9999"
 						value="#{clienteBean.cliente.telefone}" label="Telefone">
 						<f:ajax event="change" />
-					</p:inputText>
+					 </p:inputMask>
 
 					<p:outputLabel for="endereco" value="Endereço:" />
 					<p:inputText id="endereco"
