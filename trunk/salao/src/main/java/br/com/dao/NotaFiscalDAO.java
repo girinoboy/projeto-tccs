@@ -21,11 +21,15 @@ public class NotaFiscalDAO extends DAO<NotaFiscal>{
 		
 		EntityManager em = new JPAUtil().getEntityManager();
 		
-		String hql = "from NotaFiscal n e where lower(n.cnpj) = lower(:busca)";  
+		String hql = "from NotaFiscal n where lower(n.cnpj) LIKE lower(:busca)";  
 		Query query = em.createQuery(hql);  
 		query.setParameter("busca", "%" + busca + "%");
 		
-		return query.getResultList();
+		List<NotaFiscal> lista = query.getResultList();
+		
+		em.close();
+		
+		return lista;
 		
 	}
 

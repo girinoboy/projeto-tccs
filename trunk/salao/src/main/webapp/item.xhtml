@@ -18,20 +18,19 @@
                     var="c" itemLabel="#{c.nome}" itemValue="#{c}" converter="clienteConverter" forceSelection="true" cache="false" >
                     <p:ajax event="itemSelect" listener="#{clienteBean.handleSelect}" update=":messages,:form1" />  
 	            </p:autoComplete>		
-				
+				<br/>
 				<h:outputLabel value="Nota: " for="nota"/>  
 		            <p:autoComplete value="#{itemBean.item.notafiscal}" id="nota" completeMethod="#{autoCompleteBean.completarNota}"  
 	                    var="n" itemLabel="#{n.cnpj}" itemValue="#{n}" converter="notaFiscalConverter" forceSelection="true" cache="false" >
 	                    <p:ajax event="itemSelect" listener="#{notaFiscalBean.handleSelect}" update=":messages,:form1" />  
 		            </p:autoComplete>
-				
+				<br/>
 				<p:outputLabel value="Produto:" />
-				
 				<p:selectOneMenu value="#{itemBean.item.produto}" converter="produtoConverter">
 					<f:selectItems value="#{produtoBean.produtos}" var="produto"
 						itemValue="#{produto}" itemLabel="#{produto.nome}" />
 				</p:selectOneMenu>				
-				
+				<br/>
 				<p:outputLabel value="Quantidade" />
 				<p:inputText value="#{itemBean.item.quantidade}" />
 			</fieldset>
@@ -39,7 +38,7 @@
 				<p:commandButton value="Voltar"
 					action="/menu.xhtml?faces-redirect=true" immediate="true"
 					rendered="#{menuBean.pagina ne '/menu.xhtml'}" />
-				<p:commandButton action="#{notaFiscalBean.guardarItem}"
+				<p:commandButton action="#{itemBean.guardarItem}"
 					value="Guardar Item" update="result,:messages"/>
 
 			</div>
