@@ -24,11 +24,15 @@ public class ClienteDAO extends DAO<Cliente> {
 		
 //		CriteriaQuery<Cliente> query1 = em.getCriteriaBuilder().createQuery(classe);
 		
-		String hql = "from Cliente c e where lower(c.nome) = lower(:busca)";  
+		String hql = "from Cliente c where lower(c.nome) like lower(:busca)";  
 		Query query = em.createQuery(hql);  
 		query.setParameter("busca", "%" + busca + "%");
 		
-		return query.getResultList();
+		List<Cliente> lista = query.getResultList();
+		
+		em.close();
+		
+		return lista;
 		
 	}
 

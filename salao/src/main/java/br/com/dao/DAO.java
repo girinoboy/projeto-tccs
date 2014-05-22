@@ -19,7 +19,7 @@ public class DAO<T> {
 
 	public DAO(Class<T> classe) {
 		this.classe = classe;
-		em = new JPAUtil().getEntityManager();
+//		em = new JPAUtil().getEntityManager();
 	}
 
 	public void adicionar(T t) {
@@ -72,7 +72,9 @@ public class DAO<T> {
 
 	public T buscaPorId(Long id) {
 		EntityManager em = new JPAUtil().getEntityManager();
-		return (T) em.find(classe, id);
+		Object obj = em.find(classe, id);
+		em.close();
+		return (T) obj;
 	}
 
 	public List<T> listaTodos() {
