@@ -9,6 +9,7 @@ import java.util.Date;
 
 
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+import br.com.bo.UserBO;
 import br.com.dao.UserDao;
 import br.com.model.User;
  
@@ -26,11 +29,11 @@ public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/user.jsp";
     private static String LIST_USER = "/listuser.jsp";
-    private UserDao dao;
+    private UserBO bo;
  
     public UserController() {
         super();
-        dao = new UserDao();
+        bo = new UserBO();
     }
  
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,17 +42,17 @@ public class UserController extends HttpServlet {
  
         if (action.equalsIgnoreCase("delete")){
             String userId = request.getParameter("userId");
-            dao.deleteUser(userId);
+            bo.deleteUser(userId);
             forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());   
+            request.setAttribute("users", bo.getAllUsers());   
         } else if (action.equalsIgnoreCase("edit")){
             forward = INSERT_OR_EDIT;
             String userId = request.getParameter("userId");
-            User user = dao.getUserById(userId);
+            User user = bo.getUserById(userId);
             request.setAttribute("user", user);
         } else if (action.equalsIgnoreCase("listUser")){
             forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());
+            request.setAttribute("users", bo.getAllUsers());
         } else {
             forward = INSERT_OR_EDIT;
         }
@@ -78,10 +81,10 @@ public class UserController extends HttpServlet {
 //        else
 //        {
             user.setUname(userid);
-            dao.checkUser(user);
+            bo.checkUser(user);
 //        }
         RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-        request.setAttribute("users", dao.getAllUsers());
+        request.setAttribute("users", bo.getAllUsers());
         view.forward(request, response);
     }
 }
