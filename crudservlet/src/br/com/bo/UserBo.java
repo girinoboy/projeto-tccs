@@ -3,11 +3,11 @@ package br.com.bo;
 import br.com.dao.UserDao;
 import br.com.model.User;
 
-public class UserBO {
+public class UserBo {
 
 	 private UserDao dao;
 	 
-	    public UserBO() {
+	    public UserBo() {
 	        super();
 	        dao = new UserDao();
 	    }
