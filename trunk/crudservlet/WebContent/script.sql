@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `dbname`;
+USE `dbname`;
 CREATE TABLE `users` (
   `uname` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL,
