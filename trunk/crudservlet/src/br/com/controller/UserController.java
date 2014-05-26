@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-import br.com.bo.UserBO;
+import br.com.bo.UserBo;
 import br.com.dao.UserDao;
 import br.com.model.User;
  
@@ -29,11 +29,11 @@ public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/user.jsp";
     private static String LIST_USER = "/listuser.jsp";
-    private UserBO bo;
+    private UserBo bo;
  
     public UserController() {
         super();
-        bo = new UserBO();
+        bo = new UserBo();
     }
  
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
