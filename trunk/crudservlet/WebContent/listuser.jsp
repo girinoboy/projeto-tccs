@@ -5,16 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Show All Users</title>
+<title>Exibir todos usuários</title>
 </head>
 <body>
     <table border=1>
         <thead>
             <tr>
-                <th>User Name</th>
+                <th>Nome</th>
                 <th>Email</th>
-                <th>Registration Date</th>
-                <th colspan=2>Action</th>
+                <th>Data de Registro</th>
+                <th colspan=2>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +29,6 @@
             </c:forEach>
         </tbody>
     </table>
-    <p><a href="UserController?action=insert">Add User</a></p>
+    <p><a href="UserController?action=insert">Adicionar Usuario</a></p>
 </body>
 </html>

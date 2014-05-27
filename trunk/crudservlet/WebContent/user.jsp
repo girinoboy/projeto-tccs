@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add new user</title>
+        <title>Adicionar novo usuário</title>
     </head>
     <body>
         <form method="POST" action='UserController' name="frmAddUser">
@@ -13,13 +13,13 @@
                 System.out.println(action);
             %>
             <% if (action.equalsIgnoreCase("edit")) {%>
-            User Name : <input type="text" name="uname"
-                               value="<c:out value="${user.uname}" />" readonly="readonly"/> (You Can't Change this)<br />
+            Nome : <input type="text" name="uname"
+                               value="<c:out value="${user.uname}" />" readonly="readonly"/> (Você não pode alterar esse)<br />
             <%} else {%>
-            User Name : <input type="text" name="uname"
+            Nome : <input type="text" name="uname"
                                value="<c:out value="${user.uname}" />" /> <br />
             <%}%>
-            Password : <input
+            Senha : <input
                 type="password" name="pass"
                 value="<c:out value="${user.password}" />" /> <br />
             Email : <input
@@ -27,11 +27,11 @@
                 value="<c:out value="${user.email}" />" /> <br />
  
             <% if (action.equalsIgnoreCase("edit")) {%>
-            Registration : <input
+            Inscrição : <input
                 type="text" name="dob"
-                value="<fmt:formatDate pattern="yyyy/MM/dd" value="${user.registeredon}" />" readonly="readonly"/>(You Can't Change this)  <br />
+                value="<fmt:formatDate pattern="yyyy/MM/dd" value="${user.registeredon}" />" readonly="readonly"/>(Você não pode alterar esse)  <br />
             <%} else {%>
-            Registration : <input
+            Inscrição : <input
                 type="text" name="dob"
                 value="<fmt:formatDate pattern="yyyy/MM/dd" value="${user.registeredon}" />" />(yyyy/MM/dd)  <br />
             <%}%>
