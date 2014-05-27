@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>CRUD Example</title>
+        <title>CRUD Exemplo</title>
     </head>
     <body>
         <jsp:forward page="/UserController?action=listuser" />

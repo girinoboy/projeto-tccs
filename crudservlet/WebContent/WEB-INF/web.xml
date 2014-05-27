@@ -12,7 +12,7 @@
   
   <servlet>
         <servlet-name>UserController</servlet-name>
-        <servlet-class>com.bari.controller.UserController</servlet-class>
+        <servlet-class>br.com.controller.UserController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
