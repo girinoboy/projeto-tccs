@@ -9,6 +9,7 @@ public class TorcedorBean extends PessoaBean implements Serializable {
 	
 	public TorcedorBean() {
 		this.clube = new ClubeBean();
+		this.camiseta = new CamisetaBean();
 	}
 
 	public void setClube(ClubeBean clube) {
