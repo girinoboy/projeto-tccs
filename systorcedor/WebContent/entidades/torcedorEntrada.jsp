@@ -87,12 +87,12 @@ Estado Civil<br>
 </select><p/>
 UF<br>
 <select name="uf">
-<c:forEach var="uf" items="${ufs.valores}">
-	<c:if test="${torcedor.uf == uf}">
-		<option selected>${uf}</option>
+<c:forEach var="uf" items="${ufs}">
+	<c:if test="${torcedor.uf == uf.sigla}">
+		<option selected value="${uf.sigla}">${uf.sigla}</option>
 	</c:if>
-	<c:if test="${torcedor.uf != uf}">
-		<option>${uf}</option>
+	<c:if test="${torcedor.uf != uf.sigla}">
+		<option value="${uf.sigla}">${uf.sigla}</option>
 	</c:if>
 </c:forEach>
 </select><p/>

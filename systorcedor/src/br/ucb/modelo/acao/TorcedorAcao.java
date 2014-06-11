@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import br.ucb.modelo.bean.CamisetaBean;
 import br.ucb.modelo.bean.TorcedorBean;
 import br.ucb.modelo.bean.ClubeBean;
+import br.ucb.modelo.bean.UfBean;
 import br.ucb.modelo.dao.CamisetaDAO;
 import br.ucb.modelo.dao.TorcedorDAO;
 import br.ucb.modelo.dao.ClubeDAO;
+import br.ucb.modelo.dao.UfDAO;
 import br.ucb.modelo.enumerador.EstadoCivil;
 import br.ucb.modelo.enumerador.Uf;
 
@@ -23,6 +25,7 @@ public class TorcedorAcao implements Acao {
 	public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		TorcedorBean torcedor = new TorcedorBean();
 		TorcedorDAO torcedorDao = new TorcedorDAO();
+		UfDAO ufDao = new UfDAO();
 		ClubeDAO cursoDao = new ClubeDAO();
 		CamisetaDAO camisetaDao = new CamisetaDAO();
 		List <TorcedorBean> torcedores;
@@ -59,7 +62,7 @@ public class TorcedorAcao implements Acao {
 		catch (Exception e) {
 			// Cria uma variável (contexto/requisicao) para o ERRO
 			request.setAttribute("erro", "Erro de conversao");
-			entrada(request, torcedor, cursoDao, camisetaDao);
+			entrada(request, torcedor, cursoDao, camisetaDao,ufDao);
 			return Acao.ENTRADA;
 		}
 		if (request.getParameter("acaoInterna").equals("excluir")) {
@@ -75,7 +78,7 @@ public class TorcedorAcao implements Acao {
 			if (clubes.size() == 0 || camisetas.size() == 0)
 				request.setAttribute("erro", "Necessário incluir clube/camiseta antes de incluir torcedor");
 			else {
-				entrada(request, torcedor, cursoDao, camisetaDao);
+				entrada(request, torcedor, cursoDao, camisetaDao,ufDao);
 				return Acao.ENTRADA;
 			}
 		}
@@ -84,7 +87,7 @@ public class TorcedorAcao implements Acao {
 			if (torcedor == null)
 				request.setAttribute("erro", "Erro ao localizar para alteração");
 			else {
-				entrada(request, torcedor, cursoDao, camisetaDao);
+				entrada(request, torcedor, cursoDao, camisetaDao,ufDao);
 				return Acao.ENTRADA;
 			}
 		}
@@ -112,16 +115,18 @@ public class TorcedorAcao implements Acao {
 	}
 
 	private void entrada(HttpServletRequest request, TorcedorBean torcedor,
-			ClubeDAO cursoDao, CamisetaDAO camisetaDao) throws SQLException {
+			ClubeDAO cursoDao, CamisetaDAO camisetaDao,UfDAO ufDao) throws SQLException {
 		List<ClubeBean> clubes;
 		List<CamisetaBean> camisetas;
+		List<UfBean> ufs;
+		ufs = ufDao.listar();
 		clubes = cursoDao.listar();
 		camisetas = camisetaDao.listar();
 		request.setAttribute("torcedor", torcedor);
 		request.setAttribute("clubes", clubes);
 		request.setAttribute("camisetas", camisetas);
 		request.setAttribute("estadosCivis", EstadoCivil.CASADO);
-		request.setAttribute("ufs", Uf.AC);
+		request.setAttribute("ufs", ufs);
 	}
 
 }
