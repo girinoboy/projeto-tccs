@@ -1,6 +1,7 @@
 package br.ucb.modelo.acao;
 
 import java.util.Date;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -58,6 +59,7 @@ public class TorcedorAcao implements Acao {
 		catch (Exception e) {
 			// Cria uma variável (contexto/requisicao) para o ERRO
 			request.setAttribute("erro", "Erro de conversao");
+			entrada(request, torcedor, cursoDao, camisetaDao);
 			return Acao.ENTRADA;
 		}
 		if (request.getParameter("acaoInterna").equals("excluir")) {
@@ -73,10 +75,7 @@ public class TorcedorAcao implements Acao {
 			if (clubes.size() == 0 || camisetas.size() == 0)
 				request.setAttribute("erro", "Necessário incluir clube/camiseta antes de incluir torcedor");
 			else {
-				request.setAttribute("clubes", clubes);
-				request.setAttribute("camisetas", camisetas);
-				request.setAttribute("estadosCivis", EstadoCivil.CASADO);
-				request.setAttribute("ufs", Uf.AC);
+				entrada(request, torcedor, cursoDao, camisetaDao);
 				return Acao.ENTRADA;
 			}
 		}
@@ -85,11 +84,7 @@ public class TorcedorAcao implements Acao {
 			if (torcedor == null)
 				request.setAttribute("erro", "Erro ao localizar para alteração");
 			else {
-				clubes = cursoDao.listar();
-				request.setAttribute("torcedor", torcedor);
-				request.setAttribute("clubes", clubes);
-				request.setAttribute("estadosCivis", EstadoCivil.CASADO);
-				request.setAttribute("ufs", Uf.AC);
+				entrada(request, torcedor, cursoDao, camisetaDao);
 				return Acao.ENTRADA;
 			}
 		}
@@ -114,6 +109,19 @@ public class TorcedorAcao implements Acao {
 			torcedores = torcedorDao.listar();
 		request.setAttribute("torcedores", torcedores);
 		return "LISTAGEM";
+	}
+
+	private void entrada(HttpServletRequest request, TorcedorBean torcedor,
+			ClubeDAO cursoDao, CamisetaDAO camisetaDao) throws SQLException {
+		List<ClubeBean> clubes;
+		List<CamisetaBean> camisetas;
+		clubes = cursoDao.listar();
+		camisetas = camisetaDao.listar();
+		request.setAttribute("torcedor", torcedor);
+		request.setAttribute("clubes", clubes);
+		request.setAttribute("camisetas", camisetas);
+		request.setAttribute("estadosCivis", EstadoCivil.CASADO);
+		request.setAttribute("ufs", Uf.AC);
 	}
 
 }
