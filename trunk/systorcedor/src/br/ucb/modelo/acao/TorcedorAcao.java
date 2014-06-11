@@ -92,7 +92,7 @@ public class TorcedorAcao implements Acao {
 			}
 		}
 		if (request.getParameter("acaoInterna").equals("salvar")) {
-			if (request.getParameter("id").equals("")) {
+			if (request.getParameter("id").equals("") || request.getParameter("id").equals("0")) {
 				if (torcedorDao.incluir(torcedor) > 0)
 					request.setAttribute("mensagem", "Incluído com sucesso");
 				else

@@ -21,7 +21,7 @@ public class TorcedorDAO {
 	public int incluir(TorcedorBean torcedor) throws SQLException {
 		this.con = ConnectionFactory.getConnection();
 		if (torcedor == null) return 0;
-		PreparedStatement stmt = con.prepareStatement("INSERT INTO torcedor (nome, dtaNasc, estCivil, email, uf, idClube, idCamiseta) values (?, ?, ?, ?, ?, ?,?)");
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO torcedor (nome, dtaNasc, estCivil, email, uf, idClube, idCamiseta) values (?, ?, ?, ?, ?, ?, ?)");
 		stmt.setString(1, torcedor.getNome());
 		java.sql.Date dta = new java.sql.Date(torcedor.getDtaNasc().getTime());
 		stmt.setDate(2, dta);
@@ -108,7 +108,7 @@ public class TorcedorDAO {
 	public int alterar(TorcedorBean torcedor) throws SQLException {
 		this.con = ConnectionFactory.getConnection();
 		if (torcedor == null) return 0;
-		PreparedStatement stmt = this.con.prepareStatement("UPDATE torcedor SET nome=?, dtaNasc=?, estCivil=?, email=?, uf=?, idClube=?, idCamiseta WHERE id=?");
+		PreparedStatement stmt = this.con.prepareStatement("UPDATE torcedor SET nome=?, dtaNasc=?, estCivil=?, email=?, uf=?, idClube=?, idCamiseta=? WHERE id=?");
 		stmt.setString(1, torcedor.getNome());
 		java.sql.Date dta = new java.sql.Date(torcedor.getDtaNasc().getTime());
 		stmt.setDate(2, dta);
