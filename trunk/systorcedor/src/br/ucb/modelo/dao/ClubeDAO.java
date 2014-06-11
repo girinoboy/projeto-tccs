@@ -14,7 +14,7 @@ public class ClubeDAO {
 	private Connection con;
 	
 	public ClubeDAO() throws SQLException {
-		this.con = ConnectionFactory.getConnection();
+		//this.con = ConnectionFactory.getConnection();
 	}
 	
 	public int incluir(ClubeBean clube) throws SQLException {

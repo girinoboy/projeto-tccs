@@ -15,7 +15,7 @@ public class TorcedorDAO {
 	private Connection con;
 	
 	public TorcedorDAO() throws SQLException {
-		this.con = ConnectionFactory.getConnection();
+		//this.con = ConnectionFactory.getConnection();
 	}
 	
 	public int incluir(TorcedorBean torcedor) throws SQLException {

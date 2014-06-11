@@ -16,7 +16,7 @@ public class ListClubesDAO {
 	private Connection con;
 	
 	public ListClubesDAO() throws SQLException{
-		this.con = ConnectionFactory.getConnection();
+		//this.con = ConnectionFactory.getConnection();
 	}
 	
 	public List<ClubeBean> listar() throws SQLException {

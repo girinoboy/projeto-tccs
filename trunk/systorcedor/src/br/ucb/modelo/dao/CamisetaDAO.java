@@ -13,7 +13,7 @@ public class CamisetaDAO {
 	private Connection con;
 
 	public CamisetaDAO() throws SQLException {
-		this.con = ConnectionFactory.getConnection();
+		//this.con = ConnectionFactory.getConnection();
 	}
 	
 	
