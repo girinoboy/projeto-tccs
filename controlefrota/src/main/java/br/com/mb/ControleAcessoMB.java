@@ -111,7 +111,7 @@ public class ControleAcessoMB extends GenericoMB{
 					m.setNome(rb.getString(m.getNome()));
 				}
 				tr = new DefaultTreeNode(m, treeNode);
-				//verifica se é permitidos apenas par ao ultimo node
+				//verifica se ï¿½ permitidos apenas par ao ultimo node
 				if (isPermitido(m)) {
 					tr.setSelected(true);
 				}
@@ -180,7 +180,7 @@ public class ControleAcessoMB extends GenericoMB{
 
 	public void salvaPermissoes() {
 		if (perfil.getId() == 0) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nenhum usuário SELECIONADO", "Erro"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nenhum usuï¿½rio SELECIONADO", "Erro"));
 		} else {
 			try {
 				permissaoDAO.deletePermissaoPorPerfil(perfil.getId());
@@ -195,8 +195,8 @@ public class ControleAcessoMB extends GenericoMB{
 					}
 				}
 				carregaPermissoesUsuarioDTO();
-				addMessage("Permissões Salvas");
-//				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Permissões Salvas", "Permissões Salvas"));
+				addMessage("Permissï¿½es Salvas");
+//				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Permissï¿½es Salvas", "Permissï¿½es Salvas"));
 			} catch (Exception ex) {
 				Logger.getLogger(ControleAcessoMB.class.getName()).log(Level.SEVERE, null, ex);
 				addMessage(ex.getMessage());
@@ -243,7 +243,7 @@ public class ControleAcessoMB extends GenericoMB{
 			}
 			menuDAO.save(m);
 
-			Tree tree = (Tree) event.getSource();//percorre toda a lista para organizar a orderm de exibição do menu
+			Tree tree = (Tree) event.getSource();//percorre toda a lista para organizar a orderm de exibiï¿½ï¿½o do menu
 			for (TreeNode tn : tree.getValue().getChildren()) {
 				MenuDTO menu = (MenuDTO) tn.getData();
 

@@ -22,16 +22,16 @@
 		            
 		            <f:facet name="footer">
 			          	<p:commandButton value="#{msgs.save}" actionListener="#{perfilMB.add}" id="withIcon"   
-			            update=":growl,panel,vinculo" icon="ui-icon-disk" />
+			            update=":growl,panel,dataTable" icon="ui-icon-disk" />
 			            <p:commandButton value="#{msgs.reset}" type="reset" /> 
-			            <p:commandButton value="#{msgs.back}" action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"/> 
+			            <p:commandButton value="#{msgs.back}" action="/layoutElement.xhtml?faces-redirect=true" immediate="true"/> 
 		  			</f:facet>
 		        </h:panelGrid>  
 		    </p:panel>
 		    
 		    <br/>
 
-			<p:dataTable id="vinculo" var="perfil" value="#{perfilMB.listPerfil}" rowKey="#{perfil.id}" >
+			<p:dataTable id="dataTable" var="perfil" value="#{perfilMB.listPerfil}" rowKey="#{perfil.id}" >
 
 				<p:column headerText="Id" style="width:50px">
 					<h:outputText value="#{perfil.id}" />
@@ -54,11 +54,11 @@
 			
  		</h:form>
  		
- 		<p:dialog header="#{msgs.delete}?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true">
-		  <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+ 		<p:dialog header="#{msgs.delete}?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true" appendTo="@(body)">
+		  <h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
 		    <h:outputText value="#{msgs.askDelete}" />
 		    <f:facet name="footer">
-			 	<p:commandButton value="#{msgs.delete}" update=":growl,form:panel,form:vinculo"  icon="ui-icon-close" actionListener="#{perfilMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />
+			 	<p:commandButton value="#{msgs.delete}" update=":growl,form:panel,form:dataTable"  icon="ui-icon-close" actionListener="#{perfilMB.del}" immediate="true" oncomplete="PF('dlg').hide()" />
 			 	<p:commandButton value="#{msgs.cancel}" oncomplete="PF('dlg').hide()" immediate="true" />                 
 			</f:facet>
 			</h:panelGrid>
