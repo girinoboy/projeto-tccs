@@ -6,9 +6,10 @@ package br.com.mb;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -31,7 +32,7 @@ import br.com.dto.PerfilMenuDTO;
  *
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class MenuMB extends GenericoMB implements ModeloMB{
 
 	/**
@@ -43,12 +44,17 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 	private PerfilMenuDAO perfilMenuDAO = new PerfilMenuDAO();
 	private List<MenuDTO>  listMenu = new ArrayList<MenuDTO>();
 	private MenuDTO menuDTO = new MenuDTO();
-
+	
+	@PostConstruct
+	public void inicio(){
+		menuDTO.setMenuDTO(new MenuDTO());
+	}
+	
 	/**
 	 * 
 	 */
 	public MenuMB() {
-
+		System.out.println(menuDTO);
 		try {
 			atualiza(null);
 		} catch (Exception e) {
@@ -128,20 +134,37 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 	
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try{
+			if(menuDTO.getMenuDTO().getId() == null){
+				menuDTO.setMenuDTO(null);
+			}
+			menuDAO.save(menuDTO);
+			atualiza(null);
+			addMessage("Sucesso.");
+		}catch(Exception e){
+			addMessage(e.getMessage());
+		}
 	}
-
+	
 	@Override
 	public void edit(ActionEvent actionEvent) throws Exception {
+		System.out.println(actionEvent.getSource());
 		// TODO Auto-generated method stub
-		
+		System.out.println(menuDTO);
 	}
-
+	
 	@Override
 	public void del(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try{
+			menuDAO.delete(menuDTO);
+			atualiza(null);
+			addMessage("Apagado com Sucesso.");
+		}catch(Exception e){
+			addMessage(e.getMessage());
+		}
+	}
+	public void del(){
+		System.out.println(22);
 	}
 	
 	public void onDragDrop(TreeDragDropEvent event) {  

@@ -15,15 +15,23 @@
 		            <p:message for="nome" />
 		        	<h:outputLabel for="nome" value="#{msgs.name}: *" />
 		            <p:inputText id="nome" size="80"
-		                value="#{menuMB.menuDTO.nome}" required="true" label="Nome">
+		                value="#{menuMB.menuDTO.nome}" required="true" label="#{msgs.name}">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            
+		            <p:watermark for="url" value="#{msgs.fullName}" />
+		            <p:message for="url" />
+		        	<h:outputLabel for="url" value="#{msgs.url}: *" />
+		            <p:inputText id="url" size="80"
+		                value="#{menuMB.menuDTO.url}" required="true" label="#{msgs.url}">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            
 		            <p:watermark for="comando" value="#{msgs.fullName}" />
 		            <p:message for="comando" />
-		        	<h:outputLabel for="comando" value="#{msgs.command}: *" />
+		        	<h:outputLabel for="comando" value="#{msgs.command}: " />
 		            <p:inputText id="comando" size="80"
-		                value="#{menuMB.menuDTO.comando}" required="true" label="Comando">
+		                value="#{menuMB.menuDTO.comando}" required="false" label="#{msgs.command}">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            
@@ -31,14 +39,21 @@
 		            <p:message for="dropIndex" />
 		        	<h:outputLabel for="dropIndex" value="#{msgs.dropIndex}: *" />
 		            <p:inputText id="dropIndex" size="80"
-		                value="#{menuMB.menuDTO.dropIndex}" required="true" label="Droped Index">
-		                <f:validateLength minimum="2" />
+		                value="#{menuMB.menuDTO.dropIndex}" required="true" label="#{msgs.dropIndex}">
+		                <f:validateLength minimum="1" />
 		            </p:inputText>
 		            
+		            <p:watermark for="idMenuSub" value="#{msgs.fullName}" />
+		            <p:message for="idMenuSub" />
+		        	<h:outputLabel for="idMenuSub" value="#{msgs.idMenuSub}: " />
+		            <p:inputText id="idMenuSub" size="80"
+		                value="#{menuMB.menuDTO.menuDTO.id}" required="false" label="#{msgs.idMenuSub}">
+		                <f:validateLength minimum="1" />
+		            </p:inputText>
 		            
 		            <f:facet name="footer">
 			          	<p:commandButton value="#{msgs.save}" actionListener="#{menuMB.add}" id="withIcon"
-			            update=":growl,panel,menuList" icon="ui-icon-disk" />
+			            update=":growl,panel,dataTable" icon="ui-icon-disk" />
 			            <p:commandButton value="#{msgs.reset}" type="reset" />
 			            <p:commandButton value="#{msgs.back}" action="/layoutComplex.xhtml?faces-redirect=true" immediate="true"/> 
 		  			</f:facet>
@@ -47,17 +62,39 @@
 		    
 		    <br/>
 		    
- 			<p:dataTable var="menu" value="#{menuMB.listMenu}" id="menuList" editable="true" widgetVar="menusTable" draggableRows="true">
+ 			<p:dataTable var="menu" value="#{menuMB.listMenu}" id="dataTable" editable="true" widgetVar="menusTable" draggableRows="true">
  				<f:facet name="header">
 		            Lista de Menus editáveis
 		            
 		            <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
-		            <p:columnToggler datasource="menuList" trigger="toggler" />
+		            <p:columnToggler datasource="dataTable" trigger="toggler" />
 		            <div style="clear:both" />
 		        </f:facet>
  			
 	 			<p:ajax event="rowEdit" listener="#{menuMB.onEdit}" update=":growl" />
 	        	<p:ajax event="rowEditCancel" listener="#{menuMB.onCancel}" update=":growl" />
+	        	
+	        	<p:column headerText="#{msgs.id}" style="width:5%">
+		            <p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{menu.id}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                    <p:inputText value="#{menu.id}" style="width:100%"/>
+		                </f:facet>
+		            </p:cellEditor>
+		        </p:column>
+	        	
+	        	<p:column headerText="#{msgs.idMenuSub}" style="width:5%">
+		            <p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{menu.menuDTO.id}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                    <p:inputText value="#{menu.menuDTO.id}" style="width:100%"/>
+		                </f:facet>
+		            </p:cellEditor>
+		        </p:column>
 	        	
 	        	<p:column headerText="#{msgs.name}" style="width:30%">
 		            <p:cellEditor>
@@ -66,6 +103,17 @@
 		                </f:facet>
 		                <f:facet name="input">
 		                    <p:inputText value="#{menu.nome}" style="width:100%"/>
+		                </f:facet>
+		            </p:cellEditor>
+		        </p:column>
+		        
+		        <p:column headerText="#{msgs.url}" style="width:30%">
+		            <p:cellEditor>
+		                <f:facet name="output">
+		                    <h:outputText value="#{menu.url}" />
+		                </f:facet>
+		                <f:facet name="input">
+		                    <p:inputText value="#{menu.url}" style="width:100%"/>
 		                </f:facet>
 		            </p:cellEditor>
 		        </p:column>
@@ -92,7 +140,7 @@
 		            </p:cellEditor>
 		        </p:column>
 		        
-		        <p:column id="ativoInativoColumn" filterBy="ativoInativo" headerText="#{msgs.active}-#{msgs.inactive}" footerText="equals" filterMatchMode="equals" style="width:30%">
+		        <p:column id="ativoInativoColumn" sortBy="#{menu.ativoInativo}" headerText="#{msgs.active}-#{msgs.inactive}" footerText="equals" filterMatchMode="equals" style="width:30%">
 		            <f:facet name="filter">
 		                <p:selectOneButton onchange="PF('menusTable').filter()">
 		                    <f:converter converterId="javax.faces.Boolean" />
@@ -116,9 +164,25 @@
 	        	
 	        	<p:column style="width:6%">
 		            <p:rowEditor />
+		            <p:commandButton icon="ui-icon-trash" onsuccess="PF('dlg').show();" update=":form1:display" actionListener="#{menuMB.edit}" immediate="true">
+		            	<f:setPropertyActionListener value="#{menu}" target="#{menuMB.menuDTO}"/>
+	               	</p:commandButton>
 		        </p:column>
  			</p:dataTable>
+ 			
  		</h:form>
+	 		<p:dialog header="#{msgs.delete} #{menuMB.menuDTO.nome}?" widgetVar="dlg" modal="true" appendToBody="true" resizable="false" draggable="true" appendTo="@(body)">
+	 			<h:form id="form1">
+				<h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
+				    <h:outputText value="#{msgs.askDelete}" />
+				    <f:facet name="footer">
+					 	<p:commandButton value="#{msgs.delete}" update=":growl,:form:dataTable,:form:panel"  icon="ui-icon-close" actionListener="#{menuMB.del}"  oncomplete="PF('dlg').hide()" immediate="true"/>
+					 	<p:commandButton value="#{msgs.cancel}" oncomplete="PF('dlg').hide()" immediate="true" />                 
+					</f:facet>
+				</h:panelGrid>
+				</h:form>
+			</p:dialog>
+ 		
  	</ui:define>
 </ui:decorate>
 </html>

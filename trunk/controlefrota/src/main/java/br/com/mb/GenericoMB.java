@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,11 @@ public class GenericoMB implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	protected ResourceBundle rb;
+	
+	@PostConstruct
+	public void inicio(){
+		
+	}
 	
 	public GenericoMB(){
 		FacesContext fc = FacesContext.getCurrentInstance();
