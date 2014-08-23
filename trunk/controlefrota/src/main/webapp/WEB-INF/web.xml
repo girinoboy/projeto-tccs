@@ -6,7 +6,7 @@
   </welcome-file-list>
   <context-param>
     <param-name>primefaces.THEME</param-name>
-    <param-value>cupertino</param-value>
+    <param-value>flick</param-value>
   </context-param>
   <!-- JSF mapping -->
   <servlet>
@@ -116,9 +116,6 @@
 	<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
 	<param-value>true</param-value>
   </context-param>
-  <listener>
-    <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
-  </listener>
  
    <error-page>  
       <error-code>404</error-code>  
