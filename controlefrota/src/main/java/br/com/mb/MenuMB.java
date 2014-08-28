@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -24,6 +25,7 @@ import org.primefaces.model.menu.MenuModel;
 
 import br.com.dao.MenuDAO;
 import br.com.dao.PerfilMenuDAO;
+import br.com.dto.AbstractDTO;
 import br.com.dto.MenuDTO;
 import br.com.dto.PerfilMenuDTO;
 
@@ -32,7 +34,7 @@ import br.com.dto.PerfilMenuDTO;
  *
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class MenuMB extends GenericoMB implements ModeloMB{
 
 	/**
@@ -64,13 +66,13 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 	@Override
 	public void atualiza(ActionEvent event) throws Exception {
 		listMenu = menuDAO.list();
+		reset(null);
 		geraMenu(perfilMenuDAO.getMenuByIdPerfil(getUserSession().getPerfilDTO().getId()));
 	}
 	
 	@Override
 	public void reset(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		menuDTO = new MenuDTO();
 	}
 
 	private void geraMenu(List<PerfilMenuDTO> list) throws Exception {
@@ -163,8 +165,8 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 			addMessage(e.getMessage());
 		}
 	}
-	public void del(){
-		System.out.println(22);
+	public void delTest(AbstractDTO abstractDTO){
+		System.out.println(abstractDTO.getId());
 	}
 	
 	public void onDragDrop(TreeDragDropEvent event) {  

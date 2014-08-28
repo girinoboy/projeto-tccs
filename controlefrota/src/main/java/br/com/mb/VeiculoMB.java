@@ -4,8 +4,10 @@
 package br.com.mb;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
+import br.com.dao.VeiculoDAO;
 import br.com.dto.VeiculoDTO;
 
 /**
@@ -13,14 +15,17 @@ import br.com.dto.VeiculoDTO;
  *
  */
 @ManagedBean
+@SessionScoped
 public class VeiculoMB extends GenericoMB implements ModeloMB{
+	
+	VeiculoDAO veiculoDAO = new VeiculoDAO();
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6715654559023119886L;
 	
-	private VeiculoDTO veiculoDTO;
+	private VeiculoDTO veiculoDTO = new VeiculoDTO();
 
 	/**
 	 * 
@@ -37,14 +42,13 @@ public class VeiculoMB extends GenericoMB implements ModeloMB{
 
 	@Override
 	public void reset(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		veiculoDTO = new VeiculoDTO();
 	}
 
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+		veiculoDAO.save(veiculoDTO);
+		addMessage("Salvo.");
 	}
 
 	@Override
