@@ -8,35 +8,49 @@
 	<ui:define name="centro">
 		<h:form id="form1">
 			<p:panel id="panel" header="Inserir Veículo">
-		        <h:panelGrid id="pg" columns="1" cellpadding="5">
+		        <h:panelGrid id="pg" columns="2" cellpadding="5">
 		        
 		        <h:outputLabel  value="Placa do veículo: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.placa}"/>
 		        
 		        <h:outputLabel  value="Modelo: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.modelo}"/>
 		        
 		        <h:outputLabel  value="Chassi: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.chassi}"/>
 		        
 		        <h:outputLabel  value="RENAVAM: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.renavam}"/>
 		        
 		        <h:outputLabel  value="Capacidade do tanque: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.capacidadeTanque}"/>
 		        
 		        <h:outputLabel  value="KM / Óleo: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.kmOleo}"/>
 		        
 		        <h:outputLabel  value="KM / Peneu: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.kmPeneu}"/>
 		        
 		        <h:outputLabel  value="KM / Litro: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.kmLitro}"/>
 		        
 		        <h:outputLabel  value="KM / Revisão: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.kmRevisao}"/>
 		        
 		        <h:outputLabel  value="Marca: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.marca}"/>
 		        
 		        <h:outputLabel  value="Ano: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.ano}"/>
 		        
 		        <h:outputLabel  value="Tipo Combustível: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.tipoCombustivel}"/>
 		        
 		        <h:outputLabel  value="Tipo: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.tipo}"/>
 		        
 		        <h:outputLabel  value="Código do veículo: *" />
+		        <p:inputText value="#{veiculoMB.veiculoDTO.codigoVeiculo}"/>
 		        
 		        <f:facet name="footer">
 		          	<p:commandButton value="#{empty veiculooMB.veiculoDTO.id ? 'Salvar':'Alterar'}" actionListener="#{veiculoMB.add}" id="withIcon"   
