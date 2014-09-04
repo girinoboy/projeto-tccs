@@ -3,6 +3,9 @@
  */
 package br.com.mb;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.event.ActionEvent;
 
@@ -10,7 +13,7 @@ import br.com.dao.UsuarioDAO;
 import br.com.dto.UsuarioDTO;
 
 /**
- * @author Marcleônio
+ * @author Marcleï¿½nio
  *
  */
 @ManagedBean
@@ -22,12 +25,14 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	private static final long serialVersionUID = 1L;
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private List<UsuarioDTO> listUsuario = new ArrayList<UsuarioDTO>();
 
 	/**
+	 * @throws Exception 
 	 * 
 	 */
-	public UsuarioMB() {
-		// TODO Auto-generated constructor stub
+	public UsuarioMB() throws Exception {
+		listUsuario = usuarioDAO.list();
 	}
 
 	@Override
@@ -69,6 +74,14 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
 		this.usuarioDTO = usuarioDTO;
+	}
+
+	public List<UsuarioDTO> getListUsuario() {
+		return listUsuario;
+	}
+
+	public void setListUsuario(List<UsuarioDTO> listUsuario) {
+		this.listUsuario = listUsuario;
 	}
 
 }

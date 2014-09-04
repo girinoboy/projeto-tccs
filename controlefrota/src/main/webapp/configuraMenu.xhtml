@@ -88,10 +88,10 @@
 	        	<p:column headerText="#{msgs.idMenuSub}" style="width:5%">
 		            <p:cellEditor>
 		                <f:facet name="output">
-		                    <h:outputText value="#{menu.menuDTO.id}" />
+		                    <h:outputText value="#{menu.menuDTO}" />
 		                </f:facet>
 		                <f:facet name="input">
-		                    <p:inputText value="#{menu.menuDTO.id}" style="width:100%"/>
+		                    <p:inputText value="#{menu.menuDTO}" style="width:100%"/>
 		                </f:facet>
 		            </p:cellEditor>
 		        </p:column>
