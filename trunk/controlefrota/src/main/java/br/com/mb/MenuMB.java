@@ -34,7 +34,7 @@ import br.com.dto.PerfilMenuDTO;
  *
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class MenuMB extends GenericoMB implements ModeloMB{
 
 	/**
@@ -178,7 +178,8 @@ public class MenuMB extends GenericoMB implements ModeloMB{
         FacesContext.getCurrentInstance().addMessage(null, message);  
     }
 	
-	public void onEdit(RowEditEvent event) {
+	public void onEdit(RowEditEvent event) throws Exception {
+		menuDAO.save((MenuDTO) event.getObject());
         FacesMessage msg = new FacesMessage("Car Edited", ((MenuDTO) event.getObject()).getNome());
  
         FacesContext.getCurrentInstance().addMessage(null, msg);

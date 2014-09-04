@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="layoutElement.xhtml">
+	<ui:define name="centro">
+		<h:form id="form1">
+			<p:panel id="panel" header="Inserir Usuário">
+				Informe um dos campos para efetuar a consulta
+		        <h:panelGrid id="pg" columns="3" cellpadding="5" >
+		        	<h:outputLabel value="teste1" />
+		        	<p:inputText />
+		        	
+		        	<h:outputLabel value="teste2" />
+		        	<p:inputText />
+		        	
+		        	<h:outputLabel value="teste3" />
+		        	<p:inputText />
+		        </h:panelGrid>
+		        <p:dataTable id="dataTable" var="usuario" value="#{usuarioMB.listUsuario}" rowKey="#{usuario.id}">
+					<p:column headerText="Codigo" style="width:50px">
+						<h:outputText value="#{usuario.id}" />
+					</p:column>
+					<p:column headerText="Nome" style="width:50px">
+						<h:outputText value="#{usuario.nome}" />
+					</p:column>
+					<p:column headerText="Matricula" style="width:50px">
+						<h:outputText value="#{usuario.matricula}" />
+					</p:column>
+					<p:column headerText="Função" style="width:50px">
+						<h:outputText value="#{usuario.perfilDTO.nome}" />
+					</p:column>
+					<p:column headerText="Ações" style="width:50px">
+						<p:commandButton icon="ui-icon-disk"/>
+						<p:commandButton icon="ui-icon-disk"/>
+						<p:commandButton icon="ui-icon-disk"/>
+					</p:column>
+				</p:dataTable>
+		    </p:panel>
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>
