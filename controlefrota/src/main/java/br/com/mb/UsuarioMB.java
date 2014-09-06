@@ -50,10 +50,9 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	public void add(ActionEvent actionEvent) throws Exception {
 		usuarioDAO.save(usuarioDTO);
 		System.out.println(111);
-		addMessage("Salvo.");
+		addMessage(rb.getString("successfullySaved"));
 //		atualizaUserList(usuarioDTO);
 		usuarioDTO = new UsuarioDTO();
-		
 	}
 
 	@Override

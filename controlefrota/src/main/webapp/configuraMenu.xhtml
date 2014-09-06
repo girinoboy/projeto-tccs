@@ -162,14 +162,16 @@
 		            </p:cellEditor>
 	        	</p:column>
 	        	
-	        	<p:column style="width:6%">
+	        	<p:column style="width:6%" headerText="#{msgs.action}">
 		            <p:rowEditor />
-		            <p:commandButton icon="ui-icon-trash" onsuccess="PF('dlg').show();" update=":form:display" actionListener="#{menuMB.edit}" immediate="true">
+		            <p:commandButton icon="ui-icon-trash" onsuccess="PF('dlg').show();" update=":formEcluir:display" actionListener="#{menuMB.edit}" immediate="true">
 		            	<f:setPropertyActionListener value="#{menu}" target="#{menuMB.menuDTO}"/>
 	               	</p:commandButton>
 		        </p:column>
  			</p:dataTable>
  			
+ 		</h:form>
+ 		<h:form id="formEcluir">
 	 		<p:dialog header="#{msgs.delete} #{menuMB.menuDTO.nome}?" widgetVar="dlg" modal="true" resizable="false" draggable="true" appendTo="@(body)" >
 				<h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
 					<h:inputHidden value="#{menuMB.menuDTO.id}" />
@@ -181,7 +183,7 @@
 					</f:facet>
 				</h:panelGrid>
 			</p:dialog>
- 		</h:form>
+		</h:form>
  	</ui:define>
 </ui:decorate>
 </html>

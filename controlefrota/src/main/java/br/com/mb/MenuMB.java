@@ -142,7 +142,7 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 			}
 			menuDAO.save(menuDTO);
 			atualiza(null);
-			addMessage("Sucesso.");
+			addMessage(rb.getString("successfullySaved"));
 		}catch(Exception e){
 			addMessage(e.getMessage());
 		}
@@ -160,7 +160,7 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 		try{
 			menuDAO.delete(menuDTO);
 			atualiza(null);
-			addMessage("Apagado com Sucesso.");
+			addMessage(rb.getString("successfullyDeleted"));
 		}catch(Exception e){
 			addMessage(e.getMessage());
 		}
@@ -180,13 +180,13 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 	
 	public void onEdit(RowEditEvent event) throws Exception {
 		menuDAO.save((MenuDTO) event.getObject());
-        FacesMessage msg = new FacesMessage("Car Edited", ((MenuDTO) event.getObject()).getNome());
+        FacesMessage msg = new FacesMessage("Line Edited", ((MenuDTO) event.getObject()).getNome());
  
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
      
     public void onCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Car Cancelled", ((MenuDTO) event.getObject()).getNome());
+        FacesMessage msg = new FacesMessage("Line Cancelled", ((MenuDTO) event.getObject()).getNome());
  
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

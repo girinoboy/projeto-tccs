@@ -3,6 +3,9 @@
  */
 package br.com.mb;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
@@ -18,20 +21,20 @@ import br.com.dto.VeiculoDTO;
 @SessionScoped
 public class VeiculoMB extends GenericoMB implements ModeloMB{
 	
-	VeiculoDAO veiculoDAO = new VeiculoDAO();
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6715654559023119886L;
-	
+	private VeiculoDAO veiculoDAO = new VeiculoDAO();
 	private VeiculoDTO veiculoDTO = new VeiculoDTO();
+	private List<VeiculoDTO> listVeiculoDTO = new ArrayList<VeiculoDTO>();
 
 	/**
+	 * @throws Exception 
 	 * 
 	 */
-	public VeiculoMB() {
-		// TODO Auto-generated constructor stub
+	public VeiculoMB() throws Exception {
+		listVeiculoDTO = veiculoDAO.list();
 	}
 
 	@Override
@@ -48,7 +51,7 @@ public class VeiculoMB extends GenericoMB implements ModeloMB{
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
 		veiculoDAO.save(veiculoDTO);
-		addMessage("Salvo.");
+		addMessage(rb.getString("successfullySaved"));
 	}
 
 	@Override
@@ -69,6 +72,14 @@ public class VeiculoMB extends GenericoMB implements ModeloMB{
 
 	public void setVeiculoDTO(VeiculoDTO veiculoDTO) {
 		this.veiculoDTO = veiculoDTO;
+	}
+
+	public List<VeiculoDTO> getListVeiculoDTO() {
+		return listVeiculoDTO;
+	}
+
+	public void setListVeiculoDTO(List<VeiculoDTO> listVeiculoDTO) {
+		this.listVeiculoDTO = listVeiculoDTO;
 	}
 
 }
