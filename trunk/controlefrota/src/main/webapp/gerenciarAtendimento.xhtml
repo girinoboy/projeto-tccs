@@ -7,6 +7,44 @@
 <ui:decorate template="layoutElement.xhtml">
 	<ui:define name="centro">
 		<h:form id="form1">
+			<p:panel id="panel" header="Inserir Atendimento">
+		        <h:panelGrid id="pg" columns="4" cellpadding="5">
+		        	<p:watermark for="veiculo" value="" />
+		            <p:message for="veiculo" />
+		        	<h:outputLabel for="veiculo" value="Veículo: *" />
+		        	<p:selectOneMenu id="veiculo" value="#{atendimentoMB.atendimentoDTO.veiculoDTO}" converter="veiculoConverter" required="true">
+			            <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
+            			<f:selectItems value="#{veiculoMB.listVeiculoDTO}" var="l" itemLabel="#{l.placa}" itemValue="#{l}"/>
+			        </p:selectOneMenu>
+		            
+		            <p:watermark for="motorista" value="" />
+		            <p:message for="motorista" />
+		        	<h:outputLabel for="motorista" value="Motorista: *" />
+		            <p:selectOneMenu id="motorista" value="#{atendimentoMB.atendimentoDTO.usuarioDTO}" converter="usuarioConverter" required="true">
+			            <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
+			            <f:selectItems value="#{usuarioMB.listUsuario}" var="l" itemLabel="#{l.nome}" itemValue="#{l}"/>
+			        </p:selectOneMenu>
+		            
+		            <p:watermark for="destino" value="" />
+		            <p:message for="destino" />
+		        	<h:outputLabel for="destino" value="Destino: *" />
+		            <p:inputTextarea id="destino" value="#{atendimentoMB.atendimentoDTO.destino}" rows="5" cols="30" counter="display" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+		            
+		            <p:watermark for="display" value="" />
+		            <p:message for="display" />
+		            <br/>
+    				<h:outputText id="display" />
+		            
+		        	<f:facet name="footer">
+			          	<p:commandButton value="#{empty atendimentoMB.atendimentoDTO.id ? 'Salvar':'Alterar'}" actionListener="#{atendimentoMB.add}" id="withIcon"   
+			            update="panel,:messages,:growl" icon="ui-icon-disk" />
+			            <p:commandButton value="Reset" update="panel" process="@this" immediate="true">
+			                <p:resetInput target="panel" />
+			            </p:commandButton>
+			            <p:commandButton value="Voltar" action="/listarAtendimentos.xhtml?faces-redirect=true" immediate="true"/> 
+		  			</f:facet>
+		        </h:panelGrid>
+		    </p:panel>
 		
 		</h:form>
 	</ui:define>

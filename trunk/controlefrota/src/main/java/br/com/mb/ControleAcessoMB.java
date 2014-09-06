@@ -180,7 +180,7 @@ public class ControleAcessoMB extends GenericoMB{
 
 	public void salvaPermissoes() {
 		if (perfil.getId() == 0) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nenhum usu�rio SELECIONADO", "Erro"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, rb.getString("noUserSelected"), rb.getString("error")));
 		} else {
 			try {
 				permissaoDAO.deletePermissaoPorPerfil(perfil.getId());
@@ -195,7 +195,7 @@ public class ControleAcessoMB extends GenericoMB{
 					}
 				}
 				carregaPermissoesUsuarioDTO();
-				addMessage("Permiss�es Salvas");
+				addMessage(rb.getString("positionChangedMenu"));
 //				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Permiss�es Salvas", "Permiss�es Salvas"));
 			} catch (Exception ex) {
 				Logger.getLogger(ControleAcessoMB.class.getName()).log(Level.SEVERE, null, ex);

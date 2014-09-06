@@ -14,7 +14,7 @@ import br.com.dao.PerfilDAO;
 import br.com.dto.PerfilDTO;
 
 /**
- * @author Marcleônio
+ * @author Marcleï¿½nio
  *
  */
 @ManagedBean
@@ -56,7 +56,7 @@ public class PerfilMB extends GenericoMB implements ModeloMB{
 	public void add(ActionEvent actionEvent)  {
 		try {
 			perfilDAO.save(perfilDTO);
-			addMessage("Salvo com sucesso.");
+			addMessage(rb.getString("successfullySaved"));
 			perfilDTO = new PerfilDTO();
 			listPerfil = perfilDAO.list();
 		} catch (Exception e) {
@@ -74,7 +74,7 @@ public class PerfilMB extends GenericoMB implements ModeloMB{
 	public void del(ActionEvent actionEvent) {
 		try{
 			perfilDAO.delete(perfilDTO);
-			addMessage("Apagado com sucesso.");
+			addMessage(rb.getString("successfullyDeleted"));
 			perfilDTO = new PerfilDTO();
 			listPerfil = perfilDAO.list();
 		} catch (Exception e) {
