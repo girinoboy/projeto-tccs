@@ -4,6 +4,9 @@
 package br.com.dao;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.criterion.Restrictions;
 
 import br.com.dto.VeiculoDTO;
 
@@ -11,6 +14,7 @@ import br.com.dto.VeiculoDTO;
  * @author marcleonio
  *
  */
+@SuppressWarnings("unchecked")
 public class VeiculoDAO extends GenericoDAO<VeiculoDTO, Serializable>{
 
 	/**
@@ -23,6 +27,13 @@ public class VeiculoDAO extends GenericoDAO<VeiculoDTO, Serializable>{
 	 */
 	public VeiculoDAO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public List<VeiculoDTO> verificaTrocaOleo() {
+		List<VeiculoDTO> list = criteria
+				.add(Restrictions.ge("kmLitro", "10000"))
+				.list();
+		return list;
 	}
 
 }
