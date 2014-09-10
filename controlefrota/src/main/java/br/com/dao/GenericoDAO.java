@@ -26,11 +26,13 @@ public class GenericoDAO<T, ID extends Serializable> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private final Class<T> oClass;
 	public Session session ;
+	public Criteria criteria;
 
     public GenericoDAO() {
         this.oClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         try {
 			session = HibernateUtility.getSession();
+			criteria = session.createCriteria(oClass);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
