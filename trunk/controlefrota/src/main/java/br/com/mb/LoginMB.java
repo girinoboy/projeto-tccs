@@ -32,7 +32,7 @@ import br.com.dto.UsuarioPerfilDTO;
 import br.com.utility.Constantes;
 
 /**
- * @author Marcleônio
+ * @author Marcleï¿½nio
  *
  */
 @ManagedBean
@@ -61,7 +61,7 @@ public class LoginMB extends GenericoMB{
 		try{
 			usuarioDTO = usuarioDAO.verificaLoginSenha(usuarioDTO);
 			adm = usuarioDTO!=null&& usuarioDTO.getUsuario().equals("admin") && usuarioDTO.getPerfilDTO().getId().equals(1);
-			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessão caso ñ exista - false retorna nulo caso ñ exista
+			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessï¿½o caso ï¿½ exista - false retorna nulo caso ï¿½ exista
 			
 			if(usuarioDTO != null && usuarioDTO.getTema() != null){
 				loggedIn = true;
@@ -129,7 +129,7 @@ public class LoginMB extends GenericoMB{
 		MenuDTO menuDTO = new MenuDTO();
 		menuDTO.setNome("exit");
 		menuDTO.setComando("#{loginMB.logout}");
-		menuDTO.setDropIndex(3);
+		menuDTO.setDropIndex(6);
 		menuDTO.setAtivoInativo(true);
 		menuDTO = menuDAO.save(menuDTO);				
 		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
@@ -161,8 +161,22 @@ public class LoginMB extends GenericoMB{
 
 		menuDTO = new MenuDTO();
 		menuDTO.setNome("manageUser");
-		menuDTO.setUrl("gerenciarUsuario.xhtml");
-		menuDTO.setDropIndex(0);
+		menuDTO.setUrl("listarUsuarios.xhtml");
+		menuDTO.setDropIndex(3);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);
+		
+		menuDTO = new MenuDTO();
+		menuDTO.setNome("Gerenciar VeÃ­culo");
+		menuDTO.setUrl("listarVeiculos.xhtml");
+		menuDTO.setDropIndex(4);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);	
+		
+		menuDTO = new MenuDTO();
+		menuDTO.setNome("Gerenciar Atendimento");
+		menuDTO.setUrl("listarAtendimentos.xhtml");
+		menuDTO.setDropIndex(5);
 		menuDTO.setAtivoInativo(true);
 		menuDTO = menuDAO.save(menuDTO);
 		
