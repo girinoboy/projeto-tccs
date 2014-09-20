@@ -165,13 +165,15 @@ public class LoginMB extends GenericoMB{
 		menuDTO.setDropIndex(3);
 		menuDTO.setAtivoInativo(true);
 		menuDTO = menuDAO.save(menuDTO);
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
 		
 		menuDTO = new MenuDTO();
 		menuDTO.setNome("Gerenciar Veículo");
 		menuDTO.setUrl("listarVeiculos.xhtml");
 		menuDTO.setDropIndex(4);
 		menuDTO.setAtivoInativo(true);
-		menuDTO = menuDAO.save(menuDTO);	
+		menuDTO = menuDAO.save(menuDTO);
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
 		
 		menuDTO = new MenuDTO();
 		menuDTO.setNome("Gerenciar Atendimento");
@@ -179,9 +181,10 @@ public class LoginMB extends GenericoMB{
 		menuDTO.setDropIndex(5);
 		menuDTO.setAtivoInativo(true);
 		menuDTO = menuDAO.save(menuDTO);
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
 		
-		PerfilMenuDTO perfilMenuDTO = perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
-		System.out.println(perfilMenuDTO);
+//		PerfilMenuDTO perfilMenuDTO = perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+//		System.out.println(perfilMenuDTO);
 	}
 
 	public void logout() {
