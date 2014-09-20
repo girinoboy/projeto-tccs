@@ -16,6 +16,22 @@
 				</p:fieldset>
 				<p:commandButton value="Novo" action="/gerenciarVeiculo.xhtml?faces-redirect=true" immediate="true" ajax="false" />
 		        <p:commandButton value="Consultar" action="/gerenciarVeiculo.xhtml?faces-redirect=true" immediate="true" ajax="false" />
+		        <p:dataTable id="dataTable" var="veiculo" value="#{veiculoMB.listVeiculoDTO}" rowKey="#{veiculo.id}">
+					<p:column headerText="Codigo" style="width:50px">
+						<h:outputText value="#{veiculo.id}" />
+					</p:column>
+					<p:column headerText="Modelo" style="width:50px">
+						<h:outputText value="#{veiculo.modelo}" />
+					</p:column>
+					<p:column headerText="Placa" style="width:50px">
+						<h:outputText value="#{veiculo.placa}" />
+					</p:column>
+					<p:column headerText="Ações" style="width:50px">
+						<p:commandButton icon="ui-icon-search"/>
+						<p:commandButton icon="ui-icon-pencil"/>
+						<p:commandButton icon="ui-icon-trash"/>
+					</p:column>
+				</p:dataTable>
 			</p:panel>
 		</h:form>
 	</ui:define>
