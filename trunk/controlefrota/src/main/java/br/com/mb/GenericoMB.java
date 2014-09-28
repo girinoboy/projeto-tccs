@@ -13,13 +13,17 @@ import br.com.dto.MenuDTO;
 import br.com.dto.PerfilDTO;
 import br.com.dto.UsuarioDTO;
 @SuppressWarnings("unchecked")
-public class GenericoMB implements Serializable{
+public class GenericoMB<T> implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	protected ResourceBundle rb;
+	
+	private T abstractDTO;
+
+	private List<T> abstractList;
 	
 	@PostConstruct
 	public void inicio(){
@@ -59,5 +63,22 @@ public class GenericoMB implements Serializable{
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  detail);  
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
+
+	public List<T> getAbstractList() {
+		return abstractList;
+	}
+
+	public void setAbstractList(List<T> abstractList) {
+		this.abstractList = abstractList;
+	}
+
+	public T getAbstractDTO() {
+		return abstractDTO;
+	}
+
+	public void setAbstractDTO(T abstractDTO) {
+		this.abstractDTO = abstractDTO;
+	}
+
 
 }

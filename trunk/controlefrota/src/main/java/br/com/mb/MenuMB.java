@@ -35,7 +35,7 @@ import br.com.dto.PerfilMenuDTO;
  */
 @ManagedBean
 @SessionScoped
-public class MenuMB extends GenericoMB implements ModeloMB{
+public class MenuMB extends GenericoMB<MenuDTO> implements ModeloMB{
 
 	/**
 	 * 
@@ -56,7 +56,6 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 	 * 
 	 */
 	public MenuMB() {
-		System.out.println(menuDTO);
 		try {
 			atualiza(null);
 		} catch (Exception e) {
@@ -153,6 +152,7 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 		System.out.println(actionEvent.getSource());
 		// TODO Auto-generated method stub
 		System.out.println(menuDTO);
+		setAbstractDTO(menuDTO);
 	}
 	
 	@Override
@@ -166,6 +166,7 @@ public class MenuMB extends GenericoMB implements ModeloMB{
 		}
 	}
 	public void delTest(AbstractDTO abstractDTO){
+		System.out.println(menuDTO);
 		System.out.println(abstractDTO.getId());
 	}
 	

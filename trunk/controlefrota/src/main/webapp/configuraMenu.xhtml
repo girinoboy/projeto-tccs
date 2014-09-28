@@ -164,26 +164,17 @@
 	        	
 	        	<p:column style="width:6%" headerText="#{msgs.action}">
 		            <p:rowEditor />
-		            <p:commandButton icon="ui-icon-trash" onsuccess="PF('dlg').show();" update=":formEcluir:display" actionListener="#{menuMB.edit}" immediate="true">
+		            <p:commandButton icon="ui-icon-trash" onsuccess="PF('dlg').show();"  actionListener="#{menuMB.edit}" immediate="true">
 		            	<f:setPropertyActionListener value="#{menu}" target="#{menuMB.menuDTO}"/>
 	               	</p:commandButton>
 		        </p:column>
  			</p:dataTable>
- 			
  		</h:form>
- 		<h:form id="formEcluir">
-	 		<p:dialog header="#{msgs.delete} #{menuMB.menuDTO.nome}?" widgetVar="dlg" modal="true" resizable="false" draggable="true" appendTo="@(body)" >
-				<h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
-					<h:inputHidden value="#{menuMB.menuDTO.id}" />
-				    <h:outputText value="#{msgs.askDelete}-#{menuMB.menuDTO.id}" />
-				    <f:facet name="footer">
-				    	<h:commandButton value="teste" action="#{menuMB.delTest(menuMB.menuDTO)}" immediate="true" />
-					 	<p:commandButton value="#{msgs.delete}" update=":growl,:form:dataTable,:form:panel"  icon="ui-icon-close" action="#{menuMB.delTest(menuMB.menuDTO)}"  oncomplete="PF('dlg').hide()" immediate="true" ajax="false"/>
-					 	<p:commandButton value="#{msgs.cancel}" oncomplete="PF('dlg').hide()" immediate="true" />
-					</f:facet>
-				</h:panelGrid>
-			</p:dialog>
-		</h:form>
+	 	<ui:insert name="dialogDetalhamentoAto">
+			<ui:include src="dialogExcluir.xhtml">
+				<ui:param name="abstractMB" value="#{menuMB}" />
+			</ui:include>
+		</ui:insert>
  	</ui:define>
 </ui:decorate>
 </html>
