@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+		<p:dialog id="dlg" header="#{msgs.delete}?" widgetVar="dlg" modal="true" resizable="false" draggable="true" appendTo="@(body)" >
+	 		<h:form id="formEcluir">
+					<h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
+						<h:inputHidden value="#{abstractMB.abstractDTO.id}" />
+					    <h:outputText value="#{msgs.askDelete}-#{abstractMB.abstractDTO.id}" />
+					    <f:facet name="footer">
+						 	<p:commandButton value="#{msgs.delete}" update=":growl,:form:dataTable,:form:panel"  icon="ui-icon-close" actionListener="#{abstractMB.del}"  oncomplete="PF('dlg').hide()" immediate="true" />
+						 	<p:commandButton value="#{msgs.cancel}" oncomplete="PF('dlg').hide()" immediate="true" />
+						</f:facet>
+					</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+</ui:composition>
