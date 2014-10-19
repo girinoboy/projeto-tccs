@@ -31,7 +31,7 @@ public class VeiculoDAO extends GenericoDAO<VeiculoDTO, Serializable>{
 
 	public List<VeiculoDTO> verificaTrocaOleo() {
 		List<VeiculoDTO> list = criteria
-				.add(Restrictions.ge("kmLitro", "10000"))
+				.add(Restrictions.ge("kmOleo", "10000"))
 				.list();
 		return list;
 	}
