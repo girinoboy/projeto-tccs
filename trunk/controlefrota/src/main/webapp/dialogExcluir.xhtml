@@ -11,9 +11,9 @@
 	 		<h:form id="formEcluir">
 					<h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
 						<h:inputHidden value="#{abstractMB.abstractDTO.id}" />
-					    <h:outputText value="#{msgs.askDelete}-#{abstractMB.abstractDTO.id}" />
+					    <h:outputText value="#{msgs.askDelete}" />
 					    <f:facet name="footer">
-						 	<p:commandButton value="#{msgs.delete}" update=":growl,:form:dataTable,:form:panel"  icon="ui-icon-close" actionListener="#{abstractMB.del}"  oncomplete="PF('dlg').hide()" immediate="true" />
+						 	<p:commandButton value="#{msgs.delete}" update=":growl,:form1:dataTable,:form1:panel"  icon="ui-icon-close" actionListener="#{abstractMB.del}"  oncomplete="PF('dlg').hide()" immediate="true" />
 						 	<p:commandButton value="#{msgs.cancel}" oncomplete="PF('dlg').hide()" immediate="true" />
 						</f:facet>
 					</h:panelGrid>

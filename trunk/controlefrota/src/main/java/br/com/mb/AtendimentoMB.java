@@ -3,7 +3,6 @@
  */
 package br.com.mb;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +20,7 @@ import br.com.utility.Situacao;
  */
 @ManagedBean
 @SessionScoped
-public class AtendimentoMB extends GenericoMB implements ModeloMB{
+public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloMB{
 	
 	/**
 	 * 
@@ -32,10 +31,10 @@ public class AtendimentoMB extends GenericoMB implements ModeloMB{
 	private List<AtendimentoDTO> listAtendimentoDTO;
 	
 	@PostConstruct
-	public void inicio(){
+	public void inicio() throws Exception{
 		super.inicio();
 		atendimentoDTO = new AtendimentoDTO();
-		listAtendimentoDTO = new ArrayList<AtendimentoDTO>();
+//		listAtendimentoDTO = new ArrayList<AtendimentoDTO>();
 	}
 
 	/**
@@ -73,6 +72,8 @@ public class AtendimentoMB extends GenericoMB implements ModeloMB{
 
 	@Override
 	public void del(ActionEvent actionEvent) throws Exception {
+		abstractDAO.delete(abstractDTO);
+		addMessage(rb.getString("successfullyDeleted"));
 		atualiza(null);
 		
 	}

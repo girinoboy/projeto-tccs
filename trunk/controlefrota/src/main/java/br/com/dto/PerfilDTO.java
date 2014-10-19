@@ -52,10 +52,21 @@ public class PerfilDTO extends AbstractDTO{
 	}
 	
 	public PerfilDTO(Integer id) {
-		setId(id);
-//		this.id=id;
-		if(id.equals(1))
+		this.id=id;
+		if(id.equals(1)){
 			this.nome="Administrador";
+		}
+		if(id.equals(2)){
+			this.nome="Chefe";
+		}
+		if(id.equals(3)){
+			this.nome="Motorista";
+		}
+	}
+	
+	public PerfilDTO(Integer id, String nome) {
+		this.id=id;
+		this.nome=nome;
 	}
 	
 //	@Override

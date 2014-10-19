@@ -19,7 +19,7 @@ import br.com.dto.PerfilDTO;
  */
 @ManagedBean
 @RequestScoped
-public class PerfilMB extends GenericoMB implements ModeloMB{
+public class PerfilMB extends GenericoMB<PerfilDTO> implements ModeloMB{
 
 	/**
 	 * 

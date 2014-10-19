@@ -28,8 +28,12 @@ import br.com.dto.UsuarioDTO;
 
 @ManagedBean
 @ViewScoped
-public class ControleAcessoMB extends GenericoMB{
+public class ControleAcessoMB extends GenericoMB<PerfilMenuDTO>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3673275634835894694L;
 	private TreeNode root;
 	private TreeNode selectedNode;
 	private TreeNode[] nosSelecionados;

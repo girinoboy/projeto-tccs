@@ -10,6 +10,14 @@
 			<p:panel id="panel" header="Inserir Veículo">
 		        <h:panelGrid id="pg" columns="2" cellpadding="5">
 		        
+		        <h:outputLabel  value="Tipo: *" />
+		        <p:selectOneRadio id="console" value="#{veiculoMB.veiculoDTO.tipo}" layout="grid" columns="2">
+		            <f:selectItems value="#{veiculoMB.listTipo}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
+		        </p:selectOneRadio>
+		        
+		        <h:outputLabel  value="Código do veículo: *" />
+		        <p:outputLabel value="#{veiculoMB.veiculoDTO.id}"/>
+		        
 		        <h:outputLabel  value="Placa do veículo: *" />
 		        <p:inputText value="#{veiculoMB.veiculoDTO.placa}" required="true"/>
 		        
@@ -38,19 +46,22 @@
 		        <p:inputText value="#{veiculoMB.veiculoDTO.kmRevisao}"/>
 		        
 		        <h:outputLabel  value="Marca: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.marca}"/>
+		        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.marcaDTO}" converter="marcaConverter">
+		            <f:selectItem itemLabel="Selecione" itemValue="" />
+		            <f:selectItems value="#{marcaMB.abstractList}" var="ind" itemLabel="#{ind.nome}" itemValue="#{ind}"/>
+		        </p:selectOneMenu>
 		        
-		        <h:outputLabel  value="Ano: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.ano}"/>
+		        <h:outputLabel value="Ano inicial: *" />
+		        <p:inputMask value="#{veiculoMB.veiculoDTO.anoInicio}" mask="9999"/>
+		        
+		        <h:outputLabel value="Ano final: *" />
+		        <p:inputMask value="#{veiculoMB.veiculoDTO.anoFim}" mask="9999"/>
 		        
 		        <h:outputLabel  value="Tipo Combustível: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.tipoCombustivel}"/>
-		        
-		        <h:outputLabel  value="Tipo: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.tipo}"/>
-		        
-		        <h:outputLabel  value="Código do veículo: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.codigoVeiculo}"/>
+		        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.tipoCombustivel}" converter="indTipoCombustivelConverter">
+		            <f:selectItem itemLabel="Selecione" itemValue="" />
+		            <f:selectItems value="#{veiculoMB.listIndTipoCombustivel}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
+		        </p:selectOneMenu>
 		        
 		        <f:facet name="footer">
 		          	<p:commandButton value="#{empty veiculoMB.veiculoDTO.id ? 'Salvar':'Alterar'}" actionListener="#{veiculoMB.add}" id="withIcon"   

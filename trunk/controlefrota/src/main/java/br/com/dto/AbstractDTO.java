@@ -20,7 +20,7 @@ public abstract class AbstractDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	protected Integer id;
 	
 	public Integer getId() { 
 		return id; 

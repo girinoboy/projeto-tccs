@@ -6,7 +6,6 @@ package br.com.mb;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
 import br.com.dao.VeiculoDAO;
@@ -17,7 +16,7 @@ import br.com.dto.VeiculoDTO;
  *
  */
 @ManagedBean
-public class AlertaMB extends GenericoMB {
+public class AlertaMB extends GenericoMB<VeiculoDTO> {
 
 	/**
 	 * 
@@ -26,7 +25,7 @@ public class AlertaMB extends GenericoMB {
 	private VeiculoDAO veiculoDAO;
 	
 	@PostConstruct
-	public void inicio(){
+	public void inicio() throws Exception{
 		super.inicio();
 		veiculoDAO = new VeiculoDAO();
 	}

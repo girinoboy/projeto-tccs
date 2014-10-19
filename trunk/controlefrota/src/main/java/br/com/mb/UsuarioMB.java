@@ -17,7 +17,7 @@ import br.com.dto.UsuarioDTO;
  *
  */
 @ManagedBean
-public class UsuarioMB extends GenericoMB implements ModeloMB{
+public class UsuarioMB extends GenericoMB<UsuarioDTO> implements ModeloMB{
 
 	/**
 	 * 

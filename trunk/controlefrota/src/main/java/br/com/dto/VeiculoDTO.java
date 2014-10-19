@@ -3,8 +3,17 @@
  */
 package br.com.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import br.com.ind.IndTipo;
+import br.com.ind.IndTipoCombustivel;
 
 /**
  * @author marcleonio
@@ -29,10 +38,15 @@ public class VeiculoDTO extends AbstractDTO{
 	private String kmPeneu;
 	private String kmLitro;
 	private String kmRevisao;
-	private String marca;
-	private String ano;
-	private String tipoCombustivel;
-	private String tipo;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@JoinColumn(name = "marca_id", insertable = true, updatable = true, nullable = true)
+	private MarcaDTO marcaDTO;
+	private String anoInicio;
+	private String anoFim;
+	@Enumerated(EnumType.STRING)
+	private IndTipoCombustivel tipoCombustivel;
+	@Enumerated(EnumType.STRING)
+	private IndTipo tipo;
 	private String codigoVeiculo;
 
 	public VeiculoDTO(){
@@ -111,35 +125,43 @@ public class VeiculoDTO extends AbstractDTO{
 		this.kmRevisao = kmRevisao;
 	}
 
-	public String getMarca() {
-		return marca;
+	public MarcaDTO getMarcaDTO() {
+		return marcaDTO;
 	}
 
-	public void setMarca(String marca) {
-		this.marca = marca;
+	public void setMarcaDTO(MarcaDTO marcaDTO) {
+		this.marcaDTO = marcaDTO;
 	}
 
-	public String getAno() {
-		return ano;
+	public String getAnoInicio() {
+		return anoInicio;
 	}
 
-	public void setAno(String ano) {
-		this.ano = ano;
+	public void setAnoInicio(String anoInicio) {
+		this.anoInicio = anoInicio;
 	}
 
-	public String getTipoCombustivel() {
+	public String getAnoFim() {
+		return anoFim;
+	}
+
+	public void setAnoFim(String anoFim) {
+		this.anoFim = anoFim;
+	}
+
+	public IndTipoCombustivel getTipoCombustivel() {
 		return tipoCombustivel;
 	}
 
-	public void setTipoCombustivel(String tipoCombustivel) {
+	public void setTipoCombustivel(IndTipoCombustivel tipoCombustivel) {
 		this.tipoCombustivel = tipoCombustivel;
 	}
 
-	public String getTipo() {
+	public IndTipo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(IndTipo tipo) {
 		this.tipo = tipo;
 	}
 

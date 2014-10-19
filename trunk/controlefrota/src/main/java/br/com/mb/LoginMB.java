@@ -7,15 +7,12 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
-
-
 
 //import br.com.dao.LocalDAO;
 import br.com.dao.MenuDAO;
@@ -37,7 +34,7 @@ import br.com.utility.Constantes;
  */
 @ManagedBean
 @ViewScoped
-public class LoginMB extends GenericoMB{
+public class LoginMB extends GenericoMB<UsuarioDTO>{
 	
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -105,6 +102,8 @@ public class LoginMB extends GenericoMB{
 	private void criaMenus() throws Exception {
 		//cria perfil
 		PerfilDTO perfilDTO = new PerfilDAO().save(new PerfilDTO(1));
+		new PerfilDAO().save(new PerfilDTO(2,"Chefe"));//Chefe
+		new PerfilDAO().save(new PerfilDTO(3,"Motorista"));//Motorista
 		
 		//cria salas
 //		new LocalDAO().save(new LocalDTO("Sala 1"));
