@@ -27,20 +27,19 @@ public class AlertaMB extends GenericoMB<VeiculoDTO> {
 	@PostConstruct
 	public void inicio() throws Exception{
 		super.inicio();
-		veiculoDAO = new VeiculoDAO();
 	}
 
 	/**
 	 * 
 	 */
 	public AlertaMB() {
-		// TODO Auto-generated constructor stub
+		veiculoDAO = new VeiculoDAO();
 	}
 	
 	public void verificaTrocaOleo(){
 		List<VeiculoDTO> list = veiculoDAO.verificaTrocaOleo();
-		if(list != null && !list.isEmpty()){
-			addMessage("Exixtem veiculos que precisam troca o óleo.");
+		for (VeiculoDTO veiculoDTO : list) {
+			addMessage("Exixtem veiculos que precisam trocar o óleo.","Placa: "+veiculoDTO.getPlaca());
 		}
 	}
 
