@@ -38,7 +38,17 @@ public class GenericoDAO<T, ID extends Serializable> implements Serializable {
 		}
     }
 
-    public Class<T> getObjectClass() {
+    public GenericoDAO(Class<T> oClass) {
+    	 this.oClass = oClass;
+    	 try {
+ 			session = HibernateUtility.getSession();
+ 			criteria = session.createCriteria(oClass);
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}
+	}
+
+	public Class<T> getObjectClass() {
         return this.oClass;
     }
 
