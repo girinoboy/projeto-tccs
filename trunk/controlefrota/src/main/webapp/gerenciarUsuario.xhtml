@@ -60,34 +60,34 @@
 		                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 		            </p:inputText>
 		            
-		            <p:watermark for="dataAdmissao" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		            <p:message for="dataAdmissao" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		        	<h:outputLabel for="dataAdmissao" value="Data de Admissao: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		            <p:inputText id="dataAdmissao" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"
+		            <p:watermark for="dataAdmissao" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		            <p:message for="dataAdmissao" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		        	<h:outputLabel for="dataAdmissao" value="Data de Admissao: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		            <p:inputText id="dataAdmissao" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"
 		                value="#{usuarioMB.usuarioDTO.motoristaDTO.dataAdmissao}" required="true" label="Data de Admissao">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            
-		            <p:watermark for="cnh" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		            <p:message for="cnh" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		        	<h:outputLabel for="cnh" value="Número CNH: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		            <p:inputText id="cnh" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"
+		            <p:watermark for="cnh" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		            <p:message for="cnh" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		        	<h:outputLabel for="cnh" value="Número CNH: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		            <p:inputText id="cnh" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"
 		                value="#{usuarioMB.usuarioDTO.motoristaDTO.cnh}" required="true" label="Número CNH">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            
-		            <p:watermark for="validade" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		            <p:message for="validade" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		        	<h:outputLabel for="validade" value="Validade CNH: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		            <p:inputText id="validade" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"
+		            <p:watermark for="validade" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		            <p:message for="validade" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		        	<h:outputLabel for="validade" value="Validade CNH: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		            <p:inputText id="validade" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"
 		                value="#{usuarioMB.usuarioDTO.motoristaDTO.validade}" required="true" label="Validade CNH">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            
-		            <p:watermark for="categoria" value=" " rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		            <p:message for="categoria" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		        	<h:outputLabel for="categoria" value="Categoria: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}"/>
-		            <p:selectOneRadio id="categoria" value="#{usuarioMB.usuarioDTO.motoristaDTO.categoria}" required="true" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 2}">  
+		            <p:watermark for="categoria" value=" " rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		            <p:message for="categoria" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		        	<h:outputLabel for="categoria" value="Categoria: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
+		            <p:selectOneRadio id="categoria" value="#{usuarioMB.usuarioDTO.motoristaDTO.categoria}" required="true" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}">  
 			            <f:selectItem itemLabel="A" itemValue="A" />
 			            <f:selectItem itemLabel="B" itemValue="B" />
 			            <f:selectItem itemLabel="C" itemValue="C" />
