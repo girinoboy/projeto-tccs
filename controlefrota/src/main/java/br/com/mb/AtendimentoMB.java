@@ -27,13 +27,13 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 	 */
 	private static final long serialVersionUID = 7164991406034265304L;
 	private AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
-	private AtendimentoDTO atendimentoDTO;
+	private AtendimentoDTO atendimentoDTO = new AtendimentoDTO();
 	private List<AtendimentoDTO> listAtendimentoDTO;
 	
 	@PostConstruct
 	public void inicio() throws Exception{
 		super.inicio();
-		atendimentoDTO = new AtendimentoDTO();
+//		atendimentoDTO = new AtendimentoDTO();
 //		listAtendimentoDTO = new ArrayList<AtendimentoDTO>();
 	}
 
