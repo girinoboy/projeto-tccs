@@ -34,18 +34,50 @@
 		            <p:message for="display" />
 		            <br/>
     				<h:outputText id="display" />
-		            
-		        	<f:facet name="footer">
-			          	<p:commandButton value="#{empty atendimentoMB.atendimentoDTO.id ? 'Salvar':'Alterar'}" actionListener="#{atendimentoMB.add}" id="withIcon"   
-			            update="panel,:messages,:growl" icon="ui-icon-disk" />
-			            <p:commandButton value="Reset" update="panel" process="@this" immediate="true">
-			                <p:resetInput target="panel" />
-			            </p:commandButton>
-			            <p:commandButton value="Voltar" action="/listarAtendimentos.xhtml?faces-redirect=true" immediate="true"/> 
-		  			</f:facet>
+    				
 		        </h:panelGrid>
+		        
+		        <p:fieldset legend="Saída" style="margin-bottom:20px">
+		        	<h:panelGrid columns="6" cellpadding="5">
+    					<p:outputLabel for="dataSaida" value="Data:" />
+        				<p:calendar id="dataSaida" value="#{atendimentoMB.atendimentoDTO.dataSaida}" pattern="dd/MM/yyyy" mask="true" disabled="#{empty atendimentoMB.atendimentoDTO.id}" />
+    					
+    					<p:outputLabel for="horaSaida" value="Hora:" />
+        				<p:calendar id="horaSaida" value="#{atendimentoMB.atendimentoDTO.horaSaida}" pattern="HH:mm a" timeOnly="true"  disabled="#{empty atendimentoMB.atendimentoDTO.id}"/>
+        				
+        				<p:outputLabel for="kmInicial" value="km Inicial:" />
+        				<p:inputText id="kmInicial" value="#{atendimentoMB.atendimentoDTO.kmInicial}" disabled="#{empty atendimentoMB.atendimentoDTO.id}"/>
+        			</h:panelGrid>
+    			</p:fieldset>
+    			<br/>
+    			<p:fieldset legend="Chegada" style="margin-bottom:20px">
+    				<h:panelGrid columns="6" cellpadding="5">
+    					<p:outputLabel for="dataChegada" value="Data:" />
+        				<p:calendar id="dataChegada" value="#{atendimentoMB.atendimentoDTO.dataChegada}" pattern="dd/MM/yyyy" mask="true" disabled="#{empty atendimentoMB.atendimentoDTO.id}"/>
+    					
+    					<p:outputLabel for="horaChegada" value="Hora:" />
+        				<p:calendar id="horaChegada" value="#{atendimentoMB.atendimentoDTO.horaChegada}" pattern="HH:mm a" timeOnly="true"  disabled="#{empty atendimentoMB.atendimentoDTO.id}"/>
+        				
+        				<p:outputLabel for="kmFinal" value="km Final:" />
+        				<p:inputText id="kmFinal" value="#{atendimentoMB.atendimentoDTO.kmFinal}" disabled="#{empty atendimentoMB.atendimentoDTO.id}"/>
+        				
+        				<p:outputLabel for="percurso" value="Percurso:" />
+        				<p:inputTextarea id="percurso" value="#{atendimentoMB.atendimentoDTO.percurso}" disabled="#{empty atendimentoMB.atendimentoDTO.id}"/>
+        				
+        				<p:outputLabel for="observacoes" value="Observações:" />
+        				<p:inputTextarea id="observacoes" value="#{atendimentoMB.atendimentoDTO.observacoes}" disabled="#{empty atendimentoMB.atendimentoDTO.id}"/>
+        			</h:panelGrid>
+    			</p:fieldset>
+		        
+		        <f:facet name="footer">
+		          	<p:commandButton value="#{empty atendimentoMB.atendimentoDTO.id ? 'Salvar':'Alterar'}" actionListener="#{atendimentoMB.add}" id="withIcon"   
+		            update="panel,:messages,:growl" icon="ui-icon-disk" />
+		            <p:commandButton value="Reset" update="panel" process="@this" immediate="true">
+		                <p:resetInput target="panel" />
+		            </p:commandButton>
+		            <p:commandButton value="Voltar" action="/listarAtendimentos.xhtml?faces-redirect=true" immediate="true"/> 
+	  			</f:facet>
 		    </p:panel>
-		
 		</h:form>
 	</ui:define>
 </ui:decorate>

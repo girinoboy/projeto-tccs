@@ -10,70 +10,68 @@
 			<p:panel id="panel" header="Inserir Veículo">
 		        <h:panelGrid id="pg" columns="2" cellpadding="5">
 		        
-		        <h:outputLabel  value="Tipo: *" />
-		        <p:selectOneRadio id="console" value="#{veiculoMB.veiculoDTO.tipo}" layout="grid" columns="2">
-		            <f:selectItems value="#{veiculoMB.listTipo}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
-		        </p:selectOneRadio>
+			        <h:outputLabel  value="Tipo: *" />
+			        <p:selectOneRadio id="console" value="#{veiculoMB.veiculoDTO.tipo}" layout="grid" columns="2">
+			            <f:selectItems value="#{veiculoMB.listTipo}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
+			        </p:selectOneRadio>
+			        
+			        <h:outputLabel  value="Código do veículo: *" />
+			        <p:outputLabel value="#{veiculoMB.veiculoDTO.id}"/>
+			        
+			        <h:outputLabel  value="Placa do veículo: *" />
+			        <p:inputText value="#{veiculoMB.veiculoDTO.placa}" required="true"/>
+			        
+			        <h:outputLabel  value="Modelo: *" />
+			        <p:inputText value="#{veiculoMB.veiculoDTO.modelo}"/>
+			        
+			        <h:outputLabel  value="Chassi: *" />
+			        <p:inputText value="#{veiculoMB.veiculoDTO.chassi}"/>
+			        
+			        <h:outputLabel  value="RENAVAM: *" />
+			        <p:inputText value="#{veiculoMB.veiculoDTO.renavam}"/>
+			        
+			        <h:outputLabel  value="Capacidade do tanque: *" />
+			        <p:inputText value="#{veiculoMB.veiculoDTO.capacidadeTanque}"/>
+			        
+			        <h:outputLabel  value="KM / Óleo: *" />
+			        <p:inputText value="#{veiculoMB.veiculoDTO.kmOleo}"/>
+			        
+			        <h:outputLabel  value="KM / Pneu: *" />
+			        <p:inputText value="#{veiculoMB.veiculoDTO.kmPeneu}"/>
+			        
+			        <h:outputLabel  value="KM / Litro: *" />
+			        <p:inputText value="#{veiculoMB.veiculoDTO.kmLitro}"/>
+			        
+			        <h:outputLabel  value="KM / Revisão: *" />
+			        <p:inputText value="#{veiculoMB.veiculoDTO.kmRevisao}"/>
+			        
+			        <h:outputLabel  value="Marca: *" />
+			        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.marcaDTO}" converter="marcaConverter">
+			            <f:selectItem itemLabel="Selecione" itemValue="" />
+			            <f:selectItems value="#{marcaMB.abstractList}" var="ind" itemLabel="#{ind.nome}" itemValue="#{ind}"/>
+			        </p:selectOneMenu>
+			        
+			        <h:outputLabel value="Ano inicial: *" />
+			        <p:inputMask value="#{veiculoMB.veiculoDTO.anoInicio}" mask="9999"/>
+			        
+			        <h:outputLabel value="Ano final: *" />
+			        <p:inputMask value="#{veiculoMB.veiculoDTO.anoFim}" mask="9999"/>
+			        
+			        <h:outputLabel  value="Tipo Combustível: *" />
+			        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.tipoCombustivel}" converter="indTipoCombustivelConverter">
+			            <f:selectItem itemLabel="Selecione" itemValue="" />
+			            <f:selectItems value="#{veiculoMB.listIndTipoCombustivel}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
+			        </p:selectOneMenu>
 		        
-		        <h:outputLabel  value="Código do veículo: *" />
-		        <p:outputLabel value="#{veiculoMB.veiculoDTO.id}"/>
-		        
-		        <h:outputLabel  value="Placa do veículo: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.placa}" required="true"/>
-		        
-		        <h:outputLabel  value="Modelo: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.modelo}"/>
-		        
-		        <h:outputLabel  value="Chassi: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.chassi}"/>
-		        
-		        <h:outputLabel  value="RENAVAM: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.renavam}"/>
-		        
-		        <h:outputLabel  value="Capacidade do tanque: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.capacidadeTanque}"/>
-		        
-		        <h:outputLabel  value="KM / Óleo: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.kmOleo}"/>
-		        
-		        <h:outputLabel  value="KM / Peneu: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.kmPeneu}"/>
-		        
-		        <h:outputLabel  value="KM / Litro: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.kmLitro}"/>
-		        
-		        <h:outputLabel  value="KM / Revisão: *" />
-		        <p:inputText value="#{veiculoMB.veiculoDTO.kmRevisao}"/>
-		        
-		        <h:outputLabel  value="Marca: *" />
-		        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.marcaDTO}" converter="marcaConverter">
-		            <f:selectItem itemLabel="Selecione" itemValue="" />
-		            <f:selectItems value="#{marcaMB.abstractList}" var="ind" itemLabel="#{ind.nome}" itemValue="#{ind}"/>
-		        </p:selectOneMenu>
-		        
-		        <h:outputLabel value="Ano inicial: *" />
-		        <p:inputMask value="#{veiculoMB.veiculoDTO.anoInicio}" mask="9999"/>
-		        
-		        <h:outputLabel value="Ano final: *" />
-		        <p:inputMask value="#{veiculoMB.veiculoDTO.anoFim}" mask="9999"/>
-		        
-		        <h:outputLabel  value="Tipo Combustível: *" />
-		        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.tipoCombustivel}" converter="indTipoCombustivelConverter">
-		            <f:selectItem itemLabel="Selecione" itemValue="" />
-		            <f:selectItems value="#{veiculoMB.listIndTipoCombustivel}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
-		        </p:selectOneMenu>
-		        
+		        </h:panelGrid>
 		        <f:facet name="footer">
 		          	<p:commandButton value="#{empty veiculoMB.veiculoDTO.id ? 'Salvar':'Alterar'}" actionListener="#{veiculoMB.add}" id="withIcon"   
 		            update="panel,:messages,:growl" icon="ui-icon-disk" />
 		            <p:commandButton value="Reset" actionListener="#{veiculoMB.reset}" update="panel" immediate="true"/> 
 		            <p:commandButton value="Voltar" action="/listarVeiculos.xhtml?faces-redirect=true" immediate="true"/> 
 	  			</f:facet>
-		        
-		        </h:panelGrid> 
 		    </p:panel> 
-		    
-		    </h:form>
-		    </ui:define>
+		</h:form>
+	</ui:define>
 </ui:decorate>
 </html>

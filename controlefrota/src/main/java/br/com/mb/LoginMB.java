@@ -110,7 +110,8 @@ public class LoginMB extends GenericoMB<UsuarioDTO>{
 //		new LocalDAO().save(new LocalDTO("Sala 2"));
 		
 		//cria usuario
-		usuarioDTO = new UsuarioDTO();			
+		usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setMatricula("admin");
 		usuarioDTO.setUsuario("admin");
 		usuarioDTO.setSenha("admin");
 		usuarioDTO.setTema("flick");
