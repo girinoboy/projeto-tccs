@@ -3,7 +3,10 @@
  */
 package br.com.dto;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.utility.Situacao;
 
@@ -35,6 +40,27 @@ public class AtendimentoDTO extends AbstractDTO{
 	private String destino;
 	@Enumerated(EnumType.STRING)
     private Situacao situacao;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_saida")
+	private Date dataSaida;
+	@Temporal(TemporalType.TIME)
+	@Column(name="hora_saida")
+	private Date horaSaida;
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_chegada")
+	private Date dataChegada;
+	@Temporal(TemporalType.TIME)
+	@Column(name="hora_chegada")
+	private Date horaChegada;
+	
+	private String percurso;
+	private String observacoes;
+	
+	@Column(name="km_inicial")
+	private String kmInicial;
+	@Column(name="km_final")
+	private String kmFinal;
 
 	/**
 	 * 
@@ -73,6 +99,70 @@ public class AtendimentoDTO extends AbstractDTO{
 
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
+	}
+
+	public Date getDataSaida() {
+		return dataSaida;
+	}
+
+	public void setDataSaida(Date dataSaida) {
+		this.dataSaida = dataSaida;
+	}
+
+	public Date getHoraSaida() {
+		return horaSaida;
+	}
+
+	public void setHoraSaida(Date horaSaida) {
+		this.horaSaida = horaSaida;
+	}
+
+	public Date getDataChegada() {
+		return dataChegada;
+	}
+
+	public void setDataChegada(Date dataChegada) {
+		this.dataChegada = dataChegada;
+	}
+
+	public Date getHoraChegada() {
+		return horaChegada;
+	}
+
+	public void setHoraChegada(Date horaChegada) {
+		this.horaChegada = horaChegada;
+	}
+
+	public String getPercurso() {
+		return percurso;
+	}
+
+	public void setPercurso(String percurso) {
+		this.percurso = percurso;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+
+	public String getKmInicial() {
+		return kmInicial;
+	}
+
+	public void setKmInicial(String kmInicial) {
+		this.kmInicial = kmInicial;
+	}
+
+	public String getKmFinal() {
+		return kmFinal;
+	}
+
+	public void setKmFinal(String kmFinal) {
+		this.kmFinal = kmFinal;
 	}
 
 }

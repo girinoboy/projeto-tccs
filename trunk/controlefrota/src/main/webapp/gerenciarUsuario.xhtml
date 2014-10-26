@@ -94,17 +94,15 @@
 			            <f:selectItem itemLabel="D" itemValue="D" />
 			        </p:selectOneRadio>
 		            
-		            
-		          	<f:facet name="footer">
-			          	<p:commandButton value="#{empty usuarioMB.usuarioDTO.id ? 'Salvar':'Alterar'}" actionListener="#{usuarioMB.add}" id="withIcon"   
-			            update="panel,:messages,:growl" icon="ui-icon-disk" />
-			            <p:commandButton value="Reset" actionListener="#{usuarioMB.reset}" update="panel" immediate="true"/> 
-			            <p:commandButton value="Voltar" action="/listarUsuarios.xhtml?faces-redirect=true" immediate="true"/> 
-		  			</f:facet>
 		        </h:panelGrid>  
+	          	<f:facet name="footer">
+		          	<p:commandButton value="#{empty usuarioMB.usuarioDTO.id ? 'Salvar':'Alterar'}" actionListener="#{usuarioMB.add}" id="withIcon"   
+		            update="panel,:messages,:growl" icon="ui-icon-disk" />
+		            <p:commandButton value="Reset" actionListener="#{usuarioMB.reset}" update="panel" immediate="true"/> 
+		            <p:commandButton value="Voltar" action="/listarUsuarios.xhtml?faces-redirect=true" immediate="true"/> 
+	  			</f:facet>
 		    </p:panel> 
-		    
-		    </h:form>
-		    </ui:define>
+		</h:form>
+	</ui:define>
 </ui:decorate>
 </html>

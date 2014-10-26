@@ -41,6 +41,10 @@
 							<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.atendimentoDTO}"/>
 			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
 			            </p:commandButton>
+			            <p:commandButton icon="ui-icon-flag" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true">
+							<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.atendimentoDTO}"/>
+			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
+			            </p:commandButton>
 						<p:commandButton icon="ui-icon-trash" update=":formEcluir" actionListener="#{atendimentoMB.edit}" immediate="true">
 			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
 			            </p:commandButton>

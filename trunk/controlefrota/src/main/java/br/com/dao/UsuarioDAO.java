@@ -35,7 +35,7 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 		try{
 			usuario = (UsuarioDTO) HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
 					//.setFetchMode("perfilDTO", FetchMode.JOIN)
-					.add(Restrictions.eq("usuario", usuario.getUsuario()))
+					.add(Restrictions.eq("matricula", usuario.getUsuario()))
 					.add(Restrictions.eq("senha", usuario.getSenha()))
 					.uniqueResult();
 		}catch(Exception e){
