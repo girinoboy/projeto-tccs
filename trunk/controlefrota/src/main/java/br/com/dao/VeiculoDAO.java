@@ -4,6 +4,7 @@
 package br.com.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
@@ -30,8 +31,18 @@ public class VeiculoDAO extends GenericoDAO<VeiculoDTO, Serializable>{
 	}
 
 	public List<VeiculoDTO> verificaTrocaOleo() {
+		List<String> listString = new ArrayList<String>();
+		listString.add("10000");
+		listString.add("20000");
+		listString.add("30000");
+		listString.add("40000");
+		listString.add("50000");
+		listString.add("60000");
+		listString.add("70000");
+		listString.add("80000");
+		listString.add("90000");
 		List<VeiculoDTO> list = criteria
-				.add(Restrictions.ge("kmOleo", "10000"))
+				.add(Restrictions.in("kmOleo", listString))
 				.list();
 		return list;
 	}
