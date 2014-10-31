@@ -19,7 +19,7 @@
 			        </h:panelGrid>
 		        </p:fieldset>
 				<p:commandButton value="Novo" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" ajax="false" />
-			    <p:commandButton value="Consultar" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" ajax="false" />
+			    <p:commandButton value="Consultar" actionListener="#{atendimentoMB.atualiza}" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" ajax="false" />
 			    <p:dataTable id="dataTable" var="atendimento" value="#{atendimentoMB.listAtendimentoDTO}" rowKey="#{atendimento.id}">
 					<p:column headerText="Codigo" style="width:50px">
 						<h:outputText value="#{atendimento.id}" />
@@ -41,7 +41,7 @@
 							<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.atendimentoDTO}"/>
 			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
 			            </p:commandButton>
-			            <p:commandButton icon="ui-icon-flag" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true">
+			            <p:commandButton icon="ui-icon-flag" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" rendered="#{atendimentoMB.userSession.perfilDTO.id eq 3}">
 							<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.atendimentoDTO}"/>
 			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
 			            </p:commandButton>
