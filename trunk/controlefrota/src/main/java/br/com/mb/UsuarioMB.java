@@ -48,6 +48,7 @@ public class UsuarioMB extends GenericoMB<UsuarioDTO> implements ModeloMB{
 
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
+		usuarioDTO.setUsuario(usuarioDTO.getMatricula());
 		usuarioDAO.save(usuarioDTO);
 		System.out.println(111);
 		addMessage(rb.getString("successfullySaved"));
