@@ -31,6 +31,10 @@ public class GenericoMB<T> implements Serializable{
 
 	protected List<T> abstractList;
 	
+	protected Boolean visualizar;
+	protected Boolean alterar;
+	protected Boolean novo;
+	
 	@PostConstruct
 	public void inicio() throws Exception{
 		abstractList =  abstractDAO.list();
@@ -99,6 +103,30 @@ public class GenericoMB<T> implements Serializable{
 
 	public void setAbstractDTO(T abstractDTO) {
 		this.abstractDTO = abstractDTO;
+	}
+
+	public Boolean getVisualizar() {
+		return visualizar;
+	}
+
+	public void setVisualizar(Boolean visualizar) {
+		this.visualizar = visualizar;
+	}
+
+	public Boolean getAlterar() {
+		return alterar;
+	}
+
+	public void setAlterar(Boolean alterar) {
+		this.alterar = alterar;
+	}
+
+	public Boolean getNovo() {
+		return novo;
+	}
+
+	public void setNovo(Boolean novo) {
+		this.novo = novo;
 	}
 
 
