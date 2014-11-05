@@ -58,7 +58,13 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
-		atendimentoDTO.setSituacao(Situacao.AGUARDANDO);
+		if(atendimentoDTO.getSituacao() == null){
+			atendimentoDTO.setSituacao(Situacao.AGUARDANDO);
+		}else if(atendimentoDTO.getSituacao().equals(Situacao.AGUARDANDO) && atendimentoDTO.getDataSaida() != null){
+			atendimentoDTO.setSituacao(Situacao.EM_ANDAMENTO);
+		}else if(atendimentoDTO.getSituacao().equals(Situacao.EM_ANDAMENTO) && atendimentoDTO.getDataChegada() != null){
+			atendimentoDTO.setSituacao(Situacao.FINALIZADO);
+		}
 		atendimentoDAO.save(atendimentoDTO);
 		atualiza(null);
 		addMessage(rb.getString("successfullySaved"));
