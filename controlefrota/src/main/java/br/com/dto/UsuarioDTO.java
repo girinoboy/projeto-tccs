@@ -32,10 +32,12 @@ public class UsuarioDTO extends AbstractDTO{
 	//	@Id 
 //	@GeneratedValue(strategy= GenerationType.IDENTITY)
 //	private Integer id;
+	@Column(nullable=false)
 	private String usuario;
 	private String matricula;
 	private String telefone;
 	@NotAudited
+	@Column(nullable=false)
 	private String senha;
 	private String nome;
 	@Column(name="data_nascimento",columnDefinition="date")
