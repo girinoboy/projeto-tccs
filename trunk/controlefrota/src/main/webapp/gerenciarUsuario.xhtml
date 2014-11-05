@@ -62,11 +62,8 @@
 		            <p:watermark for="dataAdmissao" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
 		            <p:message for="dataAdmissao" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
 		        	<h:outputLabel for="dataAdmissao" value="Data de Admissao: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
-		            <p:inputText id="dataAdmissao" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"
-		                value="#{usuarioMB.usuarioDTO.motoristaDTO.dataAdmissao}" required="true" label="Data de Admissao">
-		                <f:validateLength minimum="2" />
-		            </p:inputText>
-		            
+		        	<p:calendar id="dataAdmissao" value="#{usuarioMB.usuarioDTO.motoristaDTO.dataAdmissao}" pattern="dd/MM/yyyy" mask="true" size="80" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}" required="true" label="Data de Admissao"/>
+
 		            <p:watermark for="cnh" value="" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
 		            <p:message for="cnh" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
 		        	<h:outputLabel for="cnh" value="Número CNH: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
