@@ -21,7 +21,7 @@ import br.com.ind.indSituacao;
 @ManagedBean
 @SessionScoped
 public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloMB{
-	
+
 	/**
 	 * 
 	 */
@@ -29,12 +29,12 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 	private AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
 	private AtendimentoDTO atendimentoDTO = new AtendimentoDTO();
 	private List<AtendimentoDTO> listAtendimentoDTO;
-	
+
 	@PostConstruct
 	public void inicio() throws Exception{
 		super.inicio();
-//		atendimentoDTO = new AtendimentoDTO();
-//		listAtendimentoDTO = new ArrayList<AtendimentoDTO>();
+		//		atendimentoDTO = new AtendimentoDTO();
+		//		listAtendimentoDTO = new ArrayList<AtendimentoDTO>();
 	}
 
 	/**
@@ -47,8 +47,11 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 
 	@Override
 	public void atualiza(ActionEvent event) throws Exception {
-		listAtendimentoDTO = atendimentoDAO.listPorIdUsuario(getUserSession());
-		
+		if(getUserSession().getPerfilDTO().getId().equals(3)){
+			listAtendimentoDTO = atendimentoDAO.listPorIdUsuario(getUserSession());
+		}else{
+			listAtendimentoDTO = atendimentoDAO.list();
+		}
 	}
 
 	@Override
@@ -73,7 +76,7 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 	@Override
 	public void edit(ActionEvent actionEvent) throws Exception {
 		atualiza(null);
-		
+
 	}
 
 	@Override
@@ -81,7 +84,7 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		abstractDAO.delete(abstractDTO);
 		addMessage(rb.getString("successfullyDeleted"));
 		atualiza(null);
-		
+
 	}
 
 	public AtendimentoDTO getAtendimentoDTO() {
