@@ -18,7 +18,7 @@
 			        	<p:inputText />
 			        </h:panelGrid>
 		        </p:fieldset>
-				<p:commandButton value="Novo" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" ajax="false" />
+				<p:commandButton value="Novo" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" ajax="false" rendered="#{atendimentoMB.userSession.perfilDTO.id ne 3}"/>
 			    <p:commandButton value="Consultar" actionListener="#{atendimentoMB.atualiza}" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" ajax="false" />
 			    <p:dataTable id="dataTable" var="atendimento" value="#{atendimentoMB.listAtendimentoDTO}" rowKey="#{atendimento.id}">
 					<p:column headerText="Codigo" style="width:50px">
