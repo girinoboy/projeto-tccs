@@ -12,7 +12,7 @@ import javax.faces.event.ActionEvent;
 
 import br.com.dao.AtendimentoDAO;
 import br.com.dto.AtendimentoDTO;
-import br.com.utility.Situacao;
+import br.com.ind.indSituacao;
 
 /**
  * @author marcleonio
@@ -47,7 +47,7 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 
 	@Override
 	public void atualiza(ActionEvent event) throws Exception {
-		listAtendimentoDTO = atendimentoDAO.list();
+		listAtendimentoDTO = atendimentoDAO.listPorIdUsuario(getUserSession());
 		
 	}
 
@@ -59,11 +59,11 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
 		if(atendimentoDTO.getSituacao() == null){
-			atendimentoDTO.setSituacao(Situacao.AGUARDANDO);
-		}else if(atendimentoDTO.getSituacao().equals(Situacao.AGUARDANDO) && atendimentoDTO.getDataSaida() != null){
-			atendimentoDTO.setSituacao(Situacao.EM_ANDAMENTO);
-		}else if(atendimentoDTO.getSituacao().equals(Situacao.EM_ANDAMENTO) && atendimentoDTO.getDataChegada() != null){
-			atendimentoDTO.setSituacao(Situacao.FINALIZADO);
+			atendimentoDTO.setSituacao(indSituacao.AGUARDANDO);
+		}else if(atendimentoDTO.getSituacao().equals(indSituacao.AGUARDANDO) && atendimentoDTO.getDataSaida() != null){
+			atendimentoDTO.setSituacao(indSituacao.EM_ANDAMENTO);
+		}else if(atendimentoDTO.getSituacao().equals(indSituacao.EM_ANDAMENTO) && atendimentoDTO.getDataChegada() != null){
+			atendimentoDTO.setSituacao(indSituacao.FINALIZADO);
 		}
 		atendimentoDAO.save(atendimentoDTO);
 		atualiza(null);

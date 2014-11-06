@@ -1,11 +1,11 @@
-package br.com.utility;
+package br.com.ind;
 
-public enum Situacao {
+public enum indSituacao {
 	AGUARDANDO("Aguardando"),FINALIZADO("Finalizado"),EM_ANDAMENTO("Em andamento");
 
 	private String descricao;
 	
-	private Situacao(String descricao) {
+	private indSituacao(String descricao) {
 		this.descricao= descricao;
 	}
 

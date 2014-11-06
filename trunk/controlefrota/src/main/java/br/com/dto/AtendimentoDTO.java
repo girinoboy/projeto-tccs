@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.utility.Situacao;
+import br.com.ind.indSituacao;
 
 /**
  * @author marcleonio
@@ -39,7 +39,7 @@ public class AtendimentoDTO extends AbstractDTO{
 	private UsuarioDTO usuarioDTO;
 	private String destino;
 	@Enumerated(EnumType.STRING)
-    private Situacao situacao;
+    private indSituacao situacao;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="data_saida")
@@ -93,11 +93,11 @@ public class AtendimentoDTO extends AbstractDTO{
 		this.destino = destino;
 	}
 
-	public Situacao getSituacao() {
+	public indSituacao getSituacao() {
 		return situacao;
 	}
 
-	public void setSituacao(Situacao situacao) {
+	public void setSituacao(indSituacao situacao) {
 		this.situacao = situacao;
 	}
 
