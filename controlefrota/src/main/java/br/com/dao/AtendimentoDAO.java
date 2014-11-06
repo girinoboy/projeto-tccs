@@ -4,13 +4,19 @@
 package br.com.dao;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.criterion.Restrictions;
 
 import br.com.dto.AtendimentoDTO;
+import br.com.dto.UsuarioDTO;
+import br.com.factory.HibernateUtility;
 
 /**
  * @author marcleonio
  *
  */
+@SuppressWarnings("unchecked")
 public class AtendimentoDAO extends GenericoDAO<AtendimentoDTO, Serializable> {
 
 	/**
@@ -23,6 +29,21 @@ public class AtendimentoDAO extends GenericoDAO<AtendimentoDTO, Serializable> {
 	 */
 	public AtendimentoDAO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	public List<AtendimentoDTO> listPorIdUsuario(UsuarioDTO userSession) throws Exception {
+		try{
+			return  HibernateUtility.getSession().createCriteria(AtendimentoDTO.class)
+					//.setFetchMode("perfilDTO", FetchMode.JOIN)
+					.add(Restrictions.eq("usuarioDTO.id", userSession.getId()))
+					.list();
+		}catch(Exception e){
+			throw e;
+		}finally{
+			HibernateUtility.closeSession();
+//			session.close();			
+		}
 	}
 
 }
