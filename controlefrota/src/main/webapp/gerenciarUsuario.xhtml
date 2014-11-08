@@ -26,7 +26,7 @@
 		        	<p:watermark for="matricula" value="" />
 		            <p:message for="matricula" />
 		        	<h:outputLabel for="matricula" value="Matrícula: *" />
-		            <p:inputText id="matricula" size="80"
+		            <p:inputText id="matricula" size="80" maxlength="8"
 		                value="#{usuarioMB.usuarioDTO.matricula}" required="true" label="Matricula">
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
