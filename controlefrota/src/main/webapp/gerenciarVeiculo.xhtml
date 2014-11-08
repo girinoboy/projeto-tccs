@@ -37,7 +37,7 @@
 				        <p:inputMask value="#{veiculoMB.veiculoDTO.renavam}" mask="9?9999999" maxlength="9" placeHolder=" "/>
 				        
 				        <h:outputLabel  value="Capacidade do tanque: *" />
-				        <p:inputMask value="#{veiculoMB.veiculoDTO.capacidadeTanque}" mask="9?999" maxlength="4" placeHolder=" "/>
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.capacidadeTanque}" mask="99" maxlength="2" placeHolder=" "/>
 				        
 				        <h:outputLabel  value="Marca: *" />
 				        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.marcaDTO}" converter="marcaConverter">
@@ -65,7 +65,7 @@
 		        		<p:inputMask value="#{veiculoMB.veiculoDTO.kmOleo}" mask="9?999" maxlength="4" placeHolder=" "/>
 				        
 				        <h:outputLabel  value="KM / Pneu: *" />
-				        <p:inputMask value="#{veiculoMB.veiculoDTO.kmPeneu}" mask="9?999" maxlength="4" placeHolder=" "/>
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.kmPneu}" mask="9?999" maxlength="4" placeHolder=" "/>
 				        
 				        <h:outputLabel  value="KM / Litro: *" />
 				        <p:inputMask value="#{veiculoMB.veiculoDTO.kmLitro}" mask="9?999" maxlength="4" placeHolder=" "/>

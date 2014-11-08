@@ -14,12 +14,16 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 
+
+
+import br.com.dao.MarcaDAO;
 //import br.com.dao.LocalDAO;
 import br.com.dao.MenuDAO;
 import br.com.dao.PerfilDAO;
 import br.com.dao.PerfilMenuDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dao.UsuarioPerfilDAO;
+import br.com.dto.MarcaDTO;
 //import br.com.dto.LocalDTO;
 import br.com.dto.MenuDTO;
 import br.com.dto.PerfilDTO;
@@ -71,7 +75,9 @@ public class LoginMB extends GenericoMB<UsuarioDTO>{
 				context.execute("PF('dlg').hide();");
 				FacesContext.getCurrentInstance().getExternalContext().redirect("layoutElement.xhtml");
 			} else if(usuarioDTO==null && usuarioDAO.list().size()==0){
+				//***********cria os meus iniciais********//
 				criaMenus();
+				//***********cria os meus iniciais********//
 
 				loggedIn = true;
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, rb.getString("welcome"), usuarioDTO.getUsuario());
@@ -182,6 +188,28 @@ public class LoginMB extends GenericoMB<UsuarioDTO>{
 		menuDTO.setAtivoInativo(true);
 		menuDTO = menuDAO.save(menuDTO);
 		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+		
+		menuDTO = new MenuDTO();
+		menuDTO.setNome("Relatório");
+		menuDTO.setDropIndex(6);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+		
+		MenuDTO menuPai = menuDTO;
+		menuDTO = new MenuDTO();
+		menuDTO.setNome("Quilômetros rodados da frota");
+		menuDTO.setUrl("relatorioKmRodadosFrota.xhtml");
+		menuDTO.setMenuDTO(menuPai);
+		menuDTO.setDropIndex(0);
+		menuDTO.setAtivoInativo(true);
+		menuDTO = menuDAO.save(menuDTO);
+		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
+		
+		MarcaDAO marcadao = new MarcaDAO();
+		MarcaDTO marcaDTO = new MarcaDTO();
+		marcaDTO.setNome("Fiat");
+		marcadao.save(marcaDTO );
 		
 //		PerfilMenuDTO perfilMenuDTO = perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
 //		System.out.println(perfilMenuDTO);
