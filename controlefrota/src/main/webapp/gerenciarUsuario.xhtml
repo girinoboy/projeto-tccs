@@ -19,7 +19,7 @@
 		            <p:message for="idPerfil" />
 		        	<h:outputLabel for="idPerfil" value="Função: *" />
 		            <p:selectOneRadio id="idPerfil" value="#{usuarioMB.usuarioDTO.perfilDTO}" required="true" label="Função" converter="perfilConverter">
-		            	<f:selectItems value="#{perfilMB.abstractList}" var="l" itemLabel="#{l.nome}" itemValue="#{l}"/>  
+		            	<f:selectItems value="#{perfilMB.listPerfil}" var="l" itemLabel="#{l.nome}" itemValue="#{l}"/>  
 			            <p:ajax update="panel"/>
 			        </p:selectOneRadio>
 		        
