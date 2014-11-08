@@ -35,6 +35,7 @@ public class PerfilMB extends GenericoMB<PerfilDTO> implements ModeloMB{
 		try {
 			listPerfil = //PerfilConverter.perfilDB;
 					perfilDAO.list();
+			listPerfil.remove(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
