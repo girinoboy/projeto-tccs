@@ -32,7 +32,7 @@ public class VeiculoDAO extends GenericoDAO<VeiculoDTO, Serializable>{
 	public List<VeiculoDTO> verificarAlertaQuilometragem() {
 		List<VeiculoDTO> list = criteria 
 				.add(Restrictions.eqProperty("kmAtual", "kmOleo"))
-				.add(Restrictions.eqProperty("kmAtual", "kmPeneu"))
+				.add(Restrictions.eqProperty("kmAtual", "kmPneu"))
 				.add(Restrictions.eqProperty("kmAtual", "kmLitro"))
 				.add(Restrictions.eqProperty("kmAtual", "kmRevisao"))
 				.list();
