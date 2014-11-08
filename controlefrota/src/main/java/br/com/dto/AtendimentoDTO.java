@@ -58,9 +58,9 @@ public class AtendimentoDTO extends AbstractDTO{
 	private String observacoes;
 	
 	@Column(name="km_inicial")
-	private String kmInicial;
+	private Long kmInicial;
 	@Column(name="km_final")
-	private String kmFinal;
+	private Long kmFinal;
 
 	/**
 	 * 
@@ -149,19 +149,19 @@ public class AtendimentoDTO extends AbstractDTO{
 		this.observacoes = observacoes;
 	}
 
-	public String getKmInicial() {
+	public Long getKmInicial() {
 		return kmInicial;
 	}
 
-	public void setKmInicial(String kmInicial) {
+	public void setKmInicial(Long kmInicial) {
 		this.kmInicial = kmInicial;
 	}
 
-	public String getKmFinal() {
+	public Long getKmFinal() {
 		return kmFinal;
 	}
 
-	public void setKmFinal(String kmFinal) {
+	public void setKmFinal(Long kmFinal) {
 		this.kmFinal = kmFinal;
 	}
 

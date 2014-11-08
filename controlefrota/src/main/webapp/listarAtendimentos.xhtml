@@ -43,7 +43,7 @@
 							<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.atendimentoDTO}"/>
 			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
 			            </p:commandButton>
-			            <p:commandButton icon="ui-icon-flag" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" rendered="#{atendimentoMB.userSession.perfilDTO.id eq 3}" disabled="#{atendimento.situacao eq 'FINALIZADO'}">
+			            <p:commandButton icon="ui-icon-flag" actionListener="#{atendimentoMB.populaAtendimento()}" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" rendered="#{atendimentoMB.userSession.perfilDTO.id eq 3}" disabled="#{atendimento.situacao eq 'FINALIZADO'}">
 							<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.atendimentoDTO}"/>
 			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
 			            </p:commandButton>

@@ -46,7 +46,7 @@
         				<p:calendar id="horaSaida" value="#{atendimentoMB.atendimentoDTO.horaSaida}" pattern="HH:mm a" timeOnly="true"  disabled="true"/>
         				
         				<p:outputLabel for="kmInicial" value="km Inicial:" />
-        				<p:inputText id="kmInicial" value="#{atendimentoMB.atendimentoDTO.kmInicial}" disabled="true"/>
+        				<p:inputText id="kmInicial" value="#{atendimentoMB.atendimentoDTO.veiculoDTO.kmAtual}" disabled="true"/>
         			</h:panelGrid>
     			</p:fieldset>
     			<br/>

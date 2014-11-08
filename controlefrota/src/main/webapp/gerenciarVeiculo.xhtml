@@ -6,63 +6,73 @@
 
 <ui:decorate template="layoutElement.xhtml">
 	<ui:define name="centro">
+	
+		<style>
+		.alignTop {
+			vertical-align: top;
+			}
+		</style>
 		<h:form id="form1">
 			<p:panel id="panel" header="Inserir Veículo">
-		        <h:panelGrid id="pg" columns="2" cellpadding="5">
-		        
-			        <h:outputLabel  value="Tipo: *" />
-			        <p:selectOneRadio id="console" value="#{veiculoMB.veiculoDTO.tipo}" layout="grid" columns="2">
-			            <f:selectItems value="#{veiculoMB.listTipo}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
-			        </p:selectOneRadio>
-			        
-			        <h:outputLabel  value="Código do veículo: *" />
-			        <p:outputLabel value="#{veiculoMB.veiculoDTO.id}"/>
-			        
-			        <h:outputLabel  value="Placa do veículo: *" />
-			        <p:inputText value="#{veiculoMB.veiculoDTO.placa}" required="true"/>
-			        
-			        <h:outputLabel  value="Modelo: *" />
-			        <p:inputText value="#{veiculoMB.veiculoDTO.modelo}"/>
-			        
-			        <h:outputLabel  value="Chassi: *" />
-			        <p:inputText value="#{veiculoMB.veiculoDTO.chassi}"/>
-			        
-			        <h:outputLabel  value="RENAVAM: *" />
-			        <p:inputText value="#{veiculoMB.veiculoDTO.renavam}"/>
-			        
-			        <h:outputLabel  value="Capacidade do tanque: *" />
-			        <p:inputText value="#{veiculoMB.veiculoDTO.capacidadeTanque}"/>
-			        
-			        <h:outputLabel  value="KM / Óleo: *" />
-			        <p:inputText value="#{veiculoMB.veiculoDTO.kmOleo}"/>
-			        
-			        <h:outputLabel  value="KM / Pneu: *" />
-			        <p:inputText value="#{veiculoMB.veiculoDTO.kmPeneu}"/>
-			        
-			        <h:outputLabel  value="KM / Litro: *" />
-			        <p:inputText value="#{veiculoMB.veiculoDTO.kmLitro}"/>
-			        
-			        <h:outputLabel  value="KM / Revisão: *" />
-			        <p:inputText value="#{veiculoMB.veiculoDTO.kmRevisao}"/>
-			        
-			        <h:outputLabel  value="Marca: *" />
-			        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.marcaDTO}" converter="marcaConverter">
-			            <f:selectItem itemLabel="Selecione" itemValue="" />
-			            <f:selectItems value="#{marcaMB.abstractList}" var="ind" itemLabel="#{ind.nome}" itemValue="#{ind}"/>
-			        </p:selectOneMenu>
-			        
-			        <h:outputLabel value="Ano inicial: *" />
-			        <p:inputMask value="#{veiculoMB.veiculoDTO.anoInicio}" mask="9999"/>
-			        
-			        <h:outputLabel value="Ano final: *" />
-			        <p:inputMask value="#{veiculoMB.veiculoDTO.anoFim}" mask="9999"/>
-			        
-			        <h:outputLabel  value="Tipo Combustível: *" />
-			        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.tipoCombustivel}" converter="indTipoCombustivelConverter">
-			            <f:selectItem itemLabel="Selecione" itemValue="" />
-			            <f:selectItems value="#{veiculoMB.listIndTipoCombustivel}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
-			        </p:selectOneMenu>
-		        
+		        <h:panelGrid id="pg" columns="2" cellpadding="5" columnClasses="alignTop,alignTop">
+		        	<h:panelGrid columns="2">
+				        <h:outputLabel  value="Tipo: *" />
+				        <p:selectOneRadio id="console" value="#{veiculoMB.veiculoDTO.tipo}" layout="grid" columns="2">
+				            <f:selectItems value="#{veiculoMB.listTipo}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
+				        </p:selectOneRadio>
+				        
+				        <h:outputLabel  value="Código do veículo: *" />
+				        <p:outputLabel value="#{veiculoMB.veiculoDTO.id}"/>
+				        
+				        <h:outputLabel  value="Placa do veículo: *" />
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.placa}" required="true" mask="aaaa-9999" maxlength="9" placeHolder=" "/>
+				        
+				        <h:outputLabel  value="Modelo: *" />
+				        <p:inputText value="#{veiculoMB.veiculoDTO.modelo}"/>
+				        
+				        <h:outputLabel  value="Chassi: *" />
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.chassi}" mask="9aaaa99aa99999999" maxlength="18" placeHolder=" "/>
+				        
+				        <h:outputLabel  value="RENAVAM: *" />
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.renavam}" mask="9?9999999" maxlength="9" placeHolder=" "/>
+				        
+				        <h:outputLabel  value="Capacidade do tanque: *" />
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.capacidadeTanque}" mask="9?999" maxlength="4" placeHolder=" "/>
+				        
+				        <h:outputLabel  value="Marca: *" />
+				        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.marcaDTO}" converter="marcaConverter">
+				            <f:selectItem itemLabel="Selecione" itemValue="" />
+				            <f:selectItems value="#{marcaMB.abstractList}" var="ind" itemLabel="#{ind.nome}" itemValue="#{ind}"/>
+				        </p:selectOneMenu>
+				        
+				        <h:outputLabel value="Ano inicial: *" />
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.anoInicio}" mask="9999"/>
+				        
+				        <h:outputLabel value="Ano final: *" />
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.anoFim}" mask="9999"/>
+				        
+				        <h:outputLabel  value="Tipo Combustível: *" />
+				        <p:selectOneMenu value="#{veiculoMB.veiculoDTO.tipoCombustivel}" converter="indTipoCombustivelConverter">
+				            <f:selectItem itemLabel="Selecione" itemValue="" />
+				            <f:selectItems value="#{veiculoMB.listIndTipoCombustivel}" var="ind" itemLabel="#{ind.descricao}" itemValue="#{ind}"/>
+				        </p:selectOneMenu>
+		        	</h:panelGrid>
+		        	<h:panelGrid columns="2">
+		        		<f:facet name="header">
+		        			Parâmetros
+		        		</f:facet>
+		        		<h:outputLabel  value="KM / Óleo: *" />
+		        		<p:inputMask value="#{veiculoMB.veiculoDTO.kmOleo}" mask="9?999" maxlength="4" placeHolder=" "/>
+				        
+				        <h:outputLabel  value="KM / Pneu: *" />
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.kmPeneu}" mask="9?999" maxlength="4" placeHolder=" "/>
+				        
+				        <h:outputLabel  value="KM / Litro: *" />
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.kmLitro}" mask="9?999" maxlength="4" placeHolder=" "/>
+				        
+				        <h:outputLabel  value="KM / Revisão: *" />
+				        <p:inputMask value="#{veiculoMB.veiculoDTO.kmRevisao}" mask="9?999" maxlength="4" placeHolder=" "/>
+		        	</h:panelGrid>
 		        </h:panelGrid>
 		        <f:facet name="footer">
 		          	<p:commandButton value="#{empty veiculoMB.veiculoDTO.id ? 'Salvar':'Alterar'}" actionListener="#{veiculoMB.add}" id="withIcon"   
