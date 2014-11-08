@@ -18,7 +18,7 @@
 			        	<p:inputText />
 			        </h:panelGrid>
 		        </p:fieldset>
-				<p:commandButton value="Novo" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" ajax="false" rendered="#{atendimentoMB.userSession.perfilDTO.id ne 3}"/>
+				<p:commandButton value="Novo" actionListener="#{atendimentoMB.reset}" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" ajax="false" rendered="#{atendimentoMB.userSession.perfilDTO.id ne 3}"/>
 			    <p:commandButton value="Consultar" actionListener="#{atendimentoMB.atualiza}" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" ajax="false" />
 			    <p:dataTable id="dataTable" var="atendimento" value="#{atendimentoMB.listAtendimentoDTO}" rowKey="#{atendimento.id}">
 					<p:column headerText="Codigo" style="width:50px">
@@ -39,7 +39,7 @@
 			            	<f:setPropertyActionListener value="true" target="#{veiculoMB.visualizar}" />
 							<f:setPropertyActionListener value="false" target="#{veiculoMB.alterar}" />
 			            </p:commandButton>
-						<p:commandButton icon="ui-icon-pencil" action="/gerenciarAtendimento.xhtml?faces-redirect=true" immediate="true" rendered="#{atendimentoMB.userSession.perfilDTO.id ne 3}">
+						<p:commandButton icon="ui-icon-pencil" action="#{atendimentoMB.redirecionar('gerenciarAtendimento.xhtml?faces-redirect=true')}" immediate="true" rendered="#{atendimentoMB.userSession.perfilDTO.id ne 3}">
 							<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.atendimentoDTO}"/>
 			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
 			            </p:commandButton>

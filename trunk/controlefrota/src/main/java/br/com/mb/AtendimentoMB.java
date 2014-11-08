@@ -3,11 +3,13 @@
  */
 package br.com.mb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import br.com.dao.AtendimentoDAO;
@@ -27,12 +29,14 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 	 */
 	private static final long serialVersionUID = 7164991406034265304L;
 	private AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
-	private AtendimentoDTO atendimentoDTO = new AtendimentoDTO();
+	private AtendimentoDTO atendimentoDTO;
 	private List<AtendimentoDTO> listAtendimentoDTO;
 
 	@PostConstruct
 	public void inicio() throws Exception{
 		super.inicio();
+		atendimentoDTO = new AtendimentoDTO();
+		System.out.println(1);
 		//		atendimentoDTO = new AtendimentoDTO();
 		//		listAtendimentoDTO = new ArrayList<AtendimentoDTO>();
 	}
@@ -57,6 +61,9 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 	@Override
 	public void reset(ActionEvent event) {
 		atendimentoDTO = new AtendimentoDTO();
+		atendimentoDTO.setDataSaida(new Date());
+		atendimentoDTO.setHoraSaida(new Date());
+		atendimentoDTO.setKmInicial("0");
 	}
 
 	@Override
