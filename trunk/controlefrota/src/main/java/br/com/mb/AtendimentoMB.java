@@ -109,6 +109,8 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		if(atendimentoDTO.getVeiculoDTO() == null){
 			atendimentoDTO.setVeiculoDTO(new VeiculoDTO());
 			atendimentoDTO.getVeiculoDTO().setKmAtual(0L);
+		}else if(atendimentoDTO.getVeiculoDTO().getKmAtual() == null){
+			atendimentoDTO.getVeiculoDTO().setKmAtual(0L);
 		}
 	}
 
