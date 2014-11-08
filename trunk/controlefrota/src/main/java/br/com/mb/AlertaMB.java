@@ -36,7 +36,7 @@ public class AlertaMB extends GenericoMB<VeiculoDTO> {
 		veiculoDAO = new VeiculoDAO();
 	}
 	
-	public void verificaTrocaOleo(){
+	public void verificarAlertaQuilometragem(){
 		List<VeiculoDTO> list = veiculoDAO.verificarAlertaQuilometragem();
 		for (VeiculoDTO veiculoDTO : list) {
 			if(veiculoDTO.getKmAtual().equals(veiculoDTO.getKmLitro())){
