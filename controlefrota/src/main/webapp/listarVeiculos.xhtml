@@ -14,7 +14,7 @@
 				        	<p:inputText/>
 				    </h:panelGrid>
 				</p:fieldset>
-				<p:commandButton value="Novo" action="/gerenciarVeiculo.xhtml?faces-redirect=true" immediate="true" ajax="false" />
+				<p:commandButton value="Novo" actionListener="#{veiculoMB.reset}" action="/gerenciarVeiculo.xhtml?faces-redirect=true" immediate="true" ajax="false" />
 		        <p:commandButton value="Consultar" actionListener="#{veiculoMB.atualiza}" action="/gerenciarVeiculo.xhtml?faces-redirect=true" immediate="true" ajax="false" />
 		        <p:dataTable id="dataTable" var="veiculo" value="#{veiculoMB.listVeiculoDTO}" rowKey="#{veiculo.id}">
 					<p:column headerText="Codigo" style="width:50px">

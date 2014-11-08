@@ -1,5 +1,6 @@
 package br.com.mb;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -35,7 +36,7 @@ public class GenericoMB<T> implements Serializable{
 	protected Boolean alterar;
 	protected Boolean novo;
 	
-	@PostConstruct
+	
 	public void inicio() throws Exception{
 		abstractList =  abstractDAO.list();
 	}
@@ -59,6 +60,13 @@ public class GenericoMB<T> implements Serializable{
 	
 	public void editar(){
 		
+	}
+	
+	public String redirecionar(String url) throws IOException{
+		
+	    FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+	    System.out.println(abstractDTO);
+		return url;
 	}
 	
 	public UsuarioDTO getUserSession(){

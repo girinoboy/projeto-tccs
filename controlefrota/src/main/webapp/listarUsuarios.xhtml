@@ -18,7 +18,7 @@
 			        	<p:inputText />
 			        </h:panelGrid>
 		        </p:fieldset>
-		        <p:commandButton value="Novo" action="/gerenciarUsuario.xhtml?faces-redirect=true" immediate="true" ajax="false" />
+		        <p:commandButton value="Novo" actionListener="#{usuarioMB.reset}" action="/gerenciarUsuario.xhtml?faces-redirect=true" immediate="true" ajax="false" />
 		        <p:commandButton value="Consultar" actionListener="#{usuarioMB.atualiza}" action="/gerenciarUsuario.xhtml?faces-redirect=true" immediate="true" ajax="false" />
 		        <p:dataTable id="dataTable" var="usuario" value="#{usuarioMB.listUsuario}" rowKey="#{usuario.id}">
 					<p:column headerText="Codigo" style="width:50px">
