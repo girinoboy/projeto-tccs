@@ -4,6 +4,7 @@
 package br.com.dto;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,21 +34,31 @@ public class VeiculoDTO extends AbstractDTO{
 	private String modelo;
 	private String chassi;
 	private String renavam;
-	private String capacidadeTanque;
-	private String kmOleo;
-	private String kmPeneu;
-	private String kmLitro;
-	private String kmRevisao;
+	@Column(name="capacidade_tanque")
+	private Long capacidadeTanque;
+	@Column(name="km_oleo")
+	private Long kmOleo;
+	@Column(name="km_peneu")
+	private Long kmPeneu;
+	@Column(name="km_litro")
+	private Long kmLitro;
+	@Column(name="km_revisao")
+	private Long kmRevisao;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinColumn(name = "marca_id", insertable = true, updatable = true, nullable = true)
 	private MarcaDTO marcaDTO;
+	@Column(name="ano_inicio")
 	private String anoInicio;
+	@Column(name="ano_fim")
 	private String anoFim;
 	@Enumerated(EnumType.STRING)
 	private IndTipoCombustivel tipoCombustivel;
 	@Enumerated(EnumType.STRING)
 	private IndTipo tipo;
+	@Column(name="codigo_veiculo")
 	private String codigoVeiculo;
+	@Column(name="km_atual")
+	private Long kmAtual;
 
 	public VeiculoDTO(){
 
@@ -85,43 +96,43 @@ public class VeiculoDTO extends AbstractDTO{
 		this.renavam = renavam;
 	}
 
-	public String getCapacidadeTanque() {
+	public Long getCapacidadeTanque() {
 		return capacidadeTanque;
 	}
 
-	public void setCapacidadeTanque(String capacidadeTanque) {
+	public void setCapacidadeTanque(Long capacidadeTanque) {
 		this.capacidadeTanque = capacidadeTanque;
 	}
 
-	public String getKmOleo() {
+	public Long getKmOleo() {
 		return kmOleo;
 	}
 
-	public void setKmOleo(String kmOleo) {
+	public void setKmOleo(Long kmOleo) {
 		this.kmOleo = kmOleo;
 	}
 
-	public String getKmPeneu() {
+	public Long getKmPeneu() {
 		return kmPeneu;
 	}
 
-	public void setKmPeneu(String kmPeneu) {
+	public void setKmPeneu(Long kmPeneu) {
 		this.kmPeneu = kmPeneu;
 	}
 
-	public String getKmLitro() {
+	public Long getKmLitro() {
 		return kmLitro;
 	}
 
-	public void setKmLitro(String kmLitro) {
+	public void setKmLitro(Long kmLitro) {
 		this.kmLitro = kmLitro;
 	}
 
-	public String getKmRevisao() {
+	public Long getKmRevisao() {
 		return kmRevisao;
 	}
 
-	public void setKmRevisao(String kmRevisao) {
+	public void setKmRevisao(Long kmRevisao) {
 		this.kmRevisao = kmRevisao;
 	}
 
@@ -171,6 +182,14 @@ public class VeiculoDTO extends AbstractDTO{
 
 	public void setCodigoVeiculo(String codigoVeiculo) {
 		this.codigoVeiculo = codigoVeiculo;
+	}
+
+	public Long getKmAtual() {
+		return kmAtual;
+	}
+
+	public void setKmAtual(Long kmAtual) {
+		this.kmAtual = kmAtual;
 	}
 
 }

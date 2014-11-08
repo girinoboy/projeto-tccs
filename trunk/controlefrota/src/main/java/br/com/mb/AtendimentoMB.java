@@ -61,9 +61,6 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 	@Override
 	public void reset(ActionEvent event) {
 		atendimentoDTO = new AtendimentoDTO();
-		atendimentoDTO.setDataSaida(new Date());
-		atendimentoDTO.setHoraSaida(new Date());
-		atendimentoDTO.setKmInicial("0");
 	}
 
 	@Override
@@ -75,9 +72,17 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		}else if(atendimentoDTO.getSituacao().equals(indSituacao.EM_ANDAMENTO) && atendimentoDTO.getDataChegada() != null){
 			atendimentoDTO.setSituacao(indSituacao.FINALIZADO);
 		}
+		calculaQuilometragem();
 		atendimentoDAO.save(atendimentoDTO);
 		atualiza(null);
 		addMessage(rb.getString("successfullySaved"));
+	}
+
+	private void calculaQuilometragem() {
+		Long kmAtual = atendimentoDTO.getVeiculoDTO().getKmAtual();
+		Long kmFinal = atendimentoDTO.getKmFinal();
+		atendimentoDTO.setKmInicial(kmAtual);
+		atendimentoDTO.getVeiculoDTO().setKmAtual(kmAtual+kmFinal);
 	}
 
 	@Override
@@ -92,6 +97,15 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		addMessage(rb.getString("successfullyDeleted"));
 		atualiza(null);
 
+	}
+
+	public void populaAtendimento(){
+		if(atendimentoDTO.getDataSaida() == null)
+			atendimentoDTO.setDataSaida(new Date());
+		if(atendimentoDTO.getHoraSaida() == null)
+			atendimentoDTO.setHoraSaida(new Date());
+		if(atendimentoDTO.getVeiculoDTO().getKmAtual() == null)
+			atendimentoDTO.getVeiculoDTO().setKmAtual(0L);
 	}
 
 	public AtendimentoDTO getAtendimentoDTO() {
