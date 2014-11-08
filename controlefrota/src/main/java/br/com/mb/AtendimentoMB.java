@@ -14,6 +14,7 @@ import javax.faces.event.ActionEvent;
 
 import br.com.dao.AtendimentoDAO;
 import br.com.dto.AtendimentoDTO;
+import br.com.dto.VeiculoDTO;
 import br.com.ind.indSituacao;
 
 /**
@@ -105,8 +106,10 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 			atendimentoDTO.setDataSaida(new Date());
 		if(atendimentoDTO.getHoraSaida() == null)
 			atendimentoDTO.setHoraSaida(new Date());
-		if(atendimentoDTO.getVeiculoDTO().getKmAtual() == null)
+		if(atendimentoDTO.getVeiculoDTO() == null){
+			atendimentoDTO.setVeiculoDTO(new VeiculoDTO());
 			atendimentoDTO.getVeiculoDTO().setKmAtual(0L);
+		}
 	}
 
 	public AtendimentoDTO getAtendimentoDTO() {
