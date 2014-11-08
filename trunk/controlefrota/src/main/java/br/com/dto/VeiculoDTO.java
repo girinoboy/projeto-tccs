@@ -38,8 +38,8 @@ public class VeiculoDTO extends AbstractDTO{
 	private Long capacidadeTanque;
 	@Column(name="km_oleo")
 	private Long kmOleo;
-	@Column(name="km_peneu")
-	private Long kmPeneu;
+	@Column(name="km_pneu")
+	private Long kmPneu;
 	@Column(name="km_litro")
 	private Long kmLitro;
 	@Column(name="km_revisao")
@@ -112,12 +112,12 @@ public class VeiculoDTO extends AbstractDTO{
 		this.kmOleo = kmOleo;
 	}
 
-	public Long getKmPeneu() {
-		return kmPeneu;
+	public Long getKmPneu() {
+		return kmPneu;
 	}
 
-	public void setKmPeneu(Long kmPeneu) {
-		this.kmPeneu = kmPeneu;
+	public void setKmPneu(Long kmPneu) {
+		this.kmPneu = kmPneu;
 	}
 
 	public Long getKmLitro() {

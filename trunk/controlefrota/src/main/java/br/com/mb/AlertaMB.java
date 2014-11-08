@@ -37,9 +37,20 @@ public class AlertaMB extends GenericoMB<VeiculoDTO> {
 	}
 	
 	public void verificaTrocaOleo(){
-		List<VeiculoDTO> list = veiculoDAO.verificaTrocaOleo();
+		List<VeiculoDTO> list = veiculoDAO.verificarAlertaQuilometragem();
 		for (VeiculoDTO veiculoDTO : list) {
-			addMessage("Exixtem veiculos que precisam trocar o óleo.","Placa: "+veiculoDTO.getPlaca());
+			if(veiculoDTO.getKmAtual().equals(veiculoDTO.getKmLitro())){
+				addMessage("Exixtem veiculos que precisam abastecer.","Placa: "+veiculoDTO.getPlaca());
+			}
+			if(veiculoDTO.getKmAtual().equals(veiculoDTO.getKmOleo())){
+				addMessage("Exixtem veiculos que precisam trocar o óleo.","Placa: "+veiculoDTO.getPlaca());
+			}
+			if(veiculoDTO.getKmAtual().equals(veiculoDTO.getKmPneu())){
+				addMessage("Exixtem veiculos que precisam trocar o Pneu.","Placa: "+veiculoDTO.getPlaca());
+			}
+			if(veiculoDTO.getKmAtual().equals(veiculoDTO.getKmRevisao())){
+				addMessage("Exixtem veiculos que precisam de revisão.","Placa: "+veiculoDTO.getPlaca());
+			}
 		}
 	}
 

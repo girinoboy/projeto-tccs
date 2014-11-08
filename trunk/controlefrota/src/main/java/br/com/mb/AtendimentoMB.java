@@ -56,6 +56,7 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		}else{
 			listAtendimentoDTO = atendimentoDAO.list();
 		}
+		atendimentoDTO = new AtendimentoDTO();
 	}
 
 	@Override
@@ -79,8 +80,8 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 	}
 
 	private void calculaQuilometragem() {
-		Long kmAtual = atendimentoDTO.getVeiculoDTO().getKmAtual();
-		Long kmFinal = atendimentoDTO.getKmFinal();
+		Long kmAtual = atendimentoDTO.getVeiculoDTO().getKmAtual() == null ? 0:atendimentoDTO.getVeiculoDTO().getKmAtual();
+		Long kmFinal = atendimentoDTO.getKmFinal() == null ? 0:atendimentoDTO.getKmFinal();
 		atendimentoDTO.setKmInicial(kmAtual);
 		atendimentoDTO.getVeiculoDTO().setKmAtual(kmAtual+kmFinal);
 	}
