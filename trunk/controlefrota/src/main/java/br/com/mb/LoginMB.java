@@ -135,7 +135,7 @@ public class LoginMB extends GenericoMB<UsuarioDTO>{
 		MenuDTO menuDTO = new MenuDTO();
 		menuDTO.setNome("exit");
 		menuDTO.setComando("#{loginMB.logout}");
-		menuDTO.setDropIndex(6);
+		menuDTO.setDropIndex(7);
 		menuDTO.setAtivoInativo(true);
 		menuDTO = menuDAO.save(menuDTO);				
 		perfilMenuDAO.save(new PerfilMenuDTO(perfilDTO, menuDTO, true));
