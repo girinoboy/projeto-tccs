@@ -200,6 +200,7 @@ public class LoginMB extends GenericoMB<UsuarioDTO>{
 		menuDTO = new MenuDTO();
 		menuDTO.setNome("Quilômetros rodados da frota");
 		menuDTO.setUrl("relatorioKmRodadosFrota.xhtml");
+		menuDTO.setComando("#{veiculoMB.atualiza}");
 		menuDTO.setMenuDTO(menuPai);
 		menuDTO.setDropIndex(0);
 		menuDTO.setAtivoInativo(true);

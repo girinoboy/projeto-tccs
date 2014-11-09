@@ -7,15 +7,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.envers.Audited;
 
+import br.com.ind.indCategoria;
+
 
 /**
- * @author Marcleônio
+ * @author Marcleonio
  *
  */
 @Entity
@@ -32,7 +36,8 @@ public class MotoristaDTO extends AbstractDTO{
 	private Date dataAdmissao;
 	private String cnh;
 	private Date validade;
-	private String categoria;
+	@Enumerated(EnumType.STRING)
+	private indCategoria categoria;
 	/**
 	 * 
 	 */
@@ -58,10 +63,10 @@ public class MotoristaDTO extends AbstractDTO{
 	public void setValidade(Date validade) {
 		this.validade = validade;
 	}
-	public String getCategoria() {
+	public indCategoria getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(String categoria) {
+	public void setCategoria(indCategoria categoria) {
 		this.categoria = categoria;
 	}
 

@@ -13,4 +13,8 @@ public enum indSituacao {
 		return this.descricao;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
 }
