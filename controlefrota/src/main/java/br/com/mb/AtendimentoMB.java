@@ -103,10 +103,15 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 
 	public void populaAtendimento(AtendimentoDTO atendimento ){
 		atendimentoDTO = atendimento;
-		if(atendimentoDTO.getDataSaida() == null)
+		if(atendimentoDTO.getDataSaida() == null){
 			atendimentoDTO.setDataSaida(new Date());
-		if(atendimentoDTO.getHoraSaida() == null)
+		}
+		if(atendimentoDTO.getHoraSaida() == null){
 			atendimentoDTO.setHoraSaida(new Date());
+		}
+		if(atendimentoDTO.getKmInicial() == null){
+			atendimentoDTO.setKmInicial(0L);
+		}
 		if(atendimentoDTO.getVeiculoDTO() == null){
 			atendimentoDTO.setVeiculoDTO(new VeiculoDTO());
 			atendimentoDTO.getVeiculoDTO().setKmAtual(0L);
