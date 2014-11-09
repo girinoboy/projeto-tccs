@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -32,6 +33,9 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 	private AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
 	private AtendimentoDTO atendimentoDTO;
 	private List<AtendimentoDTO> listAtendimentoDTO;
+	
+	@ManagedProperty("#{veiculoMB}")
+	private VeiculoMB veiculoMB;
 
 	@PostConstruct
 	public void inicio() throws Exception{
@@ -77,6 +81,7 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		calculaQuilometragem();
 		atendimentoDAO.save(atendimentoDTO);
 		atualiza(null);
+		veiculoMB.atualiza(null);
 		addMessage(rb.getString("successfullySaved"));
 	}
 
@@ -98,7 +103,6 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		abstractDAO.delete(abstractDTO);
 		addMessage(rb.getString("successfullyDeleted"));
 		atualiza(null);
-
 	}
 
 	public void populaAtendimento(AtendimentoDTO atendimento ){
@@ -139,6 +143,10 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 
 	public void setListAtendimentoDTO(List<AtendimentoDTO> listAtendimentoDTO) {
 		this.listAtendimentoDTO = listAtendimentoDTO;
+	}
+
+	public void setVeiculoMB(VeiculoMB veiculoMB) {
+		this.veiculoMB = veiculoMB;
 	}
 
 }
