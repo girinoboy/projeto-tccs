@@ -12,7 +12,7 @@
 		        	<p:watermark for="veiculo" value="" />
 		            <p:message for="veiculo" />
 		        	<h:outputLabel for="veiculo" value="Veículo: *" />
-		        	<p:selectOneMenu id="veiculo" value="#{atendimentoMB.atendimentoDTO.veiculoDTO}" converter="veiculoConverter" required="true">
+		        	<p:selectOneMenu id="veiculo" value="#{atendimentoMB.atendimentoDTO.veiculoDTO}" converter="veiculoConverter" required="true" disabled="#{atendimentoMB.userSession.perfilDTO.id eq 3}">
 			            <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
             			<f:selectItems value="#{veiculoMB.listVeiculoDTO}" var="l" itemLabel="#{l.placa}" itemValue="#{l}"/>
 			        </p:selectOneMenu>
@@ -20,15 +20,15 @@
 		            <p:watermark for="motorista" value="" />
 		            <p:message for="motorista" />
 		        	<h:outputLabel for="motorista" value="Motorista: *" />
-		            <p:selectOneMenu id="motorista" value="#{atendimentoMB.atendimentoDTO.usuarioDTO}" converter="usuarioConverter" required="true">
+		            <p:selectOneMenu id="motorista" value="#{atendimentoMB.atendimentoDTO.usuarioDTO}" converter="usuarioConverter" required="true" disabled="#{atendimentoMB.userSession.perfilDTO.id eq 3}">
 			            <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
-			            <f:selectItems value="#{usuarioMB.listUsuario}" var="l" itemLabel="#{l.nome}" itemValue="#{l}"/>
+			            <f:selectItems value="#{usuarioMB.listMotorista}" var="l" itemLabel="#{l.nome}" itemValue="#{l}"/>
 			        </p:selectOneMenu>
 		            
 		            <p:watermark for="destino" value="" />
 		            <p:message for="destino" />
 		        	<h:outputLabel for="destino" value="Destino: *" />
-		            <p:inputTextarea id="destino" value="#{atendimentoMB.atendimentoDTO.destino}" rows="5" cols="30" counter="display" maxlength="255" counterTemplate="{0} characters remaining." autoResize="false" />
+		            <p:inputTextarea id="destino" value="#{atendimentoMB.atendimentoDTO.destino}" rows="5" cols="30" counter="display" maxlength="255" counterTemplate="{0} characters remaining." autoResize="false" disabled="#{atendimentoMB.userSession.perfilDTO.id eq 3}"/>
 		            
 		            <p:watermark for="display" value="" />
 		            <p:message for="display" />

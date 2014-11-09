@@ -46,6 +46,7 @@ public class VeiculoMB extends GenericoMB<VeiculoDTO> implements ModeloMB{
 
 	@Override
 	public void atualiza(ActionEvent event) throws Exception {
+		super.inicio();
 		listVeiculoDTO = veiculoDAO.list();
 		veiculoDTO = new VeiculoDTO();
 

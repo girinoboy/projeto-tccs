@@ -18,6 +18,8 @@ public class Constantes {
 	public static final Integer TIPO_MENOR_IGUAL = 6;//le<=
 	
 	public static final Integer ADMINISTRADOR = 1;
+	public static final Integer CHEFE = 2;
+	public static final Integer MOTORISTA = 3;
 	public static String PAGINA_INDEX = "layoutElement.xhtml";
 	public static String PAGINA_LOGIN = "login.xhtml";
 }

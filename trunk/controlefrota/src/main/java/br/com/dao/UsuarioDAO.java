@@ -11,11 +11,13 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.dto.UsuarioDTO;
 import br.com.factory.HibernateUtility;
+import br.com.utility.Constantes;
 
 /**
  * @author marcleonio.medeiros
  *
  */
+@SuppressWarnings("unchecked")
 public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 
 	/**
@@ -42,7 +44,7 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 			throw e;
 		}finally{
 			HibernateUtility.closeSession();
-//			session.close();			
+			//			session.close();			
 		}
 		return usuario;
 
@@ -66,6 +68,14 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 		for (UsuarioDTO usuario : listUser) { 
 			HibernateUtility.getSession().save(usuario);
 		}
+	}
+
+
+
+	public List<UsuarioDTO> listMotorista() throws HibernateException, Exception {
+		return HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
+				.add(Restrictions.eq("perfilDTO.id", Constantes.MOTORISTA))
+				.list();
 	}
 
 
