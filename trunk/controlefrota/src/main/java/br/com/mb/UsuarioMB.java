@@ -28,7 +28,7 @@ public class UsuarioMB extends GenericoMB<UsuarioDTO> implements ModeloMB{
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private List<UsuarioDTO> listUsuario = new ArrayList<UsuarioDTO>();
-	private List<indCategoria> listCategoria = new ArrayList<indCategoria>();
+	private List<indCategoria> listCategoria = Arrays.asList(indCategoria.values());
 	private List<UsuarioDTO> listMotorista = new ArrayList<UsuarioDTO>();
 
 	/**

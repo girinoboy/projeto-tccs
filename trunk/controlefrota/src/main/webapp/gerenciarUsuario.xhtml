@@ -82,9 +82,9 @@
 		            
 		            <p:watermark for="categoria" value=" " rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
 		            <p:message for="categoria" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
-		        	<h:outputLabel for="categoria" value="Categoria: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}"/>
-		            <p:selectOneRadio id="categoria" value="#{usuarioMB.usuarioDTO.motoristaDTO.categoria}" required="true" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}">
-		            	<f:selectItems value="#{usuarioMB.listCategoria}" var="l" itemLabel="#{l}" itemValue="#{l}"/>    
+		        	<h:outputLabel for="categoria" value="Categoria: *" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}" />
+		            <p:selectOneRadio id="categoria" value="#{usuarioMB.usuarioDTO.motoristaDTO.categoria}" required="true" rendered="#{usuarioMB.usuarioDTO.perfilDTO.id eq 3}" converter="indCategoriaConverter">
+		            	<f:selectItems value="#{usuarioMB.listCategoria}" var="l" itemLabel="#{l.descricao}" itemValue="#{l}"/>    
 			        </p:selectOneRadio>
 		            
 		        </h:panelGrid>  
