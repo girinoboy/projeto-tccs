@@ -101,7 +101,8 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 
 	}
 
-	public void populaAtendimento(){
+	public void populaAtendimento(AtendimentoDTO atendimento ){
+		atendimentoDTO = atendimento;
 		if(atendimentoDTO.getDataSaida() == null)
 			atendimentoDTO.setDataSaida(new Date());
 		if(atendimentoDTO.getHoraSaida() == null)
@@ -111,6 +112,11 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 			atendimentoDTO.getVeiculoDTO().setKmAtual(0L);
 		}else if(atendimentoDTO.getVeiculoDTO().getKmAtual() == null){
 			atendimentoDTO.getVeiculoDTO().setKmAtual(0L);
+		}
+		
+		if(atendimentoDTO.getSituacao().equals(indSituacao.AGUARDANDO)){
+			atendimentoDTO.setDataChegada(new Date());
+			atendimentoDTO.setHoraChegada(new Date());
 		}
 	}
 
