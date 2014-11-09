@@ -8,10 +8,48 @@
 	<ui:define name="centro">
 		<h:form id="form1">
 			<p:panel id="panel" header="Relatório - Quilômetros rodados da frota">
-		        <h:panelGrid id="pg" columns="1" cellpadding="5">
+		        <h:panelGrid id="pg1" columns="1" cellpadding="5">
 		        
-		        
-		        
+			        <p:fieldset legend="Informe um dos campos para efetuar a consulta" style="margin-bottom:20px">
+						<h:panelGrid id="pg" columns="3" cellpadding="5" >
+					        	<h:outputLabel value="Placa do veículo:" />
+					        	<p:inputText/>
+					        	
+					        	<h:outputLabel value="Modelo do veículo:" />
+					        	<p:inputText/>
+					        	
+					        	<h:outputLabel value="Marca do veículo:" />
+					        	<p:inputText/>
+					        	
+					    </h:panelGrid>
+					</p:fieldset>
+					<h:commandLink value="Imprimir">
+				        <p:graphicImage name="/demo/images/pdf.png" />
+				        <p:dataExporter type="pdf" target="dataTable" fileName="veiculos" pageOnly="true" />
+				    </h:commandLink>
+			        <p:commandButton value="Consultar" actionListener="#{veiculoMB.atualiza}" action="/gerenciarVeiculo.xhtml?faces-redirect=true" immediate="true" ajax="false" />
+					<p:commandButton value="Voltar" actionListener="#{veiculoMB.reset}" action="/layoutElement.xhtml?faces-redirect=true" immediate="true" ajax="false" />
+			        <p:dataTable id="dataTable" var="veiculo" value="#{veiculoMB.abstractList}" rowKey="#{veiculo.id}">,
+			        	<f:facet name="header">
+					        <h:outputText value="Nome:"/>
+					        <h:outputText value="#{veiculoMB.userSession.nome}"/>
+					    </f:facet>
+						<p:column headerText="Codigo" style="width:50px">
+							<h:outputText value="#{veiculo.id}" />
+						</p:column>
+						<p:column headerText="Modelo" style="width:50px">
+							<h:outputText value="#{veiculo.modelo}" />
+						</p:column>
+						<p:column headerText="Marca" style="width:50px">
+							<h:outputText value="#{veiculo.marcaDTO.nome}" />
+						</p:column>
+						<p:column headerText="KM rodados" style="width:50px">
+							<h:outputText value="#{veiculo.kmAtual}" />
+						</p:column>
+						<p:column headerText="Placa" style="width:50px">
+							<h:outputText value="#{veiculo.placa}" />
+						</p:column>
+					</p:dataTable>
 		        
 		        </h:panelGrid> 
 		    </p:panel> 
