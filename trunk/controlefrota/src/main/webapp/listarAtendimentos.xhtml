@@ -47,7 +47,7 @@
 							<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.atendimentoDTO}"/>
 			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
 			            </p:commandButton>
-						<p:commandButton icon="ui-icon-trash" update=":formEcluir" actionListener="#{atendimentoMB.edit}" immediate="true" rendered="#{atendimentoMB.userSession.perfilDTO.id ne 3}">
+						<p:commandButton icon="ui-icon-trash" onsuccess="PF('dlg').show();" update=":formEcluir" actionListener="#{atendimentoMB.edit}" immediate="true" rendered="#{atendimentoMB.userSession.perfilDTO.id ne 3}">
 			            	<f:setPropertyActionListener value="#{atendimento}" target="#{atendimentoMB.abstractDTO}"/>
 			            </p:commandButton>
 					</p:column>
