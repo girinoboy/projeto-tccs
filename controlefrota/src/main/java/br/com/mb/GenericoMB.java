@@ -3,6 +3,7 @@ package br.com.mb;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -31,6 +32,8 @@ public class GenericoMB<T> implements Serializable{
 	protected T abstractDTO;
 
 	protected List<T> abstractList;
+	
+	private Date currentDate = new Date();
 	
 	protected Boolean visualizar;
 	protected Boolean alterar;
@@ -135,6 +138,14 @@ public class GenericoMB<T> implements Serializable{
 
 	public void setNovo(Boolean novo) {
 		this.novo = novo;
+	}
+
+	public Date getCurrentDate() {
+		return currentDate;
+	}
+
+	public void setCurrentDate(Date currentDate) {
+		this.currentDate = currentDate;
 	}
 
 
