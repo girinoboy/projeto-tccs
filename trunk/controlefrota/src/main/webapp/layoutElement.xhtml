@@ -32,9 +32,8 @@
 	<p:layout id="layout" fullPage="true">
 		<p:layoutUnit position="north" resizable="true" size="65" minSize="65" maxSize="500">
 			<h:form>
-			<p:spacer width="10"/>
-			<p:outputLabel value="#{loginMB.userSession.perfilDTO.nome.concat('(').concat(loginMB.userSession.nome).concat(')') } " style="float:right"/>
-	   		<p:menubar id="menuPrincipal" model="#{menuMB.model}"/>
+				<p:outputLabel value="#{loginMB.userSession.perfilDTO.nome.concat('(').concat(loginMB.userSession.nome).concat(')') } " />
+		   		<p:menubar id="menuPrincipal" model="#{menuMB.model}"/>
 	   		</h:form>
     	</p:layoutUnit>
 
