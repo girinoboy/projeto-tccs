@@ -31,7 +31,7 @@ public class AtendimentoDTO extends AbstractDTO{
 	 * 
 	 */
 	private static final long serialVersionUID = -4082530746039132605L;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="veiculo_id", referencedColumnName = "id",insertable=true,updatable=true,nullable=false)
 	private VeiculoDTO veiculoDTO;
 	@ManyToOne(fetch = FetchType.EAGER)
