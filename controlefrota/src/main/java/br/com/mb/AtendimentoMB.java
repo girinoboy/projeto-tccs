@@ -84,7 +84,7 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		Long kmAtual = atendimentoDTO.getVeiculoDTO().getKmAtual() == null ? 0:atendimentoDTO.getVeiculoDTO().getKmAtual();
 		Long kmFinal = atendimentoDTO.getKmFinal() == null ? 0:atendimentoDTO.getKmFinal();
 		atendimentoDTO.setKmInicial(kmAtual);
-		atendimentoDTO.getVeiculoDTO().setKmAtual(kmAtual+kmFinal);
+		atendimentoDTO.getVeiculoDTO().setKmAtual(kmFinal);
 	}
 
 	@Override
