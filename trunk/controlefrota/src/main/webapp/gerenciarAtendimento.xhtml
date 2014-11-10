@@ -48,19 +48,19 @@
     			<p:fieldset legend="Chegada" style="margin-bottom:20px">
     				<h:panelGrid columns="6" cellpadding="5">
     					<p:outputLabel for="dataChegada" value="Data:" />
-        				<p:calendar id="dataChegada" value="#{atendimentoMB.atendimentoDTO.dataChegada}" pattern="dd/MM/yyyy" mask="true" disabled="#{empty atendimentoMB.atendimentoDTO.id || empty atendimentoMB.atendimentoDTO.dataSaida}"/>
+        				<p:calendar id="dataChegada" value="#{atendimentoMB.atendimentoDTO.dataChegada}" pattern="dd/MM/yyyy" mask="true" disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao ne 'Em Andamento'}"/>
     					
     					<p:outputLabel for="horaChegada" value="Hora:" />
-        				<p:calendar id="horaChegada" value="#{atendimentoMB.atendimentoDTO.horaChegada}" pattern="HH:mm a" timeOnly="true"  disabled="#{empty atendimentoMB.atendimentoDTO.id || empty atendimentoMB.atendimentoDTO.dataSaida}"/>
+        				<p:calendar id="horaChegada" value="#{atendimentoMB.atendimentoDTO.horaChegada}" pattern="HH:mm a" timeOnly="true"  disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao ne 'Em Andamento'}"/>
         				
         				<p:outputLabel for="kmFinal" value="km Final:" />
-        				<p:inputMask id="kmFinal" value="#{atendimentoMB.atendimentoDTO.kmFinal}" disabled="#{empty atendimentoMB.atendimentoDTO.id || empty atendimentoMB.atendimentoDTO.dataSaida}" mask="9?999" maxlength="4" placeHolder=" "/>
+        				<p:inputMask id="kmFinal" value="#{atendimentoMB.atendimentoDTO.kmFinal}" disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao ne 'Em Andamento'}" mask="9?999" maxlength="4" placeHolder=" "/>
         				
         				<p:outputLabel for="percurso" value="Percurso:" />
-        				<p:inputTextarea id="percurso" value="#{atendimentoMB.atendimentoDTO.percurso}" disabled="#{empty atendimentoMB.atendimentoDTO.id || empty atendimentoMB.atendimentoDTO.dataSaida}"/>
+        				<p:inputTextarea id="percurso" value="#{atendimentoMB.atendimentoDTO.percurso}" disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao ne 'Em Andamento'}"/>
         				
         				<p:outputLabel for="observacoes" value="Observações:" />
-        				<p:inputTextarea id="observacoes" value="#{atendimentoMB.atendimentoDTO.observacoes}" disabled="#{empty atendimentoMB.atendimentoDTO.id || empty atendimentoMB.atendimentoDTO.dataSaida}"/>
+        				<p:inputTextarea id="observacoes" value="#{atendimentoMB.atendimentoDTO.observacoes}" disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao ne 'Em Andamento'}"/>
         			</h:panelGrid>
     			</p:fieldset>
 		        
