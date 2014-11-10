@@ -71,6 +71,10 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
+		if(atendimentoDTO.getKmInicial() != null && atendimentoDTO.getKmFinal() != null && atendimentoDTO.getKmInicial() > atendimentoDTO.getKmFinal()){
+			addMessage("km final não pode ser menor que inicial");
+			return;
+		}
 		if(atendimentoDAO.verificaExisteAtendimento(atendimentoDTO)){		
 			if(atendimentoDTO.getSituacao() == null){
 				atendimentoDTO.setSituacao(indSituacao.AGUARDANDO);
@@ -93,7 +97,8 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		Long kmAtual = atendimentoDTO.getVeiculoDTO().getKmAtual() == null ? 0:atendimentoDTO.getVeiculoDTO().getKmAtual();
 		Long kmFinal = atendimentoDTO.getKmFinal() == null ? 0:atendimentoDTO.getKmFinal();
 		atendimentoDTO.setKmInicial(kmAtual);
-		atendimentoDTO.getVeiculoDTO().setKmAtual(kmFinal);
+		if(atendimentoDTO.getSituacao().equals(indSituacao.FINALIZADO))
+			atendimentoDTO.getVeiculoDTO().setKmAtual(kmFinal);
 	}
 
 	@Override
