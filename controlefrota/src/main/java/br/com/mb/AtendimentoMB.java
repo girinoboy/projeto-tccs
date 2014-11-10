@@ -71,18 +71,22 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
-		if(atendimentoDTO.getSituacao() == null){
-			atendimentoDTO.setSituacao(indSituacao.AGUARDANDO);
-		}else if(atendimentoDTO.getSituacao().equals(indSituacao.AGUARDANDO) && atendimentoDTO.getDataSaida() != null){
-			atendimentoDTO.setSituacao(indSituacao.EM_ANDAMENTO);
-		}else if(atendimentoDTO.getSituacao().equals(indSituacao.EM_ANDAMENTO) && atendimentoDTO.getDataChegada() != null){
-			atendimentoDTO.setSituacao(indSituacao.FINALIZADO);
+		if(atendimentoDAO.verificaExisteAtendimento(atendimentoDTO)){		
+			if(atendimentoDTO.getSituacao() == null){
+				atendimentoDTO.setSituacao(indSituacao.AGUARDANDO);
+			}else if(atendimentoDTO.getSituacao().equals(indSituacao.AGUARDANDO) && atendimentoDTO.getDataSaida() != null){
+				atendimentoDTO.setSituacao(indSituacao.EM_ANDAMENTO);
+			}else if(atendimentoDTO.getSituacao().equals(indSituacao.EM_ANDAMENTO) && atendimentoDTO.getDataChegada() != null){
+				atendimentoDTO.setSituacao(indSituacao.FINALIZADO);
+			}
+			calculaQuilometragem();
+			atendimentoDAO.save(atendimentoDTO);
+			atualiza(null);
+			veiculoMB.atualiza(null);
+			addMessage(rb.getString("successfullySaved"));
+		}else{
+			addMessage("Já existe um atendimento para esse carro");
 		}
-		calculaQuilometragem();
-		atendimentoDAO.save(atendimentoDTO);
-		atualiza(null);
-		veiculoMB.atualiza(null);
-		addMessage(rb.getString("successfullySaved"));
 	}
 
 	private void calculaQuilometragem() {
@@ -123,7 +127,7 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 			atendimentoDTO.getVeiculoDTO().setKmAtual(0L);
 		}
 		
-		if(atendimentoDTO.getSituacao().equals(indSituacao.AGUARDANDO)){
+		if(atendimentoDTO.getSituacao().equals(indSituacao.EM_ANDAMENTO)){
 			atendimentoDTO.setDataChegada(new Date());
 			atendimentoDTO.setHoraChegada(new Date());
 		}
