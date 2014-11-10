@@ -54,6 +54,7 @@ public class AtendimentoDAO extends GenericoDAO<AtendimentoDTO, Serializable> {
 		return HibernateUtility.getSession().createCriteria(AtendimentoDTO.class)
 		.add(Restrictions.in("situacao", Arrays.asList(indSituacao.AGUARDANDO,indSituacao.EM_ANDAMENTO)))
 		.add(Restrictions.eq("veiculoDTO.id", atendimentoDTO.getVeiculoDTO().getId()))
+		.add(Restrictions.ne("id", atendimentoDTO.getId()))
 		.uniqueResult() == null;
 	}
 
