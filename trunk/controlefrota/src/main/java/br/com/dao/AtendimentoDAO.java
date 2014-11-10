@@ -4,13 +4,16 @@
 package br.com.dao;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.dto.AtendimentoDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.factory.HibernateUtility;
+import br.com.ind.indSituacao;
 
 /**
  * @author marcleonio
@@ -44,6 +47,15 @@ public class AtendimentoDAO extends GenericoDAO<AtendimentoDTO, Serializable> {
 			HibernateUtility.closeSession();
 //			session.close();			
 		}
+	}
+
+
+	public boolean verificaExisteAtendimento(AtendimentoDTO atendimentoDTO) throws HibernateException, Exception {
+		AtendimentoDTO existe = (AtendimentoDTO) HibernateUtility.getSession().createCriteria(AtendimentoDTO.class)
+		.add(Restrictions.ilike("situacao", Arrays.asList(indSituacao.AGUARDANDO,indSituacao.EM_ANDAMENTO)))
+		.add(Restrictions.eq("veiculoDTO.id", atendimentoDTO.getVeiculoDTO().getId()))
+		.uniqueResult();
+		return existe == null;
 	}
 
 }
