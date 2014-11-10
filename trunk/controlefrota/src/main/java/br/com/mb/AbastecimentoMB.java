@@ -4,6 +4,7 @@
 package br.com.mb;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import br.com.dto.AbastecimentoDTO;
@@ -13,6 +14,7 @@ import br.com.dto.AbastecimentoDTO;
  *
  */
 @ManagedBean
+@SessionScoped
 public class AbastecimentoMB extends GenericoMB<AbastecimentoDTO> implements ModeloMB{
 
 	/**
