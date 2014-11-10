@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import br.com.dto.AbastecimentoDTO;
+import br.com.dto.VeiculoDTO;
 
 /**
  * @author marcleonio
@@ -38,6 +39,9 @@ public class AbastecimentoMB extends GenericoMB<AbastecimentoDTO> implements Mod
 	@Override
 	public void reset(ActionEvent event) {
 		abstractDTO = new AbastecimentoDTO();
+		if(abstractDTO.getVeiculoDTO() == null){
+			abstractDTO.setVeiculoDTO(new VeiculoDTO());
+		}
 	}
 
 	@Override
