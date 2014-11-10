@@ -61,7 +61,7 @@ public class AtendimentoMB extends GenericoMB<AtendimentoDTO> implements ModeloM
 		}else{
 			listAtendimentoDTO = atendimentoDAO.list();
 		}
-		atendimentoDTO = new AtendimentoDTO();
+//		atendimentoDTO = new AtendimentoDTO();
 	}
 
 	@Override
