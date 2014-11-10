@@ -35,13 +35,13 @@
 		        <p:fieldset legend="Saída" style="margin-bottom:20px">
 		        	<h:panelGrid columns="6" cellpadding="5">
     					<p:outputLabel for="dataSaida" value="Data:" />
-        				<p:calendar id="dataSaida" value="#{atendimentoMB.atendimentoDTO.dataSaida}" pattern="dd/MM/yyyy" mask="true" disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao eq 'Aguardando'}" />
+        				<p:calendar id="dataSaida" value="#{atendimentoMB.atendimentoDTO.dataSaida}" pattern="dd/MM/yyyy" mask="true" disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao ne 'Aguardando'}" />
     					
     					<p:outputLabel for="horaSaida" value="Hora:" />
-        				<p:calendar id="horaSaida" value="#{atendimentoMB.atendimentoDTO.horaSaida}" pattern="HH:mm a" timeOnly="true"  disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao eq 'Aguardando'}" />
+        				<p:calendar id="horaSaida" value="#{atendimentoMB.atendimentoDTO.horaSaida}" pattern="HH:mm a" timeOnly="true"  disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao ne 'Aguardando'}" />
         				
         				<p:outputLabel for="kmInicial" value="km Inicial:" />
-        				<p:inputText id="kmInicial" value="#{atendimentoMB.atendimentoDTO.kmInicial}" disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao eq 'Aguardando'}" />
+        				<p:inputText id="kmInicial" value="#{atendimentoMB.atendimentoDTO.kmInicial}" disabled="#{empty atendimentoMB.atendimentoDTO.id || atendimentoMB.atendimentoDTO.situacao.descricao ne 'Aguardando'}" />
         			</h:panelGrid>
     			</p:fieldset>
     			<br/>
