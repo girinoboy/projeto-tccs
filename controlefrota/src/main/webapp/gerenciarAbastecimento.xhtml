@@ -14,7 +14,7 @@
 		        	<h:outputLabel for="veiculo" value="Veículo: *" />
 		        	<p:selectOneMenu id="veiculo" value="#{abastecimentoMB.abstractDTO.veiculoDTO}" converter="veiculoConverter" required="true" >
 			            <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
-            			<f:selectItems value="#{veiculoMB.abstractDTO}" var="l" itemLabel="#{l.placa}" itemValue="#{l}"/>
+            			<f:selectItems value="#{veiculoMB.abstractList}" var="l" itemLabel="#{l.placa}" itemValue="#{l}"/>
 			        </p:selectOneMenu>
 		        	
 		        	<p:watermark for="hodometro" value="" />
