@@ -3,6 +3,8 @@
  */
 package br.com.dto;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import br.com.ind.IndTipo;
 import br.com.ind.IndTipoCombustivel;
@@ -59,6 +65,10 @@ public class VeiculoDTO extends AbstractDTO{
 	private String codigoVeiculo;
 	@Column(name="km_atual")
 	private Long kmAtual;
+	@OneToMany(mappedBy = "veiculoDTO", targetEntity = AbastecimentoDTO.class, fetch = FetchType.LAZY, cascade= {CascadeType.DETACH})
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<AbastecimentoDTO> listAbastecimento;
+	
 
 	public VeiculoDTO(){
 
