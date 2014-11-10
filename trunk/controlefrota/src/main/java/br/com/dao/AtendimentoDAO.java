@@ -51,11 +51,10 @@ public class AtendimentoDAO extends GenericoDAO<AtendimentoDTO, Serializable> {
 
 
 	public boolean verificaExisteAtendimento(AtendimentoDTO atendimentoDTO) throws HibernateException, Exception {
-		AtendimentoDTO existe = (AtendimentoDTO) HibernateUtility.getSession().createCriteria(AtendimentoDTO.class)
-		.add(Restrictions.ilike("situacao", Arrays.asList(indSituacao.AGUARDANDO,indSituacao.EM_ANDAMENTO)))
+		return HibernateUtility.getSession().createCriteria(AtendimentoDTO.class)
+		.add(Restrictions.in("situacao", Arrays.asList(indSituacao.AGUARDANDO,indSituacao.EM_ANDAMENTO)))
 		.add(Restrictions.eq("veiculoDTO.id", atendimentoDTO.getVeiculoDTO().getId()))
-		.uniqueResult();
-		return existe == null;
+		.uniqueResult() == null;
 	}
 
 }
