@@ -1,9 +1,0 @@
-<classloading xmlns="urn:jboss:classloading:1.0"
-    name="rds.war"
-    parent-first="false"
-    domain="DefaultDomain"
-    top-level-classloader="true"
-    parent-domain="Ignored"
-    export-all="NON_EMPTY"
-    import-all="true">
-</classloading>
