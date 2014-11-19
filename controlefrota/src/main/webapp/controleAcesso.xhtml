@@ -11,7 +11,7 @@
                 <h:panelGrid columns="2">
                     <h:selectOneMenu value="#{controleAcessoMB.perfil.id}">
                         <f:selectItem itemValue="0" itemLabel="#{msgs.select}"/>
-                        <f:selectItems value="#{perfilMB.listPerfil}" var="perfil"
+                        <f:selectItems value="#{perfilMB.abstractList}" var="perfil"
                                        itemValue="#{perfil.id}" itemLabel="#{perfil.nome}"/>
                         <p:ajax event="change" listener="#{controleAcessoMB.carregaPermissoesUsuarioDTO}"
                                 update="panelPermissoes" />
