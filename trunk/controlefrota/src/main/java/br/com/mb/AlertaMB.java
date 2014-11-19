@@ -38,9 +38,10 @@ public class AlertaMB extends GenericoMB<VeiculoDTO> {
 	
 	public void verificarAlertaQuilometragem(){
 		List<VeiculoDTO> list = veiculoDAO.verificarAlertaQuilometragem();
+		list.addAll(veiculoDAO.verificarAlertaGasto());
 		for (VeiculoDTO veiculoDTO : list) {
-			if(veiculoDTO.getKmAtual().equals(veiculoDTO.getKmLitro())){
-				addMessage("Exixtem veiculos que precisam abastecer.","Placa: "+veiculoDTO.getPlaca());
+			if(veiculoDTO.getId() == null){
+				addMessage("Exixtem veiculos que estão abastecendo demais.","Placa: "+veiculoDTO.getPlaca());
 			}
 			if(veiculoDTO.getKmAtual().equals(veiculoDTO.getKmOleo())){
 				addMessage("Exixtem veiculos que precisam trocar o óleo.","Placa: "+veiculoDTO.getPlaca());
