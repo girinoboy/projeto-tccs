@@ -3,7 +3,9 @@
  */
 package br.com.dto;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,6 +21,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import br.com.utility.DataUtils;
 
 /**
  * @author marcleonio.medeiros
@@ -54,6 +60,7 @@ public class UsuarioDTO extends AbstractDTO{
 	private String telefone;
 	private Double desconto;
 	private Boolean excluido;
+	private String observacao;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
 	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
@@ -82,6 +89,9 @@ public class UsuarioDTO extends AbstractDTO{
 	@OneToMany(targetEntity=ResultadoAvaliacaoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private List<ResultadoAvaliacaoDTO> listResultadoAvaliacaoDTO;
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(targetEntity=FrequenciaDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL,CascadeType.PERSIST, CascadeType.MERGE})
+	private List<FrequenciaDTO> listFrequenciaDTO;
 	
 	
 	/**
@@ -89,6 +99,9 @@ public class UsuarioDTO extends AbstractDTO{
 	 */
 	public UsuarioDTO() {
 		setExcluido(false);
+	}
+	public UsuarioDTO(String search) {
+		this.nome = search;
 	}
 	
 //	@Override
@@ -314,6 +327,80 @@ public class UsuarioDTO extends AbstractDTO{
 		this.listResultadoAvaliacaoDTO = listResultadoAvaliacaoDTO;
 	}
 
+	public Integer getPagamentoVencendo() {
+		if(financeiroDTO !=null && financeiroDTO.getDataPagamento() !=null){
+			Calendar c = new GregorianCalendar();
+			c.setTime(financeiroDTO.getDataPagamento());
+			c.add(Calendar.MONTH, +1);
 
+			if(c.getTime().after(new Date())){
+				return 0;
+			}else{
+				return 1;
+			}
+		}else{
+			return 1;
+		}
+	}
+
+	public Integer getIdade(){
+
+		Calendar dateOfBirth = new GregorianCalendar();
+		if(dataNascimento!=null){
+			dateOfBirth.setTime(dataNascimento);
+		}
+		// Cria um objeto calendar com a data atual
+		Calendar today = Calendar.getInstance();
+
+		// Obt�m a idade baseado no ano
+		int age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
+
+		dateOfBirth.add(Calendar.YEAR, age);
+
+		if (today.before(dateOfBirth)) {
+			age--;
+		}
+		return age;
+
+	}
+
+	public Integer getContadorSemana(){
+		Integer cont = 0;
+		Calendar dateOfWeek = new GregorianCalendar();
+		// Cria um objeto calendar com a data atual
+	    GregorianCalendar todayF = new GregorianCalendar();
+	    GregorianCalendar todayL = new GregorianCalendar();
+	    todayF.setFirstDayOfWeek(Calendar.SUNDAY);
+	    todayL.setFirstDayOfWeek(Calendar.SUNDAY);
+	    
+	    /* Agora � s� pegar as informa��es que voc� quiser sobre o primeiro dia da semana */
+	    todayF.setTime(DataUtils.toDateOnly(todayF.getTime()));
+	    todayF.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+	    
+	    /* Agora � s� pegar as informa��es que voc� quiser sobre o �ltimo dia da semana */
+	    todayL.setTime(DataUtils.toDateOnly(todayL.getTime()));
+	    todayL.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+	    
+	    for (FrequenciaDTO f : listFrequenciaDTO) {
+	    	dateOfWeek.setTime(f.getDataEntrada());
+	    	if(dateOfWeek.getTime().equals(todayF.getTime()) || dateOfWeek.getTime().equals(todayL.getTime())||(dateOfWeek.getTime().after(todayF.getTime()) && dateOfWeek.getTime().before(todayL.getTime()))){
+	    		cont++;
+	    	}
+	    }
+
+		return cont;
+	}
+	public String getObservacao() {
+		return observacao;
+	}
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+	public List<FrequenciaDTO> getListFrequenciaDTO() {
+		return listFrequenciaDTO;
+	}
+	public void setListFrequenciaDTO(List<FrequenciaDTO> listFrequenciaDTO) {
+		this.listFrequenciaDTO = listFrequenciaDTO;
+	}
 
 }

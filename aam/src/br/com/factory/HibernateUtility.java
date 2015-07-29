@@ -75,7 +75,7 @@ public class HibernateUtility {
 			
 			try {  
 				AnnotationConfiguration configuration = new AnnotationConfiguration();
-				//CADASTROS abaixo coloque todas classes que deseja ser modelo para criação do banco de dados
+				//CADASTROS abaixo coloque todas classes que deseja ser modelo para criaï¿½ï¿½o do banco de dados
 				for(Class<?> clazz : getClasses("br.com.dto")){
 					configuration.addAnnotatedClass(clazz);
 				}
@@ -87,7 +87,14 @@ public class HibernateUtility {
 //				.setProperty("hibernate.connection.datasource", "java:/GSWebDSOracle")//DS da pasta deploy Jboss
 				.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")// tipo de dialeto do banco
 				.setProperty("hibernate.connection.driver_class","com.mysql.jdbc.Driver")
-				.setProperty("hibernate.connection.datasource", "java:aamDS")
+//				.setProperty("hibernate.connection.datasource", "java:aamDS")
+//				.setProperty("hibernate.connection.datasource", "java:comp/env/jdbc/aamDS")
+				
+				.setProperty("hibernate.connection.url","jdbc:mysql://localhost/aam")
+//				.setProperty("hibernate.connection.url","jdbc:hsqldb:file:localBD/aam")
+				.setProperty("hibernate.connection.username","root")
+				.setProperty("hibernate.connection.password","root")
+				
 				.setProperty("hibernate.hbm2ddl.auto", "update")
 				.setProperty("hibernate.c3p0.max_size", "10")
 				.setProperty("hibernate.c3p0.min_size", "2")

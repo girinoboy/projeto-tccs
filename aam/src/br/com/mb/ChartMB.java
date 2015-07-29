@@ -4,11 +4,12 @@
 package br.com.mb;
 
 /**
- * @author Marcleônio
+ * @author Marcleï¿½nio
  *
  */
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -18,12 +19,21 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.HorizontalBarChartModel;
 import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.MeterGaugeChartModel;
 import org.primefaces.model.chart.PieChartModel;
 //import org.primefaces.model.chart.BarChartSeries;
+
+
+
+
+
 
 
 
@@ -47,6 +57,8 @@ public class ChartMB extends GenericoMB implements Serializable {
 	private CartesianChartModel cNotaMediaGraduacao;
 	private CartesianChartModel cMediaGeralAcademia;
 	private CartesianChartModel cAvaliacaoMembros;
+	private MeterGaugeChartModel meterGaugeModel2;
+	private HorizontalBarChartModel horizontalBarModel;
 
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -59,7 +71,78 @@ public class ChartMB extends GenericoMB implements Serializable {
 		cNotaMediaGraduacao();
 		cMediaGeralAcademia();
 		cAvaliacaoMembros();
+		createMeterGaugeModels();
+		createHorizontalBarModel();
 	}
+	
+	public MeterGaugeChartModel getMeterGaugeModel2() {
+        return meterGaugeModel2;
+    }
+ 
+    private MeterGaugeChartModel initMeterGaugeModel() {
+        List<Number> intervals = new ArrayList<Number>(){{
+            add(20);
+            add(50);
+            add(120);
+            add(220);
+        }};
+         
+        return new MeterGaugeChartModel(140, intervals);
+    }
+	
+	private void createMeterGaugeModels() {
+//        meterGaugeModel1 = initMeterGaugeModel();
+//        meterGaugeModel1.setTitle("MeterGauge Chart");
+//        meterGaugeModel1.setGaugeLabel("km/h");
+         
+        meterGaugeModel2 = initMeterGaugeModel();
+        meterGaugeModel2.setTitle("Custom Options");
+        meterGaugeModel2.setSeriesColors("66cc66,93b75f,E7E658,cc6666");
+        meterGaugeModel2.setGaugeLabel("km/h");
+        meterGaugeModel2.setGaugeLabelPosition("bottom");
+        meterGaugeModel2.setShowTickLabels(false);
+        meterGaugeModel2.setLabelHeightAdjust(110);
+        meterGaugeModel2.setIntervalOuterRadius(100);
+    }
+	
+	public HorizontalBarChartModel getHorizontalBarModel() {
+        return horizontalBarModel;
+    }
+	
+	private void createHorizontalBarModel() {
+        horizontalBarModel = new HorizontalBarChartModel();
+ 
+        ChartSeries boys = new ChartSeries();
+        boys.setLabel("Boys");
+        boys.set("2004", 50);
+        boys.set("2005", 96);
+        boys.set("2006", 44);
+        boys.set("2007", 55);
+        boys.set("2008", 25);
+ 
+        ChartSeries girls = new ChartSeries();
+        girls.setLabel("Girls");
+        girls.set("2004", 52);
+        girls.set("2005", 60);
+        girls.set("2006", 82);
+        girls.set("2007", 35);
+        girls.set("2008", 120);
+ 
+        horizontalBarModel.addSeries(boys);
+        horizontalBarModel.addSeries(girls);
+         
+        horizontalBarModel.setTitle("Horizontal and Stacked");
+        horizontalBarModel.setLegendPosition("e");
+        horizontalBarModel.setStacked(true);
+         
+        Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
+        xAxis.setLabel("Births");
+        xAxis.setMin(0);
+        xAxis.setMax(200);
+         
+        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
+        yAxis.setLabel("Gender");        
+    }
 
 	public void handleSelect(SelectEvent event) {  
 

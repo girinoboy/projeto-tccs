@@ -115,4 +115,23 @@ public class UsuarioDAO extends GenericoDAO<UsuarioDTO, Serializable>{
 	}
 
 
+	@SuppressWarnings("unchecked")
+	public List<UsuarioDTO> filtrar(UsuarioDTO usuarioDTO) throws HibernateException, Exception {
+
+		try {
+			List<UsuarioDTO> list = HibernateUtility.getSession().createCriteria(UsuarioDTO.class)
+					//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+					.add(Restrictions.ilike("nome",usuarioDTO.getNome() ==null ? "":"%"+usuarioDTO.getNome()+"%"))
+					.list();
+			//HibernateUtility.closeSession();
+			return (List<UsuarioDTO>) list;
+		} catch (HibernateException hibernateException) {
+			cancel();
+			throw hibernateException;
+		}finally{
+			//HibernateUtility.closeSession();
+		}
+	}
+
+
 }
