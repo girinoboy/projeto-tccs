@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+
+<ui:decorate template="layout.xhtml">  
+	<ui:define id="centro" name="centro"> 
+	<h:form id="form">
+
+ 			<p:separator id="separator"/>
+			<p:dataTable var="user" value="#{usuarioMB.listUsuarioDTO}" rowKey="#{user.id}" paginator="true" rows="10" rowStyleClass="#{user.pagamentoVencendo eq 1 ? 'debito' : null}"
+		                selection="#{usuarioMB.usuarioDTO}" selectionMode="single" filteredValue="#{usuarioMB.filteredUsuarios}" id="usuarioTable" widgetVar="userTable" emptyMessage="Faça uma busca por nome">
+		  
+		        <p:ajax event="rowSelect" update=":dialogE,:form2:displayE"  listener="#{usuarioMB.editUser}" oncomplete="PF('userDialogE').show();" >
+		        	<f:setPropertyActionListener value="#{user}" target="#{usuarioMB.usuarioDTO}"/> 
+		        </p:ajax>
+		  
+				<p:column headerText="Foto" id="foto" style="text-align: center;">
+					<p:graphicImage value="#{usuarioMB.dynamicImage}" style="width:60px;height:60px">
+						<f:param name="image_id" value="#{user.anexoDTO.id}"/>
+					</p:graphicImage>
+				</p:column>
+				
+		        <p:column headerText="Nome" sortBy="nome" id="nome">
+		           #{user.nome}
+		        </p:column>
+		  
+		        <p:column headerText="Telefone" id="telefone">
+		            #{user.telefone}
+		        </p:column>
+		  
+		        <p:column headerText="Idade" sortBy="idade" id="idade">
+		           <h:outputText value="#{user.idade}"/>
+		        </p:column>
+		  
+		        <p:column headerText="Ultimo Pagamento" sortBy="dataPagamento" id="dataPagamento">
+		            <h:outputText value="#{user.financeiroDTO.dataPagamento}">
+					    <f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+		        </p:column>
+		        
+		        <p:column headerText="Frequencia na Semana"  id="contadorSemana">
+		           <h:outputText value="#{user.contadorSemana}"/>
+		        </p:column>
+		        
+		    </p:dataTable>
+		    
+		    </h:form>
+		    <p:dialog id="dialogE" header="Marcar Presença"  widgetVar="userDialogE" resizable="false"
+	              width="410" showEffect="explode" hideEffect="explode">
+	        	 <h:form id="form2">
+	        	<h:panelGrid id="displayE" columns="2" cellpadding="4">
+			   		<f:facet name="header">
+			            <p:graphicImage value="#{usuarioMB.dynamicImage}" style="width:60px;height:60px">
+					        <f:attribute name="image_id" value="#{usuarioMB.usuarioDTO.anexoDTO.id}"/>
+							<f:param name="image_id" value="#{usuarioMB.usuarioDTO.anexoDTO.id}"/>
+						</p:graphicImage>
+		            </f:facet>
+		            <h:outputText for="nomeE" value="Nome: *" />
+		            <p:inputText id="nomeE" value="#{usuarioMB.usuarioDTO.nome}" required="true" disabled="true"/>
+		  			<p:watermark for="nomeE" value="Nome Completo" />
+		            <p:message for="nomeE" />
+		            
+		            <h:outputText for="telefoneE" value="Telefone: *" />
+		            <p:inputMask id="telefoneE" value="#{usuarioMB.usuarioDTO.telefone}" required="true" mask="(99) 9999-9999" disabled="true"/>
+		            <p:watermark for="telefoneE" value="Telefone" />
+		            <p:message for="telefoneE" />
+		  
+		            <h:outputLabel for="dataPagamentoE" value="Pagamento: *" required="true"/>
+		            <p:calendar value="#{usuarioMB.usuarioDTO.financeiroDTO.dataPagamento}" id="dataPagamentoE" required="true" disabled="true"/>
+		            <p:watermark for="dataPagamentoE" value=" " />
+		            <p:message for="dataPagamentoE" />
+		            
+		            <h:outputLabel for="obsE" value="Observação: " />
+		            <p:inputTextarea id="obsE" rows="5" cols="20" counter="counter" maxlength="200"       
+				    	value="#{usuarioMB.usuarioDTO.observacao}" 
+				    	counterTemplate="{0} characters remaining." autoResize="false" disabled="true"/>  
+				  	<p:watermark for="obsE" value=" " />
+				  	<p:message for="obsE" />
+		            <br/>  
+					<h:outputText id="counter" />
+					
+					<h:outputLabel for="presencaE" value="Presente:" />
+		            <p:selectBooleanButton id="presencaE" value="#{usuarioMB.frequenciaDTO.presente}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close">  
+			            <p:ajax update=":messages,:form:usuarioTable" listener="#{usuarioMB.addFrequecia}" oncomplete="PF('userDialogE').hide()"/>
+			        </p:selectBooleanButton>
+				  	<p:watermark for="presencaE" value=" " />
+				  	<p:message for="presencaE" />
+		            
+				        
+		        </h:panelGrid>
+		           </h:form>
+		    </p:dialog>
+		 
+ 		
+ 	</ui:define>  
+</ui:decorate>  
+</html>

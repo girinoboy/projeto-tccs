@@ -3,6 +3,7 @@ package br.com.mb;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.hibernate.HibernateException;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
@@ -22,12 +24,14 @@ import org.primefaces.event.SelectEvent;
 
 import br.com.dao.AnexoDAO;
 import br.com.dao.FinanceiroDAO;
+import br.com.dao.FrequenciaDAO;
 import br.com.dao.GraduacaoDAO;
 import br.com.dao.ParametroDAO;
 import br.com.dao.ResultadoDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.AnexoDTO;
 import br.com.dto.FinanceiroDTO;
+import br.com.dto.FrequenciaDTO;
 import br.com.dto.GraduacaoDTO;
 import br.com.dto.ParametroDTO;
 import br.com.dto.PerfilDTO;
@@ -35,6 +39,7 @@ import br.com.dto.ResultadoDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.Constantes;
+import br.com.utility.DataUtils;
 
 @ManagedBean
 @SessionScoped
@@ -52,6 +57,10 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	private List<GraduacaoDTO> listGraduacaoDTO = new ArrayList<GraduacaoDTO>();
 	private AnexoDAO anexoDAO = new AnexoDAO();
 	private FinanceiroDAO financeiroDAO = new FinanceiroDAO();
+	private List<UsuarioDTO> filteredUsuarios;
+	private FrequenciaDAO frequenciaDAO = new FrequenciaDAO();
+	private FrequenciaDTO frequenciaDTO = new FrequenciaDTO();
+	private String search;
 
 	private AbstractDataModel<UsuarioDTO> membroDataModel; 
 
@@ -139,7 +148,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 //			if(usuarioDTO.getAnexoDTO().getId() !=null)
 //				usuarioDTO.setAnexoDTO(anexoDAO.getById(usuarioDTO.getAnexoDTO().getId()));
 			if(usuarioDTO.getId() !=null){
-				//verifica se existe um novo anexo, pois o anexo é salvo ao capturar
+				//verifica se existe um novo anexo, pois o anexo ï¿½ salvo ao capturar
 //				usuarioDTO.setAnexoDTO(usuarioDAO.getById(usuarioDTO.getId()).getAnexoDTO());
 
 				Calendar c = new GregorianCalendar();
@@ -165,7 +174,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			usuarioDTO.getFinanceiroDTO().getMes();
 			usuarioDTO.getFinanceiroDTO().getAno();
 			usuarioDTO = usuarioDAO.save(usuarioDTO);
-			addMessage("Operação realizada com sucesso!");
+			addMessage("Operaï¿½ï¿½o realizada com sucesso!");
 			usuarioDTO = new UsuarioDTO();
 			listUsuarioDTO = usuarioDAO.list();
 			reset(null);
@@ -175,6 +184,92 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	public void addFrequecia(ActionEvent actionEvent){
+		try{
+			addFrequecia();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addFrequecia(){
+		try{
+			RequestContext context = RequestContext.getCurrentInstance();
+			context.addCallbackParam("salvo", false);
+			Map<String, Object> filtrosConsulta = new HashMap<>();
+
+			Calendar c = new GregorianCalendar();   
+
+			//c.add(Calendar.DAY_OF_MONTH, 5);
+
+			filtrosConsulta.put("dataEntrada", DataUtils.toDateOnly(c.getTime()));
+			filtrosConsulta.put("usuarioDTO.id", usuarioDTO.getId());
+
+			List<FrequenciaDTO> f = frequenciaDAO.listCriterio(null, filtrosConsulta , 1);
+			if(!f.isEmpty() && f.get(0) !=null){
+				FrequenciaDTO a = new FrequenciaDTO();
+				a.setId(f.get(0).getId());
+				frequenciaDAO.delete(a);
+				//addMessage("Usuario jï¿½ marcardo na folha de frequencia.");
+			}else{
+				frequenciaDTO.setPresente(true);
+				frequenciaDTO.setUsuarioDTO(usuarioDTO);
+				frequenciaDTO.setDataEntrada(DataUtils.toDateOnly(c.getTime()));
+				frequenciaDTO.setDataCompleta(new Date());
+				frequenciaDAO.save(frequenciaDTO);
+				frequenciaDTO = new FrequenciaDTO();
+				context.addCallbackParam("salvo", true);
+				addMessage("Presenï¿½a marcada.");
+			}
+			atualizaUserList(new UsuarioDTO(search));
+			//usuarioDTO = new UsuarioDTO();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void atualizaUserList(UsuarioDTO usuarioDTO) {
+//		Map<String, Object> filtrosConsulta = new HashMap<>();
+//		filtrosConsulta.put("nome", usuarioDTO.getNome() ==null ? "":usuarioDTO.getNome());
+//		listUsuario = usuarioDAO.listCriterio(null, filtrosConsulta , Constantes.TIPO_CONSULTA_ILIKE);
+		try{
+			if(usuarioDTO.getNome() !=null)
+				listUsuarioDTO = usuarioDAO.filtrar(usuarioDTO);
+			else{
+				listUsuarioDTO = usuarioDAO.list();
+			}
+//			listPerfil = perfilDAO.list();
+		} catch (Exception e) {
+			addMessage(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public String editUser(SelectEvent event) throws Exception {  
+		RequestContext context = RequestContext.getCurrentInstance();
+		context.addCallbackParam("salvo", false);
+		usuarioDTO = usuarioDAO.getById(usuarioDTO.getId());
+		
+		Map<String, Object> filtrosConsulta = new HashMap<>();
+
+		Calendar c = new GregorianCalendar();   
+
+		//c.add(Calendar.DAY_OF_MONTH, 5);
+
+		filtrosConsulta.put("dataEntrada", DataUtils.toDateOnly(c.getTime()));
+		filtrosConsulta.put("usuarioDTO.id", usuarioDTO.getId());
+
+		List<FrequenciaDTO> f = frequenciaDAO.listCriterio(null, filtrosConsulta , 1);
+		if(!f.isEmpty() && f.get(0) !=null){
+			frequenciaDTO = f.get(0);
+		}else{
+			frequenciaDTO = new FrequenciaDTO();
+		}
+		context.addCallbackParam("salvo", true);
+
+		return "editar";
 	}
 
 	private void validaLogin() throws Exception {
@@ -211,7 +306,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	public void edit(ActionEvent actionEvent) throws Exception {
 		atualiza(null);
 		System.out.println(usuarioDTO);
-		addMessage("Operação realizada com sucesso!");
+		addMessage("Operaï¿½ï¿½o realizada com sucesso!");
 
 	}
 
@@ -251,7 +346,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 			}
 
 		}catch(Exception e){
-			addMessage("Registro não pode ser apagado.");
+			addMessage("Registro nï¿½o pode ser apagado.");
 			e.printStackTrace();
 		}finally{
 			try {
@@ -340,6 +435,22 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 
 	public void setListSelectedUsuarioDTO(UsuarioDTO[] listSelectedUsuarioDTO) {
 		this.listSelectedUsuarioDTO = listSelectedUsuarioDTO;
+	}
+
+	public List<UsuarioDTO> getFilteredUsuarios() {
+		return filteredUsuarios;
+	}
+
+	public void setFilteredUsuarios(List<UsuarioDTO> filteredUsuarios) {
+		this.filteredUsuarios = filteredUsuarios;
+	}
+
+	public FrequenciaDTO getFrequenciaDTO() {
+		return frequenciaDTO;
+	}
+
+	public void setFrequenciaDTO(FrequenciaDTO frequenciaDTO) {
+		this.frequenciaDTO = frequenciaDTO;
 	}
 
 }
