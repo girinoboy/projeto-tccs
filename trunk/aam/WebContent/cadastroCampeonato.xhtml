@@ -87,7 +87,7 @@
  		
  		</h:form>
  		
- 		<p:dialog header="Adicionar Link" widgetVar="dlgL" modal="true" appendToBody="true" resizable="false" draggable="true">
+ 		<p:dialog header="Adicionar Link" widgetVar="dlgL" modal="true" appendTo="@(body)" resizable="false" draggable="true">
 		    <h:form>
   				<h:panelGrid columns="2">
 				    
@@ -105,7 +105,7 @@
 		</p:dialog>
 		
 		
-		<p:dialog header="Adicionar Resultado" widgetVar="dlgR" modal="true" appendToBody="true" resizable="false" draggable="true">
+		<p:dialog header="Adicionar Resultado" widgetVar="dlgR" modal="true" appendTo="@(body)" resizable="false" draggable="true">
 		    <h:form>
   				<h:panelGrid columns="3">
 				    
@@ -127,7 +127,7 @@
 			</h:form>
 		</p:dialog>
 		
-		<p:dialog header="" widgetVar="dlgV" modal="true" appendToBody="true" resizable="false" draggable="true">
+		<p:dialog header="" widgetVar="dlgV" modal="true" appendTo="@(body)" resizable="false" draggable="true">
 		    <h:form>
   				<h:panelGrid columns="2">
   					<h:outputText value="Todos os dados alterados e não salvos serão perdidos, deseja continuar com esta ação?" />

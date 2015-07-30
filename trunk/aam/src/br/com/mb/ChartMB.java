@@ -10,6 +10,7 @@ package br.com.mb;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -25,10 +26,15 @@ import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.HorizontalBarChartModel;
+import org.primefaces.model.chart.LegendPlacement;
+import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.MeterGaugeChartModel;
 import org.primefaces.model.chart.PieChartModel;
 //import org.primefaces.model.chart.BarChartSeries;
+
+
+
 
 
 
@@ -54,9 +60,9 @@ public class ChartMB extends GenericoMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
-	private CartesianChartModel cNotaMediaGraduacao;
-	private CartesianChartModel cMediaGeralAcademia;
-	private CartesianChartModel cAvaliacaoMembros;
+	private LineChartModel cNotaMediaGraduacao;
+	private LineChartModel cMediaGeralAcademia;
+	private LineChartModel cAvaliacaoMembros;
 	private MeterGaugeChartModel meterGaugeModel2;
 	private HorizontalBarChartModel horizontalBarModel;
 
@@ -74,75 +80,83 @@ public class ChartMB extends GenericoMB implements Serializable {
 		createMeterGaugeModels();
 		createHorizontalBarModel();
 	}
-	
+
 	public MeterGaugeChartModel getMeterGaugeModel2() {
-        return meterGaugeModel2;
-    }
- 
-    private MeterGaugeChartModel initMeterGaugeModel() {
-        List<Number> intervals = new ArrayList<Number>(){{
-            add(20);
-            add(50);
-            add(120);
-            add(220);
-        }};
-         
-        return new MeterGaugeChartModel(140, intervals);
-    }
-	
+		return meterGaugeModel2;
+	}
+
+	private MeterGaugeChartModel initMeterGaugeModel() {
+		List<Number> intervals = new ArrayList<Number>(){{
+			add(5);
+			add(10);
+			add(15);
+			add(22);
+		}};
+
+		return new MeterGaugeChartModel(16, intervals);
+	}
+
 	private void createMeterGaugeModels() {
-//        meterGaugeModel1 = initMeterGaugeModel();
-//        meterGaugeModel1.setTitle("MeterGauge Chart");
-//        meterGaugeModel1.setGaugeLabel("km/h");
-         
-        meterGaugeModel2 = initMeterGaugeModel();
-        meterGaugeModel2.setTitle("Custom Options");
-        meterGaugeModel2.setSeriesColors("66cc66,93b75f,E7E658,cc6666");
-        meterGaugeModel2.setGaugeLabel("km/h");
-        meterGaugeModel2.setGaugeLabelPosition("bottom");
-        meterGaugeModel2.setShowTickLabels(false);
-        meterGaugeModel2.setLabelHeightAdjust(110);
-        meterGaugeModel2.setIntervalOuterRadius(100);
-    }
-	
+		//        meterGaugeModel1 = initMeterGaugeModel();
+		//        meterGaugeModel1.setTitle("MeterGauge Chart");
+		//        meterGaugeModel1.setGaugeLabel("km/h");
+
+		meterGaugeModel2 = initMeterGaugeModel();
+		meterGaugeModel2.setTitle("Total Geral Frequência Agrupado");
+		meterGaugeModel2.setSeriesColors("cc6666,66cc66,E7E658,3299BB");
+		meterGaugeModel2.setGaugeLabel("Otimo");
+		meterGaugeModel2.setIntervalInnerRadius(1);
+		//        meterGaugeModel2.setGaugeLabelPosition("bottom");
+		meterGaugeModel2.setShowTickLabels(true);
+		meterGaugeModel2.setLegendCols(2);
+		meterGaugeModel2.setLegendRows(2);
+		meterGaugeModel2.setLabelHeightAdjust(110);
+//		meterGaugeModel2.setIntervalOuterRadius(100);
+//		meterGaugeModel2.setMouseoverHighlight(true);
+//		Number [] a = {5,10,15,22};
+//		meterGaugeModel2.setIntervals(Arrays.asList(a));
+//		meterGaugeModel2.setLegendPosition("ne");
+//		meterGaugeModel2.setLegendPlacement(LegendPlacement.OUTSIDE);
+	}
+
 	public HorizontalBarChartModel getHorizontalBarModel() {
-        return horizontalBarModel;
-    }
-	
+		return horizontalBarModel;
+	}
+
 	private void createHorizontalBarModel() {
-        horizontalBarModel = new HorizontalBarChartModel();
- 
-        ChartSeries boys = new ChartSeries();
-        boys.setLabel("Boys");
-        boys.set("2004", 50);
-        boys.set("2005", 96);
-        boys.set("2006", 44);
-        boys.set("2007", 55);
-        boys.set("2008", 25);
- 
-        ChartSeries girls = new ChartSeries();
-        girls.setLabel("Girls");
-        girls.set("2004", 52);
-        girls.set("2005", 60);
-        girls.set("2006", 82);
-        girls.set("2007", 35);
-        girls.set("2008", 120);
- 
-        horizontalBarModel.addSeries(boys);
-        horizontalBarModel.addSeries(girls);
-         
-        horizontalBarModel.setTitle("Horizontal and Stacked");
-        horizontalBarModel.setLegendPosition("e");
-        horizontalBarModel.setStacked(true);
-         
-        Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
-        xAxis.setLabel("Births");
-        xAxis.setMin(0);
-        xAxis.setMax(200);
-         
-        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
-        yAxis.setLabel("Gender");        
-    }
+		horizontalBarModel = new HorizontalBarChartModel();
+
+		ChartSeries boys = new ChartSeries();
+		boys.setLabel("Frenquencia");
+		boys.set("Graduação 1", 22);
+		boys.set("Graduação 2", 5);
+		boys.set("Graduação 3", 14);
+		//        boys.set("2007", 55);
+		//        boys.set("2008", 25);
+
+		//        ChartSeries girls = new ChartSeries();
+		//        girls.setLabel("Girls");
+		//        girls.set("2004", 52);
+		//        girls.set("2005", 60);
+		//        girls.set("2006", 82);
+		//        girls.set("2007", 35);
+		//        girls.set("2008", 120);
+
+		horizontalBarModel.addSeries(boys);
+		//        horizontalBarModel.addSeries(girls);
+
+		horizontalBarModel.setTitle("Frequência do Aluno");
+		horizontalBarModel.setLegendPosition("e");
+		horizontalBarModel.setStacked(true);
+
+		Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
+		xAxis.setLabel("Insuficiente Bom Regular Otimo");
+		xAxis.setMin(0);
+		xAxis.setMax(22);
+
+		//        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
+		//        yAxis.setLabel("Gender");        
+	}
 
 	public void handleSelect(SelectEvent event) {  
 
@@ -172,7 +186,11 @@ public class ChartMB extends GenericoMB implements Serializable {
 
 	@SuppressWarnings("rawtypes")
 	private void cMediaGeralAcademia(){
-		cMediaGeralAcademia = new CartesianChartModel();
+		cMediaGeralAcademia = new LineChartModel();
+		cMediaGeralAcademia.setAnimate(true);
+		cMediaGeralAcademia.setLegendPosition("e");
+		Axis yAxis = cMediaGeralAcademia.getAxis(AxisType.Y);
+		yAxis.setMin(0);
 		LineChartSeries series1 = new LineChartSeries();
 		series1.setLabel("Notas");
 		series1.setMarkerStyle("diamond");
@@ -206,7 +224,11 @@ public class ChartMB extends GenericoMB implements Serializable {
 	}
 
 	private void cNotaMediaGraduacao(){
-		cNotaMediaGraduacao = new CartesianChartModel();
+		cNotaMediaGraduacao = new LineChartModel();
+		cNotaMediaGraduacao.setAnimate(true);
+		cNotaMediaGraduacao.setLegendPosition("e");
+		Axis yAxis = cNotaMediaGraduacao.getAxis(AxisType.Y);
+		yAxis.setMin(0);
 		LineChartSeries series1 = new LineChartSeries();
 		series1.setLabel("Notas");
 		series1.setMarkerStyle("diamond");
@@ -246,8 +268,12 @@ public class ChartMB extends GenericoMB implements Serializable {
 		String idUsuario = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("form:idUsuario");
 		System.out.println(idUsuario);
 
-		cAvaliacaoMembros = new CartesianChartModel();
-
+		cAvaliacaoMembros = new LineChartModel();
+		cAvaliacaoMembros.setAnimate(true);
+		cAvaliacaoMembros.setLegendPosition("e");
+		Axis yAxis = cAvaliacaoMembros.getAxis(AxisType.Y);
+		yAxis.setMin(0);
+		//        yAxis.setMax(10);
 
 		LineChartSeries series1 = new LineChartSeries();
 		series1.setLabel("Notas");
@@ -283,11 +309,11 @@ public class ChartMB extends GenericoMB implements Serializable {
 		this.usuarioDTO = usuarioDTO;
 	}
 
-	public CartesianChartModel getcNotaMediaGraduacao() {
+	public LineChartModel getcNotaMediaGraduacao() {
 		return cNotaMediaGraduacao;
 	}
 
-	public void setcNotaMediaGraduacao(CartesianChartModel cNotaMediaGraduacao) {
+	public void setcNotaMediaGraduacao(LineChartModel cNotaMediaGraduacao) {
 		this.cNotaMediaGraduacao = cNotaMediaGraduacao;
 	}
 
@@ -295,15 +321,15 @@ public class ChartMB extends GenericoMB implements Serializable {
 		return cMediaGeralAcademia;
 	}
 
-	public void setcMediaGeralAcademia(CartesianChartModel cMediaGeralAcademia) {
+	public void setcMediaGeralAcademia(LineChartModel cMediaGeralAcademia) {
 		this.cMediaGeralAcademia = cMediaGeralAcademia;
 	}
 
-	public CartesianChartModel getcAvaliacaoMembros() {
+	public LineChartModel getcAvaliacaoMembros() {
 		return cAvaliacaoMembros;
 	}
 
-	public void setcAvaliacaoMembros(CartesianChartModel cAvaliacaoMembros) {
+	public void setcAvaliacaoMembros(LineChartModel cAvaliacaoMembros) {
 		this.cAvaliacaoMembros = cAvaliacaoMembros;
 	}
 

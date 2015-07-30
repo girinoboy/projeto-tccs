@@ -32,8 +32,7 @@
 			</h:panelGrid>
 			
 <!-- 			<p:poll interval="15" update="line" /> -->
-			<p:lineChart id="line" value="#{chartBean.cAvaliacaoMembros}" legendPosition="e" animate="true"
-                         minY="0" style="height:300px;"/>
+			<p:chart type="line" id="line" model="#{chartBean.cAvaliacaoMembros}" style="height:300px;" />
 
 		</h:form>
  	</ui:define>  

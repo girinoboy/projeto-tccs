@@ -39,7 +39,7 @@
  		
  			</p:panel>
  		</h:form>
- 		<p:dialog header="Adicionar Grupo de Técnicas" widgetVar="dlgT" modal="true" appendToBody="true" resizable="false" draggable="true">
+ 		<p:dialog header="Adicionar Grupo de Técnicas" widgetVar="dlgT" modal="true" appendTo="@(body)" resizable="false" draggable="true">
 		    <h:form id="formT" enctype="multipart/form-data" acceptcharset="UTF-8" >
 		    	<h:inputHidden id="idTecnica" value="#{tecnicaMB.tecnicaDTO.id}" />
   				<h:panelGrid id="displayT" columns="2">
@@ -57,7 +57,7 @@
 			</h:form>
 		</p:dialog>
 		
-		<p:dialog header="Apagar?" widgetVar="dlgD" modal="true" appendToBody="true" resizable="false" draggable="true">
+		<p:dialog header="Apagar?" widgetVar="dlgD" modal="true" appendTo="@(body)" resizable="false" draggable="true">
 		    <h:outputText value="Tem certeza que deseja realizar essa exclusão?" />
 		    <f:facet name="footer">
 			 	<p:commandButton value="Excluir" update=":growl,form:panel"  icon="ui-icon-close" actionListener="#{tecnicaMB.del}" immediate="true" oncomplete="PF('dlgD').hide()" />                 

@@ -48,7 +48,7 @@
 		    </p:dataTable> 
 		    </p:panel>
  		</h:form>
- 		<p:dialog header="Apagar?" widgetVar="dlgD" modal="true" appendToBody="true" resizable="false" draggable="true">
+ 		<p:dialog header="Apagar?" widgetVar="dlgD" modal="true" appendTo="@(body)" resizable="false" draggable="true">
 		    <h:outputText value="Tem certeza que deseja realizar essa exclusão?" />
 		    <f:facet name="footer">
 			 	<p:commandButton value="Excluir" update=":growl,form:panel"  icon="ui-icon-close" actionListener="#{resultadoAvaliacaoMB.del}" immediate="true" oncomplete="PF('dlgD').hide()" />                 

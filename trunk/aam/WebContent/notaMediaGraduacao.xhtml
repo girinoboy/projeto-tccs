@@ -24,8 +24,7 @@
 	            <p:commandButton value="Emitir" actionListener="#{chartBean.atualizaNotaMediaGraduacao}" id="withIcon" update=":growl,line" icon="ui-icon-disk" />
  			</h:panelGrid>
  			
- 			<p:lineChart id="line" value="#{chartBean.cNotaMediaGraduacao}" legendPosition="e" animate="true"
-                         minY="0" style="height:300px;"/>
+ 			<p:chart type="line" id="line" model="#{chartBean.cNotaMediaGraduacao}" style="height:300px;"/>
  		</h:form>
  	</ui:define>  
 </ui:decorate>  
