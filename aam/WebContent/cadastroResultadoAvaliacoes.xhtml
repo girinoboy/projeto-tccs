@@ -42,7 +42,9 @@
 			            <h:outputLabel for="luta" value="Luta: *" /> <p:spacer width="80" height="10" />
 			            <pe:inputNumber id="luta" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.luta}" required="true" label="Luta" maxlength="4"/><br/>
 			            <h:outputLabel for="conhecimentos" value="Conhecimentos: *" />
-			            <pe:inputNumber id="conhecimentos" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.conhecimentos}" required="true" label="Conhecimentos" maxlength="4"/>
+			            <pe:inputNumber id="conhecimentos" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.conhecimentos}" required="true" label="Conhecimentos" maxlength="4"/><br/>
+			            <h:outputLabel for="exercicios" value="Qtd. exercicios: *" />
+			            <pe:inputNumber id="exercicios" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.qtdExercicios}" required="true" label="Qtd. exercicios" maxlength="4"/>
 		            </p:row>
 		            <p:message for="tecnica" />
 		            <p:message for="luta" />
