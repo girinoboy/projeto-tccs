@@ -134,28 +134,31 @@
 							<f:selectItems value="#{themeSwitcherBean.themes}" />
 							<p:ajax event="change" listener="#{themeSwitcherBean.saveTheme}"/>
 						</p:themeSwitcher>
-						
-						<div class="topo_right"/>
+						<div class="topo_right" style="background-color: blue"/>
 					</div>
+<!-- 						<p:menu> -->
+<!-- 							<p:menuitem value="Sair" actionListener="#{loginManagedBean.logout}"/> -->
+<!-- 						</p:menu> -->
 				</h:form>
 			</p:layoutUnit>
 
-			<p:layoutUnit id="left" position="west">
+			<p:layoutUnit id="left" position="west" maxSize="180">
 				<h:form>
 					<p:menu>
-						<p:menuitem value="História" outcome="listHistoria" update="centro" actionListener="#{historiaMB.atualiza}"/>
-						<p:menuitem value="Membros" outcome="listMembros" update="centro" actionListener="#{usuarioMB.atualiza}"/>
+<!-- 						<p:menuitem value="História" outcome="listHistoria" update="centro" actionListener="#{historiaMB.atualiza}"/> -->
+						<p:menuitem value="Usuários" outcome="listMembros" update="centro" actionListener="#{usuarioMB.atualiza}"/>
 						<p:menuitem value="Técnicas" outcome="listTecnica" update="centro" actionListener="#{tecnicaMB.atualiza}"/>
 						<p:menuitem value="Graduação" outcome="listGraduacao" update="centro" actionListener="#{graduacaoMB.atualiza}"/>
 						<p:menuitem value="Campeonatos" outcome="listCampeonato" update="centro" actionListener="#{campeonatoMB.atualiza}"/>
-						<p:menuitem value="Notícias" outcome="listNoticia" update="centro" actionListener="#{noticiaMB.atualiza}"/>
-						<p:menuitem value="Financeiro" outcome="listFinanceiro" update="centro" actionListener="#{financeiroMB.atualiza}" rendered="#{genericoMB.adm}"/>
+<!-- 						<p:menuitem value="Notícias" outcome="listNoticia" update="centro" actionListener="#{noticiaMB.atualiza}"/> -->
+<!-- 						<p:menuitem value="Financeiro" outcome="listFinanceiro" update="centro" actionListener="#{financeiroMB.atualiza}" rendered="#{genericoMB.adm}"/> -->
 						<p:menuitem value="Frequencia" outcome="listFrequencia" update="centro" />
+						<p:menuitem value="Evolução de Faixa" outcome="evolucaoFaixa" update="centro" actionListener="#{evolucaoFaixaMB.reset}"/>
 					</p:menu>
 				</h:form>
 			</p:layoutUnit>
 
-			<p:layoutUnit id="right" position="east" style="text-align:center">
+			<p:layoutUnit id="right" position="east" style="text-align:left;">
 				<h:form id="formR">
 				<div>
 					<p:menu>
@@ -187,7 +190,7 @@
 						<br/>
 					</div>
 					<p:menu>
-					<p:menuitem value="Sair" actionListener="#{loginManagedBean.logout}"/>
+						<p:menuitem value="Sair" actionListener="#{loginManagedBean.logout}"/>
 					</p:menu>
 					</div>
 				</h:form>

@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.joda.time.LocalDate;
 
 import br.com.utility.DataUtils;
 
@@ -86,6 +87,7 @@ public class UsuarioDTO extends AbstractDTO{
 	@OneToMany(targetEntity=ResultadoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private List<ResultadoDTO> listResultadoDTO;
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(targetEntity=ResultadoAvaliacaoDTO.class, mappedBy = "usuarioDTO", fetch = FetchType.LAZY, cascade= {CascadeType.ALL})
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private List<ResultadoAvaliacaoDTO> listResultadoAvaliacaoDTO;
@@ -390,6 +392,36 @@ public class UsuarioDTO extends AbstractDTO{
 
 		return cont;
 	}
+	
+	public Integer getContadorMes(){
+		Integer cont = 0;
+//		Calendar dateOfWeek = new GregorianCalendar();
+//		// Cria um objeto calendar com a data atual
+//	    GregorianCalendar todayF = new GregorianCalendar();
+//	    GregorianCalendar todayL = new GregorianCalendar();
+//	    todayF.setFirstDayOfWeek(Calendar.SUNDAY);
+//	    todayL.setFirstDayOfWeek(Calendar.SUNDAY);
+//	    
+//	    /* Agora � s� pegar as informa��es que voc� quiser sobre o primeiro dia da semana */
+//	    todayF.setTime(DataUtils.toDateOnly(todayF.getTime()));
+//	    todayF.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//	    
+//	    /* Agora � s� pegar as informa��es que voc� quiser sobre o �ltimo dia da semana */
+//	    todayL.setTime(DataUtils.toDateOnly(todayL.getTime()));
+//	    todayL.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+	    
+		for (FrequenciaDTO f : listFrequenciaDTO) {
+			if(LocalDate.fromDateFields(f.getDataEntrada()).getMonthOfYear() == LocalDate.now().getMonthOfYear()){
+				cont++;
+			}
+//	    	dateOfWeek.setTime(f.getDataEntrada());
+//	    	if(dateOfWeek.getTime().equals(todayF.getTime()) || dateOfWeek.getTime().equals(todayL.getTime())||(dateOfWeek.getTime().after(todayF.getTime()) && dateOfWeek.getTime().before(todayL.getTime()))){
+//	    	}
+	    }
+
+		return cont;
+	}
+	
 	public String getObservacao() {
 		return observacao;
 	}

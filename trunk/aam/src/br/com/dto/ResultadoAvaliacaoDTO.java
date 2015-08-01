@@ -39,6 +39,7 @@ public class ResultadoAvaliacaoDTO extends AbstractDTO{
 	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
+	private Integer qtdExercicios;
 
 	public ResultadoAvaliacaoDTO() {
 		// TODO Auto-generated constructor stub
@@ -106,6 +107,14 @@ public class ResultadoAvaliacaoDTO extends AbstractDTO{
 
 	public void setGraduacaoDTO(GraduacaoDTO graduacaoDTO) {
 		this.graduacaoDTO = graduacaoDTO;
+	}
+
+	public Integer getQtdExercicios() {
+		return qtdExercicios;
+	}
+
+	public void setQtdExercicios(Integer qtdExercicios) {
+		this.qtdExercicios = qtdExercicios;
 	}
 
 }
