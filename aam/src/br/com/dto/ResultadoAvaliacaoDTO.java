@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,11 +16,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+import br.com.enumeration.ClassificacaoDesempenhoE;
+import br.com.enumeration.ConceitoE;
+
 
 @Entity
 @Table(name="resultado_avaliacao")
 public class ResultadoAvaliacaoDTO extends AbstractDTO{
-	
+
 	/**
 	 * 
 	 */
@@ -40,6 +45,10 @@ public class ResultadoAvaliacaoDTO extends AbstractDTO{
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
 	private Integer qtdExercicios;
+	@Enumerated(EnumType.ORDINAL)
+	private ClassificacaoDesempenhoE classificacaoDesempenho;
+	@Enumerated(EnumType.ORDINAL)
+	private ConceitoE conceito;
 
 	public ResultadoAvaliacaoDTO() {
 		// TODO Auto-generated constructor stub
@@ -115,6 +124,23 @@ public class ResultadoAvaliacaoDTO extends AbstractDTO{
 
 	public void setQtdExercicios(Integer qtdExercicios) {
 		this.qtdExercicios = qtdExercicios;
+	}
+
+	public ClassificacaoDesempenhoE getClassificacaoDesempenho() {
+		return classificacaoDesempenho;
+	}
+
+	public void setClassificacaoDesempenho(
+			ClassificacaoDesempenhoE classificacaoDesempenho) {
+		this.classificacaoDesempenho = classificacaoDesempenho;
+	}
+
+	public ConceitoE getConceito() {
+		return conceito;
+	}
+
+	public void setConceito(ConceitoE conceito) {
+		this.conceito = conceito;
 	}
 
 }

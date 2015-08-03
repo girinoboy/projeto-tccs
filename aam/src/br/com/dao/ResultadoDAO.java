@@ -6,10 +6,15 @@ package br.com.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.joda.time.LocalDate;
 
+import br.com.dto.CampeonatoDTO;
 import br.com.dto.LinkDTO;
 import br.com.dto.ResultadoDTO;
+import br.com.dto.UsuarioDTO;
 import br.com.factory.HibernateUtility;
 /**
  * @author marcleonio.medeiros
@@ -42,6 +47,18 @@ public class ResultadoDAO extends GenericoDAO<ResultadoDTO, Serializable>{
 		}
 
 		return result;
+	}
+
+
+	public Integer numCampeonatosParticipado(UsuarioDTO usuarioDTO) throws HibernateException, Exception {
+		LocalDate seisMesesDepois = new LocalDate();
+		seisMesesDepois.plusMonths(6);
+		return (Integer) HibernateUtility.getSession().createCriteria(CampeonatoDTO.class)
+				.setProjection(Projections.rowCount())
+				.add(Restrictions.le("campeonatoDTO.data", seisMesesDepois.toDate()))  
+				.add(Restrictions.eq("usuarioDTO.id", usuarioDTO.getId()))
+				.uniqueResult();
+		
 	}
 
 }

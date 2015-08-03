@@ -4,6 +4,7 @@
 package br.com.mb;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -11,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.hibernate.HibernateException;
 import org.primefaces.event.SelectEvent;
 
 import br.com.dao.CampeonatoDAO;
@@ -20,6 +22,7 @@ import br.com.dto.CampeonatoDTO;
 import br.com.dto.LinkDTO;
 import br.com.dto.ResultadoDTO;
 import br.com.dto.UsuarioDTO;
+import br.com.enumeration.MedalhaE;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.Constantes;
 
@@ -54,6 +57,8 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 	private List<ResultadoDTO> listResultadoDTO = new ArrayList<ResultadoDTO>();
 	private ResultadoDTO[] listSelectedResultadoDTO;
 
+	private List<MedalhaE> listMedalha;
+
 	/**
 	 * 
 	 */
@@ -68,14 +73,15 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 	public void atualiza(ActionEvent event) throws Exception {
 		listCampeonatoDTO = campeonatoDAO.list();
 		campeonatoDataModel = new AbstractDataModel<CampeonatoDTO>(listCampeonatoDTO);
+		listMedalha = Arrays.asList(MedalhaE.values());
 
 	}
 
 	public void reset(ActionEvent event) {
 		campeonatoDTO = new CampeonatoDTO();
 
-//		listCampeonatoDTO = new ArrayList<CampeonatoDTO>();
-//		campeonatoDataModel = new AbstractDataModel<CampeonatoDTO>(listCampeonatoDTO);
+		//		listCampeonatoDTO = new ArrayList<CampeonatoDTO>();
+		//		campeonatoDataModel = new AbstractDataModel<CampeonatoDTO>(listCampeonatoDTO);
 
 		listLinkDTO = new ArrayList<LinkDTO>();
 		linkDataModel = new AbstractDataModel<LinkDTO>();
@@ -84,13 +90,13 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 		resultadoDataModel = new AbstractDataModel<ResultadoDTO>();
 
 	}
-	
+
 	public void handleSelect(SelectEvent event) {  
 
 		try {
 			resultadoDTO.setUsuarioDTO((UsuarioDTO)event.getObject()) ;
 
-			addMessage("Graduação:" + resultadoDTO.getUsuarioDTO().getGraduacaoDTO().getNome().toString());
+			addMessage("Graduaï¿½ï¿½o:" + resultadoDTO.getUsuarioDTO().getGraduacaoDTO().getNome().toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -117,7 +123,7 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 		reset(actionEvent);
 		atualiza(actionEvent);
 
-		addMessage("Operação realizada com sucesso!");
+		addMessage("Operaï¿½ï¿½o realizada com sucesso!");
 		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_CAMPEONATO);
 
 	}
@@ -182,7 +188,6 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 		}
 		resultadoDataModel = new AbstractDataModel<ResultadoDTO>(listResultadoDTO);
 	}
-
 
 	public CampeonatoDTO getCampeonatoDTO() {
 		try {
@@ -302,6 +307,14 @@ public class CampeonatoMB extends GenericoMB implements ModeloMB{
 
 	public void setListResultadoDTO(List<ResultadoDTO> listResultadoDTO) {
 		this.listResultadoDTO = listResultadoDTO;
+	}
+
+	public List<MedalhaE> getListMedalha() {
+		return listMedalha;
+	}
+
+	public void setListMedalha(List<MedalhaE> listMedalha) {
+		this.listMedalha = listMedalha;
 	}
 
 }

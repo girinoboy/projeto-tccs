@@ -36,16 +36,31 @@
 		            <p:message for="graduacao" />
 		            
 		            <h:outputText value="Notas da Avaliação:" />
-		            <p:row>
-		            	<h:outputLabel for="tecnica" value="Tecnica: *" /> <p:spacer width="57" height="10" />
-		            	<pe:inputNumber id="tecnica" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.tecnica}" required="true" label="Tecnica" maxlength="4"/><br/>
-			            <h:outputLabel for="luta" value="Luta: *" /> <p:spacer width="80" height="10" />
-			            <pe:inputNumber id="luta" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.luta}" required="true" label="Luta" maxlength="4"/><br/>
+		            <h:panelGrid columns="2">
+		            	<h:outputLabel for="tecnica" value="Tecnica: *" />
+		            	<pe:inputNumber id="tecnica" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.tecnica}" required="true" label="Tecnica" maxlength="4"/>
+<!-- 		            	<p:spacer height="1"/> -->
+			            <h:outputLabel for="luta" value="Luta: *" />
+			            <pe:inputNumber id="luta" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.luta}" required="true" label="Luta" maxlength="4"/>
+<!-- 			            <p:spacer height="1"/> -->
 			            <h:outputLabel for="conhecimentos" value="Conhecimentos: *" />
-			            <pe:inputNumber id="conhecimentos" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.conhecimentos}" required="true" label="Conhecimentos" maxlength="4"/><br/>
+			            <pe:inputNumber id="conhecimentos" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.conhecimentos}" required="true" label="Conhecimentos" maxlength="4"/>
+<!-- 			            <p:spacer height="1"/> -->
 			            <h:outputLabel for="exercicios" value="Qtd. exercicios: *" />
-			            <pe:inputNumber id="exercicios" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.qtdExercicios}" required="true" label="Qtd. exercicios" maxlength="4"/>
-		            </p:row>
+			            <pe:inputNumber id="exercicios" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.qtdExercicios}" required="true" label="Qtd. exercicios" maxlength="2" maxValue="3" decimalPlaces="0"/>
+<!--         				<p:slider for="exercicios" maxValue="3"/> -->
+			            <h:outputLabel for="classificacaoDesempenho" value="Classificação de Desempenho: *" />
+			            <p:selectOneMenu id="classificacaoDesempenho" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.classificacaoDesempenho}" effect="fade" required="true"> 
+			            	<f:selectItem itemLabel="Selecione" itemValue="" />
+			            	<f:selectItems value="#{resultadoAvaliacaoMB.listClassificacaoDesempenho}" var="l" itemLabel="#{l.descricao}" itemValue="#{l}"/>
+			        	</p:selectOneMenu>
+<!-- 			        	<p:spacer height="1"/> -->
+						<h:outputLabel for="conceito" value="Conceito: *" />
+			            <p:selectOneMenu id="conceito" value="#{resultadoAvaliacaoMB.resultadoAvaliacaoDTO.conceito}" effect="fade" required="true"> 
+			            	<f:selectItem itemLabel="Selecione" itemValue="" />
+			            	<f:selectItems value="#{resultadoAvaliacaoMB.listConceito}" var="l" itemLabel="#{l.descricao}" itemValue="#{l}"/>
+			        	</p:selectOneMenu>
+		            </h:panelGrid>
 		            <p:message for="tecnica" />
 		            <p:message for="luta" />
 		            

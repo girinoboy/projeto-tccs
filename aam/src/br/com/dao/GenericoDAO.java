@@ -82,13 +82,13 @@ public class GenericoDAO<T, ID extends Serializable> implements Serializable {
             List<T> list = HibernateUtility.getSession().createCriteria(oClass)
             		//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
             		.list();
-            //HibernateUtility.closeSession();
+//            HibernateUtility.closeSession();
             return (List<T>) list;
         } catch (HibernateException hibernateException) {
             cancel();
             throw hibernateException;
         }finally{
-        	//HibernateUtility.closeSession();
+        	HibernateUtility.closeSession();
         }
     }
 

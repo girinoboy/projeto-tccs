@@ -18,9 +18,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
- * @author Marcleônio
+ * @author Marcleï¿½nio
  *
  */
 @Entity
@@ -36,15 +38,16 @@ public class GraduacaoDTO extends AbstractDTO{
 	private Integer id;
 	private String nome;
 	private String conhecimentos;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;//usuario que cadastrou a tecnica ou alterou
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.EAGER)
+//	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	@JoinColumn(name = "anexos_id", insertable = true, updatable = true, nullable = true)
 	private AnexoDTO anexoDTO;
 	
-	@ManyToMany  (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany  (fetch=FetchType.LAZY)
 	@JoinTable(name = "graduacao_tecnica", joinColumns = { @JoinColumn(name = "graduacao_id",
 	unique = false, nullable = false, insertable = true,updatable=true) },
 	inverseJoinColumns = { @JoinColumn(name = "tecnica_id",

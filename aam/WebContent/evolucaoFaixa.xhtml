@@ -23,20 +23,21 @@
 	 		Graduação: <p:outputLabel value="#{evolucaoFaixaMB.usuarioDTO.graduacaoDTO.nome}" /> 
 <!-- 	 		Mês/Ano: <p:outputLabel value="#{evolucaoFaixaMB.usuarioDTO.graduacaoDTO.nome}" /> -->
  		</h:panelGrid>
+ 		<hr/>
  		<h:panelGrid columns="3">
-	 		Qtd. Presença Mensal: <p:outputLabel value="#{evolucaoFaixaMB.usuarioDTO.contadorMes}" /> <p:inputSwitch value="#{selectBooleanView.value1}" offLabel="Não" onLabel="Sim" disabled="true"/>
-	 		Classificação de Desempenho: <p:outputLabel value="#{evolucaoFaixaMB.classificacaoDesempenho}" /> <p:inputSwitch value="#{selectBooleanView.value1}" offLabel="Não" onLabel="Sim" disabled="true"/>
-	 		Qtd. Exercicios: <p:outputLabel value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.qtdExercicios}" /> <p:inputSwitch value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.qtdExercicios gt 3}" offLabel="Não" onLabel="Sim" disabled="true"/>
-	 		Posição Semestral: <p:outputLabel value="#{evolucaoFaixaMB.usuarioDTO.listResultadoAvaliacaoDTO.size()}" /> <p:inputSwitch value="#{not empty evolucaoFaixaMB.usuarioDTO.listResultadoAvaliacaoDTO.size()}}" offLabel="Não" onLabel="Sim" disabled="true"/>
-	 		Conceito: <p:outputLabel value="#{evolucaoFaixaMB.conceito}" /> <p:inputSwitch value="#{selectBooleanView.value1}" offLabel="Não" onLabel="Sim" disabled="true"/>
+	 		Qtd. Presença Mensal: <p:outputLabel value="#{evolucaoFaixaMB.usuarioDTO.contadorMes ge 12 ? '0.5':'0'}" /> <p:inputSwitch value="#{selectBooleanView.value1}" offLabel="Não" onLabel="Sim" disabled="true"/>
+	 		Classificação de Desempenho: <p:outputLabel value="#{evolucaoFaixaMB.classificacaoDesempenho}" /> <p:inputSwitch value="#{not empty evolucaoFaixaMB.resultadoAvaliacaoDTO.classificacaoDesempenho}" offLabel="Não" onLabel="Sim" disabled="true"/>
+	 		Qtd. Exercicios: <p:outputLabel value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.qtdExercicios ge 2 ? '1':'0'}" /> <p:inputSwitch value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.qtdExercicios ge 2 || evolucaoFaixaMB.usuarioDTO.graduacaoDTO.id eq 1}" offLabel="Não" onLabel="Sim" disabled="true"/>
+	 		Posição Semestral: <p:outputLabel value="#{evolucaoFaixaMB.numCampeonatosParticipado ge 2 ? '0.5':'0'}" /> <p:inputSwitch value="#{cevolucaoFaixaMB.numCampeonatosParticipado ge 2}" offLabel="Não" onLabel="Sim" disabled="true"/>
+	 		Conceito: <p:outputLabel value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.conceito eq 'C' ? '1' : '0'}" /> <p:inputSwitch value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.conceito eq 'C'}" offLabel="Não" onLabel="Sim" disabled="true"/>
 	 		
-	 		Nota Técnica: <p:outputLabel value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.tecnica}" /> <p:inputSwitch value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.tecnica gt 6.5}" offLabel="Não" onLabel="Sim" disabled="true"/>
-	 		Nota Luta: <p:outputLabel value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.luta}" /> <p:inputSwitch value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.luta gt 6.5}" offLabel="Não" onLabel="Sim" disabled="true"/>
-	 		Nota Conhecimento: <p:outputLabel value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.conhecimentos}" /> <p:inputSwitch value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.conhecimentos gt 6.5}" offLabel="Não" onLabel="Sim" disabled="true"/>
+	 		Nota Técnica: <p:outputLabel value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.tecnica ge 6.5 ? '1.5':'1'}" /> <p:inputSwitch value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.tecnica ge 6.5}" offLabel="Não" onLabel="Sim" disabled="true"/>
+	 		Nota Luta: <p:outputLabel value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.luta ge 6.5 ? '1.5':'1'}" /> <p:inputSwitch value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.luta ge 6.5}" offLabel="Não" onLabel="Sim" disabled="true"/>
+	 		Nota Conhecimento: <p:outputLabel value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.conhecimentos ge 6.5 ? '1.5':'1'}" /> <p:inputSwitch value="#{evolucaoFaixaMB.resultadoAvaliacaoDTO.conhecimentos ge 6.5}" offLabel="Não" onLabel="Sim" disabled="true"/>
 	 		
 	 		Observações:<p:inputTextarea />
  		</h:panelGrid>
- 		<p:commandButton value="Evolução de faixa" icon="ui-icon-check"/>
+ 		<p:commandButton value="Evolução de faixa" icon="ui-icon-check" disabled="true"/>
  		</h:form>
  	</ui:define>
 </ui:decorate>
