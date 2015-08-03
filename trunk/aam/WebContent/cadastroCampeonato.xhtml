@@ -74,7 +74,14 @@
 			        <p:column headerText="Posição">
 			        	<h:outputText value="#{resultado.posicao}"/>
 			        </p:column>
-		        
+		        	<p:column headerText="Medalha">
+		        		<h:outputText value="#{resultado.medalha.descricao}"/>
+		        	</p:column>
+		        	
+		        	<p:column headerText="Data">
+		        		<h:outputText value="#{resultado.dataCadastro}"/>
+		        	</p:column>
+		        	
 		        </p:dataTable>
 		        
 		        <f:facet name="footer">
@@ -119,10 +126,23 @@
 				  	<p:watermark for="posicao" value="" />
 				  	<h:outputLabel value="Posição" for="posicao"/>
 				  	<p:inputText id="posicao" size="50" value="#{campeonatoMB.resultadoDTO.posicao}"/>
+				  	
+			  		<p:watermark for="medalha" value="" />
+				  	<h:outputLabel value="Medalha" for="medalha"/>
+				  	<p:selectOneMenu id="medalha" value="#{campeonatoMB.resultadoDTO.medalha}" effect="fade" required="true"> 
+		            	<f:selectItem itemLabel="Selecione" itemValue="" />
+		            	<f:selectItems value="#{campeonatoMB.listMedalha}" var="l" itemLabel="#{l.descricao}" itemValue="#{l}"/>
+		        	</p:selectOneMenu>
+		        	
+		        	<p:watermark for="data" value="" />
+		        	<p:outputLabel for="data" value="Data:" />
+        			<p:calendar id="data" value="#{campeonatoMB.resultadoDTO.dataCadastro}" pattern="dd/MM/yyyy" mask="true" />
+				  	
 				  	<f:facet name="footer">
 					    <p:commandButton value="Salvar" ajax="false" actionListener="#{campeonatoMB.addResultado}" update=":form:dataTableR"/>
 				  		<p:commandButton value="Cancelar" oncomplete="PF('dlgR').hide()" immediate="true" />
 			  		</f:facet>
+			  		
 		  		</h:panelGrid>
 			</h:form>
 		</p:dialog>

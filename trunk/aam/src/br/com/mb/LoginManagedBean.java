@@ -44,14 +44,14 @@ public class LoginManagedBean {
 		try{
 			usuarioDTO = usuarioDAO.verificaLoginSenha(usuarioDTO);
 			adm = usuarioDTO!=null&& usuarioDTO.getUsuario().equals("admin") && usuarioDTO.getPerfilDTO().getId().equals(1);
-			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessão caso ñ exista - false retorna nulo caso ñ exista
+			session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);//true cria sessï¿½o caso ï¿½ exista - false retorna nulo caso ï¿½ exista
 			
 			if(usuarioDTO != null && usuarioDTO.getTema() != null && usuarioDTO.getPerfilDTO().getId() !=null){
 				loggedIn = true;
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", usuarioDTO.getUsuario());
 				session.setAttribute("usuarioAutenticado", usuarioDTO);
 				session.setAttribute("adm", adm);
-				FacesContext.getCurrentInstance().getExternalContext().redirect("layout.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("listMembros.xhtml");
 				gp.setTheme(usuarioDTO.getTema());
 			} if(usuarioDTO==null && usuarioDAO.list().size()==0){
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem Vindo", "Admin");
@@ -75,7 +75,7 @@ public class LoginManagedBean {
 				p.setValor("0");
 				parametroDAO.save(p);
 				session.setAttribute("adm", adm);
-				FacesContext.getCurrentInstance().getExternalContext().redirect("layout.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("listMembros.xhtml");
 			}else {
 				loggedIn = false;  
 				msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");  

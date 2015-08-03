@@ -1,6 +1,7 @@
 package br.com.mb;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,8 @@ import br.com.dao.UsuarioDAO;
 import br.com.dto.GraduacaoDTO;
 import br.com.dto.ResultadoAvaliacaoDTO;
 import br.com.dto.UsuarioDTO;
+import br.com.enumeration.ClassificacaoDesempenhoE;
+import br.com.enumeration.ConceitoE;
 import br.com.utility.AbstractDataModel;
 import br.com.utility.Constantes;
 
@@ -37,6 +40,8 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private AbstractDataModel<ResultadoAvaliacaoDTO> resultadoAvaliacaoDataModel;
 	private ResultadoAvaliacaoDTO[] listSelectedResultadoAvaliacaoDTO;
+	private List<ClassificacaoDesempenhoE> listClassificacaoDesempenho;
+	private List<ConceitoE> listConceito;
 
 	public ResultadoAvaliacaoMB() {
 		try {
@@ -50,6 +55,8 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 		listResuldoAvaliacaoDTO = resuldoAvaliacaoDAO.listOrdenada();
 		listGraduacaoDTO = graduacaoDAO.list();
 		resultadoAvaliacaoDataModel = new AbstractDataModel<ResultadoAvaliacaoDTO>(listResuldoAvaliacaoDTO);
+		listClassificacaoDesempenho = Arrays.asList(ClassificacaoDesempenhoE.values());
+		listConceito = Arrays.asList(ConceitoE.values());
 	}
 	
 	public void reset(ActionEvent event) {
@@ -68,7 +75,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 		try {
 			resultadoAvaliacaoDTO.setUsuarioDTO((UsuarioDTO)event.getObject()) ;
 
-			addMessage("Graduação:" + resultadoAvaliacaoDTO.getUsuarioDTO().getGraduacaoDTO().getNome().toString());
+			addMessage("Graduaï¿½ï¿½o:" + resultadoAvaliacaoDTO.getUsuarioDTO().getGraduacaoDTO().getNome().toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -92,7 +99,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 		resuldoAvaliacaoDAO.save(resultadoAvaliacaoDTO);
 		atualiza(actionEvent);
 		reset(actionEvent);
-		addMessage("Operação realizada com sucesso!");
+		addMessage("Operaï¿½ï¿½o realizada com sucesso!");
 		FacesContext.getCurrentInstance().getExternalContext().redirect(Constantes.PAGINA_RESULTADO_AVALIACAO);
 	}
 
@@ -113,7 +120,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 			}
 
 		}catch(Exception e){
-			addMessage("Registro não pode ser apagado.");
+			addMessage("Registro nï¿½o pode ser apagado.");
 			e.printStackTrace();
 		}finally{
 			try {
@@ -166,6 +173,23 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 	public void setListSelectedResultadoAvaliacaoDTO(
 			ResultadoAvaliacaoDTO[] listSelectedResultadoAvaliacaoDTO) {
 		this.listSelectedResultadoAvaliacaoDTO = listSelectedResultadoAvaliacaoDTO;
+	}
+
+	public List<ClassificacaoDesempenhoE> getListClassificacaoDesempenho() {
+		return listClassificacaoDesempenho;
+	}
+
+	public void setListClassificacaoDesempenho(
+			List<ClassificacaoDesempenhoE> listClassificacaoDesempenho) {
+		this.listClassificacaoDesempenho = listClassificacaoDesempenho;
+	}
+
+	public List<ConceitoE> getListConceito() {
+		return listConceito;
+	}
+
+	public void setListConceito(List<ConceitoE> listConceito) {
+		this.listConceito = listConceito;
 	}
 
 	

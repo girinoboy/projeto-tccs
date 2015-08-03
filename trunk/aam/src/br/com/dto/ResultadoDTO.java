@@ -3,15 +3,24 @@
  */
 package br.com.dto;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cascade;
+
+import br.com.enumeration.MedalhaE;
 
 /**
  * @author marcleonio.medeiros
@@ -38,6 +47,11 @@ public class ResultadoDTO extends AbstractDTO{
 	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
 	@JoinColumn(name = "campeonato_id", insertable = true, updatable = true, nullable = true)
 	private CampeonatoDTO campeonatoDTO;
+	@Enumerated(EnumType.ORDINAL)
+	private MedalhaE medalha;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_cadastro")
+	private Date dataCadastro;
 	
 	/**
 	 * 
@@ -78,6 +92,22 @@ public class ResultadoDTO extends AbstractDTO{
 
 	public void setCampeonatoDTO(CampeonatoDTO campeonatoDTO) {
 		this.campeonatoDTO = campeonatoDTO;
+	}
+
+	public MedalhaE getMedalha() {
+		return medalha;
+	}
+
+	public void setMedalha(MedalhaE medalha) {
+		this.medalha = medalha;
+	}
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 }

@@ -113,7 +113,7 @@
 							<f:selectItem itemLabel="Ativo" itemValue="true" />
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
 						</p:selectOneRadio>
-
+						<p:outputPanel rendered="false">
 						<!-- Desconto -->
 						<h:outputLabel for="desconto" value="Desconto: *" />
 						<p:selectOneMenu id="desconto" effect="fade" required="true" disabled="#{!genericoMB.adm}"
@@ -138,7 +138,7 @@
 						<h:outputText for="valor" value="Valor da mensalidade: " />
 						<p:inputText id="valorMensalidade" size="15" required="true" label="valor" readonly="true"
 							value="#{usuarioMB.usuarioDTO.financeiroDTO.valorComDesconto}"/>
-
+						</p:outputPanel>
 
 						<f:facet name="footer">
 							<div align="right">
