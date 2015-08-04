@@ -10,10 +10,14 @@ import org.hibernate.HibernateException;
 import com.sun.org.apache.bcel.internal.generic.IUSHR;
 
 import br.com.dao.CampeonatoDAO;
+import br.com.dao.FrequenciaDAO;
 import br.com.dao.ResultadoDAO;
+import br.com.dao.UsuarioDAO;
+import br.com.dto.GraduacaoDTO;
 import br.com.dto.ResultadoAvaliacaoDTO;
 import br.com.dto.UsuarioDTO;
 import br.com.enumeration.ClassificacaoDesempenhoE;
+import br.com.enumeration.ConceitoE;
 
 @ManagedBean
 @ViewScoped
@@ -61,7 +65,7 @@ public class EvolucaoFaixaMB extends GenericoMB implements ModeloMB{
 		
 	}
 	
-	public Integer getnumCampeonatosParticipado(){
+	public Integer getNumCampeonatosParticipado(){
 
 		try {
 			if(usuarioDTO != null)
@@ -76,7 +80,54 @@ public class EvolucaoFaixaMB extends GenericoMB implements ModeloMB{
 		return null;
 
 	}
-
+	
+	public boolean getVerificaCriterios(){
+		Double total = 0d;
+		if(usuarioDTO != null){
+			if(usuarioDTO.getContadorMes() >=12){
+				total = total + 0.5;
+			}
+			if(classificacaoDesempenho != null){
+				total = total + Double.valueOf(classificacaoDesempenho);
+			}
+			if(resultadoAvaliacaoDTO.getQtdExercicios() >= 2){
+				total = total + 1d;
+			}
+			if(getNumCampeonatosParticipado() >= 2){
+				total = total + 0.5;
+			}
+			if(resultadoAvaliacaoDTO.getConceito() == ConceitoE.C){
+				total = total + 1d;
+			}
+			if(resultadoAvaliacaoDTO.getTecnica() >= 6.5){
+				total = total + 1.5;
+			}
+			if(resultadoAvaliacaoDTO.getLuta() >= 6.5){
+				total = total + 1.5;
+			}
+			if(resultadoAvaliacaoDTO.getConhecimentos() >= 6.5){
+				total = total + 1.5;
+			}
+		}
+		if(total >= 8)
+			return false;
+		else{
+			return true;
+		}
+	}
+	
+	public void mudaFaixa(){
+		usuarioDTO.setGraduacaoDTO(new GraduacaoDTO(usuarioDTO.getGraduacaoDTO().getId()+1));
+		try {
+//			usuarioDTO.setGraduacaoDTO((new GraduacaoDAO()).getById(usuarioDTO.getGraduacaoDTO().getId()+2));
+			(new UsuarioDAO()).save(usuarioDTO);
+			addMessage("Opera��o realizada com sucesso!");
+		} catch (Exception e) {
+			addMessage("Graduação inexistente");
+			e.printStackTrace();
+		}
+	}
+	
 	public UsuarioDTO getUsuarioDTO() {
 		if(usuarioDTO != null){
 			for (ResultadoAvaliacaoDTO r : usuarioDTO.getListResultadoAvaliacaoDTO()) {

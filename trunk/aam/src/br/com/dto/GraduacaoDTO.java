@@ -90,6 +90,10 @@ public class GraduacaoDTO extends AbstractDTO{
 //		this.id = id;
 //	}
 
+	public GraduacaoDTO(Integer id) {
+		setId(id);
+	}
+
 	public String getNome() {
 		return nome;
 	}

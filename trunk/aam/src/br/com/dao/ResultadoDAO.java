@@ -53,8 +53,9 @@ public class ResultadoDAO extends GenericoDAO<ResultadoDTO, Serializable>{
 	public Integer numCampeonatosParticipado(UsuarioDTO usuarioDTO) throws HibernateException, Exception {
 		LocalDate seisMesesDepois = new LocalDate();
 		seisMesesDepois.plusMonths(6);
-		return (Integer) HibernateUtility.getSession().createCriteria(CampeonatoDTO.class)
+		return (Integer) HibernateUtility.getSession().createCriteria(ResultadoDTO.class)
 				.setProjection(Projections.rowCount())
+				.createAlias("campeonatoDTO","campeonatoDTO") 
 				.add(Restrictions.le("campeonatoDTO.data", seisMesesDepois.toDate()))  
 				.add(Restrictions.eq("usuarioDTO.id", usuarioDTO.getId()))
 				.uniqueResult();

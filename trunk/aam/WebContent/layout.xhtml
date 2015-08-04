@@ -152,8 +152,8 @@
 						<p:menuitem value="Campeonatos" outcome="listCampeonato" update="centro" actionListener="#{campeonatoMB.atualiza}"/>
 <!-- 						<p:menuitem value="Notícias" outcome="listNoticia" update="centro" actionListener="#{noticiaMB.atualiza}"/> -->
 <!-- 						<p:menuitem value="Financeiro" outcome="listFinanceiro" update="centro" actionListener="#{financeiroMB.atualiza}" rendered="#{genericoMB.adm}"/> -->
-						<p:menuitem value="Frequencia" outcome="listFrequencia" update="centro" />
-						<p:menuitem value="Evolução de Faixa" outcome="evolucaoFaixa" update="centro" actionListener="#{evolucaoFaixaMB.reset}"/>
+						<p:menuitem value="Frequencia" outcome="cadastroFrequencia" update="centro" rendered="#{frequenciaMB.adm}"/>
+						<p:menuitem value="Evolução de Faixa" outcome="evolucaoFaixa" update="centro" actionListener="#{evolucaoFaixaMB.reset}" rendered="#{frequenciaMB.adm}"/>
 					</p:menu>
 				</h:form>
 			</p:layoutUnit>

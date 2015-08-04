@@ -105,7 +105,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 
 	public void edit(ActionEvent actionEvent) throws Exception {
 		System.out.println(resultadoAvaliacaoDTO);
-
+		atualiza(null);
 	}
 
 	public void del(ActionEvent actionEvent) throws Exception {
