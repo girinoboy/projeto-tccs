@@ -10,48 +10,33 @@ package br.com.mb;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.HorizontalBarChartModel;
-import org.primefaces.model.chart.LegendPlacement;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.MeterGaugeChartModel;
-import org.primefaces.model.chart.PieChartModel;
-//import org.primefaces.model.chart.BarChartSeries;
-
-
-
-
-
-
-
-
-
-
-
 
 import br.com.dao.ChartDAO;
 import br.com.dao.UsuarioDAO;
 import br.com.dto.ResultadoAvaliacaoDTO;
 import br.com.dto.UsuarioDTO;
+//import org.primefaces.model.chart.BarChartSeries;
 
 
 @ManagedBean(name="chartBean")
-@RequestScoped
+@SessionScoped
 public class ChartMB extends GenericoMB implements Serializable {  
 
 	/**
@@ -66,6 +51,10 @@ public class ChartMB extends GenericoMB implements Serializable {
 	private MeterGaugeChartModel meterGaugeModel2;
 	private HorizontalBarChartModel horizontalBarModel;
 
+	
+	private HorizontalBarChartModel notaTecnicaB;
+	private MeterGaugeChartModel notaTecnicaM;
+	
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private ChartDAO chartDAO = new ChartDAO();
@@ -79,21 +68,98 @@ public class ChartMB extends GenericoMB implements Serializable {
 		cAvaliacaoMembros();
 		createMeterGaugeModels();
 		createHorizontalBarModel();
+		createNotaTecnica();
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void createNotaTecnica() {
+		try {
+			List a = chartDAO.notaTecnica(usuarioDTO);
+			notaTecnicaB = new HorizontalBarChartModel();
+			ChartSeries graduacao = new ChartSeries();
+			graduacao.setLabel("GraduaÃ§Ã£o");
+			
+
+			notaTecnicaB.setTitle("Nota Tecnica do Aluno");
+			notaTecnicaB.setLegendPosition("e");
+			notaTecnicaB.setStacked(true);
+			
+			Axis xAxis = notaTecnicaB.getAxis(AxisType.X);
+			xAxis.setMin(0);
+			xAxis.setMax(10);
+			int cont = 0;
+			Double total = 0d;
+			Iterator it = a.iterator();
+			while(it.hasNext())  
+			{  
+				Object[] c = (Object[]) it.next();  
+				System.out.println(c[0]);
+				System.out.println(c[1]);
+
+				//mes-avg(valor)
+//				series1.set(sdf.format(c[0]),(Double)c[1]); 
+				
+				graduacao.set(c[0], (Double)c[1]);
+				total = total + (Double)c[1];
+				cont++;
+			}
+
+			if(graduacao.getData().size() == 0){
+				graduacao.set(0, 0);
+			}
+
+			notaTecnicaB.addSeries(graduacao); 
+			
+			if(cont == 0) cont =1;
+			notaTecnicaM = initMeterGaugeModel(total/cont);
+			notaTecnicaM.setTitle("Total Geral FrequÃªncia Agrupado");
+			notaTecnicaM.setSeriesColors("cc6666,66cc66,E7E658,3299BB");
+			notaTecnicaM.setGaugeLabel(recuperaIndice(total/cont));
+//			notaTecnicaM.setIntervalInnerRadius(1);
+			notaTecnicaM.setShowTickLabels(true);
+			notaTecnicaM.setLabelHeightAdjust(110);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	private String recuperaIndice(Double valor) {
+		if(valor >= 0 && valor <5){
+			return "Insuficiente";
+		}
+		if(valor >= 5 && valor <7){
+			return "Bom";
+		}
+		if(valor >= 7 && valor <9){
+			return "Regular";
+		}
+		if(valor >= 9 && valor <=10){
+			return "Ã“timo";
+		}
+		return null;
 	}
 
 	public MeterGaugeChartModel getMeterGaugeModel2() {
 		return meterGaugeModel2;
 	}
 
-	private MeterGaugeChartModel initMeterGaugeModel() {
-		List<Number> intervals = new ArrayList<Number>(){{
+	private MeterGaugeChartModel initMeterGaugeModel(Number valor) {
+		List<Number> intervals = new ArrayList<Number>(){/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+		{
 			add(5);
+			add(7);
+			add(9);
 			add(10);
-			add(15);
-			add(22);
 		}};
 
-		return new MeterGaugeChartModel(16, intervals);
+		return new MeterGaugeChartModel(valor, intervals);
 	}
 
 	private void createMeterGaugeModels() {
@@ -101,8 +167,8 @@ public class ChartMB extends GenericoMB implements Serializable {
 		//        meterGaugeModel1.setTitle("MeterGauge Chart");
 		//        meterGaugeModel1.setGaugeLabel("km/h");
 
-		meterGaugeModel2 = initMeterGaugeModel();
-		meterGaugeModel2.setTitle("Total Geral Frequência Agrupado");
+		meterGaugeModel2 = initMeterGaugeModel(0);
+		meterGaugeModel2.setTitle("Total Geral FrequÃªncia Agrupado");
 		meterGaugeModel2.setSeriesColors("cc6666,66cc66,E7E658,3299BB");
 		meterGaugeModel2.setGaugeLabel("Otimo");
 		meterGaugeModel2.setIntervalInnerRadius(1);
@@ -128,9 +194,9 @@ public class ChartMB extends GenericoMB implements Serializable {
 
 		ChartSeries boys = new ChartSeries();
 		boys.setLabel("Frenquencia");
-		boys.set("Graduação 1", 22);
-		boys.set("Graduação 2", 5);
-		boys.set("Graduação 3", 14);
+		boys.set("GraduaÃ§Ã£o 1", 22);
+		boys.set("GraduaÃ§Ã£o 2", 5);
+		boys.set("GraduaÃ§Ã£o 3", 14);
 		//        boys.set("2007", 55);
 		//        boys.set("2008", 25);
 
@@ -145,12 +211,12 @@ public class ChartMB extends GenericoMB implements Serializable {
 		horizontalBarModel.addSeries(boys);
 		//        horizontalBarModel.addSeries(girls);
 
-		horizontalBarModel.setTitle("Frequência do Aluno");
+		horizontalBarModel.setTitle("FrequÃªncia do Aluno");
 		horizontalBarModel.setLegendPosition("e");
 		horizontalBarModel.setStacked(true);
 
 		Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
-		xAxis.setLabel("Insuficiente Bom Regular Otimo");
+		//xAxis.setLabel("Insuficiente Bom Regular Otimo");
 		xAxis.setMin(0);
 		xAxis.setMax(22);
 
@@ -347,6 +413,14 @@ public class ChartMB extends GenericoMB implements Serializable {
 
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
+	}
+
+	public HorizontalBarChartModel getNotaTecnicaB() {
+		return notaTecnicaB;
+	}
+
+	public MeterGaugeChartModel getNotaTecnicaM() {
+		return notaTecnicaM;
 	}  
 }  
 

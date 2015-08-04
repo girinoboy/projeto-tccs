@@ -5,19 +5,14 @@ package br.com.dto;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -33,9 +28,9 @@ public class GraduacaoDTO extends AbstractDTO{
 	 * 
 	 */
 	private static final long serialVersionUID = -1034105644688150471L;
-	@Id 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer id;
+//	@Id 
+//	@GeneratedValue(strategy= GenerationType.IDENTITY)
+//	private Integer id;
 	private String nome;
 	private String conhecimentos;
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -86,14 +81,14 @@ public class GraduacaoDTO extends AbstractDTO{
 //        hash = 31 * hash + this.id;
 //        return hash;
 //    }
-	@Override
-	public Integer getId() {
-		return id;
-	}
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Override
+//	public Integer getId() {
+//		return id;
+//	}
+//	@Override
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public String getNome() {
 		return nome;
