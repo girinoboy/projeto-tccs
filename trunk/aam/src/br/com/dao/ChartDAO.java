@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -17,7 +18,7 @@ import br.com.dto.UsuarioDTO;
 import br.com.factory.HibernateUtility;
 
 /**
- * @author Marcleônio
+ * @author Marcleï¿½nio
  *
  */
 @SuppressWarnings("unchecked")
@@ -88,6 +89,23 @@ public class ChartDAO extends GenericoDAO<ResultadoAvaliacaoDTO, Serializable>{
 		}
 
 		return result;
+	}
+
+
+	public List notaTecnica(UsuarioDTO usuarioDTO) throws Exception {
+//		String a = "";
+		
+		Criteria criteria = HibernateUtility.getSession().createCriteria(ResultadoAvaliacaoDTO.class)
+				.createAlias("graduacaoDTO","graduacaoDTO") 
+				.add(Restrictions.eq("usuarioDTO.id", usuarioDTO.getId()))
+			    .setProjection(Projections.projectionList()
+                        .add(Projections.groupProperty("graduacaoDTO.nome"))
+                        .add(Projections.avg("tecnica")));
+		
+//		List b = criteria.list();
+		
+		return criteria.list();
+		
 	}
 
 }

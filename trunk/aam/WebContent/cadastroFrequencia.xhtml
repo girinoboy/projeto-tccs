@@ -11,7 +11,7 @@
  			<h:panelGrid columns="4">
 	 			<h:outputLabel value="Nome: " for="nome" />
 				<p:autoComplete required="true"
-					value="#{evolucaoFaixaMB.usuarioDTO}"
+					value="#{usuarioMB.usuarioDTO}"
 					id="nome" completeMethod="#{autoCompleteMB.completarUsuario}"
 					var="u" itemLabel="#{u.nome}" itemValue="#{u}" converter="usuario"
 					forceSelection="true" cache="false">
@@ -19,7 +19,7 @@
 						listener="#{chartBean.handleSelect}" update="form" />
 				</p:autoComplete>
  			</h:panelGrid>
- 			cpf:
+ 			cpf: #{usuarioMB.usuarioDTO.cpf}
  			Mês:
  			Ano:
  			Quantidade de presença mensal:
