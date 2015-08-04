@@ -62,9 +62,9 @@ public class UsuarioDTO extends AbstractDTO{
 	private Double desconto;
 	private Boolean excluido;
 	private String observacao;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-	@Cascade({org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.MERGE})
-	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = true)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
+	@Cascade({org.hibernate.annotations.CascadeType.REFRESH})
+	@JoinColumn(name = "graduacao_id", insertable = true, updatable = true, nullable = false)
 	private GraduacaoDTO graduacaoDTO;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
@@ -410,9 +410,11 @@ public class UsuarioDTO extends AbstractDTO{
 //	    todayL.setTime(DataUtils.toDateOnly(todayL.getTime()));
 //	    todayL.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
 	    
+		
 		for (FrequenciaDTO f : listFrequenciaDTO) {
-			if(LocalDate.fromDateFields(f.getDataEntrada()).getMonthOfYear() == LocalDate.now().getMonthOfYear()){
-				cont++;
+			
+			if(((Integer)LocalDate.now().getMonthOfYear()).equals(f.getMes())){
+				cont = f.getTotalPresenca();
 			}
 //	    	dateOfWeek.setTime(f.getDataEntrada());
 //	    	if(dateOfWeek.getTime().equals(todayF.getTime()) || dateOfWeek.getTime().equals(todayL.getTime())||(dateOfWeek.getTime().after(todayF.getTime()) && dateOfWeek.getTime().before(todayL.getTime()))){

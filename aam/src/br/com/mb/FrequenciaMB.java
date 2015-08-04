@@ -7,7 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import br.com.dao.FrequenciaDAO;
 import br.com.dao.UsuarioDAO;
+import br.com.dto.FrequenciaDTO;
 import br.com.dto.UsuarioDTO;
 
 /**
@@ -23,20 +25,26 @@ public class FrequenciaMB extends GenericoMB implements ModeloMB{
 	 */
 	private static final long serialVersionUID = 9007826101364461566L;
 	
-	private UsuarioDTO usuarioDTO;
 	
-	private UsuarioDAO usuarioDAO;
+	private FrequenciaDTO frequenciaDTO;
+	private FrequenciaDAO frequenciaDAO;
 
 	/**
 	 * 
 	 */
 	public FrequenciaMB() {
-		// TODO Auto-generated constructor stub
+		try {
+			frequenciaDAO = new FrequenciaDAO();
+			atualiza(null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void atualiza(ActionEvent event) throws Exception {
-		// TODO Auto-generated method stub
+		frequenciaDTO = new FrequenciaDTO();
 		
 	}
 
@@ -48,8 +56,10 @@ public class FrequenciaMB extends GenericoMB implements ModeloMB{
 
 	@Override
 	public void add(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
-		
+		frequenciaDAO.save(frequenciaDTO);
+		addMessage("Operação realizada com sucesso!");
+		reset(null);
+		atualiza(null);
 	}
 
 	@Override
@@ -62,6 +72,14 @@ public class FrequenciaMB extends GenericoMB implements ModeloMB{
 	public void del(ActionEvent actionEvent) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public FrequenciaDTO getFrequenciaDTO() {
+		return frequenciaDTO;
+	}
+
+	public void setFrequenciaDTO(FrequenciaDTO frequenciaDTO) {
+		this.frequenciaDTO = frequenciaDTO;
 	}
 
 }
