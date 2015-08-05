@@ -388,7 +388,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 	public void calculaDesconto() throws HibernateException, Exception{
 		ParametroDAO parametroDAO = new ParametroDAO();
 		ParametroDTO p = parametroDAO.recuperaParametro("mensalidade");
-		if(p != null && p.getValor() != null)
+		if(p != null && p.getValor() != null && usuarioDTO.getDesconto() != null)
 			usuarioDTO.getFinanceiroDTO().setValorComDesconto(Double.valueOf(p.getValor()) - Double.valueOf(p.getValor()) * usuarioDTO.getDesconto());
 		else
 			usuarioDTO.getFinanceiroDTO().setValorComDesconto(0d);

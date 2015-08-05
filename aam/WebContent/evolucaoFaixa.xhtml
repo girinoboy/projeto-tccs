@@ -37,7 +37,7 @@
 		 		
 		 		Observações:<p:inputTextarea value="#{evolucaoFaixaMB.usuarioDTO.observacao}"/>
 	 		</h:panelGrid>
- 			<p:commandButton value="Evolução de faixa" icon="ui-icon-check" disabled="#{evolucaoFaixaMB.verificaCriterios}" actionListener="#{evolucaoFaixaMB.mudaFaixa}" update=":growl"/>
+ 			<p:commandButton value="Evolução de faixa" icon="ui-icon-check" disabled="#{evolucaoFaixaMB.verificaCriterios}" actionListener="#{evolucaoFaixaMB.mudaFaixa}" update=":growl,:form"/>
  		</h:form>
  	</ui:define>
 </ui:decorate>

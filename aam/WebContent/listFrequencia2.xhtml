@@ -42,7 +42,7 @@
 		        </p:column>
 		        
 		        <p:column headerText="">
-			        <p:commandLink id="ajax" update="panel" actionListener="#{frequenciaMB.edit}" action="/cadastrofrequencia.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
+			        <p:commandLink id="ajax" update="panel" actionListener="#{frequenciaMB.edit}" action="/cadastroFrequencia.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
 			        	<f:setPropertyActionListener value="#{frequencia}" target="#{frequenciaMB.frequenciaDTO}"/>
 				        <h:outputText value="Alterar" rendered="#{genericoMB.adm}"/>
 				        <h:outputText value="Visualizar" rendered="#{!genericoMB.adm}"/>

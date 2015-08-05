@@ -4,6 +4,7 @@
 package br.com.mb;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
@@ -19,7 +20,7 @@ import br.com.utility.AbstractDataModel;
  *
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class FrequenciaMB extends GenericoMB implements ModeloMB{
 
 	/**

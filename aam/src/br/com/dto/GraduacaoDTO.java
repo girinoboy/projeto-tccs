@@ -5,6 +5,7 @@ package br.com.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -33,11 +35,11 @@ public class GraduacaoDTO extends AbstractDTO{
 //	private Integer id;
 	private String nome;
 	private String conhecimentos;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;//usuario que cadastrou a tecnica ou alterou
-	@ManyToOne(fetch = FetchType.EAGER)
-//	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	@JoinColumn(name = "anexos_id", insertable = true, updatable = true, nullable = true)
 	private AnexoDTO anexoDTO;
 	

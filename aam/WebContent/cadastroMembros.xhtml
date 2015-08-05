@@ -46,20 +46,19 @@
 							label="CPF">
 							<f:validateLength minimum="2" />
 						</p:inputMask>
-
-						<p:watermark for="rg" value=" " />
-						<p:message for="rg" />
-						<h:outputLabel for="rg" value="RG: *" />
-						<p:inputText id="rg" value="#{usuarioMB.usuarioDTO.rg}" validatorMessage="Apenas numeros" required="true" label="RG">
-							<p:clientValidator event="keyup" size="15" required="true"
-								label="RG" />
-								<f:validateRegex pattern="^[0-9]*$" /> 
-							<f:validateLength minimum="2" />
-						</p:inputText>
-
+						<p:outputPanel rendered="false">
+							<p:watermark for="rg" value=" " />
+							<p:message for="rg" />
+							<h:outputLabel for="rg" value="RG: *" />
+							<p:inputText id="rg" value="#{usuarioMB.usuarioDTO.rg}" validatorMessage="Apenas numeros" required="false" label="RG">
+								<p:clientValidator event="keyup" size="15" required="true"
+									label="RG" />
+									<f:validateRegex pattern="^[0-9]*$" /> 
+								<f:validateLength minimum="2" />
+							</p:inputText>
+						</p:outputPanel>
 						<h:outputText for="dataNascimento" value="Data de nascimento: *" required="true" />
-						<p:calendar locale="pt" showButtonPanel="true" navigator="true" value="#{usuarioMB.usuarioDTO.dataNascimento}" id="popupButtonCal"
-							showOn="button" valueChangeListener="1800"/>
+						<p:calendar navigator="true" value="#{usuarioMB.usuarioDTO.dataNascimento}" id="popupButtonCal" pattern="dd/MM/yyyy" mask="true"/>
 
 						<p:watermark for="sexo" value=" " />
 						<p:message for="sexo" />
@@ -116,7 +115,7 @@
 						<p:outputPanel rendered="false">
 						<!-- Desconto -->
 						<h:outputLabel for="desconto" value="Desconto: *" />
-						<p:selectOneMenu id="desconto" effect="fade" required="true" disabled="#{!genericoMB.adm}"
+						<p:selectOneMenu id="desconto" effect="fade" required="false" disabled="#{!genericoMB.adm}"
 							value="#{usuarioMB.usuarioDTO.desconto}" size="30">
 							<p:ajax event="change" listener="#{usuarioMB.calculaDesconto}"
                                 update="valorMensalidade" />
@@ -136,7 +135,7 @@
 
 						<!-- Valor da mensalidade -->
 						<h:outputText for="valor" value="Valor da mensalidade: " />
-						<p:inputText id="valorMensalidade" size="15" required="true" label="valor" readonly="true"
+						<p:inputText id="valorMensalidade" size="15" required="false" label="valor" readonly="true"
 							value="#{usuarioMB.usuarioDTO.financeiroDTO.valorComDesconto}"/>
 						</p:outputPanel>
 
@@ -159,7 +158,7 @@
   					<h:outputText value="Todos os dados alterados e não salvos serão perdidos, deseja continuar com esta ação?" />
 				    
 				  	<f:facet name="footer">
-					    <p:commandButton value="Sim" actionListener="#{campeonatoMB.atualiza}" action="/listMembros.xhtml?faces-redirect=true" immediate="true" update=":center"/>
+					    <p:commandButton value="Sim" actionListener="#{campeonatoMB.atualiza}" action="/listMembros2.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 				  		<p:commandButton value="Não" oncomplete="PF('dlgV').hide()" immediate="true" />
 			  		</f:facet>
 		  		</h:panelGrid>

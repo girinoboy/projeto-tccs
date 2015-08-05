@@ -74,7 +74,7 @@ public class ResultadoAvaliacaoMB extends GenericoMB implements ModeloMB{
 
 		try {
 			resultadoAvaliacaoDTO.setUsuarioDTO((UsuarioDTO)event.getObject()) ;
-
+			resultadoAvaliacaoDTO.setGraduacaoDTO(((UsuarioDTO)event.getObject()).getGraduacaoDTO());
 			addMessage("Gradua��o:" + resultadoAvaliacaoDTO.getUsuarioDTO().getGraduacaoDTO().getNome().toString());
 		} catch (Exception e) {
 			e.printStackTrace();
