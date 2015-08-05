@@ -76,7 +76,26 @@ public class FrequenciaMB extends GenericoMB implements ModeloMB{
 
 	@Override
 	public void del(ActionEvent actionEvent) throws Exception {
-		frequenciaDAO.delete(frequenciaDTO);
+		
+		try{
+			for (FrequenciaDTO n : listSelectedFrequenciaDTO) {
+				frequenciaDAO.delete(n);
+			}
+			if(listSelectedFrequenciaDTO.length >0){
+				addMessage("Apagado.");
+			}else{
+				addMessage("Nenhum Item Selecionado.");
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try {
+				atualiza(actionEvent);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
