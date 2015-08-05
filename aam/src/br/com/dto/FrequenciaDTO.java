@@ -35,7 +35,7 @@ public class FrequenciaDTO extends AbstractDTO{
 	@Column(name ="data_completa")
 	private Date dataCompleta;
 	private Boolean presente;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuario_id", insertable = true, updatable = true, nullable = true)
 	private UsuarioDTO usuarioDTO;
 	private Integer mes;
