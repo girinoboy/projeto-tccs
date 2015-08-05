@@ -87,11 +87,13 @@ public class HibernateUtility {
 //				.setProperty("hibernate.connection.datasource", "java:/GSWebDSOracle")//DS da pasta deploy Jboss
 				.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")// tipo de dialeto do banco
 				.setProperty("hibernate.connection.driver_class","com.mysql.jdbc.Driver")
+//				.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect")// tipo de dialeto do banco
+//				.setProperty("hibernate.connection.driver_class","org.hsqldb.jdbcDriver")
 //				.setProperty("hibernate.connection.datasource", "java:aamDS")
 //				.setProperty("hibernate.connection.datasource", "java:comp/env/jdbc/aamDS")
 				
 				.setProperty("hibernate.connection.url","jdbc:mysql://localhost/aam")
-//				.setProperty("hibernate.connection.url","jdbc:hsqldb:file:localBD/aam")
+//				.setProperty("hibernate.connection.url","jdbc:hsqldb:file:~/data/aam")
 				.setProperty("hibernate.connection.username","root")
 				.setProperty("hibernate.connection.password","root")
 				

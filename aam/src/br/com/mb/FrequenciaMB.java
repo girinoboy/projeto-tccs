@@ -9,8 +9,10 @@ import javax.faces.event.ActionEvent;
 
 import br.com.dao.FrequenciaDAO;
 import br.com.dao.UsuarioDAO;
+import br.com.dto.CampeonatoDTO;
 import br.com.dto.FrequenciaDTO;
 import br.com.dto.UsuarioDTO;
+import br.com.utility.AbstractDataModel;
 
 /**
  * @author marcleonio
@@ -26,8 +28,11 @@ public class FrequenciaMB extends GenericoMB implements ModeloMB{
 	private static final long serialVersionUID = 9007826101364461566L;
 	
 	
-	private FrequenciaDTO frequenciaDTO;
-	private FrequenciaDAO frequenciaDAO;
+	private FrequenciaDTO frequenciaDTO = new FrequenciaDTO();
+	private FrequenciaDAO frequenciaDAO = new FrequenciaDAO();
+	private AbstractDataModel<FrequenciaDTO> frequenciaDataModel;
+	private FrequenciaDTO[] listSelectedFrequenciaDTO;
+	
 
 	/**
 	 * 
@@ -45,13 +50,13 @@ public class FrequenciaMB extends GenericoMB implements ModeloMB{
 	@Override
 	public void atualiza(ActionEvent event) throws Exception {
 		frequenciaDTO = new FrequenciaDTO();
+		frequenciaDataModel = new AbstractDataModel<FrequenciaDTO>(frequenciaDAO.list());
 		
 	}
 
 	@Override
 	public void reset(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		frequenciaDTO = new FrequenciaDTO();
 	}
 
 	@Override
@@ -70,7 +75,7 @@ public class FrequenciaMB extends GenericoMB implements ModeloMB{
 
 	@Override
 	public void del(ActionEvent actionEvent) throws Exception {
-		// TODO Auto-generated method stub
+		frequenciaDAO.delete(frequenciaDTO);
 		
 	}
 
@@ -80,6 +85,24 @@ public class FrequenciaMB extends GenericoMB implements ModeloMB{
 
 	public void setFrequenciaDTO(FrequenciaDTO frequenciaDTO) {
 		this.frequenciaDTO = frequenciaDTO;
+	}
+
+	public AbstractDataModel<FrequenciaDTO> getFrequenciaDataModel() {
+		return frequenciaDataModel;
+	}
+
+	public void setFrequenciaDataModel(
+			AbstractDataModel<FrequenciaDTO> frequenciaDataModel) {
+		this.frequenciaDataModel = frequenciaDataModel;
+	}
+
+	public FrequenciaDTO[] getListSelectedFrequenciaDTO() {
+		return listSelectedFrequenciaDTO;
+	}
+
+	public void setListSelectedFrequenciaDTO(
+			FrequenciaDTO[] listSelectedFrequenciaDTO) {
+		this.listSelectedFrequenciaDTO = listSelectedFrequenciaDTO;
 	}
 
 }
