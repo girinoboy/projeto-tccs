@@ -79,7 +79,9 @@
 		        	</p:column>
 		        	
 		        	<p:column headerText="Data">
-		        		<h:outputText value="#{resultado.dataCadastro}"/>
+		        		<h:outputText value="#{resultado.dataCadastro}">
+						    <f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
 		        	</p:column>
 		        	
 		        </p:dataTable>

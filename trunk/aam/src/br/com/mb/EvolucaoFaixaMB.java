@@ -1,6 +1,7 @@
 package br.com.mb;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -33,6 +34,9 @@ public class EvolucaoFaixaMB extends GenericoMB implements ModeloMB{
 	private ResultadoAvaliacaoDTO resultadoAvaliacaoDTO;
 	private String classificacaoDesempenho;
 	private String conceito;
+	
+	@ManagedProperty(value = "#{usuarioMB}")
+	private UsuarioMB usuarioMB;
 
 	@Override
 	public void atualiza(ActionEvent event) throws Exception {
@@ -121,6 +125,9 @@ public class EvolucaoFaixaMB extends GenericoMB implements ModeloMB{
 		try {
 //			usuarioDTO.setGraduacaoDTO((new GraduacaoDAO()).getById(usuarioDTO.getGraduacaoDTO().getId()+2));
 			(new UsuarioDAO()).save(usuarioDTO);
+//			reset(null);
+//			atualiza(null);
+			usuarioMB.atualiza(null);
 			addMessage("Opera��o realizada com sucesso!");
 		} catch (Exception e) {
 			addMessage("Graduação inexistente");
@@ -176,6 +183,14 @@ public class EvolucaoFaixaMB extends GenericoMB implements ModeloMB{
 
 	public void setConceito(String conceito) {
 		this.conceito = conceito;
+	}
+
+	public UsuarioMB getUsuarioMB() {
+		return usuarioMB;
+	}
+
+	public void setUsuarioMB(UsuarioMB usuarioMB) {
+		this.usuarioMB = usuarioMB;
 	}
 
 }
