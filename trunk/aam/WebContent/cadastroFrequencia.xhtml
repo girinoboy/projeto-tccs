@@ -35,6 +35,7 @@
 			          	<p:commandButton value="Salvar" actionListener="#{frequenciaMB.add}" id="withIcon"   
 			            update=":growl,panel" icon="ui-icon-disk" rendered="#{frequenciaMB.adm}"/>
 			            <p:commandButton value="Limpar" type="reset" rendered="#{frequenciaMB.adm}"/> 
+			            <p:commandButton value="Cancelar" actionListener="#{frequenciaMB.atualiza}" action="/listFrequencia.xhtml?faces-redirect=true" immediate="true" update=":center"/>
 		  			</f:facet>
  			</h:panelGrid>
  		</p:panel>	

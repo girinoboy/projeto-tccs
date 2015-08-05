@@ -108,4 +108,26 @@ public class ChartDAO extends GenericoDAO<ResultadoAvaliacaoDTO, Serializable>{
 		
 	}
 
+
+	public List notaLuta(UsuarioDTO usuarioDTO) throws Exception {
+		Criteria criteria = HibernateUtility.getSession().createCriteria(ResultadoAvaliacaoDTO.class)
+				.createAlias("graduacaoDTO","graduacaoDTO") 
+				.add(Restrictions.eq("usuarioDTO.id", usuarioDTO.getId()))
+			    .setProjection(Projections.projectionList()
+                        .add(Projections.groupProperty("graduacaoDTO.nome"))
+                        .add(Projections.avg("luta")));
+		return criteria.list();
+	}
+
+
+	public List notaConhecimento(UsuarioDTO usuarioDTO) throws Exception {
+		Criteria criteria = HibernateUtility.getSession().createCriteria(ResultadoAvaliacaoDTO.class)
+				.createAlias("graduacaoDTO","graduacaoDTO") 
+				.add(Restrictions.eq("usuarioDTO.id", usuarioDTO.getId()))
+			    .setProjection(Projections.projectionList()
+                        .add(Projections.groupProperty("graduacaoDTO.nome"))
+                        .add(Projections.avg("conhecimentos")));
+		return criteria.list();
+	}
+
 }

@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+
+<ui:decorate template="layout.xhtml">  
+	<ui:define id="centro" name="centro"> 
+ 		<h:form id="form">
+ 		<p:panel header="Frequencia">
+ 			<p:commandButton value="Incluir Novo" actionListener="#{frequenciaMB.reset}" action="/cadastroFrequencia.xhtml?faces-redirect=true" immediate="true" update=":center" rendered="#{genericoMB.adm}"/>
+
+ 			<p:commandButton value="Excluir" update="form,:messages,:growl,panel" onclick="PF('dlgD').show();" rendered="#{genericoMB.adm}"/>
+
+ 			<p:separator id="separator"/>
+ 			
+ 			<p:dataTable id="panel" var="frequencia" value="#{frequenciaMB.frequenciaDataModel}" selection="#{frequenciaMB.listSelectedFrequenciaDTO}" rowKey="#{frequencia.id}" editable="true" editMode="cell" paginator="true" rows="10">  
+ 			
+ 				<p:column selectionMode="multiple" style="width:2%" />
+ 				
+ 				<p:column headerText="Nome">
+		            <h:outputText value="#{frequencia.usuarioDTO.nome}"/>
+		        </p:column>
+		        
+		        <p:column headerText="Mês">
+		            <h:outputText value="#{frequencia.mes}"/>
+		        </p:column>
+		        
+		        <p:column headerText="Ano">
+		            <h:outputText value="#{frequencia.ano}"/>
+		        </p:column>
+		        
+		        <p:column headerText="Total">
+		            <h:outputText value="#{frequencia.totalPresenca}"/>
+		        </p:column>
+		        
+		        <p:column headerText="Data">
+					<h:outputText value="#{frequencia.dataLancamento}">
+						<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy"/>
+					</h:outputText>
+		        </p:column>
+		        
+		        <p:column headerText="">
+			        <p:commandLink id="ajax" update="panel" actionListener="#{frequenciaMB.edit}" action="/cadastrofrequencia.xhtml?faces-redirect=true" immediate="true" style="margin-right:20px;">
+			        	<f:setPropertyActionListener value="#{frequencia}" target="#{frequenciaMB.frequenciaDTO}"/>
+				        <h:outputText value="Alterar" rendered="#{genericoMB.adm}"/>
+				        <h:outputText value="Visualizar" rendered="#{!genericoMB.adm}"/>
+				    </p:commandLink>
+		        </p:column>
+		        
+		    </p:dataTable> 
+ 			</p:panel>
+ 		</h:form>
+ 		
+ 		<p:dialog header="Apagar?" widgetVar="dlgD" modal="true" appendTo="@(body)" resizable="false" draggable="true">
+		    <h:outputText value="Tem certeza que deseja realizar essa exclusão?" />
+		    <f:facet name="footer">
+			 	<p:commandButton value="Excluir" update=":growl,form:panel"  icon="ui-icon-close" actionListener="#{frequenciaMB.del}" immediate="true" oncomplete="PF('dlgD').hide()" />                 
+			 	<p:commandButton value="Cancelar" oncomplete="PF('dlgD').hide()" immediate="true" />                 
+			</f:facet>
+		</p:dialog>
+ 		
+ 	</ui:define>  
+</ui:decorate>  
+</html>

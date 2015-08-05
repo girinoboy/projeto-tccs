@@ -55,6 +55,12 @@ public class ChartMB extends GenericoMB implements Serializable {
 	private HorizontalBarChartModel notaTecnicaB;
 	private MeterGaugeChartModel notaTecnicaM;
 	
+	private HorizontalBarChartModel notaLutaB;
+	private MeterGaugeChartModel notaLutaM;
+	
+	private HorizontalBarChartModel notaConhecimentoB;
+	private MeterGaugeChartModel notaConhecimentoM;
+	
 	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private ChartDAO chartDAO = new ChartDAO();
@@ -69,6 +75,116 @@ public class ChartMB extends GenericoMB implements Serializable {
 		createMeterGaugeModels();
 		createHorizontalBarModel();
 		createNotaTecnica();
+		createNotaLuta();
+		createNotaConhecimento();
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void createNotaConhecimento() {
+		try {
+			List a = chartDAO.notaConhecimento(usuarioDTO);
+			notaConhecimentoB = new HorizontalBarChartModel();
+			ChartSeries graduacao = new ChartSeries();
+			graduacao.setLabel("Graduação");
+			
+
+			notaConhecimentoB.setTitle("Nota Conhecimento do Aluno");
+			notaConhecimentoB.setLegendPosition("e");
+			notaConhecimentoB.setStacked(true);
+			
+			Axis xAxis = notaConhecimentoB.getAxis(AxisType.X);
+			xAxis.setMin(0);
+			xAxis.setMax(10);
+			int cont = 0;
+			Double total = 0d;
+			Iterator it = a.iterator();
+			while(it.hasNext())  
+			{  
+				Object[] c = (Object[]) it.next();  
+				System.out.println(c[0]);
+				System.out.println(c[1]);
+
+				//mes-avg(valor)
+//				series1.set(sdf.format(c[0]),(Double)c[1]); 
+				
+				graduacao.set(c[0], (Double)c[1]);
+				total = total + (Double)c[1];
+				cont++;
+			}
+
+			if(graduacao.getData().size() == 0){
+				graduacao.set(0, 0);
+			}
+
+			notaConhecimentoB.addSeries(graduacao); 
+			
+			if(cont == 0) cont =1;
+			notaConhecimentoM = initMeterGaugeModel(total/cont);
+			notaConhecimentoM.setTitle("Total Geral Conhecimento Agrupado");
+			notaConhecimentoM.setSeriesColors("cc6666,66cc66,E7E658,3299BB");
+			notaConhecimentoM.setGaugeLabel(recuperaIndice(total/cont));
+//			notaTecnicaM.setIntervalInnerRadius(1);
+			notaConhecimentoM.setShowTickLabels(true);
+			notaConhecimentoM.setLabelHeightAdjust(110);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void createNotaLuta() {
+		try {
+			List a = chartDAO.notaLuta(usuarioDTO);
+			notaLutaB = new HorizontalBarChartModel();
+			ChartSeries graduacao = new ChartSeries();
+			graduacao.setLabel("Graduação");
+			
+
+			notaLutaB.setTitle("Nota Luta do Aluno");
+			notaLutaB.setLegendPosition("e");
+			notaLutaB.setStacked(true);
+			
+			Axis xAxis = notaLutaB.getAxis(AxisType.X);
+			xAxis.setMin(0);
+			xAxis.setMax(10);
+			int cont = 0;
+			Double total = 0d;
+			Iterator it = a.iterator();
+			while(it.hasNext())  
+			{  
+				Object[] c = (Object[]) it.next();  
+				System.out.println(c[0]);
+				System.out.println(c[1]);
+
+				//mes-avg(valor)
+//				series1.set(sdf.format(c[0]),(Double)c[1]); 
+				
+				graduacao.set(c[0], (Double)c[1]);
+				total = total + (Double)c[1];
+				cont++;
+			}
+
+			if(graduacao.getData().size() == 0){
+				graduacao.set(0, 0);
+			}
+
+			notaLutaB.addSeries(graduacao); 
+			
+			if(cont == 0) cont =1;
+			notaLutaM = initMeterGaugeModel(total/cont);
+			notaLutaM.setTitle("Total Geral Luta Agrupado");
+			notaLutaM.setSeriesColors("cc6666,66cc66,E7E658,3299BB");
+			notaLutaM.setGaugeLabel(recuperaIndice(total/cont));
+//			notaTecnicaM.setIntervalInnerRadius(1);
+			notaLutaM.setShowTickLabels(true);
+			notaLutaM.setLabelHeightAdjust(110);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -112,7 +228,7 @@ public class ChartMB extends GenericoMB implements Serializable {
 			
 			if(cont == 0) cont =1;
 			notaTecnicaM = initMeterGaugeModel(total/cont);
-			notaTecnicaM.setTitle("Total Geral Frequência Agrupado");
+			notaTecnicaM.setTitle("Total Geral Tecnica Agrupado");
 			notaTecnicaM.setSeriesColors("cc6666,66cc66,E7E658,3299BB");
 			notaTecnicaM.setGaugeLabel(recuperaIndice(total/cont));
 //			notaTecnicaM.setIntervalInnerRadius(1);
@@ -421,6 +537,22 @@ public class ChartMB extends GenericoMB implements Serializable {
 
 	public MeterGaugeChartModel getNotaTecnicaM() {
 		return notaTecnicaM;
+	}
+
+	public HorizontalBarChartModel getNotaLutaB() {
+		return notaLutaB;
+	}
+
+	public MeterGaugeChartModel getNotaLutaM() {
+		return notaLutaM;
+	}
+
+	public HorizontalBarChartModel getNotaConhecimentoB() {
+		return notaConhecimentoB;
+	}
+
+	public MeterGaugeChartModel getNotaConhecimentoM() {
+		return notaConhecimentoM;
 	}  
 }  
 

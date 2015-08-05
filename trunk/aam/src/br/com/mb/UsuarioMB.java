@@ -85,7 +85,7 @@ public class UsuarioMB extends GenericoMB implements ModeloMB{
 		membroDataModel = new AbstractDataModel<UsuarioDTO>(listUsuarioDTO);
 
 	}
-
+	@Override
 	public void reset(ActionEvent event) {
 		try {
 			usuarioDTO = new UsuarioDTO();

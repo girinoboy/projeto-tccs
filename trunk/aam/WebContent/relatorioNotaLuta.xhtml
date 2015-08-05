@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core_rt">
+
+<ui:decorate template="layout.xhtml">  
+	<ui:define id="centro" name="centro"> 
+ 		<h:form id="form">
+ 			<h:panelGrid columns="2">
+	 			Nome do Aluno:
+	 			<p:selectOneMenu id="graduacao" value="#{chartBean.usuarioDTO}" effect="fade" converter="usuario" required="true">
+	 				<p:ajax event="change" listener="#{chartBean.createNotaLuta}"  update="charts" />  
+		            <f:selectItem itemLabel="Selecione" itemValue="" />
+		            <f:selectItems value="#{usuarioMB.listUsuarioDTO}" var="l" itemLabel="#{l.nome}" itemValue="#{l}"/>
+		        </p:selectOneMenu>
+		    </h:panelGrid>
+		    <p:outputPanel id="charts">
+		 			<p:chart type="bar" model="#{chartBean.notaLutaB}" style="width:700px;height:200px"/>
+		 			<p:spacer width="300" height="50" />
+	<!-- 	 			<p:spacer width="300" height="10" style="background-color: yellow;"/>	 			 -->
+			    <h:panelGrid columns="2">
+					<p:spacer width="300" height="10"/>	 			
+		 			<p:chart type="metergauge" model="#{chartBean.notaLutaM}" style="width:400px;height:250px" />
+	 			</h:panelGrid>
+ 			</p:outputPanel>
+ 		</h:form>
+ 		
+ 	</ui:define>  
+</ui:decorate>  
+</html>
