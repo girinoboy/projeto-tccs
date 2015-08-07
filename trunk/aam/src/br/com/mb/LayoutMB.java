@@ -30,14 +30,38 @@ public class LayoutMB {
 	public LayoutMB() {
 		String pagina = FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath();
 		
-		if(pagina.equals("/avaliacaoMembro.xhtml")){
+		switch (pagina) {
+		case "/avaliacaoMembro.xhtml":
 			myActiveIndex =0;
-		}else if(pagina.equals("/notaMediaGraduacao.xhtml")){
+			break;
+		case "/notaMediaGraduacao.xhtml":
 			myActiveIndex =1;
-		}else if(pagina.equals("/mediaGeralAcademia.xhtml")){
+			break;
+		case "/mediaGeralAcademia.xhtml":
 			myActiveIndex =2;
-		}else{
+			break;
+		case "/relatorioFrequencia.xhtml":
 			myActiveIndex =0;
+			break;
+		case "/relatorioNotaTecnica.xhtml":
+			myActiveIndex =0;
+			break;
+		case "/relatorioNotaLuta.xhtml":
+			myActiveIndex =0;
+			break;
+		case "/relatorioNotaConhecimento.xhtml":
+			myActiveIndex =0;
+			break;
+		case "/relatorioResultadoCampeonato.xhtml":
+			myActiveIndex =0;
+			break;
+		case "/relatorioClassificacaoDesempenho.xhtml":
+			myActiveIndex =0;
+			break;
+
+		default:
+			myActiveIndex =0;
+			break;
 		}
 		
 		viewedPage = "topGrafico.xhtml"; 

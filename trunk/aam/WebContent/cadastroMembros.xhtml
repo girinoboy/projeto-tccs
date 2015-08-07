@@ -97,12 +97,23 @@
 						<!-- Graduação -->
 						<h:outputLabel for="graduacao" value="Graduação: *" />
 						<p:selectOneMenu id="graduacao" label="Graduação" disabled="#{!genericoMB.adm}"
-							value="#{usuarioMB.usuarioDTO.graduacaoDTO}" effect="fade"
+							value="#{usuarioMB.usuarioDTO.graduacaoDTO}" effect="fade" var="t"
 							converter="graduacao" required="true">
 							<f:selectItem itemLabel="Selecione" itemValue="" />
 							<f:selectItems value="#{usuarioMB.listGraduacaoDTO}"
 								var="graduacao" itemLabel="#{graduacao.nome}"
 								itemValue="#{graduacao}" />
+							<p:column style="width:10%">
+				                <p:graphicImage id="avatar1" value="#{genericoMB.dynamicImage}"
+									style="width:60px;height:60px">
+									<f:param id="av1" name="image_id"
+										value="#{t.anexoDTO.id}" />
+								</p:graphicImage>
+				            </p:column>
+				 
+				            <p:column>
+				                <h:outputText value="#{t.nome}" />
+			           	 	</p:column>
 						</p:selectOneMenu>
 
 						<!-- Status -->

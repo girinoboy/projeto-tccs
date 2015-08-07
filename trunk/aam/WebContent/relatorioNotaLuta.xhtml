@@ -8,14 +8,7 @@
 <ui:decorate template="layout.xhtml">  
 	<ui:define id="centro" name="centro"> 
  		<h:form id="form">
- 			<h:panelGrid columns="2">
-	 			Nome do Aluno:
-	 			<p:selectOneMenu id="graduacao" value="#{chartBean.usuarioDTO}" effect="fade" converter="usuario" required="true">
-	 				<p:ajax event="change" listener="#{chartBean.createNotaLuta}"  update="charts" />  
-		            <f:selectItem itemLabel="Selecione" itemValue="" />
-		            <f:selectItems value="#{usuarioMB.listUsuarioDTO}" var="l" itemLabel="#{l.nome}" itemValue="#{l}"/>
-		        </p:selectOneMenu>
-		    </h:panelGrid>
+ 			<ui:include id="pag" src="topRelatorio.xhtml"/>
 		    <p:outputPanel id="charts">
 		 			<p:chart type="bar" model="#{chartBean.notaLutaB}" style="width:700px;height:200px"/>
 		 			<p:spacer width="300" height="50" />

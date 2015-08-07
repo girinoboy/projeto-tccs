@@ -78,6 +78,12 @@ public class ChartMB extends GenericoMB implements Serializable {
 		createNotaLuta();
 		createNotaConhecimento();
 	}
+	
+	public void atualiza(){
+		createNotaTecnica();
+		createNotaLuta();
+		createNotaConhecimento();
+	}
 
 	@SuppressWarnings("rawtypes")
 	public void createNotaConhecimento() {
