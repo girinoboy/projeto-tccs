@@ -125,10 +125,10 @@ public class ChartMB extends GenericoMB implements Serializable {
 			notaConhecimentoB.addSeries(graduacao); 
 			
 			if(cont == 0) cont =1;
-			notaConhecimentoM = initMeterGaugeModel(total/cont);
+			notaConhecimentoM = initMeterGaugeModel((total/cont)*100);
 			notaConhecimentoM.setTitle("Total Geral Conhecimento Agrupado");
 			notaConhecimentoM.setSeriesColors("cc6666,66cc66,E7E658,3299BB");
-			notaConhecimentoM.setGaugeLabel(recuperaIndice(total/cont));
+			notaConhecimentoM.setGaugeLabel(recuperaIndice((total/cont)*100));
 //			notaTecnicaM.setIntervalInnerRadius(1);
 			notaConhecimentoM.setShowTickLabels(true);
 			notaConhecimentoM.setLabelHeightAdjust(110);
@@ -179,10 +179,10 @@ public class ChartMB extends GenericoMB implements Serializable {
 			notaLutaB.addSeries(graduacao); 
 			
 			if(cont == 0) cont =1;
-			notaLutaM = initMeterGaugeModel(total/cont);
+			notaLutaM = initMeterGaugeModel((total/cont)*100);
 			notaLutaM.setTitle("Total Geral Luta Agrupado");
 			notaLutaM.setSeriesColors("cc6666,66cc66,E7E658,3299BB");
-			notaLutaM.setGaugeLabel(recuperaIndice(total/cont));
+			notaLutaM.setGaugeLabel(recuperaIndice((total/cont)*100));
 //			notaTecnicaM.setIntervalInnerRadius(1);
 			notaLutaM.setShowTickLabels(true);
 			notaLutaM.setLabelHeightAdjust(110);
@@ -233,10 +233,10 @@ public class ChartMB extends GenericoMB implements Serializable {
 			notaTecnicaB.addSeries(graduacao); 
 			
 			if(cont == 0) cont =1;
-			notaTecnicaM = initMeterGaugeModel(total/cont);
+			notaTecnicaM = initMeterGaugeModel((total/cont)*100);
 			notaTecnicaM.setTitle("Total Geral Tecnica Agrupado");
 			notaTecnicaM.setSeriesColors("cc6666,66cc66,E7E658,3299BB");
-			notaTecnicaM.setGaugeLabel(recuperaIndice(total/cont));
+			notaTecnicaM.setGaugeLabel(recuperaIndice((total/cont)*100));
 //			notaTecnicaM.setIntervalInnerRadius(1);
 			notaTecnicaM.setShowTickLabels(true);
 			notaTecnicaM.setLabelHeightAdjust(110);
@@ -249,17 +249,17 @@ public class ChartMB extends GenericoMB implements Serializable {
 	}
 
 	private String recuperaIndice(Double valor) {
-		if(valor >= 0 && valor <5){
-			return "Insuficiente";
+		if(valor >= 0 && valor <50){
+			return "Insuficiente - "+valor+"%";
 		}
-		if(valor >= 5 && valor <7){
-			return "Bom";
+		if(valor >= 50 && valor <70){
+			return "Bom - "+valor+"%";
 		}
-		if(valor >= 7 && valor <9){
-			return "Regular";
+		if(valor >= 70 && valor <90){
+			return "Regular - "+valor+"%";
 		}
-		if(valor >= 9 && valor <=10){
-			return "Ótimo";
+		if(valor >= 90 && valor <=100){
+			return "Ótimo - "+valor+"%";
 		}
 		return null;
 	}
@@ -275,10 +275,10 @@ public class ChartMB extends GenericoMB implements Serializable {
 			private static final long serialVersionUID = 1L;
 
 		{
-			add(5);
-			add(7);
-			add(9);
-			add(10);
+			add(50);
+			add(70);
+			add(90);
+			add(100);
 		}};
 
 		return new MeterGaugeChartModel(valor, intervals);
