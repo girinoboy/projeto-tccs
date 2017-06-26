@@ -33,9 +33,9 @@
         <h:form id="form">
             <p:panel id="draggable1" widgetVar="dg1" style="z-index:1; width: 60px; height: 60px; left: #{mainBean.left}px; top: #{mainBean.top}px" >
                 <h:outputText value="Mago 1" />
-                <p:draggable for="draggable1" revert ="false" />
+                <p:draggable for="draggable1" revert ="false" grid="60,60" opacity="0.3"/>
             </p:panel>
-
+<!-- 	tentar usar restricao na proxima versao -->
             <p:panel id="droppable" style="z-index:1; width: 600px; height: 600px;">
                 <p:droppable widgetVar="dropWV" for="droppable"> 
                     <p:ajax listener="#{mainBean.onDrop}" />

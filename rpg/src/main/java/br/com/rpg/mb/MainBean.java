@@ -13,6 +13,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.primefaces.component.dnd.Draggable;
+import org.primefaces.component.panel.Panel;
 import org.primefaces.config.PrimeConfiguration;
 import org.primefaces.config.StartupPrimeConfiguration;
 import org.primefaces.context.RequestContext;
@@ -80,6 +82,14 @@ public class MainBean implements Serializable {
 		facesContext.addMessage(null, facesMessage);
 
 		return facesMessage;
+	}
+
+	public void onCreate(){
+		Panel a;
+		Draggable b = new Draggable();
+		b.setId("");
+		b.setFor("_for");
+
 	}
 
 	public void onDrop(DragDropEvent dragDropEvent) {
