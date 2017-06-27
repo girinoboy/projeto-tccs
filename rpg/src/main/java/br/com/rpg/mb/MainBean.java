@@ -32,6 +32,8 @@ import org.primefaces.model.diagram.endpoint.EndPointAnchor;
 import org.primefaces.push.EventBus;
 import org.primefaces.push.EventBusFactory;
 
+import br.com.rpg.dto.PersonagemDTO;
+
 /**
  *
  * @author hatemalimam
@@ -55,6 +57,8 @@ public class MainBean implements Serializable {
 
 	private int left = 0,top = 0;
 
+	private List<PersonagemDTO> panelList ;
+
 
 	public MainBean() {
 		currentNav = "/checkBoxesJQuery/main.xhtml";
@@ -74,6 +78,16 @@ public class MainBean implements Serializable {
 
 		PrimeConfiguration config = new StartupPrimeConfiguration(FacesContext.getCurrentInstance());
 		pfVersion = RequestContext.getCurrentInstance().getApplicationContext().getConfig().getBuildVersion();
+
+		panelList = new ArrayList<PersonagemDTO>();
+
+//		panelList.add(new PersonagemDTO("1","414px","552px","P1"));
+//		panelList.add(new PersonagemDTO("2","0px","0px","P2"));
+//		panelList.add(new PersonagemDTO("3","0px","0px","P3"));
+//		panelList.add(new PersonagemDTO("4","0px","0px","P4"));
+//		panelList.add(new PersonagemDTO("5","0px","0px","P5"));
+//		panelList.add(new PersonagemDTO("6","0px","0px","P6"));
+
 	}
 
 	public FacesMessage addMessage(String message) {
@@ -85,11 +99,10 @@ public class MainBean implements Serializable {
 	}
 
 	public void onCreate(){
-		Panel a;
-		Draggable b = new Draggable();
-		b.setId("");
-		b.setFor("_for");
 
+		if(panelList != null){
+			panelList.add(new PersonagemDTO(""+panelList.size(),"0px","0px","P"+panelList.size()));
+		}
 	}
 
 	public void onDrop(DragDropEvent dragDropEvent) {
@@ -97,8 +110,15 @@ public class MainBean implements Serializable {
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String left = params.get(dargId + "_left");
 		String top = params.get(dargId + "_top");
+		String wgv = params.get(dargId + "_dragWgv");
 		//addMessage("Left: " + left + " Top: " + top);
 
+		for (PersonagemDTO p : panelList) {
+			if(p.getId().equals(wgv.split("_")[1])){
+				p.setLeft(left);
+				p.setTop(top);
+			}
+		}
 		this.left = new Integer(left);
 		this.top = new Integer(top);
 		EventBus eventBus = EventBusFactory.getDefault().eventBus();
@@ -119,6 +139,14 @@ public class MainBean implements Serializable {
 
 	public void setLeft(int left) {
 		this.left = left;
+	}
+
+	public List<PersonagemDTO> getPanelList() {
+		return panelList;
+	}
+
+	public void setPanelList(List<PersonagemDTO> panelList) {
+		this.panelList = panelList;
 	}
 
 }

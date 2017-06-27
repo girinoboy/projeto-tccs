@@ -20,7 +20,7 @@
 	        function handleMessage(facesmessage) {
 	            facesmessage.severity = 'info';
 	
-// 	            PF('wmsj').show([facesmessage]);
+ 	            PF('wmsj').show([facesmessage]);
 
 	            var array = facesmessage.detail.split(" ");
 				
@@ -31,10 +31,26 @@
         </script>
         
         <h:form id="form">
+        
+        <p:commandButton value="Create" actionListener="#{mainBean.onCreate}" update=":form:panel_main"/>
+        
+        <p:outputPanel id="panel_main" style="height: 79px;">        
+	        <ui:repeat var="o" value="#{mainBean.panelList}" varStatus="status">
+	        	<p:panel id="panel_#{o.id}" widgetVar="dg_#{o.id}" style="width: 60px; height: 60px; left: #{o.left}; top: #{o.top};"> 
+		        	<h:outputText value="#{o.nome}" /> 
+		        	<p:draggable grid="69,69" opacity="0.3"/>
+	        	</p:panel>
+	        </ui:repeat>
+        </p:outputPanel>
+        
+        
+        
+        <!--
+        
             <p:panel id="draggable1" widgetVar="dg1" style="z-index:1; width: 60px; height: 60px; left: #{mainBean.left}px; top: #{mainBean.top}px" >
                 <h:outputText value="Mago 1" />
-                <p:draggable for="draggable1" revert ="false" grid="60,60" opacity="0.3"/>
-            </p:panel>
+                <p:draggable for="draggable1" revert ="false" grid="69,69" opacity="0.3"/>
+            </p:panel> -->
 <!-- 	tentar usar restricao na proxima versao -->
             <p:panel id="droppable" style="z-index:1; width: 600px; height: 600px;">
                 <p:droppable widgetVar="dropWV" for="droppable"> 
@@ -58,6 +74,7 @@
                                 params: [
                                     {name: _self.id + '_dragId', value: ui.draggable.attr('id')},
                                     {name: _self.id + '_dropId', value: _self.cfg.target},
+                                    {name: ui.draggable.attr('id') + '_dragWgv', value: ui.draggable.attr('data-widget')},
                                     {name: ui.draggable.attr('id') + '_left', value: ui.position.left},
                                     {name: ui.draggable.attr('id') + '_top', value: ui.position.top}
                                 ]
