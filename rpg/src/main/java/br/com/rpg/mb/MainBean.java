@@ -103,6 +103,9 @@ public class MainBean implements Serializable {
 		if(panelList != null){
 			panelList.add(new PersonagemDTO(""+panelList.size(),"0px","0px","P"+panelList.size()));
 		}
+
+		EventBus eventBus = EventBusFactory.getDefault().eventBus();
+		eventBus.publish("/main", panelList);
 	}
 
 	public void onDrop(DragDropEvent dragDropEvent) {
@@ -114,7 +117,8 @@ public class MainBean implements Serializable {
 		//addMessage("Left: " + left + " Top: " + top);
 
 		for (PersonagemDTO p : panelList) {
-			if(p.getId().equals(wgv.split("_")[1])){
+			if(p.getId().equals(wgv.split("_")[1]) || p.getId().equals(dargId)){
+				p.setId(dargId);
 				p.setLeft(left);
 				p.setTop(top);
 			}
@@ -122,7 +126,8 @@ public class MainBean implements Serializable {
 		this.left = new Integer(left);
 		this.top = new Integer(top);
 		EventBus eventBus = EventBusFactory.getDefault().eventBus();
-		eventBus.publish("/main", new FacesMessage(StringEscapeUtils.escapeHtml3("id: "+ dargId +" Left: " + left + " Top: " + top)));
+//		eventBus.publish("/main", new FacesMessage(StringEscapeUtils.escapeHtml3("id: "+ dargId +" Left: " + left + " Top: " + top)));
+		eventBus.publish("/main", panelList);
 	}
 
 	public int getTop() {

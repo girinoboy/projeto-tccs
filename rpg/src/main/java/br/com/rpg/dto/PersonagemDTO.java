@@ -44,7 +44,8 @@ public class PersonagemDTO implements Serializable{
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public PersonagemDTO setNome(String nome) {
 		this.nome = nome;
+		return this;
 	}
 }

@@ -13,19 +13,44 @@
         <p:growl id="msj" widgetVar="wmsj" showDetail="false" />
         
         <p:socket onMessage="handleMessage" channel="/main" >
-            <p:ajax event="message" update=":form:droppable" />
+            <p:ajax event="message"  />
         </p:socket>
         
         <script type="text/javascript">
+        	var array = null
 	        function handleMessage(facesmessage) {
-	            facesmessage.severity = 'info';
-	
- 	            PF('wmsj').show([facesmessage]);
+	            //facesmessage.severity = 'info';
+				array = facesmessage.list;
+ 	            //PF('wmsj').show([facesmessage]);
+//  	            alert(facesmessage);
+//  	           alert(facesmessage.empty);
+//  	          alert(facesmessage[0]);
 
-	            var array = facesmessage.detail.split(" ");
+//  	         alert(a.list[0].nome);
+
+ 	         for (x in array) {
+ 	        //	alert(array[x].id);
+	//alert(document.getElementById(array[x].id));
+			if(document.getElementById(array[x].id) !=null){
+ 	        	document.getElementById(array[x].id).style.left = array[x].left+'px';
+ 	           document.getElementById(array[x].id).style.top = array[x].top+'px';
+ 	         }else{
+ 	 	         id = 'form:repete:'+array[x].id+':panel_';
+ 	 	        //alert(id);
+ 	 	      //alert(document.getElementById(id));
+ 	 	      //   alert(array[x].left);
+ 	 	      if(document.getElementById(id) !=null)
+ 	        	document.getElementById(id).style.left = '0px';
+ 	        	//document.getElementById(id).style.top = '-138px';
+ 	 	         }
+ 	         }
+ 	        
+ 	 	          	          
+ 	          
+	          //  var array = facesmessage.detail.split(" ");
 				
-				document.getElementById(array[1]).style.left = array[3]+'px';
-	            document.getElementById(array[1]).style.top = array[5]+'px';
+				//document.getElementById(array[1]).style.left = array[3]+'px';
+	           // document.getElementById(array[1]).style.top = array[5]+'px';
 				
 	        }
         </script>
@@ -34,13 +59,14 @@
         
         <p:commandButton value="Create" actionListener="#{mainBean.onCreate}" update=":form:panel_main"/>
         
-        <p:outputPanel id="panel_main" style="height: 79px;">        
-	        <ui:repeat var="o" value="#{mainBean.panelList}" varStatus="status">
+        <p:outputPanel id="panel_main" layout="block" style="z-index:1; width: 69px; height: 69px;border:1px solid #666666;">        
+	        <ui:repeat id="repete" var="o" value="#{mainBean.panelList}" varStatus="status">
 	        	<p:panel id="panel_#{o.id}" widgetVar="dg_#{o.id}" style="width: 60px; height: 60px; left: #{o.left}; top: #{o.top};"> 
 		        	<h:outputText value="#{o.nome}" /> 
-		        	<p:draggable grid="69,69" opacity="0.3"/>
+		        	<p:draggable grid="69,69" opacity="0.3" />
 	        	</p:panel>
 	        </ui:repeat>
+	        
         </p:outputPanel>
         
         
@@ -52,8 +78,8 @@
                 <p:draggable for="draggable1" revert ="false" grid="69,69" opacity="0.3"/>
             </p:panel> -->
 <!-- 	tentar usar restricao na proxima versao -->
-            <p:panel id="droppable" style="z-index:1; width: 600px; height: 600px;">
-                <p:droppable widgetVar="dropWV" for="droppable"> 
+             <p:panel id="droppable" style="z-index:1; width: 611px; height: 611px;">
+                <p:droppable widgetVar="dropWV" > 
                     <p:ajax listener="#{mainBean.onDrop}" />
                 </p:droppable>
             </p:panel>          
