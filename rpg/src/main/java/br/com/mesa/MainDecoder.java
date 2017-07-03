@@ -1,11 +1,9 @@
-package br.com.rpg.mb;
+package br.com.mesa;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.primefaces.push.Decoder;
-
-import br.com.rpg.dto.PersonagemDTO;
 
 public class MainDecoder implements Decoder<String,List<PersonagemDTO>> {
 

@@ -1,11 +1,9 @@
-package br.com.rpg.mb;
+package br.com.mesa;
 
 import java.util.List;
 
 import org.primefaces.json.JSONObject;
 import org.primefaces.push.Encoder;
-
-import br.com.rpg.dto.PersonagemDTO;
 
 
 public class MainEncoder  implements Encoder<List<PersonagemDTO>, String> {

@@ -1,4 +1,4 @@
-package br.com.rpg.mb;
+package br.com.mesa;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,12 +7,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.atmosphere.config.service.Post;
 import org.primefaces.component.dnd.Draggable;
 import org.primefaces.component.panel.Panel;
 import org.primefaces.config.PrimeConfiguration;
@@ -31,8 +34,10 @@ import org.primefaces.model.diagram.endpoint.DotEndPoint;
 import org.primefaces.model.diagram.endpoint.EndPointAnchor;
 import org.primefaces.push.EventBus;
 import org.primefaces.push.EventBusFactory;
+import org.primefaces.push.RemoteEndpoint;
+import org.primefaces.push.annotation.OnOpen;
 
-import br.com.rpg.dto.PersonagemDTO;
+import br.com.chat.Message;
 
 /**
  *
@@ -57,8 +62,23 @@ public class MainBean implements Serializable {
 
 	private int left = 0,top = 0;
 
-	private List<PersonagemDTO> panelList ;
+//	private List<PersonagemDTO> panelList ;
 
+	@ManagedProperty("#{personagemMB}")
+	private PersonagemMB personagemMB;
+
+	@OnOpen
+	public void onOpen(RemoteEndpoint r, EventBus eventBus) {
+//        logger.info("OnOpen {}", r);
+
+//        eventBus.publish(room + "/*", new Message(String.format("%s has entered the room '%s'",  username, room), true));
+		System.out.println(2);
+    }
+
+	@PostConstruct
+	public void inicio(){
+		System.out.println(1);
+	}
 
 	public MainBean() {
 		currentNav = "/checkBoxesJQuery/main.xhtml";
@@ -79,7 +99,7 @@ public class MainBean implements Serializable {
 		PrimeConfiguration config = new StartupPrimeConfiguration(FacesContext.getCurrentInstance());
 		pfVersion = RequestContext.getCurrentInstance().getApplicationContext().getConfig().getBuildVersion();
 
-		panelList = new ArrayList<PersonagemDTO>();
+//		panelList = new ArrayList<PersonagemDTO>();
 
 //		panelList.add(new PersonagemDTO("1","414px","552px","P1"));
 //		panelList.add(new PersonagemDTO("2","0px","0px","P2"));
@@ -100,9 +120,12 @@ public class MainBean implements Serializable {
 
 	public void onCreate(){
 
+		List<PersonagemDTO> panelList = personagemMB.getListPersonagem();
 		if(panelList != null){
-			panelList.add(new PersonagemDTO(""+panelList.size(),"0px","0px","P"+panelList.size()));
+			personagemMB.add(new PersonagemDTO(""+panelList.size(),"0px","0px","P"+panelList.size()));
 		}
+//		RequestContext requestContext = RequestContext.getCurrentInstance();
+//		requestContext.execute("PF('subscriber').connect('/" + "username" + "')");
 
 		EventBus eventBus = EventBusFactory.getDefault().eventBus();
 		eventBus.publish("/main", panelList);
@@ -116,18 +139,21 @@ public class MainBean implements Serializable {
 		String wgv = params.get(dargId + "_dragWgv");
 		//addMessage("Left: " + left + " Top: " + top);
 
-		for (PersonagemDTO p : panelList) {
+		for (PersonagemDTO p : personagemMB.getListPersonagem()) {
 			if(p.getId().equals(wgv.split("_")[1]) || p.getId().equals(dargId)){
 				p.setId(dargId);
 				p.setLeft(left);
 				p.setTop(top);
+				p.setNovo(false);
 			}
 		}
 		this.left = new Integer(left);
 		this.top = new Integer(top);
 		EventBus eventBus = EventBusFactory.getDefault().eventBus();
 //		eventBus.publish("/main", new FacesMessage(StringEscapeUtils.escapeHtml3("id: "+ dargId +" Left: " + left + " Top: " + top)));
-		eventBus.publish("/main", panelList);
+		eventBus.publish("/main", personagemMB.getListPersonagem());
+
+
 	}
 
 	public int getTop() {
@@ -146,12 +172,20 @@ public class MainBean implements Serializable {
 		this.left = left;
 	}
 
-	public List<PersonagemDTO> getPanelList() {
-		return panelList;
+	public PersonagemMB getPersonagemMB() {
+		return personagemMB;
 	}
 
-	public void setPanelList(List<PersonagemDTO> panelList) {
-		this.panelList = panelList;
+	public void setPersonagemMB(PersonagemMB personagemMB) {
+		this.personagemMB = personagemMB;
 	}
+
+//	public List<PersonagemDTO> getPanelList() {
+//		return panelList;
+//	}
+//
+//	public void setPanelList(List<PersonagemDTO> panelList) {
+//		this.panelList = panelList;
+//	}
 
 }
